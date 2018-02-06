@@ -26,4 +26,27 @@
   //
   // $query = "CREATE DATABASE mydba";
   // mysqli_query($connection, $query);
+
+  # 3. Create Table
+  $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+  if (!$connection)
+  {
+    die("ERROR " . mysqli_connect_error());
+  }
+
+  $query = "
+  CREATE TABLE `testarea` (
+    `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `company` varchar(255) NOT NULL,
+    `size` int(5) NOT NULL,
+    `contact` varchar(255) NOT NULL
+  ) ENGINE = InnoDB DEFAULT CHARSET=latin1;
+  ";
+
+  if(mysqli_query($connection, $query)){
+      echo "Created Table";
+  } else {
+      echo "Something went wrong :(";
+  }  
 ?>
