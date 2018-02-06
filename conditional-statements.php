@@ -13,8 +13,6 @@
 		} else {
 			echo "PM";
 		}
-
-		
 	?>
 </body>
 </html>

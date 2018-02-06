@@ -5,7 +5,7 @@
 	<title>Basics</title>
 </head>
 <body>
-	<?php 
+	<?php
 		// for all information about php (never use in production)
 		// phpinfo();
 
@@ -16,7 +16,7 @@
 
 		$date  = 13;
 		$month = 'May';
-		// double quotes support variables 
+		// double quotes support variables
 		echo "My Birthday is on $date $month every year!<br>";
 		// in single quotes, we've to use concatenation
 		echo 'My Birthday is on '. $date . $month . ' every year!';
