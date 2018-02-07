@@ -20,14 +20,17 @@
   ##############################
   // $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS);
   //
-  // if($connection) {
-  //   echo "Connected";
-  // } else {
+  // if(!$connection) {
   //   die("ERROR " . mysqli_connect_error());
   // }
   //
-  // $query = "CREATE DATABASE mydba";
-  // mysqli_query($connection, $query);
+  // $query = "CREATE DATABASE mydb1";
+  //
+  // if(mysqli_query($connection, $query)) {
+  //   echo "Database Created";
+  // } else {
+  //   echo "Something went wrong :(";
+  // }
 
   # 3. Create Table
   ##############################
@@ -38,7 +41,7 @@
   // }
   //
   // $query = "
-  //   CREATE TABLE `testarea` (
+  //   CREATE TABLE `testarea1` (
   //     `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   //     `company` varchar(255) NOT NULL,
   //     `size` int(5) NOT NULL,
@@ -47,7 +50,7 @@
   // ";
   //
   // if(mysqli_query($connection, $query)) {
-  //   echo "Created Table";
+  //   echo "Table Created";
   // } else {
   //   echo "Something went wrong :(";
   // }
