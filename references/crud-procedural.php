@@ -102,7 +102,7 @@
   // $query = "UPDATE `testarea` SET `company` = 'New Company', `size` = '123', `contact` = 'John Jackson' WHERE `testarea`.`size` = 50";
   //
   // if(mysqli_query($connection, $query)){
-  //     echo "was updated";
+  //     echo "Updated";
   // }
   //
   // mysqli_close($connection);

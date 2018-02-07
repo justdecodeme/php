@@ -18,25 +18,30 @@
 
   # 2. Create Database
   ##############################
-  $connection = new mysqli(DB_HOST, DB_USER, DB_PASS);
-
-  if($connection->connect_error) {
-    die("ERROR " . $connection->connect_error);
-  }
-
-  $query = "CREATE DATABASE mydb2";
-  echo $connection->query($query);
+  // $connection = new mysqli(DB_HOST, DB_USER, DB_PASS);
+  //
+  // if($connection->connect_error) {
+  //   die("ERROR " . $connection->connect_error);
+  // }
+  //
+  // $query = "CREATE DATABASE mydb3";
+  //
+  // if($connection->query($query)) {
+  //   echo "Database Created";
+  // } else {
+  //   echo "Something went wrong :(";
+  // }
 
   # 3. Create Table
   ##############################
-  // $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+  // $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
   //
-  // if(!$connection) {
-  //   die("ERROR " . mysqli_connect_error());
+  // if($connection->connect_error) {
+  //   die("ERROR " . $connection->connect_error);
   // }
   //
   // $query = "
-  //   CREATE TABLE `testarea1` (
+  //   CREATE TABLE `testarea3` (
   //     `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   //     `company` varchar(255) NOT NULL,
   //     `size` int(5) NOT NULL,
@@ -44,7 +49,7 @@
   //   ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
   // ";
   //
-  // if(mysqli_query($connection, $query)) {
+  // if($connection->query($query)) {
   //   echo "Table Created";
   // } else {
   //   echo "Something went wrong :(";
@@ -52,90 +57,72 @@
 
   # 4. Insert
   ##############################
-  // $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+  // $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
   //
-  // if(!$connection) {
-  //   die("ERROR " . mysqli_connect_error());
+  // if($connection->connect_error) {
+  //   die("ERROR " . $connection->connect_error);
   // }
   //
   // $query = "INSERT INTO `testarea` ( `company`, `size`, `contact`) VALUES ( 'ACME', '50', 'Mike Smith')";
+  // // $query = "INSERT INTO `testarea` ( `company`, `size`, `contact`) VALUES ( 'ACME', '50', 'Mike Smith')";
   //
-  // if(mysqli_query($connection, $query)) {
-  //   echo "New Entry added";
+  // $result = $connection->query($query);
+  // // $result = $connection->multi_query($query);
+  //
+  // if($result) {
+  //   echo "New Entry added: " . $result;
   // } else {
-  //   echo "Something went wrong :(";
+  //   echo "error " . $connection->error;
   // }
-  //
-  // mysqli_close($connection);
 
   # 5. Read
   ##############################
-  // $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+  // $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
   //
-  // if(!$connection) {
-  //   die("ERROR " . mysqli_connect_error());
+  // if($connection->connect_error) {
+  //   die("ERROR " . $connection->connect_error);
   // }
   //
   // $query = "SELECT * FROM `testarea`";
+  // $result = $connection->query($query);
   //
-  // if($result = mysqli_query($connection, $query)) {
-  //   while($row = mysqli_fetch_assoc($result)) {
-  //     echo "id:".$row["id"]." company:".$row["company"]."<br>";
+  // if($result) {
+  //   while($row = $result->fetch_assoc()) {
+  //     echo "id:".$row["id"]." company:".$row["company"]." contact:".$row["contact"]."<br>";
   //   }
-  // };
-  //
-  // mysqli_close($connection);
+  // } else {
+  //     echo "error " . $connection->error;
+  // }
 
   # 6. Update
   ##############################
-  // $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+  // $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
   //
-  // if(!$connection) {
-  //   die("ERROR " . mysqli_connect_error());
+  // if($connection->connect_error) {
+  //   die("ERROR " . $connection->connect_error);
   // }
   //
   // $query = "UPDATE `testarea` SET `company` = 'New Company', `size` = '123', `contact` = 'John Jackson' WHERE `testarea`.`size` = 50";
   //
-  // if(mysqli_query($connection, $query)){
-  //     echo "was updated";
+  // if($connection->query($query)) {
+  //   echo "Updated";
+  // } else {
+  //   echo "error " . $connection->error;
   // }
-  //
-  // mysqli_close($connection);
 
   # 7. Delete
   ##############################
-  // $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-  //
-  // if(!$connection) {
-  //   die("ERROR " . mysqli_connect_error());
-  // }
-  //
-  // $query = "DELETE FROM `testarea` WHERE `company` = 'New Company' LIMIT 2";
-  //
-  // if(mysqli_query($connection, $query)){
-  //     echo "Rows affected: " . mysqli_affected_rows($connection);
-  // }
-  //
-  // mysqli_close($connection);
-  # 2. Create Table
   // $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
   //
-  // if ($connection->connect_error) {
+  // if($connection->connect_error) {
   //   die("ERROR " . $connection->connect_error);
   // }
   //
-  // $query = "
-  // CREATE TABLE `testareb` (
-  //   `id` int(12) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  //   `company` varchar(255) NOT NULL,
-  //   `size` int(5) NOT NULL,
-  //   `contact` varchar(255) NOT NULL
-  // ) ENGINE = InnoDB DEFAULT CHARSET=latin1;
-  // ";
+  // $query = "DELETE FROM `testarea` WHERE id = 11";
   //
-  // if($connection->connect_error) {
-  //   echo "Created Table";
+  // if($connection->query($query)) {
+  //   echo "Deleted";
   // } else {
-  //   echo "Something went wrong :(" . $connection->error;
+  //   echo "error " . $connection->error;
   // }
 ?>
