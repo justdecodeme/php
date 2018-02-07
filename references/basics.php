@@ -11,6 +11,7 @@
 
 		// language constructors
 		echo "PHP is very easy!<br>";
+		print "PHP is very easy!<br>";
 
 		print_r("I will be master in PHP in some days!<br>");
 
