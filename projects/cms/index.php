@@ -6,13 +6,19 @@
 
 	$login_err = '';
 	
-	if(isset($_GET['login_error'])){
-		if($_GET['login_error'] == 'empty'){
-			$login_err = '<div class="alert alert-danger">User name or Password was empty!</div>';
-		}elseif($_GET['login_error'] == 'wrong'){
-			$login_err = '<div class="alert alert-danger">User name or Password was Wrong!</div>';
-		}elseif($_GET['login_error'] == 'query_error'){
-			$login_err = '<div class="alert alert-danger">There is somekind of Database Issue!</div>';
+	if(isset($_GET['login_error'])) {
+		if($_GET['login_error'] == 'empty') {
+			$login_err = '<div class="alert alert-danger alert-dismissable"">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			User name or Password was empty!</div>';
+		} elseif ($_GET['login_error'] == 'wrong') {
+			$login_err = '<div class="alert alert-danger alert-dismissable"">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			User name or Password was Wrong!</div>';
+		} elseif ($_GET['login_error'] == 'query_error') {
+			$login_err = '<div class="alert alert-danger alert-dismissable"">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			There is somekind of Database Issue!</div>';
 		}
 	}
 	
@@ -44,6 +50,7 @@
 			<?php echo $login_err; ?>
 			<article class="row">
 				<section class="col-lg-8">
+					<!-- Show published posts -->
 					<?php
 						$sel_sql = "SELECT * FROM posts WHERE status = 'published' ORDER BY id DESC LIMIT $start_from, $per_page";
 						$run_sql = mysqli_query($conn, $sel_sql);
@@ -58,7 +65,7 @@
 										<img src="'.$rows['image'].'" height="100px">
 									</div>
 									<div class="col-lg-8">
-										<p>'.substr($rows['description'],0,200).'........</p>
+										<p>'.substr($rows['description'], 0, 200).'........</p>
 									</div>
 									<a href="post.php?post_id='.$rows['id'].'" class="btn btn-primary">Read More</a>
 								</div>
@@ -67,6 +74,7 @@
 						}
 					?>
 
+					<!-- Pagination -->
 					<div class="text-center">
 						<ul class="pagination">
 							<?php
@@ -77,7 +85,7 @@
 								
 								$total_pages = ceil($count/$per_page);
 								
-								for($i=1;$i<=$total_pages;$i++){
+								for($i = 1; $i <= $total_pages; $i++) {
 									echo '<li><a href="index.php?page='.$i.'">'.$i.'</a></li>';
 								}
 							?>
@@ -88,7 +96,7 @@
 				<?php include 'includes/sidebar.php';?>
 			</article>
 		</div>
-		<!-- <div style="width:50px;height:50px;"></div> -->
-		<!-- <?php include 'includes/footer.php';?> -->
+		<div style="width:50px;height:50px;"></div>
+		<?php include 'includes/footer.php';?>
 	</body>
 </html>

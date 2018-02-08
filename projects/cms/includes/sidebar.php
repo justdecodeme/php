@@ -1,4 +1,5 @@
 <aside class="col-lg-4">
+	<!-- Search bar -->
 	<form class="panel-group form-horizontal" action="search.php" role="form">
 		<div class="panel panel-default">
 			<div class="panel-heading">Search Something</div>
@@ -6,12 +7,14 @@
 				<div class="input-group">
 					<input type="search" name="search" class="form-control" placeholder="Search Something....">
 					<div class="input-group-btn">
-						<button class="btn btn-default" name="search_submit" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+						<button class="btn btn-default" name="search_submit" type="submit" value="submit"><i class="glyphicon glyphicon-search"></i></button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
+	
+	<!-- Login form -->
 	<form class="panel-group form-horizontal" role="form" action="accounts/login.php" method="post">
 		<div class="panel panel-default">
 			<div class="panel-heading">Login Area</div>
@@ -36,7 +39,8 @@
 			</div>
 		</div>
 	</form>
-
+	
+	<!-- Latest posts -->
 	<div class="panel panel-default">
 		<div class="panel-heading">Latest posts</div>
 		<div class="panel-body">
@@ -68,5 +72,4 @@
 			</div>
 		</div>
 	</div>
-
 </aside>
