@@ -4,33 +4,30 @@
 				<ul class="nav navbar-nav navbar-right">
 					
 					<?php
+						// Make navigation and add class as per active page
+
+						// separately check as this don't belong to any category as above
+						$class = $_SERVER['PHP_SELF'] == '/projects/cms/index.php' ? 'active' : '';
+						echo '<li class="' . $class .'"><a href="index.php">Home</a>';
+						
+						// add active class to category if selected
 						$sel_cat = "SELECT * FROM category";
 						$run_cat = mysqli_query($conn, $sel_cat);
-						while($rows = mysqli_fetch_assoc($run_cat)){
-							if(isset($_GET['cat_id'])){
-								if($_GET['cat_id'] == $rows['c_id']){
-								$class = 'active';
-								} else {
-									$class = '';
-								}
-							}else {
+						while($rows = mysqli_fetch_assoc($run_cat)) {
+							if(isset($_GET['cat_id'])) {
+								$class = $_GET['cat_id'] == $rows['c_id'] ? 'active' : '';
+							} else {
 								$class='';
 							}
-							if($rows['c_id'] == 1){
-								echo $_SERVER['PHP_SELF'];
-								if($_SERVER['PHP_SELF'] == '/projects/cms/index.php'){
-									echo '<li class="active"><a href="index.php">'.ucfirst($rows['category_name']).'</a>';
-								} else {
-									echo '<li class=""><a href="index.php">'.ucfirst($rows['category_name']).'</a>';
-								}
-							}else {
-								echo '<li class="'.$class.'"><a href="menu.php?cat_id='.$rows['c_id'].'">'.ucfirst($rows['category_name']).'</a></li>';
-							}
+							echo '<li class="'.$class.'"><a href="menu.php?cat_id='.$rows['c_id'].'">'.ucfirst($rows['category_name']).'</a></li>';
 						}
+
+						// separately check as they don't belong to any category as above
+						$class = $_SERVER['PHP_SELF'] == '/projects/cms/contact.php' ? 'active' : '';
+						echo '<li class="' . $class .'"><a href="contact.php">Contact Us</a>';
+						$class = $_SERVER['PHP_SELF'] == '/projects/cms/registration.php' ? 'active' : '';
+						echo '<li class="' . $class .'"><a href="registration.php">Registration</a>';
 					?>
-					
-					<li><a href="contact.php">Contact Us</a></li>
-					<li><a href="registration.php">Registration</a></li>
 				</ul>
 			</div>
 		</header>
