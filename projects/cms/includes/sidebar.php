@@ -1,10 +1,8 @@
 <aside class="col-lg-4">
 	<form class="panel-group form-horizontal" action="search.php" role="form">
 		<div class="panel panel-default">
+			<div class="panel-heading">Search Something</div>
 			<div class="panel-body">
-				<div class="panel-header">
-					<h4>Search Something</h4>
-				</div>
 				<div class="input-group">
 					<input type="search" name="search" class="form-control" placeholder="Search Something....">
 					<div class="input-group-btn">
@@ -31,7 +29,6 @@
 					</div>
 				</div>
 				<div class="form-group">
-					
 					<div class="col-sm-12">
 						<input type="submit" class="btn btn-success btn-block" name="submit_login">
 					</div>
@@ -39,34 +36,37 @@
 			</div>
 		</div>
 	</form>
-	<div class="list-group">
-		<?php
-			$sel_side = "SELECT * FROM posts WHERE status = 'published' ORDER BY id DESC LIMIT 6";
-			$run_side = mysqli_query($conn,$sel_side);
-			while($rows = mysqli_fetch_assoc($run_side)){
-				if(isset($_GET['post_id'])){
-					if($_GET['post_id'] == $rows['id']){
-						$class='active';
-					}else {
-						$class='';
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Latest posts</div>
+		<div class="panel-body">
+			<div class="list-group">
+				<?php
+					$sel_side = "SELECT * FROM posts WHERE status = 'published' ORDER BY id DESC LIMIT 5";
+					$run_side = mysqli_query($conn, $sel_side);
+					while($rows = mysqli_fetch_assoc($run_side)){
+						// can be changed by url (PLEASE UPDATE THIS CODE AFTER UNDERSTANDING WHOLE)
+						if(isset($_GET['post_id'])){
+							$class = $_GET['post_id'] == $rows['id'] ? 'active' : '';
+						} else {
+							$class = '';	
+						}
+						echo '
+						<a href="post.php?post_id='.$rows['id'].'" class="list-group-item '.$class.'">
+							<div class="col-sm-4">
+								<img src="'.$rows['image'].'" width="100%">
+							</div>
+							<div class="col-sm-8">
+								<h4 class="list-group-item-heading">'.$rows['title'].'</h4>
+								<p class="list-group-item-text">'.substr($rows['description'], 0, 50).'</p>
+							</div>
+							<div style="clear:both;"></div>
+						</a>
+						';
 					}
-				}else {
-					$class='';	
-				}
-				echo '
-				<a href="post.php?post_id='.$rows['id'].'" class="list-group-item '.$class.'">
-					<div class="col-sm-4">
-						<img src="'.$rows['image'].'" width="100%">
-					</div>
-					<div class="col-sm-8">
-						<h4 class="list-group-item-heading">'.$rows['title'].'</h4>
-						<p class="list-group-item-text">'.substr($rows['description'],0,50).'</p>
-					</div>
-					<div style="clear:both;"></div>
-					
-				</a>
-				';
-			}
-		?>
+				?>
+			</div>
+		</div>
 	</div>
+
 </aside>

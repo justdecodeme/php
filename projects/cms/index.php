@@ -19,7 +19,7 @@
 	# pagination
 	#############
 
-	$per_page = 5;
+	$per_page = 2;
 	
 	if(isset($_GET['page'])){
 		$page = $_GET['page'];
@@ -66,31 +66,29 @@
 							';
 						}
 					?>
-				</section>
-				<?php include 'includes/sidebar.php';?>
-				
-			</article>
-			<div class="text-center">
-				<ul class="pagination">
-			<?php
-				$pagination_sql = "SELECT * FROM posts WHERE status = 'published'";
-				$run_pagination = mysqli_query($conn, $pagination_sql);
 
-				$count = mysqli_num_rows($run_pagination);
-				
-				$total_pages = ceil($count/$per_page);
-				
-				for($i=1;$i<=$total_pages;$i++){
-					echo '<li><a href="index.php?page='.$i.'">'.$i.'</a></li>';
-				}
-				
-			?>
-			
-				</ul>
-			</div>
-			
+					<div class="text-center">
+						<ul class="pagination">
+							<?php
+								$pagination_sql = "SELECT * FROM posts WHERE status = 'published'";
+								$run_pagination = mysqli_query($conn, $pagination_sql);
+
+								$count = mysqli_num_rows($run_pagination);
+								
+								$total_pages = ceil($count/$per_page);
+								
+								for($i=1;$i<=$total_pages;$i++){
+									echo '<li><a href="index.php?page='.$i.'">'.$i.'</a></li>';
+								}
+							?>
+						</ul>
+					</div>
+				</section>
+
+				<?php include 'includes/sidebar.php';?>
+			</article>
 		</div>
-		<div style="width:50px;height:50px;"></div>
-		<?php include 'includes/footer.php';?>
+		<!-- <div style="width:50px;height:50px;"></div> -->
+		<!-- <?php include 'includes/footer.php';?> -->
 	</body>
 </html>
