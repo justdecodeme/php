@@ -45,20 +45,20 @@
 			<article class="row">
 				<section class="col-lg-8">
 					<?php
-						$sel_sql = "SELECT * FROM posts WHERE status = 'published' ORDER BY id DESC LIMIT $start_from,$per_page";
-						$run_sql = mysqli_query($conn,$sel_sql);
-						while($rows = mysqli_fetch_assoc($run_sql)){
+						$sel_sql = "SELECT * FROM posts WHERE status = 'published' ORDER BY id DESC LIMIT $start_from, $per_page";
+						$run_sql = mysqli_query($conn, $sel_sql);
+						while($rows = mysqli_fetch_assoc($run_sql)) {
 							echo '
 							<div class="panel panel-success">
 								<div class="panel-heading">
-									<h3><a href="post.php?post_id='.$rows['id'].'">'.$rows['title'].'</a></h3>
+									<h4>' . $rows['title'] . '</h4>
 								</div>
 								<div class="panel-body">
 									<div class="col-lg-4">
-										<img src="'.$rows['image'].'" width="100%">
+										<img src="'.$rows['image'].'" height="100px">
 									</div>
 									<div class="col-lg-8">
-										<p>'.substr($rows['description'],0,300).'........</p>
+										<p>'.substr($rows['description'],0,200).'........</p>
 									</div>
 									<a href="post.php?post_id='.$rows['id'].'" class="btn btn-primary">Read More</a>
 								</div>
