@@ -9,9 +9,9 @@
 <html>
 	<head>
 		<title>CMS System</title>
-		<link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
-		<script src="../bootstrap/js/bootstrap.js"></script>
-		<script src="../js/jquery.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>	
 	</head>
 	<body>
 		<?php include 'includes/header.php';?>
@@ -49,7 +49,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label"></label>
 							<div class="col-sm-8">
-								<input type="submit" value="Submit your Form" name="submit_contact" class="btn btn-block btn-danger" id="subject">
+								<input type="submit" value="Submit your Form" name="submit_contact" class="btn btn-block btn-danger">
 							</div>
 						</div>
 					</form>
