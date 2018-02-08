@@ -1,6 +1,11 @@
 <?php session_start();
 	include 'includes/db.php';
-		$login_err = '';
+
+	# check login status
+	#####################
+
+	$login_err = '';
+	
 	if(isset($_GET['login_error'])){
 		if($_GET['login_error'] == 'empty'){
 			$login_err = '<div class="alert alert-danger">User name or Password was empty!</div>';
@@ -11,12 +16,17 @@
 		}
 	}
 	
+	# pagination
+	#############
+
 	$per_page = 5;
+	
 	if(isset($_GET['page'])){
 		$page = $_GET['page'];
 	} else{
 		$page = 1;
 	}
+	
 	$start_from = ($page-1) * $per_page;
 ?>
 
