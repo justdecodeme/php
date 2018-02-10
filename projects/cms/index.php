@@ -18,7 +18,7 @@
 		} elseif ($_GET['login_error'] == 'query_error') {
 			$login_err = '<div class="alert alert-danger alert-dismissable"">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			There is somekind of Database Issue!</div>';
+			There is some kind of Database Issue!</div>';
 		}
 	}
 	

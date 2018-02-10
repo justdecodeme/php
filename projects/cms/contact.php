@@ -1,8 +1,16 @@
 <?php include 'includes/db.php';
+	$msg = '';
+
 	if(isset($_POST['submit_contact'])){
 		$date = date('Y-m-d h:i:s');
 		$ins_sql = "INSERT INTO comments (name, email, subject, comment, date) VALUES ('$_POST[name]', '$_POST[email]', '$_POST[subject]', '$_POST[comment]', '$date')";
 		$run_sql = mysqli_query($conn,$ins_sql);
+
+		if(mysqli_affected_rows($conn)) {
+			$msg = '<div class="alert alert-success alert-dismissable"">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			Thank you very much for your valuable feedback!</div>';
+		}
 	}
 ?>
 <!DOCTYPE html>
@@ -18,6 +26,7 @@
 		<div class="container">
 			<article class="row">
 				<section class="col-lg-8">
+					<?php echo $msg; ?>
 					<div class="page-header">
 						<h2>Contact Us Form</h2>
 					</div>

@@ -8,25 +8,23 @@
 			$sql = "SELECT * FROM users WHERE user_email = '$get_user_name' AND user_password = '$get_password'";
 			
 			if($result = mysqli_query($conn, $sql)) {
-					var_dump($result);
-					var_dump(mysqli_fetch_assoc($result));
 				while($rows = mysqli_fetch_assoc($result)) {
 					if(mysqli_num_rows($result) == 1){
-						echo 'if';
 						$_SESSION['user'] = $get_user_name;
 						$_SESSION['password'] = $get_password;
 						$_SESSION['role'] = $rows['role'];
-						// header('Location: ../admin/index.php');
-					} else {
-						echo 'else';
-						// header('Location: ../index.php?login_error=wrong');
+						header('Location: ../admin/index.php');
 					}
 				}
+			    // if fields doesn't match
+				header('Location: ../index.php?login_error=wrong');
+		    // if some query error
 			} else {
-				// header('Location: ../index.php?login_error=query_error');
+				header('Location: ../index.php?login_error=query_error');
 			}
+	    // if both fields are empty
 		} else {
-			// header('Location: ../index.php?login_error=empty');
+			header('Location: ../index.php?login_error=empty');
 		}
 	}
 ?>
