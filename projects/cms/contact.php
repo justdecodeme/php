@@ -34,25 +34,25 @@
 						<div class="form-group">
 							<label for="name" class="col-sm-2 control-label">Name</label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="name" placeholder="Insert your Name" id="name">
+								<input type="text" class="form-control" name="name" placeholder="Insert your Name" id="name" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="email" class="col-sm-2 control-label">Email Address</label>
 							<div class="col-sm-8">
-								<input type="email" class="form-control" name="email" placeholder="Email Address" id="email">
+								<input type="email" class="form-control" name="email" placeholder="Email Address" id="email" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="subject" class="col-sm-2 control-label">Subject</label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="subject" placeholder="Subject" id="subject">
+								<input type="text" class="form-control" name="subject" placeholder="Subject" id="subject" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="comments" class="col-sm-2 control-label">Comment</label>
 							<div class="col-sm-8">
-								<textarea class="form-control" rows="10" name="comment" style="resize:none;"></textarea>
+								<textarea class="form-control" rows="10" name="comment" style="resize:none;" required></textarea>
 							</div>
 						</div>
 						<div class="form-group">
