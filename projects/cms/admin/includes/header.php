@@ -8,12 +8,12 @@
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>		
 		<style>
 			body {
-				padding-bottom: 100px;
+				padding: 60px 0;
 			}
 		</style>
 	</head>
 	<body>
-		
+
 <header class="navbar navbar-default navbar-fixed-top" >
 	<div class="container">
 		<a href="index.php" class="navbar-brand">CMS System</a>
@@ -23,5 +23,3 @@
 		</ul>
 	</div>
 </header>
-
-<div style="width:50px;height:60px;"></div>		
