@@ -10,11 +10,11 @@
 		if($_GET['login_error'] == 'empty') {
 			$login_err = '<div class="alert alert-danger alert-dismissable"">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			User name or Password was empty!</div>';
+			User name or Password was <b>Empty!</b></div>';
 		} elseif ($_GET['login_error'] == 'wrong') {
 			$login_err = '<div class="alert alert-danger alert-dismissable"">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			User name or Password was Wrong!</div>';
+			User name or Password was <b>Wrong!</b></div>';
 		} elseif ($_GET['login_error'] == 'query_error') {
 			$login_err = '<div class="alert alert-danger alert-dismissable"">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

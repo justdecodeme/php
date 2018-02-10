@@ -6,6 +6,11 @@
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>	
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>		
+		<style>
+			body {
+				padding-bottom: 100px;
+			}
+		</style>
 	</head>
 	<body>
 <header class="navbar navbar-inverse navbar-static-top" >

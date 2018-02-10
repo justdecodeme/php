@@ -1,5 +1,3 @@
-<div style="width:55px;height:50px;"></div>
-
 <footer class="navbar navbar-default navbar-fixed-bottom">
 	<div class="container">
 		<p class="navbar-text pull-left">

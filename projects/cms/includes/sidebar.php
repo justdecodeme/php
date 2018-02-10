@@ -20,7 +20,7 @@
 			<div class="panel-heading">Login Area</div>
 			<div class="panel-body">
 				<div class="form-group">
-					<label for="username" class="control-label col-sm-4">User Name</label>
+					<label for="username" class="control-label col-sm-4">Email</label>
 					<div class="col-sm-7">
 						<input type="text" id="username" placeholder="Insert Email Address" name="user_name" class="form-control">
 					</div>

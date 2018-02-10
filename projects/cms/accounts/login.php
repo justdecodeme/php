@@ -6,7 +6,7 @@
 			$get_password = mysqli_real_escape_string($conn, $_POST['password']);
 			
 			$sql = "SELECT * FROM users WHERE user_email = '$get_user_name' AND user_password = '$get_password'";
-			
+
 			if($result = mysqli_query($conn, $sql)) {
 				while($rows = mysqli_fetch_assoc($result)) {
 					if(mysqli_num_rows($result) == 1){
@@ -17,7 +17,7 @@
 					}
 				}
 			    // if fields doesn't match
-				header('Location: ../index.php?login_error=wrong');
+				// header('Location: ../index.php?login_error=wrong');
 		    // if some query error
 			} else {
 				header('Location: ../index.php?login_error=query_error');
