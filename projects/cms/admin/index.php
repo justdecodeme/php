@@ -1,6 +1,7 @@
 <?php session_start();
 	include 'includes/db.php';
 
+	// if session variables are set
 	if(isset($_SESSION['user']) && isset($_SESSION['password'])){
 		$sel_sql = "SELECT * FROM users WHERE user_email = '$_SESSION[user]' AND user_password = '$_SESSION[password]' LIMIT 1";
 
@@ -26,13 +27,13 @@
 	} else {
 		header('Location:../index.php');
 	}
+
 	// Counting Posts
 	$sql = "SELECT * FROM posts WHERE status = 'published'";
 	$run = mysqli_query($conn,$sql);
 	$total_posts = mysqli_num_rows($run);
 	
 	// Counting Categories
-	
 	$sql = "SELECT * FROM category";
 	$run = mysqli_query($conn,$sql);
 	$total_categories = mysqli_num_rows($run);
@@ -47,7 +48,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<?php echo $_SESSION['user']; include 'includes/sidebar.php';?>
+		<?php include 'includes/sidebar.php';?>
 
 		<div class="col-lg-10">
 			<div class="row">

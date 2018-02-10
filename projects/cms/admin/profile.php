@@ -37,7 +37,6 @@
 	</head>
 	<body>
 		<?php include 'includes/header.php';?>
-		<div style="width:50px;height:50px;"></div>
 		<?php include 'includes/sidebar.php';?>
 		<div class="col-lg-10">
 			<div style="width:20px;height:20px;"></div>

@@ -26,9 +26,9 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="password" class="control-label col-sm-4">Password</label>
+					<label for="login_password" class="control-label col-sm-4">Password</label>
 					<div class="col-sm-7">
-						<input type="password" id="password" class="form-control" name="password" placeholder="Insert Your Password">
+						<input type="password" id="login_password" class="form-control" name="password" placeholder="Insert Your Password">
 					</div>
 				</div>
 				<div class="form-group">

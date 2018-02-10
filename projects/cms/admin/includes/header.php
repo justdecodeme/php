@@ -19,7 +19,15 @@
 		<a href="index.php" class="navbar-brand">CMS System</a>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="index.php">Home</a></li>
-			<li><a href="../accounts/logout.php">Log Out</a></li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $_SESSION['user'] ?>
+				<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+				  <li><a href="profile.php"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
+				  <li><a href="../accounts/logout.php"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+				</ul>
+			</li>			
+			
 		</ul>
 	</div>
 </header>

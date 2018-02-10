@@ -83,19 +83,19 @@
 				<div class="form-group">
 					<label for="phone_no" class="col-sm-3 control-label"> Phone No: *</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="phone_no" id="phone_no" placeholder="Insert Your Contact No." id="con_password" required>
+						<input type="text" class="form-control" name="phone_no" id="phone_no" placeholder="Insert Your Contact No." required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="designation" class="col-sm-3 control-label"> Designation:</label>
 					<div class="col-sm-8">
-						<input type="text" name="designation" class="form-control" name="designation" placeholder="Insert your Designation" id="con_password">
+						<input type="text" name="designation" class="form-control" name="designation" placeholder="Insert your Designation">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="website" class="col-sm-3 control-label"> Official Website:</label>
 					<div class="col-sm-8">
-						<input type="text" id="website" class="form-control" name="website" placeholder="Insert your Official Website" id="con_password">
+						<input type="text" id="website" class="form-control" name="website" placeholder="Insert your Official Website">
 					</div>
 				</div>
 				<div class="form-group">
