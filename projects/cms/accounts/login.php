@@ -8,7 +8,7 @@
 			echo $get_user_name . '<br>';
 			echo $get_password . '<br>';
 
-			$sql = "SELECT * FROM users WHERE user_email = '$get_user_name' AND user_password = '$get_password'";
+			$sql = "SELECT * FROM users WHERE user_email = '$get_user_name' AND user_password = '$get_password' LIMIT 1";
 
 			if($result = mysqli_query($conn, $sql)) {
 				if(mysqli_affected_rows($conn)) {
@@ -17,6 +17,7 @@
 					$_SESSION['user'] = $get_user_name;
 					$_SESSION['password'] = $get_password;
 					$_SESSION['role'] = $rows['role'];
+
 					header('Location: ../admin/index.php');
 			    // if fields doesn't match
 				} else {

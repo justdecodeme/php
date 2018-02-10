@@ -1,8 +1,17 @@
 <?php session_start();
 	include 'includes/db.php';
-	if(isset($_SESSION['user']) && isset($_SESSION['password']) == true){
-		$sel_sql = "SELECT * FROM users WHERE user_email = '$_SESSION[user]' AND user_password = '$_SESSION[password]'";
+
+	if(isset($_SESSION['user']) && isset($_SESSION['password'])){
+		$sel_sql = "SELECT * FROM users WHERE user_email = '$_SESSION[user]' AND user_password = '$_SESSION[password]' LIMIT 1";
 		if($run_sql = mysqli_query($conn, $sel_sql)){
+			// if(mysqli_affected_rows($conn)) {
+			// 	$rows = mysqli_fetch_assoc($run_sql);
+
+			// 	$name = $rows['user_f_name'].' '.$rows['user_l_name'];
+			// 	$job = $rows['user_designation'];
+			// 	$gender = $rows['user_gender'];
+			// 	$contact_no = $rows['user_phone_no'];
+			// }
 			while($rows = mysqli_fetch_assoc($run_sql)){
 				$name = $rows['user_f_name'].' '.$rows['user_l_name'];
 				$job = $rows['user_designation'];
