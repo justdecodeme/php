@@ -26,18 +26,18 @@
 	} else {
 		header('Location:../index.php');
 	}
-	//// Counting Posts
+	// Counting Posts
 	$sql = "SELECT * FROM posts WHERE status = 'published'";
 	$run = mysqli_query($conn,$sql);
 	$total_posts = mysqli_num_rows($run);
 	
-	/// Counting Categories
+	// Counting Categories
 	
 	$sql = "SELECT * FROM category";
 	$run = mysqli_query($conn,$sql);
 	$total_categories = mysqli_num_rows($run);
-	///Counting Users
-	
+
+	// Counting Users
 	$sql = "SELECT * FROM users";
 	$run = mysqli_query($conn,$sql);
 	$total_users = mysqli_num_rows($run);
