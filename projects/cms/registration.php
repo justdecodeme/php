@@ -1,13 +1,21 @@
 <?php include 'includes/db.php';
-	$match = '';
+	$msg = '';
 	if(isset($_POST['submit_user'])){
 		
 		if($_POST['password'] == $_POST['con_password']){
 			$date = date('Y-m-d h:i:s');
+			
 			$ins_sql = "INSERT INTO users (role, user_f_name, user_l_name, user_email, user_password, user_gender, user_marital_status, user_phone_no, user_designation, user_website, user_address, user_about_me, user_date) VALUES ('subscriber', '$_POST[first_name]', '$_POST[last_name]', '$_POST[email]', '$_POST[password]', '$_POST[gender]', '$_POST[marital_status]', '$_POST[phone_no]', '$_POST[designation]', '$_POST[website]', '$_POST[address]', '$_POST[about_me]', '$date')";
+			
 			$run_sql = mysqli_query($conn,$ins_sql);
-		}else {
-			$match = '<div class="alert alert-danger">Password doesn&apos;t match!</div>';
+
+			if(mysqli_affected_rows($conn)) {
+				$msg = '<div class="alert alert-success alert-dismissable"">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				Registration successful!</div>';
+			}
+		} else {
+			$msg = '<div class="alert alert-danger">Password doesn&apos;t match!</div>';
 		}
 	}
 ?>
@@ -15,10 +23,10 @@
 <div class="container">
 	<article class="row">
 		<section class="col-lg-8">
+			<?php echo $msg; ?>
 			<div class="page-header">
 				<h2>Registration Form</h2>
 			</div>
-			<?php echo $match; ?>
 			<form class="form-horizontal" action="registration.php" method="post" role="form">
 				<div class="form-group">
 					<label for="first_name" class="col-sm-3 control-label">First Name *</label>
