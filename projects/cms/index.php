@@ -1,6 +1,10 @@
 <?php session_start();
 	include 'includes/db.php';
 	
+	// if(isset($_SESSION['user']) && isset($_SESSION['password'])) {
+	// 	echo "<p>Logedin as: " . $_SESSION['user'] . '</p>';
+	// }
+
 	# check login status
 	#####################
 
