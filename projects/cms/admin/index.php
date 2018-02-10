@@ -3,6 +3,7 @@
 
 	if(isset($_SESSION['user']) && isset($_SESSION['password'])){
 		$sel_sql = "SELECT * FROM users WHERE user_email = '$_SESSION[user]' AND user_password = '$_SESSION[password]' LIMIT 1";
+
 		if($run_sql = mysqli_query($conn, $sel_sql)){
 			if(mysqli_affected_rows($conn)) {
 				$rows = mysqli_fetch_assoc($run_sql);
@@ -21,6 +22,7 @@
 				header('Location:../index.php');
 			}
 		}
+	// if session variables are not set
 	} else {
 		header('Location:../index.php');
 	}
