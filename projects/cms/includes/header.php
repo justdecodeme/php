@@ -6,7 +6,7 @@
 			<?php
 				// Make navigation and add class as per active page
 
-				// separately check as this don't belong to any category as above
+				// add active class if this page is index.php (home) page
 				$class = $_SERVER['PHP_SELF'] == '/projects/cms/index.php' ? 'active' : '';
 				echo '<li class="' . $class .'"><a href="index.php">Home</a>';
 				
@@ -22,7 +22,7 @@
 					echo '<li class="'.$class.'"><a href="menu.php?cat_id='.$rows['c_id'].'">'.ucfirst($rows['category_name']).'</a></li>';
 				}
 
-				// separately check as they don't belong to any category as above
+				// add active class if this page contact or registration page
 				$class = $_SERVER['PHP_SELF'] == '/projects/cms/contact.php' ? 'active' : '';
 				echo '<li class="' . $class .'"><a href="contact.php">Contact Us</a>';
 				$class = $_SERVER['PHP_SELF'] == '/projects/cms/registration.php' ? 'active' : '';
