@@ -33,7 +33,7 @@
 	<p style="color: red;"><?php echo $login_err; ?></p>
 	<h1>Login to xType</h1>
 
-	<form action="login.php" method="post">
+	<form action="includes\login.php" method="post">
 		<input type="email"  name="user_email" placeholder="email">
 		<input type="password"  name="password" placeholder="password">
 		<input type="submit" name="submit_login" value="Login">

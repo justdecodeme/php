@@ -1,5 +1,5 @@
 <?php session_start();
-	include 'includes/db.php';
+	include 'db.php';
 
 	if(isset($_POST['submit_login'])){
 		if(!empty($_POST['user_email']) && !empty($_POST['password'])){
@@ -20,19 +20,19 @@
 					$_SESSION['user'] = $get_user_name;
 					$_SESSION['password'] = $get_password;
 
-					header('Location: xtype.php');
+					header('Location: ../xtype.php');
 			    // if fields doesn't match
 				} else {
 					// echo $get_password;
-					header('Location: index.php?login_error=wrong');
+					header('Location: ../index.php?login_error=wrong');
 				}
 		    // if some query error
 			} else {
-				header('Location: index.php?login_error=query_error');
+				header('Location: ../index.php?login_error=query_error');
 			}
 	    // if both fields are empty
 		} else {
-			header('Location: index.php?login_error=empty');
+			header('Location: ../index.php?login_error=empty');
 		}
 	}
 ?>

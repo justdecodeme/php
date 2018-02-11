@@ -36,7 +36,7 @@
 </head>
 <body>
 	<!-- echo $email; can also be used -->
-	<h2><a href="logout.php">Logout</a></h2>
+	<h2><a href="includes\logout.php">Logout</a></h2>
 	<h1>Welcome to xType: <span style="color: green;"><?php echo $_SESSION['user']; ?></span></h1> 
 
 </body>
