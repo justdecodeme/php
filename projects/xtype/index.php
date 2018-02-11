@@ -17,7 +17,7 @@
 
 				$email = $rows['user_email'];
 
-			// if login is not matched
+			// if login is not validated
 			} else {
 				header('Location: login.php');
 			}
