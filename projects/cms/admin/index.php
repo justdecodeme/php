@@ -57,6 +57,28 @@
 
 		<div class="col-lg-10">
 			<div class="row">
+				
+				<div class="col-md-3">
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3"><i class="glyphicon glyphicon-user" style="font-size:4.5em"></i></div>
+								<div class="col-xs-9 text-right">
+									<div style="font-size:2.5em"><?php echo $total_users; ?></div>
+									<div>Users</div>
+								</div>
+							</div>
+						</div>
+						<a href="user_list.php">
+							<div class="panel-footer">
+								<div class="pull-left">View Users</div>
+								<div class="pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i></div>
+								<div class="clearfix"></div>
+							</div>
+						</a>
+					</div>
+				</div>
+
 				<div class="col-md-3">
 					<div class="panel panel-danger">
 						<div class="panel-heading">
@@ -100,27 +122,6 @@
 				</div>
 				
 				<div class="col-md-3">
-					<div class="panel panel-warning">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3"><i class="glyphicon glyphicon-user" style="font-size:4.5em"></i></div>
-								<div class="col-xs-9 text-right">
-									<div style="font-size:2.5em"><?php echo $total_users; ?></div>
-									<div>Users</div>
-								</div>
-							</div>
-						</div>
-						<a href="user_list.php">
-							<div class="panel-footer">
-								<div class="pull-left">View Users</div>
-								<div class="pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i></div>
-								<div class="clearfix"></div>
-							</div>
-						</a>
-					</div>
-				</div>
-				
-				<div class="col-md-3">
 					<div class="panel panel-info">
 						<div class="panel-heading">
 							<div class="row">
@@ -144,6 +145,7 @@
 			
 			<div class="row">
 				<div class="col-lg-8">
+					<!-- user list -->
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h4>Users List</h4>
@@ -177,8 +179,88 @@
 							</table>
 						</div>
 					</div>
-				</div>
 
+					<!-- latest posts -->
+					<div class="panel panel-primary">
+						<div class="panel-heading"><h3>Latest Posts</h3></div>
+						<div class="panel-body">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>S.No</th>
+										<th>Date</th>
+										<th>Image</th>
+										<th>Title</th>
+										<th>Description</th>
+										<th>Category</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										// joining to get category name for posts instead of id 
+										$sql = "SELECT * FROM posts p JOIN category c ON c.c_id = p.category WHERE p.author = '$_SESSION[user]' AND p.status = 'published'";
+										//$sql = "SELECT * FROM posts WHERE author = '$_SESSION[user]' AND status = 'published'";
+										$run = mysqli_query($conn,$sql);
+										$number = 1;
+										while($rows = mysqli_fetch_assoc($run)){
+											echo '
+											<tr>
+												<td>'.$number.'</td>
+												<td>'.$rows['date'].'</td>
+												<td><img src="../'.$rows['image'].'" width="50px"></td>
+												<td>'.$rows['title'].'</td>
+												<td>'.substr($rows['description'],0,50).'....</td>
+												<td>'.ucfirst($rows['category_name']).'</td>
+											</tr>
+											';
+											$number++;
+										}
+									?>									
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<!-- latest comments -->
+					<div class="panel panel-primary">
+						<div class="panel-heading"><h3>Latest Comments</h3></div>
+						<div class="panel-body">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>S.No</th>
+										<th>Date</th>
+										<th>Name</th>
+										<th>Email</th>
+										<th>Subject</th>
+										<th>Comment</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										$sql = "SELECT * FROM comments LIMIT 5";
+										$run = mysqli_query($conn,$sql);
+										$number = 1;
+										while($rows = mysqli_fetch_assoc($run)){
+											echo '
+											<tr>
+												<td>'.$number.'</td>
+												<td>'.$rows['date'].'</td>
+												<td>'.$rows['name'].'</td>
+												<td>'.$rows['email'].'</td>
+												<td>'.substr($rows['subject'],0,20).'....</td>
+												<td>'.substr($rows['comment'],0,50).'....</td>
+											</tr>
+											';
+											$number++;
+										}
+									?>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
 				<div class="col-lg-4">
 					<div class="panel panel-primary">
 					<div class="panel-heading">
@@ -216,107 +298,6 @@
 						</div>
 					</div>
 					</div>
-				</div>
-			</div>
-
-			<div class="panel panel-primary">
-				<div class="panel-heading"><h3>Latest Posts</h3></div>
-				<div class="panel-body">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>S.No</th>
-								<th>Date</th>
-								<th>Image</th>
-								<th>Title</th>
-								<th>Description</th>
-								<th>Category</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-								// joining to get category name for posts instead of id 
-								$sql = "SELECT * FROM posts p JOIN category c ON c.c_id = p.category WHERE p.author = '$_SESSION[user]' AND p.status = 'published'";
-								//$sql = "SELECT * FROM posts WHERE author = '$_SESSION[user]' AND status = 'published'";
-								$run = mysqli_query($conn,$sql);
-								$number = 1;
-								while($rows = mysqli_fetch_assoc($run)){
-									echo '
-									<tr>
-										<td>'.$number.'</td>
-										<td>'.$rows['date'].'</td>
-										<td><img src="../'.$rows['image'].'" width="50px"></td>
-										<td>'.$rows['title'].'</td>
-										<td>'.substr($rows['description'],0,50).'....</td>
-										<td>'.ucfirst($rows['category_name']).'</td>
-									</tr>
-									';
-									$number++;
-								}
-							?>
-							
-						</tbody>
-					</table>
-				</div>
-			</div>
-
-			<div class="panel panel-primary">
-				<div class="panel-heading"><h3>Latest Comments</h3></div>
-				<div class="panel-body">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>S.No</th>
-								<th>Date</th>
-								<th>Author</th>
-								<th>Email</th>
-								<th>Post</th>
-								<th>Comments</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>2015-10-21</td>
-								<td>Michael</td>
-								<td>abc@gmail.com</td>
-								<td>2</td>
-								<td>I like that Post</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>2015-10-21</td>
-								<td>Michael</td>
-								<td>abc@gmail.com</td>
-								<td>2</td>
-								<td>I like that Post</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>2015-10-21</td>
-								<td>Michael</td>
-								<td>abc@gmail.com</td>
-								<td>2</td>
-								<td>I like that Post</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>2015-10-21</td>
-								<td>Michael</td>
-								<td>abc@gmail.com</td>
-								<td>2</td>
-								<td>I like that Post</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>2015-10-21</td>
-								<td>Michael</td>
-								<td>abc@gmail.com</td>
-								<td>2</td>
-								<td>I like that Post</td>
-							</tr>
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</div>
