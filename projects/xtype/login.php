@@ -20,7 +20,7 @@
 					$_SESSION['user'] = $get_user_name;
 					$_SESSION['password'] = $get_password;
 
-					header('Location: index.php');
+					header('Location: xtype.php');
 			    // if fields doesn't match
 				} else {
 					// echo $get_password;

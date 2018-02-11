@@ -24,7 +24,7 @@
 		}
 	// if session variables are not set
 	} else {
-		header('Location: login.php?login_error=force');
+		header('Location: login.php');
 	}
 ?>
 
@@ -36,8 +36,15 @@
 </head>
 <body>
 	<!-- echo $email; can also be used -->
-	<h2><a href="includes\logout.php">Logout</a></h2>
-	<h1>Welcome to xType: <span style="color: green;"><?php echo $_SESSION['user']; ?></span></h1> 
+	<h1>
+		Welcome to xType: 
+		<span style="color: green;"><?php echo $_SESSION['user']; ?></span>
+		<a href=""></a>
+	</h1> 
+	<h2>
+		<a href="includes\logout.php">Logout</a> | 
+		<a href="xtype.php">Continue</a>
+	</h2>
 
 </body>
 </html>
