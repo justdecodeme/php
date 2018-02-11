@@ -27,6 +27,7 @@
 	if(isset($_POST['submit_post'])){
 		$title = strip_tags($_POST['title']);
 		$date = date('Y-m-d h:i:s');
+		// if image name is not empty (if some image is selected)
 		if($_FILES['image']['name'] != ''){
 			$image_name = $_FILES['image']['name'];
 			$image_tmp = $_FILES['image']['tmp_name'];
@@ -55,6 +56,7 @@
 			} else {
 				$error = '<div class="alert alert-danger">Image File Size is much bigger then Expect!</div>';
 			}
+		// if no image is selected
 		} else {
 			$ins_sql = "INSERT INTO posts (title, description, category, status, date, author) VALUES ('$title', '$_POST[description]', '$_POST[category]', '$_POST[status]', '$date', '$_SESSION[user]')";
 			if(mysqli_query($conn,$ins_sql)){
@@ -75,7 +77,7 @@
 	
 	<div class="col-lg-10">
 		<div class="page-header"><h1>New Post</h1></div>
-		
+
 		<form class="form-horizontal" action="new_post.php" method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="image">Upload an Image</label>
