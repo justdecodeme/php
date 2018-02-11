@@ -1,22 +1,28 @@
 <?php session_start();
 	include 'includes/db.php';
-	if(isset($_SESSION['user']) && isset($_SESSION['password']) == true){
-		$sel_sql = "SELECT * FROM users WHERE user_email = '$_SESSION[user]' AND user_password = '$_SESSION[password]'";
+	
+	// if session variables are set
+	if(isset($_SESSION['user']) && isset($_SESSION['password'])){
+		$sel_sql = "SELECT * FROM users WHERE user_email = '$_SESSION[user]' AND user_password = '$_SESSION[password]' LIMIT 1";
+
 		if($run_sql = mysqli_query($conn, $sel_sql)){
-			while($rows = mysqli_fetch_assoc($run_sql)){
-				if(mysqli_num_rows($run_sql) == 1 ){
-					if($rows['role'] == 'admin'){
-					} else {
-						header('Location:../index.php');
-					}
-				} else{
+			if(mysqli_affected_rows($conn)) {
+				$rows = mysqli_fetch_assoc($run_sql);
+
+				// if role is not admin 
+				if($rows['role'] != 'admin') {
 					header('Location:../index.php');
 				}
+			// if login is not matched
+			} else {
+				header('Location:../index.php');
 			}
 		}
+	// if session variables are not set
 	} else {
 		header('Location:../index.php');
-	}
+	}	
+
 	$error = '';
 	if(isset($_POST['submit_post'])){
 		$title = strip_tags($_POST['title']);
