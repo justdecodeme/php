@@ -231,11 +231,11 @@
 								<th>Title</th>
 								<th>Description</th>
 								<th>Category</th>
-								<th>Author</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
+								// joining to get category name for posts instead of id 
 								$sql = "SELECT * FROM posts p JOIN category c ON c.c_id = p.category WHERE p.author = '$_SESSION[user]' AND p.status = 'published'";
 								//$sql = "SELECT * FROM posts WHERE author = '$_SESSION[user]' AND status = 'published'";
 								$run = mysqli_query($conn,$sql);
@@ -249,7 +249,6 @@
 										<td>'.$rows['title'].'</td>
 										<td>'.substr($rows['description'],0,50).'....</td>
 										<td>'.ucfirst($rows['category_name']).'</td>
-										<td>'.$name.'</td>
 									</tr>
 									';
 									$number++;
