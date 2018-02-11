@@ -32,7 +32,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>xType | Login</title>
+	<title>xType | <?php echo $_SESSION['user']; ?></title>
 </head>
 <body>
 	<!-- echo $email; can also be used -->
