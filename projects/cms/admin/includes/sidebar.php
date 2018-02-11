@@ -9,7 +9,8 @@
 		</li>
 		<li><a href="post_list.php"><i class="glyphicon glyphicon-list"></i> Posts</a></li>
 		<li><a href="category_list.php"><i class="glyphicon glyphicon-tasks"></i> Categories</a></li>
+		<li><a href="user_list.php"><i class="glyphicon glyphicon-user"></i> Users</a></li>
 		<li><a href="comment_list.php"><i class="glyphicon glyphicon-comment"></i> Comments</a></li>
-		<li><a href="profile.php"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
+		<li><a href="profile.php"><i class="glyphicon glyphicon-list-alt"></i> Profile</a></li>
 	</ul>
 </div>

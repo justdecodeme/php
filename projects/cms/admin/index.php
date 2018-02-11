@@ -42,6 +42,11 @@
 	$sql = "SELECT * FROM users";
 	$run = mysqli_query($conn,$sql);
 	$total_users = mysqli_num_rows($run);
+
+	// Counting Comments
+	$sql = "SELECT * FROM comments";
+	$run = mysqli_query($conn,$sql);
+	$total_comments = mysqli_num_rows($run);
 ?>
 
 <?php include 'includes/header.php';?>
@@ -105,7 +110,7 @@
 								</div>
 							</div>
 						</div>
-						<a href="#">
+						<a href="user_list.php">
 							<div class="panel-footer">
 								<div class="pull-left">View Users</div>
 								<div class="pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i></div>
@@ -121,12 +126,12 @@
 							<div class="row">
 								<div class="col-xs-3"><i class="glyphicon glyphicon-comment" style="font-size:4.5em"></i></div>
 								<div class="col-xs-9 text-right">
-									<div style="font-size:2.5em">6</div>
+									<div style="font-size:2.5em"><?php echo $total_comments; ?></div>
 									<div>Comments</div>
 								</div>
 							</div>
 						</div>
-						<a href="#">
+						<a href="comment_list.php">
 							<div class="panel-footer">
 								<div class="pull-left">View Comments</div>
 								<div class="pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i></div>
