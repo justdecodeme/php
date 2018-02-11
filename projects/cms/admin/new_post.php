@@ -65,68 +65,58 @@
 		}
 	}
 ?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Admin Panel</title>
-		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.css">
-		<script src="../../js/jquery.js"></script>
-		<script src="../../bootstrap/js/bootstrap.js"></script>
-		<script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
-		<script>tinymce.init({selector:'textarea'});</script>
-	</head>
-	<body>
-		<?php include 'includes/header.php';?>
-		<div style="width:50px;height:50px;"></div>
-		
-		<?php echo $error; include 'includes/sidebar.php';?>
-		<div class="col-lg-10">
-			<div class="page-header"><h1>New Post</h1></div>
-			<div class="container-fluid">
-				<form class="form-horizontal" action="new_post.php" method="post" enctype="multipart/form-data">
-					<div class="form-group">
-						<label for="image">Upload an Image</label>
-						<input id="image" type="file" name="image" class="btn btn-primary">
-					</div>
-					<div class="form-group">
-						<label for="title">Title</label>
-						<input id="title" type="text" name="title" class="form-control" required>
-					</div>
-					<div class="form-group">
-						<label for="category">Category</label>
-						<select id="category" name="category" class="form-control" required>
-							<option value="">Select Any Category</option>
-							<?php
-								$sel_sql = "SELECT * FROM category";
-								$run_sql = mysqli_query($conn,$sel_sql);
-								while($rows = mysqli_fetch_assoc($run_sql)){
-									if($rows['category_name'] == 'home'){
-										continue;
-									}
-									echo '<option value="'.$rows['c_id'].'">'.ucfirst($rows['category_name']).'</option>';
-								}
-							?>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="description">Description</label>
-						<textarea id="description" name="description"></textarea>
-					</div>
-					<div class="form-group">
-						<label for="status">Status</label>
-						<select id="status" name="status" class="form-control">
-							<option value="draft">Draft</option>
-							<option value="publish">Publish</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<input type="submit" name="submit_post" class="btn btn-danger btn-block">
-					</div>
-				</form>
-			</div>
-			
-		</div>
 
-		<footer></footer>
-	</body>
-</html>
+<?php include 'includes/header.php';?>
+
+
+<div class="container-fluid">
+		
+	<?php echo $error; include 'includes/sidebar.php';?>
+	
+	<div class="col-lg-10">
+		<div class="page-header"><h1>New Post</h1></div>
+		
+		<form class="form-horizontal" action="new_post.php" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<label for="image">Upload an Image</label>
+				<input id="image" type="file" name="image" class="btn btn-primary">
+			</div>
+			<div class="form-group">
+				<label for="title">Title</label>
+				<input id="title" type="text" name="title" class="form-control" required>
+			</div>
+			<div class="form-group">
+				<label for="category">Category</label>
+				<select id="category" name="category" class="form-control" required>
+					<option value="">Select Any Category</option>
+					<?php
+						$sel_sql = "SELECT * FROM category";
+						$run_sql = mysqli_query($conn,$sel_sql);
+						while($rows = mysqli_fetch_assoc($run_sql)){
+							if($rows['category_name'] == 'home'){
+								continue;
+							}
+							echo '<option value="'.$rows['c_id'].'">'.ucfirst($rows['category_name']).'</option>';
+						}
+					?>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="description">Description</label>
+				<textarea id="description" name="description"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="status">Status</label>
+				<select id="status" name="status" class="form-control">
+					<option value="draft">Draft</option>
+					<option value="publish">Publish</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<input type="submit" name="submit_post" class="btn btn-danger btn-block">
+			</div>
+		</form>
+	</div>
+	
+</div>
+<?php include 'includes/footer.php';?>

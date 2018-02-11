@@ -6,6 +6,8 @@
 		<script src="../js/jquery-3.3.1.min.js"></script>
 		<script src="../js/bootstrap.min.js"></script>	
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>		
+		<script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
+		<script>tinymce.init({selector:'textarea#description'});</script>
 		<style>
 			body {
 				padding: 60px 0;
