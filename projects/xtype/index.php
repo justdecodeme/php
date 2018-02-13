@@ -28,23 +28,14 @@
 	}
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>xType | <?php echo $_SESSION['user']; ?></title>
-</head>
-<body>
-	<!-- echo $email; can also be used -->
-	<h1>
-		Welcome to xType: 
-		<span style="color: green;"><?php echo $_SESSION['user']; ?></span>
-		<a href=""></a>
-	</h1> 
-	<h2>
-		<a href="includes\logout.php">Logout</a> | 
-		<a href="xtype.php">Continue</a>
-	</h2>
-
-</body>
-</html>
+<?php include 'includes/header.php' ?>
+<h1>
+	Welcome to xType: 
+	<span style="color: green;"><?php echo $_SESSION['user']; ?></span>
+	<a href=""></a>
+</h1> 
+<h2>
+	<a href="includes\logout.php">Logout</a> | 
+	<a href="xtype.php">Continue</a>
+</h2>
+<?php include 'includes/footer.php' ?>

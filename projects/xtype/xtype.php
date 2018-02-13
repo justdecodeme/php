@@ -28,33 +28,27 @@
   }
 ?>
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>xType | xLab Typing App</title>
-    <link rel="stylesheet" href="_assets/style.min.css">
-  </head>
-  <body>
-    <h1>
-      Welcome to xType: 
-      <span style="color: green;"><?php echo $_SESSION['user']; ?></span>
-      <a href="includes\logout.php">Logout</a>
-    </h1> 
+<?php include 'includes/header.php' ?>
 
-    <a id="toggleTypingBtn">Start Typing</a>
+<h1>
+  Welcome to xType: 
+  <span style="color: green;"><?php echo $_SESSION['user']; ?></span>
+  <a href="includes\logout.php">Logout</a>
+</h1> 
 
-    <div id="timerArea">
-      <h1 class="display__time-left"></h1>
-    </div>
+<a id="toggleTypingBtn">Start Typing</a>
 
-    <div id="progressBar">
-      <div id="seekBar"></div>
-    </div>
+<div id="timerArea">
+  <h1 class="display__time-left"></h1>
+</div>
 
-    <!-- container for letters -->
-    <div id="typingArea"></div> <!-- {1} -->
+<div id="progressBar">
+  <div id="seekBar"></div>
+</div>
 
-    <script src="_assets/script.min.js" charset="utf-8"></script>
-  </body>
-</html>
+<!-- container for letters -->
+<div id="typingArea"></div> <!-- {1} -->
+
+<script src="_assets/script.min.js" charset="utf-8"></script>
+
+<?php include 'includes/footer.php' ?>
