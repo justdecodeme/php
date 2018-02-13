@@ -68,29 +68,28 @@ var timer = function(seconds) {
     if(secondsLeft < 0) {
       clearInterval(countdown);
 
-    setTimeout(function() {
-      // Gross WPM = (total typed / 5) / (time taken in mins)
-      grossWPM = (totalTyped/5) / (initialTime/60);
+      setTimeout(function() {
+        // Gross WPM = (total typed / 5) / (time taken in mins)
+        grossWPM = (totalTyped/5) / (initialTime/60);
 
-      // Net WPM = Gross WPM - ((total wrong letters typed / 5) / time taken in mins)
-      netWPM = grossWPM - ((totalErrors/5) / (initialTime/60));
-      // netWPM = ((totalTyped/5) - (totalErrors/5)) / (initialTime/60); // same as above
+        // Net WPM = Gross WPM - ((total wrong letters typed / 5) / time taken in mins)
+        netWPM = grossWPM - ((totalErrors/5) / (initialTime/60));
+        // netWPM = ((totalTyped/5) - (totalErrors/5)) / (initialTime/60); // same as above
 
-      accuracy = totalTyped != 0 ? ((totalSuccesses)/totalTyped) * 100 + '%' : 0 + '%';
-      // accuracy = ((netWPM)/grossWPM)*100 + '%'; // same as above
-      console.log(totalSuccesses, totalTyped, accuracy);
-      // alert('Done, Check Console Tab!');
-      totalErrorsEl.innerHTML = totalErrors;
-      totalTypedEl.innerHTML = totalTyped;
-      grossWPMEl.innerHTML = Math.round(grossWPM);
-      netWPMEl.innerHTML = Math.round(netWPM);
-      accuracyEl.innerHTML = parseInt(accuracy);
-    });
-    // generateText();
-    // toggleTypingBtn.classList.remove('active');
-    // toggleTypingBtn.innerHTML = 'Start Typing Again';
-    // document.removeEventListener('keyup', checkTyping, false);
+        accuracy = totalTyped != 0 ? ((totalSuccesses)/totalTyped) * 100 + '%' : 0 + '%';
+        // accuracy = ((netWPM)/grossWPM)*100 + '%'; // same as above
 
+        // alert('Done, Check Console Tab!');
+        totalErrorsEl.innerHTML = totalErrors;
+        totalTypedEl.innerHTML = totalTyped;
+        grossWPMEl.innerHTML = Math.round(grossWPM);
+        netWPMEl.innerHTML = Math.round(netWPM);
+        accuracyEl.innerHTML = parseInt(accuracy);
+      });
+      // generateText();
+      // toggleTypingBtn.classList.remove('active');
+      // toggleTypingBtn.innerHTML = 'Start Typing Again';
+      // document.removeEventListener('keyup', checkTyping, false);
 
       return;
     }
