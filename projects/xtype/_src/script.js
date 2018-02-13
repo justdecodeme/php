@@ -34,6 +34,7 @@ var generateText = function() {
   // add active class to firt letter
   letters[0].classList.add('active');
 };
+
 var displayTimeLeft = function(seconds) {
   seekBar.style.width = ((initialTime - seconds) / initialTime) * 100 + '%';
 
@@ -65,7 +66,6 @@ var displayTimeLeft = function(seconds) {
     // document.removeEventListener('keyup', checkTyping, false);
   }
 }
-
 var timer = function(seconds) {
   // clear any existing timers
   clearInterval(countdown);
@@ -128,6 +128,7 @@ var checkTyping = function(e) {
     }
   }
 }
+
 var startTyping = function() {
   timer(initialTime);
   toggleTypingBtn.classList.add('active');
