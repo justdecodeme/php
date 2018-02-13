@@ -49,10 +49,6 @@ var displayTimeLeft = function(seconds) {
   const remainderSeconds = seconds % 60;
   const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;
   timerDisplay.textContent = display;
-
-  // if time ends
-  if(seconds == 0) {
-  }
 }
 var timer = function(seconds) {
   // clear any existing timers
@@ -64,28 +60,49 @@ var timer = function(seconds) {
 
   countdown = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
+
     // check if we should stop it!
     if(secondsLeft < 0) {
       clearInterval(countdown);
 
-      setTimeout(function() {
-        // Gross WPM = (total typed / 5) / (time taken in mins)
-        grossWPM = (totalTyped/5) / (initialTime/60);
+      // Gross WPM = (total typed / 5) / (time taken in mins)
+      grossWPM = Math.round((totalTyped/5) / (initialTime/60));
 
-        // Net WPM = Gross WPM - ((total wrong letters typed / 5) / time taken in mins)
-        netWPM = grossWPM - ((totalErrors/5) / (initialTime/60));
-        // netWPM = ((totalTyped/5) - (totalErrors/5)) / (initialTime/60); // same as above
+      // Net WPM = Gross WPM - ((total wrong letters typed / 5) / time taken in mins)
+      netWPM = Math.round(grossWPM - ((totalErrors/5) / (initialTime/60)));
+      // netWPM = ((totalTyped/5) - (totalErrors/5)) / (initialTime/60); // same as above
 
-        accuracy = totalTyped != 0 ? ((totalSuccesses)/totalTyped) * 100 + '%' : 0 + '%';
-        // accuracy = ((netWPM)/grossWPM)*100 + '%'; // same as above
+      accuracy = totalTyped != 0 ? parseInt(((totalSuccesses)/totalTyped) * 100) + '%' : 0 + '%';
+      // accuracy = ((netWPM)/grossWPM)*100 + '%'; // same as above
 
-        // alert('Done, Check Console Tab!');
-        totalErrorsEl.innerHTML = totalErrors;
-        totalTypedEl.innerHTML = totalTyped;
-        grossWPMEl.innerHTML = Math.round(grossWPM);
-        netWPMEl.innerHTML = Math.round(netWPM);
-        accuracyEl.innerHTML = parseInt(accuracy);
-      });
+      // alert('Done, Check Console Tab!');
+
+        
+
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        var query = 'te='+totalErrors+'&tt='+totalTyped+'&gwpm='+grossWPM+'$nwpm='+netWPM+'&a='+accuracy;
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                totalErrorsEl.innerHTML = totalErrors;
+                totalTypedEl.innerHTML = totalTyped;
+                grossWPMEl.innerHTML = grossWPM;
+                netWPMEl.innerHTML = netWPM;
+                accuracyEl.innerHTML = parseInt(accuracy);
+                console.log(this.responseText);
+            }
+        };
+        xmlhttp.open("GET","update_scoreboard.php?"+query,true);
+        xmlhttp.send();
+
+
+
+
       // generateText();
       // toggleTypingBtn.classList.remove('active');
       // toggleTypingBtn.innerHTML = 'Start Typing Again';
@@ -97,6 +114,28 @@ var timer = function(seconds) {
     displayTimeLeft(secondsLeft);
   }, 1000);
 }
+
+// var updateScoreboard = function() {
+//     if (str == "") {
+//         document.getElementById("txtHint").innerHTML = "";
+//         return;
+//     } else { 
+//         if (window.XMLHttpRequest) {
+//             // code for IE7+, Firefox, Chrome, Opera, Safari
+//             xmlhttp = new XMLHttpRequest();
+//         } else {
+//             // code for IE6, IE5
+//             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+//         }
+//         xmlhttp.onreadystatechange = function() {
+//             if (this.readyState == 4 && this.status == 200) {
+//                 document.getElementById("txtHint").innerHTML = this.responseText;
+//             }
+//         };
+//         xmlhttp.open("GET","update_scoreboard.php?q="+str,true);
+//         xmlhttp.send();
+//     }
+// }
 
 var checkTyping = function(e) {
   // select active letter
