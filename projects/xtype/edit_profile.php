@@ -39,6 +39,12 @@
 
 	$msg = '';
 	if(isset($_POST['update_profile'])){
+	    $user_id = $_POST['user_id'];
+	    $user_name = $_POST['user_name'];
+	    $user_email = $_POST['user_email'];
+	    $user_f_name = $_POST['user_f_name'];
+	    $user_l_name = $_POST['user_l_name'];
+	    $user_phone = $_POST['user_phone'];
 
 		if($_FILES['user_image']['name'] != ''){
 			$image_name = $_FILES['user_image']['name'];
@@ -47,20 +53,20 @@
 			$image_ext = pathinfo($image_name, PATHINFO_EXTENSION);
 			$image_path = '_assets/images/'.$image_name;
 			$image_db_path = $image_name;
-			if($image_size < 1000000){
-				if($image_ext == 'jpg' || $image_ext == 'png' || $image_ext == 'gif'){
-					if(move_uploaded_file($image_tmp,$image_path)){
+			if($image_size < 1000000) {
+				if($image_ext == 'jpg' || $image_ext == 'png' || $image_ext == 'gif') {
+					if(move_uploaded_file($image_tmp,$image_path)) {
 						$up_sql = "UPDATE `users` 
 							SET 
 							`user_image` = '$image_db_path',
-							`user_name` = '$_POST[user_name]',
-							`user_email` = '$_POST[user_email]',
-							`user_f_name` = '$_POST[user_f_name]',
-							`user_l_name` = '$_POST[user_l_name]',
-							`user_phone` = '$_POST[user_phone]'
-							WHERE `user_id` = '$_POST[user_id]'";			
+							`user_name` = '$user_name',
+							`user_email` = '$user_email',
+							`user_f_name` = '$user_f_name',
+							`user_l_name` = '$user_l_name',
+							`user_phone` = '$user_phone'
+							WHERE `user_id` = '$user_id'";
 
-						if(mysqli_query($conn, $up_sql)){
+						if(mysqli_query($conn, $up_sql)) {
 							//header('Location: edit_post.php?edit_id='.$_POST['id']);
 							$msg = 'You&apos;ve Edited the post no. ' . $_POST['user_id'];
 						}else {
@@ -73,17 +79,17 @@
 					$msg = 'Image Format was not Correct!';
 				}
 			} else {
-				$msg = '<div class="alert alert-danger">Image File Size is much bigger then Expect!</div>';
+				$msg = 'Image File Size is much bigger then Expect!';
 			}
 		} else {
 			$up_sql = "UPDATE `users` 
 				SET 
-				`user_name` = '$_POST[user_name]',
-				`user_email` = '$_POST[user_email]',
-				`user_f_name` = '$_POST[user_f_name]',
-				`user_l_name` = '$_POST[user_l_name]',
-				`user_phone` = '$_POST[user_phone]'
-				WHERE `user_id` = '$_POST[user_id]'";			
+				`user_name` = '$user_name',
+				`user_email` = '$user_email',
+				`user_f_name` = '$user_f_name',
+				`user_l_name` = '$user_l_name',
+				`user_phone` = '$user_phone'
+				WHERE `user_id` = '$user_id'";		
 			if(mysqli_query($conn, $up_sql)){
 				// update session with new details
 				$_SESSION['user'] = $_POST['user_email'];
@@ -132,7 +138,7 @@
 	    <td><input type="text" name="user_phone" value="<?php echo $user_phone; ?>"></td>
 	  </tr>
 	  <tr>
-	  	<th><input type="text" name="user_id" value="<?php echo $user_id; ?>"></th>
+	  	<th><input type="hidden" name="user_id" value="<?php echo $user_id; ?>"></th>
 	  	<td><input type="submit" name="update_profile" value="Update Profile"></td>
 	  </tr>
 	</table>
