@@ -1,12 +1,30 @@
 $active: rgba(0, 0, 255, 0.5);
 $success: rgba(0, 255, 0, 0.5);
 $error: rgba(255, 0, 0, 0.5);
-$lightgrey05: rgba(0, 0, 0, 0.05);
-$lightgrey1: rgba(0, 0, 0, 0.1);
+$black05: rgba(0, 0, 0, 0.05);
+$black: rgba(0, 0, 0, 0.1);
+$white08: rgba(255, 255, 255, 0.8);
 
 span.active { background: $active; }
 span.success { color: $success; }
 span.error { background: $error; }
+
+.grid_container {
+  display: grid;
+  grid-template-columns: 200px auto 200px;
+  grid-template-rows: auto auto;
+  grid-gap: 1px;
+  background-color: $active;
+  padding: 10px;
+  .grid_item {
+    background-color: $white08;
+    padding: 10px;
+  }
+  .grid_item:nth-child(1) { grid-area: 1 / 1 / 3 / 2; }
+  .grid_item:nth-child(2) { grid-area: 1 / 2 / 2 / 3; }
+  .grid_item:nth-child(3) { grid-area: 2 / 2 / 3 / 3; }
+  .grid_item:nth-child(4) { grid-area: 1 / 3 / 3 / 4; }
+}
 
 #toggleTypingBtn {
   background: $success;
@@ -22,7 +40,7 @@ span.error { background: $error; }
 
 div#progressBar {
   height: 10px;
-  background: $lightgrey1;
+  background: $black;
   border-radius: 20px;
   margin: 10px 0;
   #seekBar {
@@ -38,7 +56,7 @@ div#progressBar {
   font-size: 30px;
   max-height: 250px;
   overflow: scroll;
-  background:$lightgrey05;
+  background:$black05;
   padding: 10px;
   border-radius: 10px;
 }

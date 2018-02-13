@@ -6,9 +6,9 @@
 
   // if session variables are set
   if(isset($_SESSION['user']) && isset($_SESSION['password'])){
-    $sel_sql = "SELECT * FROM users 
-          WHERE user_email = '$_SESSION[user]' 
-          AND user_password = '$_SESSION[password]' 
+    $sel_sql = "SELECT * FROM users
+          WHERE user_email = '$_SESSION[user]'
+          AND user_password = '$_SESSION[password]'
           LIMIT 1";
 
     if($run_sql = mysqli_query($conn, $sel_sql)){
@@ -30,24 +30,41 @@
 
 <?php include 'includes/header.php' ?>
 
-<h1>
-  Welcome to xType: 
-  <span style="color: green;"><?php echo $_SESSION['user']; ?></span>
-  <a href="includes\logout.php">Logout</a>
-</h1> 
 
-<a id="toggleTypingBtn">Start Typing</a>
+<div class="grid_container">
+  <!-- Leaderboard -->
+  <div class="grid_item">
+    <h1>Leaderboard</h1>
+  </div>
 
-<div id="timerArea">
-  <h1 class="display__time-left"></h1>
+  <!-- Header -->
+  <div class="grid_item">
+    <h1>
+      Welcome to xType:
+      <span style="color: green;"><?php echo $_SESSION['user']; ?></span>
+      <a href="includes\logout.php">Logout</a>
+    </h1>
+  </div>
+
+  <!-- Typing area -->
+  <div class="grid_item">
+    <a id="toggleTypingBtn">Start Typing</a>
+
+    <div id="timerArea">
+      <h1 class="display__time-left"></h1>
+    </div>
+
+    <div id="progressBar">
+      <div id="seekBar"></div>
+    </div>
+
+    <div id="typingArea"></div>
+  </div>
+
+  <div class="grid_item">
+    <h1>Profile</h1>
+  </div>
 </div>
-
-<div id="progressBar">
-  <div id="seekBar"></div>
-</div>
-
-<!-- container for letters -->
-<div id="typingArea"></div> <!-- {1} -->
 
 <script src="_assets/script.min.js" charset="utf-8"></script>
 
