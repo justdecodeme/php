@@ -1,5 +1,7 @@
 <?php session_start();
 	include 'includes/db.php';
+
+	// if session variables are set
 	if(isset($_SESSION['user']) && isset($_SESSION['password']) == true){
 		$sel_sql = "SELECT * FROM users WHERE user_email = '$_SESSION[user]' AND user_password = '$_SESSION[password]'";
 		if($run_sql = mysqli_query($conn, $sel_sql)){
@@ -40,7 +42,7 @@
 		<?php include 'includes/sidebar.php';?>
 		<div class="col-lg-10">
 			<div style="width:20px;height:20px;"></div>
-			<!----- Profile Area ------>
+			<!-- Profile Area -->
 			<div class="col-lg-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">

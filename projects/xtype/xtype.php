@@ -7,15 +7,24 @@
   // if session variables are set
   if(isset($_SESSION['user']) && isset($_SESSION['password'])){
     $sel_sql = "SELECT * FROM users
-          WHERE user_email = '$_SESSION[user]'
-          AND user_password = '$_SESSION[password]'
-          LIMIT 1";
+                WHERE user_email = '$_SESSION[user]'
+                AND user_password = '$_SESSION[password]'
+                LIMIT 1";
 
     if($run_sql = mysqli_query($conn, $sel_sql)){
       if(mysqli_affected_rows($conn)) {
         $rows = mysqli_fetch_assoc($run_sql);
 
-        $email = $rows['user_email'];
+        $user_name = $rows['user_name'];
+        $user_email = $rows['user_email'];
+        $user_password = $rows['user_password'];
+        $user_f_name = $rows['user_f_name'];
+        $user_l_name = $rows['user_l_name'];
+        $user_role = $rows['user_role'];
+        $user_gender = $rows['user_gender'];
+        $user_image = $rows['user_image'];
+        $user_phone = $rows['user_phone'];
+        $user_doj = $rows['user_doj'];        
 
       // if login is not matched
       } else {
@@ -35,10 +44,10 @@
   <!-- Leaderboard -->
   <div class="grid_item">
     <h3>Scoreboard</h3>
-    <table style="text-align: left;">
+    <table style="text-align: left; border-collapse: collapse; width: 100%;" border="1">
       <tr>
         <th>Errors: </th>
-        <td id="totalErrors"></td>
+        <td id="totalErrors" width="30"></td>
       </tr>
       <tr>
         <th>Characters Typed: </th>
@@ -84,7 +93,50 @@
   </div>
 
   <div class="grid_item">
-    <h3>Profile</h3>
+    <h3>Profile <a href="edit_profile.php">Edit</a></h3>
+
+    <table style="text-align: left; border-collapse: collapse; width: 100%;" border="1">
+      <tr>
+        <th width="50%">Image</th>
+        <td width="50%"><img src="_assets/images/<?php echo $user_image; ?>" alt="<?php echo $user_image; ?>" width="100"></td>
+      </tr>
+      <tr>
+        <th>First Name</th>
+        <td><?php echo $user_f_name; ?></td>
+      </tr>
+      <tr>
+        <th>Last Name</th>
+        <td><?php echo $user_l_name; ?></td>
+      </tr>
+      <tr>
+        <th>username</th>
+        <td><?php echo $user_name; ?></td>
+      </tr>
+      <tr>
+        <th>email</th>
+        <td><?php echo $user_email; ?></td>
+      </tr>
+      <tr>
+        <th>password</th>
+        <td><?php echo $user_password; ?></td>
+      </tr>
+      <tr>
+        <th>Phone</th>
+        <td><?php echo $user_phone; ?></td>
+      </tr>
+      <tr>
+        <th>Role</th>
+        <td><?php echo $user_role; ?></td>
+      </tr>
+      <tr>
+        <th>Date of Joining</th>
+        <td><?php echo $user_doj; ?></td>
+      </tr>
+      <tr>
+        <th>Gender</th>
+        <td><?php echo $user_gender; ?></td>
+      </tr>
+    </table>
   </div>
 </div>
 
