@@ -17,7 +17,7 @@ const accuracyEl = document.querySelector('#accuracy');
 
 // FUNCTIONS
 var generateText = function() {
-  initialTime = 5;
+  initialTime = 3;
   totalErrors = 0;
   totalSuccesses = 0;
   totalTyped = 0;
@@ -61,7 +61,7 @@ var timer = function(seconds) {
   countdown = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
 
-    // check if we should stop it!
+    // update db and scoreboard once time finished
     if(secondsLeft < 0) {
       clearInterval(countdown);
 
@@ -72,34 +72,29 @@ var timer = function(seconds) {
       netWPM = Math.round(grossWPM - ((totalErrors/5) / (initialTime/60)));
       // netWPM = ((totalTyped/5) - (totalErrors/5)) / (initialTime/60); // same as above
 
-      accuracy = totalTyped != 0 ? parseInt(((totalSuccesses)/totalTyped) * 100) + '%' : 0 + '%';
+      accuracy = totalTyped != 0 ? parseInt(((totalSuccesses)/totalTyped) * 100) + '%' : '0%';
       // accuracy = ((netWPM)/grossWPM)*100 + '%'; // same as above
 
       // alert('Done, Check Console Tab!');
 
-        
+      if (window.XMLHttpRequest) {
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp = new XMLHttpRequest();
+      } else {
+          // code for IE6, IE5
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
 
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        let query = 'te='+totalErrors+'&tt='+totalTyped+'&gwpm='+grossWPM+'$nwpm='+netWPM+'&a='+accuracy;
-        
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                updateScoreboard();
-                console.log(this.responseText);
-            }
-        };
-        xmlhttp.open("GET","update_scoreboard.php?"+query,true);
-        xmlhttp.send();
-
-
-
+      let query = '&te='+totalErrors+'&tty='+totalTyped+'&gwpm='+grossWPM+'&nwpm='+netWPM+'&a='+accuracy+'&ttm='+'1min';
+      
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              updateScoreboard();
+              console.log(this.responseText);
+          }
+      };
+      xmlhttp.open("GET","update_scoreboard.php?"+query,true);
+      xmlhttp.send();
 
       // generateText();
       // toggleTypingBtn.classList.remove('active');
@@ -118,7 +113,7 @@ var updateScoreboard = function() {
   totalTypedEl.innerHTML = totalTyped;
   grossWPMEl.innerHTML = grossWPM;
   netWPMEl.innerHTML = netWPM;
-  accuracyEl.innerHTML = parseInt(accuracy);
+  accuracyEl.innerHTML = accuracy;
 }
 
 var checkTyping = function(e) {
