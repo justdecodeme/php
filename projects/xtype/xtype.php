@@ -73,7 +73,6 @@
     <h1>
       Welcome to xType:
       <span style="color: green;"><?php echo $_SESSION['user']; ?></span>
-      <a href="includes\logout.php">Logout</a>
     </h1>
   </div>
 
@@ -91,9 +90,14 @@
 
     <div id="typingArea"></div>
   </div>
-
+  
+  <!-- Profile -->
   <div class="grid_item">
-    <h3>Profile <a href="edit_profile.php">Edit</a></h3>
+    <h3>Profile </h3>
+    <h4>
+      <a href="edit_profile.php">Edit</a> | 
+      <a href="includes\logout.php">Logout</a>
+    </h4>
 
     <table style="text-align: left; border-collapse: collapse; width: 100%;" border="1">
       <tr>
