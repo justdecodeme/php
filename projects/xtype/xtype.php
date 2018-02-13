@@ -34,7 +34,29 @@
 <div class="grid_container">
   <!-- Leaderboard -->
   <div class="grid_item">
-    <h1>Leaderboard</h1>
+    <h3>Scoreboard</h3>
+    <table style="text-align: left;">
+      <tr>
+        <th>Errors: </th>
+        <td id="totalErrors"></td>
+      </tr>
+      <tr>
+        <th>Characters Typed: </th>
+        <td id="totalTyped"></td>
+      </tr>
+      <tr>
+        <th>Gross WPM: </th>
+        <td id="grossWPM"></td>
+      </tr>
+      <tr>
+        <th>Net WPM: </th>
+        <td id="netWPM"></td>
+      </tr>
+      <tr>
+        <th>Accuracy: </th>
+        <td id="accuracy"></td>
+      </tr>
+    </table>
   </div>
 
   <!-- Header -->
@@ -62,7 +84,7 @@
   </div>
 
   <div class="grid_item">
-    <h1>Profile</h1>
+    <h3>Profile</h3>
   </div>
 </div>
 
