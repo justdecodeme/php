@@ -17,7 +17,7 @@ const accuracyEl = document.querySelector('#accuracy');
 
 // FUNCTIONS
 var generateText = function() {
-  initialTime = 60;
+  initialTime = 3;
   totalErrors = 0;
   totalSuccesses = 0;
   totalTyped = 0;
