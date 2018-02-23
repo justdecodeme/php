@@ -17,7 +17,7 @@ const accuracyEl = document.querySelector('#accuracy');
 
 // FUNCTIONS
 var generateText = function() {
-  initialTime = 3;
+  initialTime = 60;
   totalErrors = 0;
   totalSuccesses = 0;
   totalTyped = 0;
@@ -86,7 +86,7 @@ var timer = function(seconds) {
       }
 
       let query = '&te='+totalErrors+'&tty='+totalTyped+'&gwpm='+grossWPM+'&nwpm='+netWPM+'&a='+accuracy+'&ttm='+'1min';
-      
+
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
               updateScoreboard();

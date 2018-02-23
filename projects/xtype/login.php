@@ -7,10 +7,10 @@
 			$get_password = mysqli_real_escape_string($conn, $_POST['password']);
 
 			// echo $get_user_name;
-			
-			$sql = "SELECT * FROM users 
-					WHERE user_email = '$get_user_name' 
-					AND user_password = '$get_password' 
+
+			$sql = "SELECT * FROM users
+					WHERE user_email = '$get_user_name'
+					AND user_password = '$get_password'
 					LIMIT 1";
 
 			if($result = mysqli_query($conn, $sql)) {
@@ -40,7 +40,7 @@
 	#####################
 
 	$login_err = '';
-	
+
 	if(isset($_GET['login_error'])) {
 		if($_GET['login_error'] == 'empty') {
 			$login_err = 'User name or Password was <b>Empty!</b>';
@@ -49,17 +49,17 @@
 		} elseif ($_GET['login_error'] == 'query_error') {
 			$login_err = 'There is some kind of <b>Database Issue!</b>';
 		}
-	}	
+	}
 ?>
 
 <?php include 'includes/header.php' ?>
 
 <p style="color: red;"><?php echo $login_err; ?></p>
-<h1>Login to xType</h1>
+<h1>Login to xType | <a href="signup.php">Signup</a></h1>
 
 <form action="login.php" method="post">
-	<input type="email"  name="user_email" placeholder="email">
-	<input type="password"  name="password" placeholder="password">
+	<input type="email"  name="user_email" placeholder="email"><br>
+	<input type="password"  name="password" placeholder="password"><br>
 	<input type="submit" name="submit_login" value="Login">
 </form>
 
