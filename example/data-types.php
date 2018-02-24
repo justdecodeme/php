@@ -7,7 +7,7 @@
 
   // integer
   $a = 5;
-  // float
+  // float also called double
   $b = 3.14;
   // string
   $c = 'php';
@@ -22,5 +22,9 @@
   // ERROR
   $h;
 
-  var_dump($g);
+  var_dump($a);
+
+  // constants (are automatically global)
+  define('PI', 3.14, true); // true -> case-insensitive, default is false (case sensitive)
+  var_dump(pi);
  ?>
