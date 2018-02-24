@@ -34,15 +34,28 @@
 
   # create table
   ##############
-  $query = 'CREATE TABLE Persons (
-    PersonID int,
-    LastName varchar(255),
-    FirstName varchar(255),
-    Address varchar(255),
-    City varchar(255)
-  )';
-  if(mysqli_query($conn, $query)) {
-    echo 'Table created.<br>';
+  // $query = 'CREATE TABLE Persons (
+  //   PersonID int,
+  //   LastName varchar(255),
+  //   FirstName varchar(255),
+  //   Address varchar(255),
+  //   City varchar(255)
+  // )';
+  // if(mysqli_query($conn, $query)) {
+  //   echo 'Table created.<br>';
+  // }
+
+  # read
+  ######
+  $query = 'SELECT * FROM user';
+  $result = $conn->query($query);
+  echo $result->num_rows;
+  if($result) {
+    while($row = $result->fetch_assoc()) {
+      echo $row["name"]."<br>";
+    }
+  } else {
+      echo "error " . $conn->error;
   }
 
   # close connection

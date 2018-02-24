@@ -85,7 +85,7 @@
   //
   // $query = "SELECT * FROM `testarea`";
   // $result = $connection->query($query);
-  //
+  // echo $result->num_rows;
   // if($result) {
   //   while($row = $result->fetch_assoc()) {
   //     echo "id:".$row["id"]." company:".$row["company"]." contact:".$row["contact"]."<br>";
