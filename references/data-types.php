@@ -1,16 +1,30 @@
-<?php 
-	// number
-	$a = 10;
+<?php
+  class Car {
+    function Car() {
+      $this->model = 'x5';
+    }
+  }
 
-	// string
-	$b = 'Hi, How are you?';
+  // integer
+  $a = 5;
+  // float also called double
+  $b = 3.14;
+  // string
+  $c = 'php';
+  // boolean
+  $d = true;
+  // array
+  $e = array('php', 'mysql');
+  // null
+  $f = null;
+  // object
+  $g = new Car();
+  // ERROR
+  $h;
 
-	// boolean
-	$c = true;
+  var_dump($a);
 
-	// array
-	$d = array('php', 'nodejs', 'python');
-
-	echo $a . '<br>';
-	var_dump($d);
+  // constants (are automatically global)
+  define('PI', 3.14, true); // true -> case-insensitive, default is false (case sensitive)
+  var_dump(pi);
  ?>
