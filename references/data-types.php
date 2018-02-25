@@ -26,5 +26,5 @@
 
   // constants (are automatically global)
   define('PI', 3.14, true); // true -> case-insensitive, default is false (case sensitive)
-  var_dump(pi);
+  var_dump(pi); // float(3.14)
  ?>
