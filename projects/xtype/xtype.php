@@ -24,7 +24,7 @@
         $user_gender = $rows['user_gender'];
         $user_image = $rows['user_image'];
         $user_phone = $rows['user_phone'];
-        $user_doj = $rows['user_doj'];        
+        $user_doj = $rows['user_doj'];
 
       // if login is not matched
       } else {
@@ -66,6 +66,26 @@
         <td id="accuracy"></td>
       </tr>
     </table>
+    <br>
+    <table style="text-align: left; border-collapse: collapse; width: 100%;" border="1">
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>Highest WPM</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboard">
+<?php
+  $query = "SELECT * FROM `users` ORDER BY `user_highest_wpm` DESC";
+
+  if($result = mysqli_query($conn, $query)) {
+    while($row = mysqli_fetch_assoc($result)) {
+      echo "<tr><td>$row[user_name]</td><td>$row[user_highest_wpm]</td></tr>";
+    }
+  };
+ ?>
+      </tbody>
+    </table>
   </div>
 
   <!-- Header -->
@@ -90,12 +110,12 @@
 
     <div id="typingArea"></div>
   </div>
-  
+
   <!-- Profile -->
   <div class="grid_item">
     <h3>Profile </h3>
     <h4>
-      <a href="edit_profile.php">Edit</a> | 
+      <a href="edit_profile.php">Edit</a> |
       <a href="includes\logout.php">Logout</a>
     </h4>
 
