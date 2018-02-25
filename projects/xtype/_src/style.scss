@@ -5,6 +5,12 @@ $black05: rgba(0, 0, 0, 0.05);
 $black: rgba(0, 0, 0, 0.1);
 $white08: rgba(255, 255, 255, 0.8);
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
+}
+
 span.active { background: $active; }
 span.success { color: $success; }
 span.error { background: $error; }
@@ -59,4 +65,12 @@ div#progressBar {
   background:$black05;
   padding: 10px;
   border-radius: 10px;
+}
+
+#load{
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:9999;
+    background:url("images/loader.gif") no-repeat center center rgba(0,0,0,0.8)
 }

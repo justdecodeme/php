@@ -38,9 +38,8 @@
 ?>
 
 <?php include 'includes/header.php' ?>
-
-
-<div class="grid_container">
+<div id="load"></div>
+<div class="grid_container" id="contents">
   <!-- Leaderboard -->
   <div class="grid_item">
     <h3>Scoreboard</h3>
@@ -75,15 +74,15 @@
         </tr>
       </thead>
       <tbody id="leaderboard">
-<?php
-  $query = "SELECT * FROM `users` ORDER BY `user_highest_wpm` DESC";
+        <?php
+          $query = "SELECT * FROM `users` ORDER BY `user_highest_wpm` DESC";
 
-  if($result = mysqli_query($conn, $query)) {
-    while($row = mysqli_fetch_assoc($result)) {
-      echo "<tr><td>$row[user_name]</td><td>$row[user_highest_wpm]</td></tr>";
-    }
-  };
- ?>
+          if($result = mysqli_query($conn, $query)) {
+            while($row = mysqli_fetch_assoc($result)) {
+              echo "<tr><td>$row[user_name]</td><td>$row[user_highest_wpm]</td></tr>";
+            }
+          };
+         ?>
       </tbody>
     </table>
   </div>
