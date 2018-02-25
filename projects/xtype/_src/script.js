@@ -96,10 +96,10 @@ var timer = function(seconds) {
       xmlhttp.open("GET","update_scoreboard.php?"+query,true);
       xmlhttp.send();
 
-      // generateText();
-      // toggleTypingBtn.classList.remove('active');
-      // toggleTypingBtn.innerHTML = 'Start Typing Again';
-      // document.removeEventListener('keyup', checkTyping, false);
+      generateText();
+      toggleTypingBtn.classList.remove('active');
+      toggleTypingBtn.innerHTML = 'Start Typing';
+      document.removeEventListener('keyup', checkTyping, false);
 
       return;
     }
