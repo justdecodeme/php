@@ -1,4 +1,4 @@
-.jumbotron {
+.jumbotron.blog-main {
 	color: white;
 	background: lightblue url("../images/blog.jpg") no-repeat center; 
 	background-size: cover;
@@ -34,4 +34,8 @@ footer p {
 	text-align: center;
 	color: white;
 	margin: 20px 0 0;
+}
+
+.left-sidebar a {
+	font-size: 12px;
 }
