@@ -91,10 +91,15 @@
 				<div class="latest-post">
 					<h2>Latest Post</h2>
 					<div class="list-group">
-					  <a href="#" class="list-group-item list-group-item-action">The First Post</a>
-					  <a href="#" class="list-group-item list-group-item-action">The Second Post</a>
-					  <a href="#" class="list-group-item list-group-item-action">The Third Post</a>
+					  <a href="post.php" class="list-group-item list-group-item-action">The First Post</a>
+					  <a href="post.php" class="list-group-item list-group-item-action">The Second Post</a>
+					  <a href="post.php" class="list-group-item list-group-item-action">The Third Post</a>
 					</div>
+				</div>
+
+				<div class="post-of-the-day">
+					<h2>Post of the Day</h2>
+
 				</div>
 			</div>
 		</div>
