@@ -112,6 +112,20 @@
 						</p>
 					</div>
 				</div>
+
+				<div class="about">
+					<h2>About Rakko</h2>
+					<div class="row">
+						<div class="col-md-4">
+							<img src="images/rakko.jpg" class="img-fluid img-thumbnail">
+						</div>
+						<div class="col-md-8">
+							<a href="#">Profile Page</a><br>
+							<a href="#">Website</a><br>
+							<a href="#">Email</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
