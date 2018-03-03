@@ -2,6 +2,12 @@ body {
 	padding-bottom: 100px;
 }
 
+.jumbotron {
+	color: white;
+	background: lightblue url("../images/blog.jpg") no-repeat center; 
+	background-size: cover;
+}
+
 .post {
     border-bottom: 1px solid grey;
     padding-bottom: 20px;
