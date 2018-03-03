@@ -1,7 +1,3 @@
-body {
-	padding-bottom: 100px;
-}
-
 .jumbotron {
 	color: white;
 	background: lightblue url("../images/blog.jpg") no-repeat center; 
@@ -25,4 +21,12 @@ body {
 }
 .post-of-the-day .outer .categories a {
 	margin-bottom: 10px;
+}
+
+footer p {
+	background: #343a40;
+	padding: 20px 0;
+	text-align: center;
+	color: white;
+	margin: 20px 0 0;
 }

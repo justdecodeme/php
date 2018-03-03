@@ -130,6 +130,10 @@
 		</div>
 	</div>
 
+	<footer>
+		<p>Made with love in Bangalore</p>
+	</footer>
+
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
