@@ -32,9 +32,9 @@
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis repellat fuga, eveniet quo inventore quibusdam, saepe ratione placeat nemo consequuntur, eveniet quo inventore quibusdam, saepe ratione placeat nemo consequuntur, repudiandae praesentiu... <a href="post.php">Read More</a>
 					</p>
 					<p>
-						<a href="label.php" class="btn btn-light btn-sm">What is Technology?</a>
-						<a href="label.php" class="btn btn-light btn-sm">How technology works?</a>
-						<a href="label.php" class="btn btn-light btn-sm">Intro to Technology?</a>
+						<a href="#" class="btn btn-light btn-sm">What is Technology?</a>
+						<a href="#" class="btn btn-light btn-sm">How technology works?</a>
+						<a href="#" class="btn btn-light btn-sm">Intro to Technology?</a>
 					</p>
 				</div>
 				<div class="post">
@@ -62,7 +62,7 @@
 					</p>
 				</div>
 			</div>
-
+			
 			<?php include 'includes/blog-sidebar.php' ?>
 		</div>
 	</div>
