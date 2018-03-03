@@ -21,6 +21,8 @@
     </div>
 
 	<div class="container">
+		<?php include 'includes/blog-nav.php' ?>
+
 		<div class="row">
 			<div class="col-md-8">
 				<div class="post">
@@ -60,6 +62,7 @@
 					</p>
 				</div>
 			</div>
+			
 			<?php include 'includes/blog-sidebar.php' ?>
 		</div>
 	</div>

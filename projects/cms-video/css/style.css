@@ -2,6 +2,11 @@
 	color: white;
 	background: lightblue url("../images/blog.jpg") no-repeat center; 
 	background-size: cover;
+	margin: 0;
+}
+
+.blog-nav {
+	margin: 10px;
 }
 
 .post {
