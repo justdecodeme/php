@@ -1,8 +1,18 @@
 .post {
-    border-bottom: 2px solid grey;
+    border-bottom: 1px solid grey;
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
 .post:last-child {
 	border: none;
+}
+.post-of-the-day { 
+	margin: 40px 0;
+}
+.post-of-the-day .outer {
+	border: 1px solid grey;
+	padding: 10px 10px 0;
+}
+.post-of-the-day .outer .categories a {
+	margin-bottom: 10px;
 }
