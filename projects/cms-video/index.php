@@ -8,8 +8,9 @@
 	<title>CMS VIDEO</title>
 
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/font-awesome.css">
 	<link rel="stylesheet" href="css/style.css">
+
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 </head>
 <body>
 	
@@ -120,9 +121,9 @@
 							<img src="images/rakko.jpg" class="img-fluid img-thumbnail">
 						</div>
 						<div class="col-md-8">
-							<a href="#">Profile Page</a><br>
-							<a href="#">Website</a><br>
-							<a href="#">Email</a>
+							<a href="#"><i class="fas fa-user"></i> Profile Page</a><br>
+							<a href="#"><i class="fas fa-globe"></i> Website</a><br>
+							<a href="#"><i class="fas fa-envelope"></i> Email</a>
 						</div>
 					</div>
 				</div>
@@ -131,7 +132,7 @@
 	</div>
 
 	<footer>
-		<p>Made with love in Bangalore</p>
+		<p>Made with <i class="fas fa-heart" style="color: red;"></i> in Bangalore</p>
 	</footer>
 
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
