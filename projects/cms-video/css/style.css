@@ -39,3 +39,7 @@ footer p {
 .left-sidebar a {
 	font-size: 14px;
 }
+.sidebar-videos {
+	border-bottom: 1px solid grey;
+	margin-bottom: 20px;
+}
