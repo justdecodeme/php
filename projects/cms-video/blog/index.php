@@ -16,7 +16,7 @@
 				// prepare the statement. the place holders allow PDO to handle substituting
 				// the values, which also prevents SQL injection
 				// $stmt = $pdo->prepare("SELECT * FROM product WHERE productTypeId=:productTypeId AND brand=:brand");
-				$stmt = $pdo->prepare("SELECT * FROM blog_data");			
+				$stmt = $pdo->prepare("SELECT * FROM blog_data ORDER BY blog_id DESC LIMIT 3");			
 
 				// // bind the parameters
 				// $stmt->bindValue(":productTypeId", 6);
@@ -27,26 +27,32 @@
 				if ($stmt->execute()) {
 				    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 				        // $blog_post[] = $row;
-					    echo "id:".$row["blog_id"]." category:".$row["blog_category"]."<br>";
+					    $blog_title = ucwords($row['blog_title']);
+					    $blog_description = substr($row['blog_description'], 0, 350);
+					    $blog_category = strtoupper($row['blog_category']);
+					    $blog_author = ucwords($row['blog_author']);
+					?>
+					<div class="post">
+						<h3><?php echo $blog_title; ?></h3>
+						<p><a href="post.php"><?php echo $row['blog_date'] ?></a> | 
+							<a href="post.php"><?php echo $blog_category ?></a> | 
+							<a href="post.php"><?php echo $blog_author ?></a></p>
+						<p><?php echo $blog_description; ?>...
+							<a href="post.php">Read More</a>
+						</p>
+						<p>
+							<a href="label.php" class="btn btn-light btn-sm">What is Technology?</a>
+							<a href="label.php" class="btn btn-light btn-sm">How technology works?</a>
+							<a href="label.php" class="btn btn-light btn-sm">Intro to Technology?</a>
+						</p>
+					</div>
+					<?php 
 				    }
 				}
 
 				// set PDO to null in order to close the connection
 				$pdo = null;
 			 ?>
-
-			<div class="post">
-				<h1>The First Post</h1>
-				<p><a href="post.php">date</a> | <a href="post.php">Technology</a> | <a href="post.php">Rakko</a></p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis repellat fuga, eveniet quo inventore quibusdam, saepe ratione placeat nemo consequuntur, eveniet quo inventore quibusdam, saepe ratione placeat nemo consequuntur, repudiandae praesentiu... <a href="post.php">Read More</a>
-				</p>
-				<p>
-					<a href="label.php" class="btn btn-light btn-sm">What is Technology?</a>
-					<a href="label.php" class="btn btn-light btn-sm">How technology works?</a>
-					<a href="label.php" class="btn btn-light btn-sm">Intro to Technology?</a>
-				</p>
-			</div>
 
 		</div>
 
