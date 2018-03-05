@@ -2,9 +2,22 @@
 	<div class="latest-post">
 		<h2>Latest Post</h2>
 		<div class="list-group">
-		  <a href="post.php" class="list-group-item list-group-item-action active">The First Post</a>
-		  <a href="post.php" class="list-group-item list-group-item-action">The Second Post</a>
-		  <a href="post.php" class="list-group-item list-group-item-action">The Third Post</a>
+			<?php 
+				$stmt = $pdo->prepare("SELECT * FROM blog_data ORDER BY blog_id DESC LIMIT 5");			
+				if ($stmt->execute()) {
+				    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+					    $side_blog_title = ucwords($row['blog_title']);
+					    $side_blog_author = ucwords($row['blog_author']);
+					?>
+					  <a href="post.php" class="list-group-item list-group-item-action" style="font-size: 14px;">
+					  	<?php echo $side_blog_title; ?>
+					  	<span style="font-size: 80%; color: violet;">(<?php echo $side_blog_author ?>)</span>
+					  </a>
+					  
+					<?php 
+				    }
+				}
+			 ?>
 		</div>
 	</div>
 

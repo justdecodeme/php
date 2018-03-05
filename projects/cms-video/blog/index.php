@@ -51,7 +51,7 @@
 				}
 
 				// set PDO to null in order to close the connection
-				$pdo = null;
+				// $pdo = null;
 			 ?>
 
 		</div>
