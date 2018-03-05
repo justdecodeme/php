@@ -13,20 +13,20 @@
 			<h3>Rakko</h3>
 			<div class="row">
 				<div class="col-md-5">
-					<img src="../images/rakko.jpg" class="img-fluid">
+					<img src="../images/rakko.jpg" class="img-fluid img-thumbnail">
 				</div>
 				<div class="col-md-7">
 					<table>
 						<tr>
-							<td>Name</td>
+							<th>Name</th>
 							<td>Rakko</td>
 						</tr>
 						<tr>
-							<td>Email</td>
+							<th>Email</th>
 							<td>hashrakeshkumar@gmail.com</td>
 						</tr>
 						<tr>
-							<td>Contact No.</td>
+							<th>Contact No.</th>
 							<td>8437892273</td>
 						</tr>
 					</table>
