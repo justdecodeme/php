@@ -31,9 +31,9 @@
 				<img src="../images/rakko.jpg" class="img-fluid img-thumbnail">
 			</div>
 			<div class="col-md-8">
-				<a href="#"><i class="fas fa-user"></i> Profile Page</a><br>
-				<a href="#"><i class="fas fa-globe"></i> Website</a><br>
-				<a href="#"><i class="fas fa-envelope"></i> Email</a>
+				<a href="profile.php"><i class="fas fa-user"></i> Profile Page</a><br>
+				<a href="http://www.justdecode.me" target="_blank"><i class="fas fa-globe"></i> Website</a><br>
+				<a href="hashrakeshkumar@gmail.com"><i class="fas fa-envelope"></i> Email</a>
 			</div>
 		</div>
 	</div>
