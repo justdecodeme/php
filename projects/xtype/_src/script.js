@@ -7,7 +7,7 @@ document.onreadystatechange = function () {
       setTimeout(function(){
          document.getElementById('loaderOuter').style.visibility="hidden";
          document.getElementById('contents').style.visibility="visible";
-      },100000);
+      }, 1000);
   }
 }
 
