@@ -7,6 +7,7 @@ $('textarea').keyup(function(e) {
 function loadChat() {
   $.post('messages.php?action=getMessage', function(data, status) {
     $('#chat').html(data);
+    $('#chat').scrollTop($('#chat').prop('scrollHeight'));
   });
 }
 loadChat();
@@ -16,6 +17,7 @@ $('form').submit(function() {
   $.post('messages.php?action=sendMessage&message='+message, function(data, status) {
     if(status == 'success') {
       document.getElementById('chatForm').reset();
+      loadChat();
     }
   });
   return false;
