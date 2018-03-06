@@ -8,10 +8,17 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   </head>
   <body>
+
+    <?php
+      session_start();
+      $_SESSION['username'] = 'Rakko';
+     ?>
+    <div id="msg"></div>
+    
     <div class="wrapper">
       <div class="chat_wrapper">
         <div id="chat"></div>
-        <form class="" action="index.php" method="post">
+        <form id="chatForm">
           <textarea name="message" rows="8" cols="80"></textarea>
         </form>
       </div>

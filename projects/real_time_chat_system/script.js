@@ -1,10 +1,15 @@
 $('textarea').keyup(function(e) {
   if(e.which == 13) {
-    console.log('enter clicked');
     $('form').submit();
   }
 });
+
 $('form').submit(function() {
-  console.log('submited');
+  var message = $('textarea').val();
+  $.post('messages.php?action=sendMessage&message='+message, function(data, status) {
+    if(status == 'success') {
+      document.getElementById('chatForm').reset();
+    }
+  });
   return false;
 });
