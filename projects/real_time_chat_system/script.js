@@ -4,6 +4,13 @@ $('textarea').keyup(function(e) {
   }
 });
 
+function loadChat() {
+  $.post('messages.php?action=getMessage', function(data, status) {
+    $('#chat').html(data);
+  });
+}
+loadChat();
+
 $('form').submit(function() {
   var message = $('textarea').val();
   $.post('messages.php?action=sendMessage&message='+message, function(data, status) {
