@@ -11,6 +11,10 @@ function loadChat() {
   });
 }
 loadChat();
+setInterval(function() {
+  console.log('interval');
+  loadChat();
+}, 1000);
 
 $('form').submit(function() {
   var message = $('textarea').val();
