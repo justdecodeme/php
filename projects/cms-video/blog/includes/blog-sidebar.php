@@ -1,6 +1,6 @@
 <div class="col-md-4">
 	<div class="latest-post">
-		<h2>Latest Post</h2>
+		<h2>5 Latest Post</h2>
 		<div class="list-group">
 			<?php 
 				$stmt = $pdo->prepare("SELECT * FROM blog_data ORDER BY blog_id DESC LIMIT 5");			
@@ -11,7 +11,7 @@
 				    	$side_blog_category = strtoupper($row['blog_category']);
 				    	$side_blog_author = ucwords($row['blog_author']);
 					?>
-					  <a href="post.php" class="list-group-item list-group-item-action" style="font-size: 14px;">
+					  <a href="post.php?post_id=<?php echo $row['blog_id'] ?>" class="list-group-item list-group-item-action" style="font-size: 14px;">
 					  	<b><?php echo $side_blog_title; ?></b><br>
 					  	<span>
 					  		<?php echo $side_blog_date ?> | 

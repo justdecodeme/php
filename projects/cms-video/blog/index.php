@@ -33,12 +33,14 @@
 					    $blog_author = ucwords($row['blog_author']);
 					?>
 					<div class="post">
-						<h3><?php echo $blog_title; ?></h3>
-						<p><a href="post.php"><?php echo $row['blog_date'] ?></a> | 
+						<h3><a href="post.php?post_id=<?php echo $row['blog_id'] ?>"><?php echo $blog_title; ?></a></h3>
+						<p>
+							<a href="post.php"><?php echo $row['blog_date'] ?></a> | 
 							<a href="post.php"><?php echo $blog_category ?></a> | 
 							<a href="post.php"><?php echo $blog_author ?></a></p>
-						<p><?php echo $blog_description; ?>...
-							<a href="post.php">Read More</a>
+						<p>
+							<?php echo $blog_description; ?>...
+							<a href="post.php?post_id=<?php echo $row['blog_id'] ?>">Read More</a>
 						</p>
 						<p>
 							<a href="label.php" class="btn btn-light btn-sm">What is Technology?</a>
