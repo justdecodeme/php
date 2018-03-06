@@ -67,10 +67,82 @@ div#progressBar {
   border-radius: 10px;
 }
 
-#load{
-    width:100%;
-    height:100%;
-    position:fixed;
-    z-index:9999;
-    background:url("images/loader.gif") no-repeat center center rgba(0,0,0,0.8)
+
+/*************/
+/* SVG Loader*/
+/*************/
+#loaderOuter {
+  background: #601d86;
+  width:100%;
+  height:100%;
+  position:fixed;
+  z-index:9999;
+  .loader {
+    background: rgb(96,29,134);
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    svg {
+      padding-top: 15px;
+      path {
+        fill: #fff;
+        stroke: #fff;
+        stroke-width: 14px;
+        fill: #fff;
+        fill-opacity: 0;
+      }
+      path#a {
+        /*opacity: .1;*/
+        stroke-dasharray: 305;
+        stroke-dashoffset: -305px;
+      }
+      path.a {
+        animation: draw-a .2s reverse ease-in forwards;
+      }
+      path#b {
+        /*opacity: .3;*/
+        stroke-dasharray: 308;
+        stroke-dashoffset: -308px;
+      }
+      path.b {
+        animation: draw-b .2s .2s reverse ease-in forwards;
+      }
+      path#c {
+        /*opacity: .5;*/
+        stroke-dasharray: 305;
+        stroke-dashoffset: -305px;
+      }
+      path.c {
+        animation: draw-c .2s .4s reverse ease-in forwards;
+      }
+      path#d {
+        /*opacity: .7;*/
+        stroke-dasharray: 315;
+        stroke-dashoffset: -315px;
+      }
+      path.d {
+        animation: draw-d .2s .6s reverse ease-in forwards;
+      }
+    }
+  }
+}
+@keyframes draw-a {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 305; }
+}
+@keyframes draw-b {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 308; }
+}
+@keyframes draw-c {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 305; }
+}
+@keyframes draw-d {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 315; }
 }

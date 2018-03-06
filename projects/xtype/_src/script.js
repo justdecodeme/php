@@ -1,14 +1,42 @@
+// Show loader untill page is not loaded completely
 document.onreadystatechange = function () {
   var state = document.readyState
   if (state == 'interactive') {
        document.getElementById('contents').style.visibility="hidden";
   } else if (state == 'complete') {
-      // setTimeout(function(){
-         document.getElementById('load').style.visibility="hidden";
+      setTimeout(function(){
+         document.getElementById('loaderOuter').style.visibility="hidden";
          document.getElementById('contents').style.visibility="visible";
-      // },5000);
+      },100000);
   }
 }
+
+/********************/
+/* Loader Animation */
+/********************/
+var path_A = document.querySelector('.loader #a');
+var path_B = document.querySelector('.loader #b');
+var path_C = document.querySelector('.loader #c');
+var path_D = document.querySelector('.loader #d');
+
+// console.log("a: " + path_A.getTotalLength());
+// console.log("b: " + path_B.getTotalLength());
+// console.log("c: " + path_C.getTotalLength());
+// console.log("d: " + path_D.getTotalLength());
+
+path_D.addEventListener('animationend', function() {
+  path_A.classList.remove('a');
+  path_B.classList.remove('b');
+  path_C.classList.remove('c');
+  path_D.classList.remove('d');
+
+  setTimeout(function() {
+    path_A.classList.add('a');
+    path_B.classList.add('b');
+    path_C.classList.add('c');
+    path_D.classList.add('d');
+  })
+});
 
 let isTypingEnabled, totalTyped, time, totalErrors, totalSuccesses, grossWPM, netWPM, countdown;
 // string to be typed

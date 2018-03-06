@@ -38,7 +38,16 @@
 ?>
 
 <?php include 'includes/header.php' ?>
-<div id="load"></div>
+<div id="loaderOuter">
+  <div class="loader">
+    <svg width="100" height="100" viewBox="0 0 600 600">
+        <path class="a" d="M410 140 L180 340" id="a"/>
+        <path class="b" d="M140 340c-64.06-12.7-96.45-46.03-97.17-100-.73-53.97 31.66-87.3 97.17-100" id="b"/>
+        <path class="c" d="M180 142 L410 340" id="c"/>
+        <path class="d" d="M462.39 340c65.94-11.97 98.48-45.31 97.61-100-.87-54.69-35.94-88.03-105.22-100" id="d"/>
+    </svg>
+  </div>  
+</div>
 <div class="grid_container" id="contents">
   <!-- Leaderboard -->
   <div class="grid_item">
