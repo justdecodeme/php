@@ -54,13 +54,25 @@
 
 <?php include 'includes/header.php' ?>
 
-<p style="color: red;"><?php echo $login_err; ?></p>
-<h1>Login to xType | <a href="signup.php">Signup</a></h1>
+<main>
+	<form action="login.php" method='post'>
+		<h1>Log in to xType</h1>
 
-<form action="login.php" method="post">
-	<input type="email"  name="user_email" placeholder="email"><br>
-	<input type="password"  name="password" placeholder="password"><br>
-	<input type="submit" name="submit_login" value="Login">
-</form>
+		<!-- <p class="error"><?php echo $login_err; ?></p> -->
+
+		<label for="email">Email</label>
+		<input type="text" id="email" name="user_email">
+		
+		<label for="password">Password</label>
+		<input type="password" id="password" name="password"> <br>
+		
+		<!-- <input type="checkbox" id="remember" name="remember" value="yes"> -->
+		<!-- <label for="remember">Remember Me</label> -->
+
+		<input class="transition" type="submit" name="submit_login" value="Login">
+		<p class="signup">Don’t have an account? <a class="bg-link" href="signup.php">Signup</a></p>
+	</form>
+</main>
+
 
 <?php include 'includes/footer.php' ?>

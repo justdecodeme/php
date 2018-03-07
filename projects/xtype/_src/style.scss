@@ -2,13 +2,42 @@ $active: rgba(0, 0, 255, 0.5);
 $success: rgba(0, 255, 0, 0.5);
 $error: rgba(255, 0, 0, 0.5);
 $black05: rgba(0, 0, 0, 0.05);
-$black: rgba(0, 0, 0, 0.1);
+$black25: rgba(0, 0, 0, 0.25);
 $white08: rgba(255, 255, 255, 0.8);
+$primary: rgba(96, 29, 134, 1);
+$primary05: rgba(96, 29, 134, 0.5);
+$primary08: rgba(96, 29, 134, 0.8);
 
 * {
   margin: 0;
   padding: 0;
-  box-sizing: 0;
+  box-sizing: border-box;
+  font-family: 'Comfortaa', cursive;
+}
+a {
+  font-family: 'Comfortaa', cursive;
+  text-decoration: none;
+}
+
+a.link {
+    color: $primary;
+}
+a.link:hover {
+    color: $primary05;
+}
+a.bg-link {
+    color: $primary;
+    background: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+a.bg-link:hover {
+    background: $white08;
+}
+
+.transition {
+  transition: all 0.2s ease;
 }
 
 span.active { background: $active; }
@@ -46,7 +75,7 @@ span.error { background: $error; }
 
 div#progressBar {
   height: 10px;
-  background: $black;
+  background: black;
   border-radius: 20px;
   margin: 10px 0;
   #seekBar {
@@ -68,17 +97,17 @@ div#progressBar {
 }
 
 
-/*************/
-/* SVG Loader*/
-/*************/
+/*********************************/
+/*     SVG Loader     */
+/*********************************/
 #loaderOuter {
-  background: #601d86;
+  background: $primary;
   width:100%;
   height:100%;
   position:fixed;
   z-index:9999;
   .loader {
-    background: rgb(96,29,134);
+    background: $primary;
     width: 100px;
     height: 100px;
     margin: 0 auto;
@@ -145,4 +174,82 @@ div#progressBar {
 @keyframes draw-d {
   from { stroke-dashoffset: 0; }
   to { stroke-dashoffset: 315; }
+}
+
+/*********************************/
+/*     Login Page     */
+/*********************************/
+body {
+    background: $primary;
+    background-image: url(../_assets/images/typing-bg.jpg);
+    background-size: cover;
+    background-position: center top;
+}
+body:after {
+    content: "";
+    position: absolute;
+    background: $primary08;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: -1;
+}
+form {
+    color: white;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
+}
+form h1 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+form label {
+    display: block;
+    margin: 20px 0 10px 0;
+}
+form label[for='remember'] {
+    display: inline-block;
+    margin-top: 30px;
+}
+form label a {
+    font-size: 12px;
+}
+form input[type='text'], form input[type='password'] {
+    border: 1px solid white;
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+    padding: 10px 5px;
+    font-size: 18px;
+    border-radius: 4px;
+    width: 50%;
+}
+form input[type='submit'] {
+    color: white;
+    display: block;
+    margin-top: 20px;
+    background: $primary;
+    border: 1px solid white;
+    padding: 12px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+form input[type='submit']:hover {
+    background: $primary08;
+}
+form p.signup {
+  margin-top: 20px;
+}
+form p.error {
+    margin-top: 20px;
+    font-size: 15px;
+    color: red;
+    background: $black25;
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 4px;
+    margin: 0 0 10px;
+    display: inline-block;
 }
