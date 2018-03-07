@@ -1,18 +1,49 @@
 $active: rgba(0, 0, 255, 0.5);
 $success: rgba(0, 255, 0, 0.5);
 $error: rgba(255, 0, 0, 0.5);
-$black05: rgba(0, 0, 0, 0.05);
 $black25: rgba(0, 0, 0, 0.25);
-$white08: rgba(255, 255, 255, 0.8);
+$black5: rgba(0, 0, 0, 0.05);
+$white25: rgba(255, 255, 255, 0.25);
+$white2: rgba(255, 255, 255, 0.2);
+$white3: rgba(255, 255, 255, 0.3);
+$white5: rgba(255, 255, 255, 0.5);
+$white8: rgba(255, 255, 255, 0.8);
 $primary: rgba(96, 29, 134, 1);
-$primary05: rgba(96, 29, 134, 0.5);
-$primary08: rgba(96, 29, 134, 0.8);
+$primary5: rgba(96, 29, 134, 0.5);
+$primary25: rgba(96, 29, 134, 0.25);
+$primary8: rgba(96, 29, 134, 0.8);
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Comfortaa', cursive;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(255,255,255,.35);
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(255,255,255,.35);
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(255,255,255,.35);
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: rgba(255,255,255,.35);
+}
+.flex {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+.flex-h {
+  display: flex;
+  align-self: center;
+}
+.flex-v {
+  display: flex;
+  /*align-self: center;*/
+  justify-content: center;
 }
 a {
   font-family: 'Comfortaa', cursive;
@@ -23,20 +54,20 @@ a.link {
     color: $primary;
 }
 a.link:hover {
-    color: $primary05;
+    color: $primary5;
 }
 a.bg-link {
-    color: $primary;
-    background: white;
+    color: white;
+    background: $white2;
     padding: 4px 10px;
     border-radius: 6px;
     font-size: 12px;
 }
 a.bg-link:hover {
-    background: $white08;
+    background: $white3;
 }
 
-.transition {
+.transition:hover {
   transition: all 0.2s ease;
 }
 
@@ -52,7 +83,7 @@ span.error { background: $error; }
   background-color: $active;
   padding: 10px;
   .grid_item {
-    background-color: $white08;
+    background-color: $white8;
     padding: 10px;
   }
   .grid_item:nth-child(1) { grid-area: 1 / 1 / 3 / 2; }
@@ -91,7 +122,7 @@ div#progressBar {
   font-size: 30px;
   max-height: 250px;
   overflow: scroll;
-  background:$black05;
+  background:$black5;
   padding: 10px;
   border-radius: 10px;
 }
@@ -179,16 +210,18 @@ div#progressBar {
 /*********************************/
 /*     Login Page     */
 /*********************************/
-body {
-    background: $primary;
-    background-image: url(../_assets/images/typing-bg.jpg);
+html {
+    position: relative;
+    background: $primary25;
+    /*background-image: url(../_assets/images/typing-bg.jpg);*/
     background-size: cover;
     background-position: center top;
+    min-height: 100%;
 }
-body:after {
+html:after {
     content: "";
     position: absolute;
-    background: $primary08;
+    background: $primary8;
     left: 0;
     width: 100%;
     height: 100%;
@@ -197,13 +230,13 @@ body:after {
 }
 form {
     color: white;
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 400px;
+    margin: 100px auto;
     text-align: left;
 }
 form h1 {
     font-size: 30px;
-    font-weight: bold;
+    font-weight: lighter;
     margin-bottom: 30px;
 }
 form label {
@@ -219,12 +252,12 @@ form label a {
 }
 form input[type='text'], form input[type='password'] {
     border: 1px solid white;
-    background: rgba(255, 255, 255, 0.8);
-    color: black;
+    background: $white25;
+    color: white;
     padding: 10px 5px;
     font-size: 18px;
     border-radius: 4px;
-    width: 50%;
+    width: 80%;
 }
 form input[type='submit'] {
     color: white;
@@ -237,16 +270,16 @@ form input[type='submit'] {
     cursor: pointer;
 }
 form input[type='submit']:hover {
-    background: $primary08;
+    background: $primary8;
 }
-form p.signup {
+form p.last {
   margin-top: 20px;
 }
 form p.error {
     margin-top: 20px;
     font-size: 15px;
-    color: red;
-    background: $black25;
+    color: $white8;
+    background: $error;
     padding: 10px;
     border: 1px solid red;
     border-radius: 4px;

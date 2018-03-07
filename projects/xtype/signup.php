@@ -68,24 +68,40 @@
 
 <?php include 'includes/header.php' ?>
 
-<p style="color: red;"><?php echo $signup_err; ?></p>
-
-<h1>Signup to xType | <a href="login.php">Login</a></h1>
-
 <form action="signup.php" method="post">
-	<input type="text" name="name" placeholder="username"><br>
-	<input type="email" name="email" placeholder="email"><br>
-	<input type="text" name="f_name" placeholder="first name"><br>
-	<input type="text" name="l_name" placeholder="last name"><br>
-	<input type="password" name="password" placeholder="password"><br>
-	<input type="password" name="conf_password" placeholder="conform password"><br>
-  <select name="gender">
+  <h1>Create a <b>xType</b> account</h1>
+
+  <?php echo ($signup_err != '' ? '<p class="error">' . $signup_err . '</p>' : ''); ?>
+
+  <label for="username">Username</label>
+  <input type="text" id="username" name="username" placeholder="r_kumar">
+
+  <label for="email">Email</label>
+  <input type="text" id="email" name="email" placeholder="example@gmail.com">
+  
+<!--   <label for="f_name">First Name</label>
+  <input type="text" id="f_name" name="email">
+  
+  <label for="l_name">Last Name</label>
+  <input type="text" id="l_name" name="l_name">
+  
+  <label for="gender">Gender</label>
+  <select name="gender" id="gender">
     <option>Gender</option>
     <option value="male">Male</option>
     <option value="female">Female</option>
     <option value="other">other</option>
-  </select><br>
-	<input type="submit" name="submit_signup" value="Sign up">
+  </select>
+ -->  
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" placeholder="••••••••••">
+  
+  <label for="conf_password">Password</label>
+  <input type="password" id="conf_password" name="conf_password" placeholder="••••••••••">
+  
+  <input class="transition" type="submit" name="submit_signup" value="Sign up">
+  <p class="last">Already have an account? <a class="bg-link" href="login.php">Login</a></p>
 </form>
+
 
 <?php include 'includes/footer.php' ?>

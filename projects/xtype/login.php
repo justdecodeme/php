@@ -56,23 +56,22 @@
 
 <main>
 	<form action="login.php" method='post'>
-		<h1>Log in to xType</h1>
+		<h1>Log in to <b>xType</b></h1>
 
-		<!-- <p class="error"><?php echo $login_err; ?></p> -->
+		<?php echo ($login_err != '' ? '<p class="error">' . $login_err . '</p>' : ''); ?>
 
 		<label for="email">Email</label>
-		<input type="text" id="email" name="user_email">
+		<input type="text" id="email" name="user_email" placeholder="example@gmail.com">
 		
 		<label for="password">Password</label>
-		<input type="password" id="password" name="password"> <br>
+		<input type="password" id="password" name="password" placeholder="••••••••••"> <br>
 		
 		<!-- <input type="checkbox" id="remember" name="remember" value="yes"> -->
 		<!-- <label for="remember">Remember Me</label> -->
 
 		<input class="transition" type="submit" name="submit_login" value="Login">
-		<p class="signup">Don’t have an account? <a class="bg-link" href="signup.php">Signup</a></p>
+		<p class="last">Don’t have an account? <a class="bg-link" href="signup.php">Signup</a></p>
 	</form>
 </main>
-
 
 <?php include 'includes/footer.php' ?>
