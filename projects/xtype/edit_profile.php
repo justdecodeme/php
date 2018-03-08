@@ -108,7 +108,7 @@
 
 <h3>Edit <?php echo $user_name; ?> | <a href="xtype.php">Back</a></h3>
 
-<form action="edit_profile.php" method="post" enctype="multipart/form-data">
+<form action="edit_profile.php" method="post" enctype="multipart/form-data" class="main-form">
 	<table style="text-align: left; border-collapse: collapse; width: 100%;" border="1">
 	  <tr>
 	    <th width="50%">Image</th>
