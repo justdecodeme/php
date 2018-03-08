@@ -69,40 +69,42 @@
 
 <?php include 'includes/header.php' ?>
 
-<form action="signup.php" method="post">
-  <h1>Create a <b>xType</b> account</h1>
+<main>
+  <form action="signup.php" method="post" class="main-form">
+    <h1>Create a <b>xType</b> account</h1>
 
-  <?php echo ($signup_err != '' ? '<p class="error">' . $signup_err . '</p>' : ''); ?>
+    <?php echo ($signup_err != '' ? '<p class="error">' . $signup_err . '</p>' : ''); ?>
 
-  <label for="username">Username</label>
-  <input type="text" id="username" name="username" placeholder="r_kumar">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" placeholder="r_kumar">
 
-  <label for="email">Email</label>
-  <input type="text" id="email" name="email" placeholder="example@gmail.com">
-  
-<!--   <label for="f_name">First Name</label>
-  <input type="text" id="f_name" name="email">
-  
-  <label for="l_name">Last Name</label>
-  <input type="text" id="l_name" name="l_name">
-  
-  <label for="gender">Gender</label>
-  <select name="gender" id="gender">
-    <option>Gender</option>
-    <option value="male">Male</option>
-    <option value="female">Female</option>
-    <option value="other">other</option>
-  </select>
- -->  
-  <label for="password">Password</label>
-  <input type="password" id="password" name="password" placeholder="••••••••••">
-  
-  <label for="conf_password">Confirm Password</label>
-  <input type="password" id="conf_password" name="conf_password" placeholder="••••••••••">
-  
-  <input class="transition" type="submit" name="submit_signup" value="Sign up">
-  <p class="last">Already have an account? <a class="bg-link" href="login.php">Login</a></p>
-</form>
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" placeholder="example@gmail.com">
+    
+  <!--   <label for="f_name">First Name</label>
+    <input type="text" id="f_name" name="email">
+    
+    <label for="l_name">Last Name</label>
+    <input type="text" id="l_name" name="l_name">
+    
+    <label for="gender">Gender</label>
+    <select name="gender" id="gender">
+      <option>Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">other</option>
+    </select>
+   -->  
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="••••••••••">
+    
+    <label for="conf_password">Confirm Password</label>
+    <input type="password" id="conf_password" name="conf_password" placeholder="••••••••••">
+    
+    <input class="transition" type="submit" name="submit_signup" value="Sign up">
+    <p class="last">Already have an account? <a class="bg-link" href="login.php">Login</a></p>
+  </form>  
+</main>
 
 
 <?php include 'includes/footer.php' ?>

@@ -16,6 +16,7 @@
 				$rows = mysqli_fetch_assoc($run_sql);
 
 				$email = $rows['user_email'];
+				$image = $rows['user_image'];
 
 			// if login is not validated
 			} else {
@@ -29,13 +30,18 @@
 ?>
 
 <?php include 'includes/header.php' ?>
-<h1>
-	Welcome to xType: 
-	<span style="color: green;"><?php echo $_SESSION['user']; ?></span>
-	<a href=""></a>
-</h1> 
-<h2>
-	<a href="includes\logout.php">Logout</a> | 
-	<a href="xtype.php">Continue</a>
-</h2>
+
+<main class="index_page">
+	<form class="main-form">
+		<h1 class="heading">Already logged in as: <span><?php echo $_SESSION['user']; ?></span></h1>
+		<div class="user-img flex-inline">
+			<img src="<?php echo '_assets/images/'.$image; ?>" alt="<?php echo $_SESSION['user']; ?>">
+		</div>
+		<div class="user-options">
+			<a class="bg-link" href="includes\logout.php">Logout</a>
+			<a class="bg-link" href="xtype.php">Continue</a>				
+		</div>
+	</form>
+</main>
+
 <?php include 'includes/footer.php' ?>

@@ -13,6 +13,24 @@ $primary5: rgba(96, 29, 134, 0.5);
 $primary25: rgba(96, 29, 134, 0.25);
 $primary8: rgba(96, 29, 134, 0.8);
 
+html {
+    position: relative;
+    background: $primary25;
+    /*background-image: url(../_assets/images/typing-bg.jpg);*/
+    background-size: cover;
+    background-position: center top;
+    min-height: 100%;
+}
+html:after {
+    content: "";
+    position: absolute;
+    background: $primary8;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: -1;
+}
 * {
   margin: 0;
   padding: 0;
@@ -31,18 +49,23 @@ $primary8: rgba(96, 29, 134, 0.8);
 :-moz-placeholder { /* Firefox 18- */
   color: rgba(255,255,255,.35);
 }
-.flex {
+.flex-block {
   display: flex;
-  align-self: center;
+  align-items: center;
+  justify-content: center;
+}
+.flex-inline {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
 }
 .flex-h {
   display: flex;
-  align-self: center;
+  align-items: center;
 }
 .flex-v {
   display: flex;
-  /*align-self: center;*/
+  /*align-items: center;*/
   justify-content: center;
 }
 a {
@@ -52,9 +75,9 @@ a {
 
 a.link {
     color: $primary;
-}
-a.link:hover {
-    color: $primary5;
+    :hover {
+      color: $primary5;
+    }
 }
 a.bg-link {
     color: white;
@@ -62,9 +85,9 @@ a.bg-link {
     padding: 4px 10px;
     border-radius: 6px;
     font-size: 12px;
-}
-a.bg-link:hover {
-    background: $white3;
+    :hover {
+      background: $white3;
+    }
 }
 
 .transition:hover {
@@ -208,81 +231,105 @@ div#progressBar {
 }
 
 /*********************************/
-/*     Login Page     */
+/*     Login + Signup Page     */
 /*********************************/
-html {
-    position: relative;
-    background: $primary25;
-    /*background-image: url(../_assets/images/typing-bg.jpg);*/
-    background-size: cover;
-    background-position: center top;
-    min-height: 100%;
-}
-html:after {
-    content: "";
-    position: absolute;
-    background: $primary8;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    z-index: -1;
-}
-form {
+form.main-form {
     color: white;
     max-width: 400px;
     margin: 100px auto;
     text-align: left;
+    h1 {
+      font-size: 30px;
+      font-weight: lighter;
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin: 20px 0 10px 0;
+      a {
+        font-size: 12px;
+      }
+    }
+    label[for='remember'] {
+        display: inline-block;
+        margin-top: 30px;
+    }
+    input[type='text'], input[type='password'] {
+        border: 1px solid white;
+        background: $white25;
+        color: white;
+        padding: 10px 5px;
+        font-size: 18px;
+        border-radius: 4px;
+        width: 80%;
+    }
+    input[type='submit'] {
+        color: white;
+        display: block;
+        margin-top: 20px;
+        background: $primary;
+        border: 1px solid white;
+        padding: 12px 30px;
+        border-radius: 4px;
+        cursor: pointer;
+        :hover {
+          background: $primary8;
+        }
+    }
+    p.last {
+      margin-top: 20px;
+    }
+    p.error {
+      margin-top: 20px;
+      font-size: 15px;
+      color: $white8;
+      background: $error;
+      padding: 10px;
+      border: 1px solid red;
+      border-radius: 4px;
+      margin: 0 0 10px;
+      display: inline-block;
+    }
 }
-form h1 {
-    font-size: 30px;
-    font-weight: lighter;
-    margin-bottom: 30px;
-}
-form label {
-    display: block;
-    margin: 20px 0 10px 0;
-}
-form label[for='remember'] {
-    display: inline-block;
-    margin-top: 30px;
-}
-form label a {
-    font-size: 12px;
-}
-form input[type='text'], form input[type='password'] {
-    border: 1px solid white;
-    background: $white25;
-    color: white;
-    padding: 10px 5px;
-    font-size: 18px;
+
+/*********************************/
+/*     Index Page     */
+/*********************************/
+.index_page form {
+  text-align: center;
+  .heading {
+    margin: 0;
+    line-height: 1.5;
+    span {
+      color: rgb(255, 255, 255);
+      border: 1px solid rgba(255, 255, 255, 0.29);
+      padding: 4px 20px;
+      border-radius: 4px;
+      font-size: 60%;
+      font-weight: bold;
+    }
+  }
+  .user-img {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 20px auto;
+    border: 1px solid $white2;
+    padding: 4px;
     border-radius: 4px;
-    width: 80%;
+    img {
+      max-width: 100%;
+      max-height: 100%;      
+      border-radius: 4px;
+    }
+  }
+  .user-options {
+    width: 200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    .bg-link {
+      width: 46%;
+    }
+  }
 }
-form input[type='submit'] {
-    color: white;
-    display: block;
-    margin-top: 20px;
-    background: $primary;
-    border: 1px solid white;
-    padding: 12px 30px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-form input[type='submit']:hover {
-    background: $primary8;
-}
-form p.last {
-  margin-top: 20px;
-}
-form p.error {
-    margin-top: 20px;
-    font-size: 15px;
-    color: $white8;
-    background: $error;
-    padding: 10px;
-    border: 1px solid red;
-    border-radius: 4px;
-    margin: 0 0 10px;
-    display: inline-block;
-}
+

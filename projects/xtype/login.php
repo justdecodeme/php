@@ -71,7 +71,7 @@
 <?php include 'includes/header.php' ?>
 
 <main>
-	<form action="login.php" method='post'>
+	<form action="login.php" method='post' class="main-form">
 		<h1>Log in to <b>xType</b></h1>
 
 		<?php echo ($login_err != '' ? '<p class="error">' . $login_err . '</p>' : ''); ?>
