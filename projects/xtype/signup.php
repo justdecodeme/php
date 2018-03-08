@@ -1,6 +1,23 @@
 <?php session_start();
 	include 'includes/db.php';
 
+    # check login status
+    #####################
+
+    // if session variables are set redirect user to index.php page
+    if(isset($_SESSION['user']) && isset($_SESSION['password'])){
+      $sel_sql = "SELECT * FROM users
+            WHERE user_email = '$_SESSION[user]'
+            AND user_password = '$_SESSION[password]'
+            LIMIT 1";
+      if($run_sql = mysqli_query($conn, $sel_sql)){
+        if(mysqli_affected_rows($conn)) {
+          header('Location: index.php');
+        }
+      }
+    }
+
+
   if(isset($_POST['submit_signup'])){
 		if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['conf_password']) && !empty($_POST['f_name']) && !empty($_POST['l_name'])) {
 			$name = mysqli_real_escape_string($conn, $_POST['name']);
@@ -48,22 +65,6 @@
   		}
   	}
 
-	# check login status
-	#####################
-
-	// if session variables are set
-	if(isset($_SESSION['user']) && isset($_SESSION['password'])){
-		$sel_sql = "SELECT * FROM users
-					WHERE user_email = '$_SESSION[user]'
-					AND user_password = '$_SESSION[password]'
-					LIMIT 1";
-		if($run_sql = mysqli_query($conn, $sel_sql)){
-			if(mysqli_affected_rows($conn)) {
-        // if logged in then go to index page otherwise show signup form
-        header('Location: index.php');
-			}
-		}
-	}
 ?>
 
 <?php include 'includes/header.php' ?>
@@ -96,7 +97,7 @@
   <label for="password">Password</label>
   <input type="password" id="password" name="password" placeholder="••••••••••">
   
-  <label for="conf_password">Password</label>
+  <label for="conf_password">Confirm Password</label>
   <input type="password" id="conf_password" name="conf_password" placeholder="••••••••••">
   
   <input class="transition" type="submit" name="submit_signup" value="Sign up">

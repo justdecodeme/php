@@ -1,6 +1,22 @@
 <?php session_start();
 	include 'includes/db.php';
 
+	# check login status
+	#####################
+
+	// if session variables are set redirect user to index.php page
+	if(isset($_SESSION['user']) && isset($_SESSION['password'])){
+	  $sel_sql = "SELECT * FROM users
+	        WHERE user_email = '$_SESSION[user]'
+	        AND user_password = '$_SESSION[password]'
+	        LIMIT 1";
+	  if($run_sql = mysqli_query($conn, $sel_sql)){
+	    if(mysqli_affected_rows($conn)) {
+	      header('Location: index.php');
+	    }
+	  }
+	}
+
 	if(isset($_POST['submit_login'])){
 		if(!empty($_POST['user_email']) && !empty($_POST['password'])){
 			$get_user_name = mysqli_real_escape_string($conn, $_POST['user_email']);
