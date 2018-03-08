@@ -6,9 +6,9 @@
 
 	// if session variables are set
 	if(isset($_SESSION['user']) && isset($_SESSION['password'])){
-		$sel_sql = "SELECT * FROM users 
-					WHERE user_email = '$_SESSION[user]' 
-					AND user_password = '$_SESSION[password]' 
+		$sel_sql = "SELECT * FROM users
+					WHERE user_email = '$_SESSION[user]'
+					AND user_password = '$_SESSION[password]'
 					LIMIT 1";
 
 		if($run_sql = mysqli_query($conn, $sel_sql)){
@@ -38,8 +38,8 @@
 			<img src="<?php echo '_assets/images/'.$image; ?>" alt="<?php echo $_SESSION['user']; ?>">
 		</div>
 		<div class="user-options">
-			<a class="bg-link" href="includes\logout.php">Logout</a>
-			<a class="bg-link" href="xtype.php">Continue</a>				
+			<a class="bg-link" href="includes\logout.php">Logout <i class="fas fa-sign-out-alt"></i></a>
+			<a class="bg-link" href="xtype.php">Continue <i class="fas fa-arrow-right"></i></a>
 		</div>
 	</form>
 </main>
