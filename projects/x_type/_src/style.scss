@@ -1,3 +1,6 @@
+/*********************************/
+/*     variables     */
+/*********************************/
 $active: rgba(0, 0, 255, 0.5);
 $success: rgba(0, 255, 0, 0.5);
 $error: rgba(255, 0, 0, 0.5);
@@ -13,6 +16,15 @@ $primary5: rgba(96, 29, 134, 0.5);
 $primary25: rgba(96, 29, 134, 0.25);
 $primary8: rgba(96, 29, 134, 0.8);
 
+/*********************************/
+/*     Universal CSS     */
+/*********************************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Comfortaa', cursive;
+}
 html {
     position: relative;
     background: $primary25;
@@ -30,12 +42,6 @@ html:after {
     height: 100%;
     top: 0;
     z-index: -1;
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Comfortaa', cursive;
 }
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: rgba(255,255,255,.35);
@@ -96,59 +102,6 @@ a.bg-link:hover {
 span.active { background: $active; }
 span.success { color: $success; }
 span.error { background: $error; }
-
-.grid_container {
-  display: grid;
-  grid-template-columns: 200px auto 300px;
-  grid-template-rows: auto auto;
-  grid-gap: 1px;
-  background-color: $active;
-  padding: 10px;
-  .grid_item {
-    background-color: $white8;
-    padding: 10px;
-  }
-  .grid_item:nth-child(1) { grid-area: 1 / 1 / 3 / 2; }
-  .grid_item:nth-child(2) { grid-area: 1 / 2 / 2 / 3; }
-  .grid_item:nth-child(3) { grid-area: 2 / 2 / 3 / 3; }
-  .grid_item:nth-child(4) { grid-area: 1 / 3 / 3 / 4; }
-}
-
-#toggleTypingBtn {
-  background: $success;
-  padding: 10px;
-  cursor: pointer;
-  user-select: none;
-  display: inline-block;
-}
-
-#toggleTypingBtn.active {
-  background: $active;
-}
-
-div#progressBar {
-  height: 10px;
-  background: black;
-  border-radius: 20px;
-  margin: 10px 0;
-  #seekBar {
-    width: 0%;
-    background: $active;
-    height: 100%;
-    border-radius: 20px;
-    transition: 1s width linear;
-  }
-}
-
-#typingArea {
-  font-size: 30px;
-  max-height: 250px;
-  overflow: scroll;
-  background:$black5;
-  padding: 10px;
-  border-radius: 10px;
-}
-
 
 /*********************************/
 /*     SVG Loader     */
@@ -330,4 +283,59 @@ form.main-form {
       width: 46%;
     }
   }
+}
+
+/*********************************/
+/*     Typing Page     */
+/*********************************/
+.grid_container {
+  display: grid;
+  grid-template-columns: 200px auto 300px;
+  grid-template-rows: auto auto;
+  grid-gap: 1px;
+  background-color: $active;
+  padding: 10px;
+  .grid_item {
+    background-color: $white8;
+    padding: 10px;
+  }
+  .grid_item:nth-child(1) { grid-area: 1 / 1 / 3 / 2; }
+  .grid_item:nth-child(2) { grid-area: 1 / 2 / 2 / 3; }
+  .grid_item:nth-child(3) { grid-area: 2 / 2 / 3 / 3; }
+  .grid_item:nth-child(4) { grid-area: 1 / 3 / 3 / 4; }
+}
+
+#toggleTypingBtn {
+  background: $success;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+  display: inline-block;
+}
+
+#toggleTypingBtn.active {
+  background: $active;
+}
+
+div#progressBar {
+  height: 10px;
+  background: black;
+  border-radius: 20px;
+  margin: 10px 0;
+  #seekBar {
+    width: 0%;
+    background: $active;
+    height: 100%;
+    border-radius: 20px;
+    transition: 1s width linear;
+  }
+}
+
+#typingArea {
+  font-size: 30px;
+  max-height: 250px;
+  overflow: scroll;
+  background:$black5;
+  padding: 10px;
+  border-radius: 10px;
 }
