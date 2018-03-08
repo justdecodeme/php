@@ -83,13 +83,12 @@ a.bg-link {
     color: white;
     background: $white2;
     padding: 4px 10px;
-    border-radius: 6px;
+    border-radius: 4px;
     font-size: 12px;
-    :hover {
-      background: $white3;
-    }
 }
-
+a.bg-link:hover {
+  background: $white3;
+}
 .transition:hover {
   transition: all 0.2s ease;
 }
@@ -318,7 +317,7 @@ form.main-form {
     border-radius: 4px;
     img {
       max-width: 100%;
-      max-height: 100%;      
+      max-height: 100%;
       border-radius: 4px;
     }
   }
@@ -332,4 +331,3 @@ form.main-form {
     }
   }
 }
-
