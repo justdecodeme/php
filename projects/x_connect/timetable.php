@@ -5,16 +5,17 @@
 ?>
 
 <div class="container">
-  <h2>Time Table <small style="font-size: 40%;"><a href="edit_timetable.php">Edit</a></small></h2>
+  <!-- <h2>Time Table <small style="font-size: 40%;"><a href="edit_timetable.php">Edit</a></small></h2> -->
+  <h2>Time Table</h2>
   <hr>
   <div class="row">
     <div class="col-md-4">
       <form class="form-inline">
           <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select Batch</label>
-          <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+          <select class="custom-select my-1 mr-sm-2" id="selectBatch">
             <option value="bc180305">bc180305 (Bootcamp)</option>
-            <option value="unity180325">unity180325 (Unity)</option>
-            <option value="gr180325" selected>gr180325 (Graphic Design)</option>
+            <option value="unity180325" selected>unity180325 (Unity)</option>
+            <option value="gr180325" >gr180325 (Graphic Design)</option>
           </select>
       </form>
     </div>
@@ -34,8 +35,8 @@
             <th scope="col"></th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
+        <tbody id="timetableResult">
+          <!-- <tr>
             <th scope="row">1</th>
             <td>25 Mar 18</td>
             <td>GR01</td>
@@ -79,7 +80,7 @@
             <td>11:30 PM - 01:30 PM</td>
             <td>A</td>
             <td><a class="text-danger" href="#">Edit</a> | <a class="text-danger" href="#">Delete</a></td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
