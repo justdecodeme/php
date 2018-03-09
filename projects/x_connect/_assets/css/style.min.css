@@ -1,1 +1,1 @@
-a:hover{text-decoration:none}a.card{margin-bottom:30px;transition:0.3s}a.card:hover{box-shadow:0px 4px 10px rgba(0,0,0,0.2)}.navbar{margin-bottom:20px}td.time-picker{display:flex}td.time-picker input{width:50%}
+table{font-size:14px}a:hover{text-decoration:none}a.card{margin-bottom:30px;transition:0.3s}a.card:hover{box-shadow:0px 4px 10px rgba(0,0,0,0.2)}.navbar{margin-bottom:20px}td.time-picker{display:flex;justify-content:space-between}td.time-picker input{width:46%}

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2018 at 02:35 PM
+-- Generation Time: Mar 09, 2018 at 05:19 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS `batch` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `name` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL,
   `total_students` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -40,10 +39,10 @@ CREATE TABLE IF NOT EXISTS `batch` (
 -- Dumping data for table `batch`
 --
 
-INSERT INTO `batch` (`id`, `batch_id`, `start_date`, `end_date`, `name`, `status`, `total_students`) VALUES
-(1, 'bc180305', '0000-00-00', '0000-00-00', 'Bootcamp', 'pending', 10),
-(2, 'unity180325', '2018-03-25', '2018-05-06', 'Unity', 'active', 3),
-(3, 'gr180325', '2018-03-25', '2018-04-29', 'Graphic Design', 'pending', 15);
+INSERT INTO `batch` (`id`, `batch_id`, `start_date`, `end_date`, `name`, `total_students`) VALUES
+(1, 'bc180305', '0000-00-00', '0000-00-00', 'Bootcamp', 10),
+(2, 'unity180325', '2018-03-25', '2018-05-06', 'Unity', 3),
+(3, 'gr180325', '2018-03-25', '2018-04-29', 'Graphic Design', 15);
 
 --
 -- Indexes for dumped tables

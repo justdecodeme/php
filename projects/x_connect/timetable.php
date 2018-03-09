@@ -11,7 +11,7 @@
     <div class="col-md-4">
       <form class="form-inline">
           <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
-          <select class="custom-select my-1 mr-sm-2" id="selectBatch">
+          <select class="custom-select my-1 mr-sm-2" id="selectedBatch">
             <option value="bc180305">bc180305 (Bootcamp)</option>
             <option value="unity180325" selected>unity180325 (Unity)</option>
             <option value="gr180325" >gr180325 (Graphic Design)</option>
@@ -22,6 +22,7 @@
 
   <div class="row">
     <div class="col-md-12">
+      <div class="alert alert-success" role="alert" id="statusBar"></div>      
       <table class="table table-bordered" style="margin-top: 10px;">
         <thead>
           <tr>
@@ -44,8 +45,10 @@
             </td>
             <td>
               <select class="custom-select" id="selectedClass">
-                <option value="a" selected>A</option>
-                <option value="b">B</option>
+                <option value="u1" selected>Unity 1</option>
+                <option value="u2">Unity 2</option>
+                <option value="u3">Unity 3</option>
+                <option value="u4">Unity 4</option>
               </select>
             </td>
             <td>
@@ -67,7 +70,7 @@
               </select>
             </td>
             <td>
-              <button class="btn btn-outline-danger" id="submit">Submit</button>
+              <button class="btn btn-outline-danger" id="addClassBtn">Submit</button>
             </td>
           </tr>
         </tfoot>

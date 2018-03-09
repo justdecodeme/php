@@ -3,6 +3,9 @@
   // padding: 0;
   // box-sizing: border-box;
 }
+table {
+  font-size: 14px;
+}
 a:hover {
   text-decoration: none;
 }
@@ -18,7 +21,8 @@ a.card:hover {
 }
 td.time-picker {
   display: flex;
+  justify-content: space-between;
 }
 td.time-picker input {
-  width: 50%;
+  width: 46%;
 }
