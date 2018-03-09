@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-md-4">
       <form class="form-inline">
-          <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select Batch</label>
+          <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
           <select class="custom-select my-1 mr-sm-2" id="selectBatch">
             <option value="bc180305">bc180305 (Bootcamp)</option>
             <option value="unity180325" selected>unity180325 (Unity)</option>
@@ -36,6 +36,41 @@
         </thead>
         <tbody id="timetableResult">
         </tbody>
+        <tfoot>
+          <tr>
+            <td>#</td>
+            <td>
+              <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
+            </td>
+            <td>
+              <select class="custom-select" id="selectedClass">
+                <option value="a" selected>A</option>
+                <option value="b">B</option>
+              </select>
+            </td>
+            <td>
+              <select class="custom-select" id="selectedInstructor">
+                <option value="ins_rakesh" selected>Rakesh</option>
+                <option value="ins_asha">Asha</option>
+                <option value="ins_varsha">Varsha</option>
+                <option value="ins_Pallavi">Pallavi</option>
+              </select>
+            </td>
+            <td class="time-picker">
+              <input type="time" id="selectedStartTime" class="form-control" value="09:30">
+              <input type="time" id="selectedEndTime" class="form-control" value="13:30">
+            </td>
+            <td>
+              <select class="custom-select" id="selectedRoom">
+                <option value="a" selected>A</option>
+                <option value="b">B</option>
+              </select>
+            </td>
+            <td>
+              <button class="btn btn-outline-danger" id="submit">Submit</button>
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   </div>

@@ -16,3 +16,9 @@ a.card:hover {
 .navbar {
   margin-bottom: 20px;
 }
+td.time-picker {
+  display: flex;
+}
+td.time-picker input {
+  width: 50%;
+}
