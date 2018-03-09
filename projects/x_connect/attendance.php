@@ -6,6 +6,7 @@
 
 <div class="container">
   <h2>Attendance</h2>
+  <hr>
   <div class="row">
   </div>
 </div>
