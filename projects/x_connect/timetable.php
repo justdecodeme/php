@@ -22,7 +22,6 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div class="alert alert-success" role="alert" id="statusBar"></div>
       <table class="table table-bordered" style="margin-top: 10px;">
         <thead>
           <tr>
