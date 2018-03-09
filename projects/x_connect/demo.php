@@ -10,17 +10,16 @@
     $timetable = '';
     $i = 1;
     foreach($result as $class) {
-      // $timetable .= '<p><b>'.$class->batch_code. ' </b><span>'.$class->class . ' </span> | <span>'.date('m-d-Y', strtotime($class->date)).'</span></p>';
       $timetable .= '
-      <tr>
-        <td scope="row">'.$i.'</td>
-        <td>'.date('m-d-Y', strtotime($class->date)).'</td>
-        <td>'.$class->class.'</td>
-        <td>'.$class->instructor_code.'</td>
-        <td>'.$class->start_time.' - '.$class->end_time.'</td>
-        <td>'.$class->room.'</td>
-        <td><a class="text-danger" href="#">Edit</a> | <a class="text-danger" href="#">Delete</a></td>
-      </tr>
+        <tr>
+          <td scope="row">'.$i.'</td>
+          <td>'.date('m-d-Y', strtotime($class->date)).'</td>
+          <td>'.$class->class.'</td>
+          <td>'.$class->instructor_code.'</td>
+          <td>'.$class->start_time.' - '.$class->end_time.'</td>
+          <td>'.$class->room.'</td>
+          <td><a class="text-danger" href="#">Edit</a> | <a class="text-danger" href="#">Delete</a></td>
+        </tr>
       ';
       $i++;
     }

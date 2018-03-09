@@ -5,7 +5,6 @@
 ?>
 
 <div class="container">
-  <!-- <h2>Time Table <small style="font-size: 40%;"><a href="edit_timetable.php">Edit</a></small></h2> -->
   <h2>Time Table</h2>
   <hr>
   <div class="row">
@@ -36,51 +35,6 @@
           </tr>
         </thead>
         <tbody id="timetableResult">
-          <!-- <tr>
-            <th scope="row">1</th>
-            <td>25 Mar 18</td>
-            <td>GR01</td>
-            <td>Rakesh</td>
-            <td>11:30 AM - 01:30 PM</td>
-            <td>A</td>
-            <td><a class="text-danger" href="#">Edit</a> | <a class="text-danger" href="#">Delete</a></td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>01 Apr 18</td>
-            <td>GR02</td>
-            <td>Vinay</td>
-            <td>09:00 AM - 11:00 AM</td>
-            <td>A</td>
-            <td><a class="text-danger" href="#">Edit</a> | <a class="text-danger" href="#">Delete</a></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>01 Apr 18</td>
-            <td>GR03</td>
-            <td>Varsha</td>
-            <td>11:30 AM - 01:30 PM</td>
-            <td>A</td>
-            <td><a class="text-danger" href="#">Edit</a> | <a class="text-danger" href="#">Delete</a></td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>08 Apr 18</td>
-            <td>GR01 - GR03(Practice)</td>
-            <td>Vinay</td>
-            <td>09:00 PM - 11:00 AM</td>
-            <td>A</td>
-            <td><a class="text-danger" href="#">Edit</a> | <a class="text-danger" href="#">Delete</a></td>
-          </tr>
-          <tr>
-            <th scope="row">5</th>
-            <td>08 Apr 18</td>
-            <td>GR04</td>
-            <td>Pallavi</td>
-            <td>11:30 PM - 01:30 PM</td>
-            <td>A</td>
-            <td><a class="text-danger" href="#">Edit</a> | <a class="text-danger" href="#">Delete</a></td>
-          </tr> -->
         </tbody>
       </table>
     </div>
