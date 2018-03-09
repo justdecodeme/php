@@ -67,7 +67,7 @@
             <td>08 Apr 18</td>
             <td>GR01 - GR03(Practice)</td>
             <td>Vinay</td>
-            <td>09:30 PM - 11:30 AM</td>
+            <td>09:00 PM - 11:00 AM</td>
             <td>A</td>
             <td><a class="text-danger" href="#">Edit</a> | <a class="text-danger" href="#">Delete</a></td>
           </tr>
