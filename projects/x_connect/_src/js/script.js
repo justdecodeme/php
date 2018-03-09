@@ -7,9 +7,9 @@ var statusBar = document.getElementById('statusBar');
 var xhttp = new XMLHttpRequest();
 
 // Update time table on change of batch
-function updateTimeTable(e) {
+function updateTimeTable() {
   console.log('changed');
-  var batchCode = e.target.value;
+  var batchCode = selectedBatch.value;
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      timetableResult.innerHTML = this.responseText;
@@ -43,3 +43,5 @@ function addClass() {
 
 selectedBatch.addEventListener('change', updateTimeTable, false);
 addClassBtn.addEventListener('click', addClass, false);
+
+updateTimeTable(selectedBatch);

@@ -14,7 +14,7 @@
           <select class="custom-select my-1 mr-sm-2" id="selectedBatch">
             <option value="bc180305">bc180305 (Bootcamp)</option>
             <option value="unity180325" selected>unity180325 (Unity)</option>
-            <option value="gr180325" >gr180325 (Graphic Design)</option>
+            <option value="gr180325">gr180325 (Graphic Design)</option>
           </select>
       </form>
     </div>
@@ -22,7 +22,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div class="alert alert-success" role="alert" id="statusBar"></div>      
+      <div class="alert alert-success" role="alert" id="statusBar"></div>
       <table class="table table-bordered" style="margin-top: 10px;">
         <thead>
           <tr>
@@ -39,7 +39,7 @@
         </tbody>
         <tfoot>
           <tr>
-            <td>#</td>
+            <td></td>
             <td>
               <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
             </td>

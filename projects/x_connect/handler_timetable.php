@@ -44,8 +44,8 @@
     $statement = $connection->prepare($query);
     $params = array ('BATCH_CODE'=>$batchCode,'SELECTED_DATE'=>$date,'CLASSNAME'=>$className,'INSTRUCTOR_CODE'=>$instructorCode,'STARTTIME'=>$startTime,'ENDTIME'=>$endTime,'ROOM'=>$room);
 
+    // Update timetable if query is successful
     if($statement->execute($params)) {
-      // echo "Class Added";
       $query = "SELECT * FROM timetable WHERE batch_code=:batchId";
       $statement = $connection->prepare($query);
       $statement->bindParam(":batchId", $batchCode);
@@ -71,15 +71,5 @@
         echo $timetable;
       }
     }
-
-    // echo $batchCode.'<br>';
-    // echo $date.'<br>';
-    // echo $className.'<br>';
-    // echo $instructorCode.'<br>';
-    // echo $startTime.'<br>';
-    // echo $endTime.'<br>';
-    // echo $room.'<br>';
-
-
   }
  ?>
