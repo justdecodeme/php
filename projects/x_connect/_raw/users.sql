@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2018 at 02:35 PM
+-- Generation Time: Mar 09, 2018 at 05:28 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -28,7 +28,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `users` (
 `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `f_name` varchar(255) NOT NULL,
+  `l_name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
@@ -44,11 +46,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `image`, `role`, `gender`, `doj`, `batch_code`, `student_code`, `instructor_code`) VALUES
-(1, 'a', 'a@gmail.com', 'a', 'a.jpg', 'admin', 'male', '2018-03-08 07:23:00', '', '', ''),
-(2, 'rakesh', 'b@gmail.com', 'r', 'b.jpg', 'instructor', 'male', '2018-03-09 13:25:55', '', '', 'ins_rakesh'),
-(3, 'c', 'c@gmail.com', 'c', 'c.jpg', 'student', 'male', '2018-03-09 13:25:39', 'gr180325', 'std_c', ''),
-(4, 'varsha', 'varsha@gmail.com', 'v', 'v.jpg', 'instructor', 'female', '2018-03-09 13:25:50', '', '', 'ins_varsha');
+INSERT INTO `users` (`id`, `f_name`, `l_name`, `username`, `email`, `password`, `image`, `role`, `gender`, `doj`, `batch_code`, `student_code`, `instructor_code`) VALUES
+(1, '', '', 'a', 'a@gmail.com', 'a', 'a.jpg', 'admin', 'male', '2018-03-08 07:23:00', '', '', ''),
+(2, '', '', 'rakesh', 'rakesh@gmail.com', 'r', 'rakesh.jpg', 'instructor', 'male', '2018-03-09 13:38:04', '', '', 'ins_rakesh'),
+(3, '', '', 'c', 'c@gmail.com', 'c', 'c.jpg', 'student', 'male', '2018-03-09 13:25:39', 'gr180325', 'std_c', ''),
+(4, '', '', 'varsha', 'varsha@gmail.com', 'v', 'v.jpg', 'instructor', 'female', '2018-03-09 13:25:50', '', '', 'ins_varsha');
 
 --
 -- Indexes for dumped tables
