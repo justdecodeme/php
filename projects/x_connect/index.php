@@ -8,7 +8,7 @@
   <h2>Dashboard</h2>
   <div class="row">
     <div class="col-md-3">
-      <a class="card" href="#">
+      <a class="card" href="attendance.php">
         <img class="card-img-top" src="./_assets/images/attendance.jpg" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">
           <h4 class="card-title text-center" style="margin: 0;">Attendance</h4>
@@ -16,7 +16,7 @@
       </a>
     </div>
     <div class="col-md-3">
-      <a class="card" href="#">
+      <a class="card" href="timetable.php">
         <img class="card-img-top" src="./_assets/images/time-table.jpg" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">
           <h4 class="card-title text-center" style="margin: 0;">Time Table</h4>
