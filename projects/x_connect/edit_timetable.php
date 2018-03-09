@@ -5,7 +5,7 @@
 ?>
 
 <div class="container">
-  <h2>Time Table <small style="font-size: 40%;"><a href="edit_timetable.php">Edit</a></small></h2>
+  <h2>Edit Time Table</h2>
   <hr>
   <div class="row">
     <div class="col-md-4">
