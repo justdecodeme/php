@@ -6,34 +6,68 @@
 <?php
   function update_timetable($code, $temp) {
     global $connection;
-    $query = "SELECT * FROM timetable WHERE batch_code=:batchCode";
+    $query = "SELECT * FROM timetable WHERE batch_code=:batchCode ORDER BY date";
     $statement = $connection->prepare($query);
     $statement->bindParam(":batchCode", $code);
 
     if($statement->execute()) {
+      $date_now = new DateTime("now");
       $batch_template = $temp;
       global $batch_obj;
       $batch = $batch_obj[$batch_template];
       $timetable = '';
       $i = 1;
+      $row_highlight_class = 'table-success';
 
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
       foreach($row as $class) {
+
+        // var_dump(date('Y-m-d', strtotime($class->date)));
+
+        $class_date = date('Y-m-d', strtotime($class->date));
+        $now_date = date("Y-m-d", time());
+        $class_date_seconds = strtotime($class_date);
+        $now_date_seconds = strtotime($now_date);
+        $diff_in_seconds = $class_date_seconds - $now_date_seconds;
+        // past
+        if($diff_in_seconds < 0) {
+          $row_highlight_class = 'table-active';
+          // future
+        } else if($diff_in_seconds > 0) {
+          $row_highlight_class = 'table-primary';
+          // present
+        } else {
+          $row_highlight_class = 'table-success';
+        }
+
         $timetable .= '
-        <tr>
-          <td scope="row">'.$i.'</td>
-          <td>'.date('j M y | D', strtotime($class->date)).'</td>
-          <td>'.$batch['classes'][$class->class_code].'</td>
-          <td>'.$batch['instructors'][$class->instructor_code].'</td>
-          <td>'
-            .date('h:i A', strtotime($class->start_time)).' - '
-            .date('h:i A', strtotime($class->end_time)).'
-          </td>
-          <td>'.$batch['rooms'][$class->room_code].'</td>
-          <td class="edit-delete-buttons">
+        <tr class="'.$row_highlight_class.'">
+          <td scope="row">'.
+            $i
+          .'</td>
+          <td>'.
+            date('j M y | D', strtotime($class->date))
+          .'</td>
+          <td>'.
+            $batch['classes'][$class->class_code]
+          .'</td>
+          <td>'.
+            $batch['instructors'][$class->instructor_code]
+          .'</td>
+          <td>'.
+            date('h:i A', strtotime($class->start_time))
+            .' - '.
+            date('h:i A', strtotime($class->end_time))
+          .'</td>
+          <td>'.
+            $batch['rooms'][$class->room_code]
+          .'</td>
+          <td class="edit-delete-buttons">'.
+            (!($diff_in_seconds < 0) ? '
             <span class="text-danger" id="editClass" data-class-id="'.$class->id.'">Edit</span> |
             <span class="text-danger" id="deleteClass" data-class-id="'.$class->id.'">Del</span>
-          </td>
+            ' : '')
+          .'</td>
         </tr>
         ';
         $i++;
@@ -72,7 +106,7 @@
     }
   }
 
-  // Delete class
+  // Delete class on click of delete button
   if(isset($_POST['action']) && $_POST['action'] == 'deleteClass') {
     $batch_code = $_POST['batchCode'];
     $batch_template = $_POST['batchTemplate'];
