@@ -53,7 +53,7 @@ function updateTimeTable(e) {
      timetableResult.innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET", "handler_timetable.php?action=updateTimeTable&batchCode="+batchCode, true);  // open(method, url, async)
+  xhttp.open("GET", "handler_timetable.php?action=updateTimeTable&batchCode="+batchCode+"&batchTemplate="+batchTemplate, true);  // open(method, url, async)
   xhttp.send();
 }
 

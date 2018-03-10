@@ -1,6 +1,14 @@
 <?php include 'includes/connect.php'; ?>
 
 <?php
+  // $url = '_assets/js/demo.json'; // path to your JSON file
+  // $data = file_get_contents($url); // put the contents of the file into a variable
+  // $batch = json_decode($data, true); // decode the JSON feed
+  // echo ($batch['unity']['classes']['u1']);
+  // var_dump($batch);
+ ?>
+
+<?php
   // Update time table on change of batch
   if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTable') {
     $query = "SELECT * FROM timetable WHERE batch_code=:batchCode";
@@ -8,6 +16,7 @@
     $statement->bindParam(":batchCode", $_GET['batchCode']);
 
     if($statement->execute()) {
+      echo $_GET['batchTemplate'];
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
       $timetable = '';
       $i = 1;
@@ -27,6 +36,7 @@
       }
       echo $timetable;
     }
+
   }
 
   // Add class on Submit btn click

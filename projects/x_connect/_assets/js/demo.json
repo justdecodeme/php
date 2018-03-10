@@ -1,4 +1,4 @@
-var batch = {
+{
   "unity": {
       "classes": {
         "u1": "Unity 1",
