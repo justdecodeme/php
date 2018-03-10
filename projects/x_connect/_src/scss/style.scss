@@ -3,6 +3,15 @@
   // padding: 0;
   // box-sizing: border-box;
 }
+.edit-delete-buttons span {
+  cursor: pointer;
+  padding: 2px 6px;
+  background: lighten(black, 90%)!important;
+  font-size: 13px;
+}
+.edit-delete-buttons span:hover {
+  opacity: .7;
+}
 table {
   font-size: 14px;
 }

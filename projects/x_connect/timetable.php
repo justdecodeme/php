@@ -13,8 +13,8 @@
       <form class="form-inline">
           <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
           <select class="custom-select my-1 mr-sm-2" id="selectedBatch">
-            <option value="bc180305" data-template="bootcamp">bc180305 (Bootcamp)</option>
-            <option value="u180325" data-template="unity" selected>u180325 (Unity)</option>
+            <option value="bc180305" data-template="bootcamp" selected>bc180305 (Bootcamp)</option>
+            <option value="u180325" data-template="unity">u180325 (Unity)</option>
             <option value="gr180325" data-template="graphic">gr180325 (Graphic Design)</option>
           </select>
       </form>

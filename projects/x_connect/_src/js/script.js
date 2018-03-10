@@ -80,24 +80,38 @@ function addClass() {
 }
 
 // Delete class on Submit btn click
-function deleteClass() {
-  console.log('deleting');
-  var classCode = document.getElementById('selectedClass').value;
+function deleteClass(e) {
+  e.stopPropagation();
+  if(e.target.id == 'deleteClass') {
+    var deleteId = e.target.dataset.classId;
+    console.log('deleting: ' + deleteId);
+    // console.log(deleteId);
 
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-     timetableResult.innerHTML = this.responseText;
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+       timetableResult.innerHTML = this.responseText;
+      }
+    };
+
+    var deleteConfirmation = confirm("Want to delete?");
+    if (deleteConfirmation) {
+        //Logic to delete the item
+        xhttp.open("POST", "handler_timetable.php", true);  // open(method, url, async)
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("action=deleteClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&deleteId="+deleteId);
+    } else {
+      console.log('Deletion is stopped!');
     }
-  };
-  xhttp.open("POST", "handler_timetable.php", true);  // open(method, url, async)
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("action=addClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode);
+
+  } else if(e.target.id = 'editClass') {
+    console.log('editing: ' + e.target.dataset.classId);
+  }
 }
 
 
 selectedBatch.addEventListener('change', updateTimeTable, false);
 addClassBtn.addEventListener('click', addClass, false);
-// deleteClassBtn.addEventListener('click', deleteClass, false);
+timetableResult.addEventListener('click', deleteClass, false);
 
 // run on page laod
 updateTimeTable(selectedBatch);
