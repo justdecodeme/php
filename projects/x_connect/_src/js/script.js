@@ -21,7 +21,7 @@ function updateTimeTable(e) {
   batchTemplate = document.querySelector("[value='"+batchCode+"']").dataset.template;
 
   // load classses from json, based on batch template selected
-  var classesObj = batch[batchTemplate]['classes'];
+  var classesObj = batchData[batchTemplate]['classes'];
   var classesList = '';
 
   for (var classCode in classesObj) {
@@ -30,7 +30,7 @@ function updateTimeTable(e) {
   selectedClassEl.innerHTML = classesList;
 
   // load instructors from json, based on batch template selected
-  var instructorsObj = batch[batchTemplate]['instructors'];
+  var instructorsObj = batchData[batchTemplate]['instructors'];
   var instructorsList = '';
 
   for (var instructorCode in instructorsObj) {
@@ -39,7 +39,7 @@ function updateTimeTable(e) {
   selectedInstructorEL.innerHTML = instructorsList;
 
   // load rooms from json, based on batch template selected
-  var roomsObj = batch[batchTemplate]['rooms'];
+  var roomsObj = batchData[batchTemplate]['rooms'];
   var roomsList = '';
 
   for (var roomCode in roomsObj) {
@@ -67,7 +67,7 @@ function addClass() {
   var startTime = document.getElementById('selectedStartTime').value;
   var endTime = document.getElementById('selectedEndTime').value;
   var roomCode = document.getElementById('selectedRoom').value;
-  console.log(batchCode, date, classCode, instructorCode, startTime, endTime, roomCode);
+  // console.log(batchCode, date, classCode, instructorCode, startTime, endTime, roomCode);
 
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {

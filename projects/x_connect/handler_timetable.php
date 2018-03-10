@@ -1,12 +1,7 @@
-<?php include 'includes/connect.php'; ?>
-
 <?php
-  // $url = '_assets/js/demo.json'; // path to your JSON file
-  // $data = file_get_contents($url); // put the contents of the file into a variable
-  // $batch = json_decode($data, true); // decode the JSON feed
-  // echo ($batch['unity']['classes']['u1']);
-  // var_dump($batch);
- ?>
+  include 'includes/connect.php';
+  include 'includes/template_reader.php';
+?>
 
 <?php
   // Update time table on change of batch
@@ -16,24 +11,27 @@
     $statement->bindParam(":batchCode", $_GET['batchCode']);
 
     if($statement->execute()) {
-      echo $_GET['batchTemplate'];
-      $row = $statement->fetchAll(PDO::FETCH_OBJ);
+      $batch_template = $_GET['batchTemplate'];
+      $batch = $batch_obj[$batch_template];
       $timetable = '';
       $i = 1;
+
+      $row = $statement->fetchAll(PDO::FETCH_OBJ);
       foreach($row as $class) {
         $timetable .= '
         <tr>
         <td scope="row">'.$i.'</td>
         <td>'.date('m-d-Y', strtotime($class->date)).'</td>
-        <td>'.$class->class_code.'</td>
-        <td>'.$class->instructor_code.'</td>
+        <td>'.$batch['classes'][$class->class_code].'</td>
+        <td>'.$batch['instructors'][$class->instructor_code].'</td>
         <td>'.date('h:i A', strtotime($class->start_time)).' - '.date('h:i A', strtotime($class->end_time)).'</td>
-        <td>'.$class->room_code.'</td>
+        <td>'.$batch['rooms'][$class->room_code].'</td>
         <td><a class="text-danger" href="#"><i class="fa fa-edit"></i></a> | <a class="text-danger" href="#"><i class="fa fa-trash-alt"></i></a></td>
         </tr>
         ';
         $i++;
       }
+
       echo $timetable;
     }
 
@@ -61,18 +59,21 @@
       $statement->bindParam(":batchCode", $batch_code);
 
       if($statement->execute()) {
-        $row = $statement->fetchAll(PDO::FETCH_OBJ);
+        $batch_template = $_GET['batchTemplate'];
+        $batch = $batch_obj[$batch_template];
         $timetable = '';
         $i = 1;
+
+        $row = $statement->fetchAll(PDO::FETCH_OBJ);
         foreach($row as $class) {
           $timetable .= '
           <tr>
           <td scope="row">'.$i.'</td>
           <td>'.date('m-d-Y', strtotime($class->date)).'</td>
-          <td>'.$class->class_code.'</td>
-          <td>'.$class->instructor_code.'</td>
+          <td>'.$batch['classes'][$class->class_code].'</td>
+          <td>'.$batch['instructors'][$class->instructor_code].'</td>
           <td>'.date('h:i A', strtotime($class->start_time)).' - '.date('h:i A', strtotime($class->end_time)).'</td>
-          <td>'.$class->room_code.'</td>
+          <td>'.$batch['rooms'][$class->room_code].'</td>
           <td><a class="text-danger" href="#"><i class="fa fa-edit"></i></a> | <a class="text-danger" href="#"><i class="fa fa-trash-alt"></i></a></td>
           </tr>
           ';
