@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2018 at 05:19 PM
+-- Generation Time: Mar 10, 2018 at 08:37 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `batch` (
 `id` int(11) NOT NULL,
-  `batch_id` varchar(255) NOT NULL,
+  `batch_code` varchar(255) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `batch` (
 -- Dumping data for table `batch`
 --
 
-INSERT INTO `batch` (`id`, `batch_id`, `start_date`, `end_date`, `name`, `total_students`) VALUES
+INSERT INTO `batch` (`id`, `batch_code`, `start_date`, `end_date`, `name`, `total_students`) VALUES
 (1, 'bc180305', '0000-00-00', '0000-00-00', 'Bootcamp', 10),
 (2, 'unity180325', '2018-03-25', '2018-05-06', 'Unity', 3),
 (3, 'gr180325', '2018-03-25', '2018-04-29', 'Graphic Design', 15);
