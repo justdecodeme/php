@@ -1,0 +1,23 @@
+var batch = {
+  "unity": {
+      "classes": ["unity1", "unity2", "unity3", "unity4"],
+      "startTimings": [],
+      "endTimings": [],
+      "instructorCodes": [],
+      "room": ["a", "b"]
+  },
+  "graphic": {
+      "classes": ["graphic1", "graphic2", "graphic3", "graphic4"],
+      "startTimings": [],
+      "endTimings": [],
+      "instructorCodes": [],
+      "room": ["a", "b"]
+  },
+  "bootcamp": {
+      "classes": ["bootcamp1", "bootcamp2", "bootcamp3", "bootcamp4"],
+      "startTimings": [],
+      "endTimings": [],
+      "instructorCodes": [],
+      "room": ["a", "b"]
+  }
+}

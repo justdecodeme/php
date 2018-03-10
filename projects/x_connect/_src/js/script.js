@@ -1,3 +1,4 @@
+console.log(batch['unity']['classes'][2]);
 console.log('js is working');
 
 var selectedBatch = document.getElementById('selectedBatch');
