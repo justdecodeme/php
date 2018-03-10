@@ -2,11 +2,11 @@
   include 'includes/connect.php';
   include 'includes/header.php';
   include 'includes/template_reader.php';
-  // include 'includes/login_status.php';
+  include 'includes/login_status.php';
 ?>
 
 <div class="container">
-  <!-- <h2>Time Table</h2> -->
+  <h2>Time Table</h2>
   <hr>
   <div class="row">
     <div class="col-md-4">
