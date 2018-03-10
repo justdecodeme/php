@@ -2,6 +2,7 @@ var xhttp = new XMLHttpRequest();
 
 var selectedBatch = document.getElementById('selectedBatch');
 var addClassBtn = document.getElementById('addClassBtn');
+var deleteClassBtn = document.getElementById('deleteClass');
 var timetableResult = document.getElementById('timetableResult');
 
 var batchCode = null;
@@ -59,7 +60,7 @@ function updateTimeTable(e) {
 
 // Add class on Submit btn click
 function addClass() {
-  console.log('clicked');
+  console.log('adding');
   var date = document.getElementById('selectedDate').value;
   var classCode = document.getElementById('selectedClass').value;
   var instructorCode = document.getElementById('selectedInstructor').value;
@@ -78,8 +79,25 @@ function addClass() {
   xhttp.send("action=addClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode);
 }
 
+// Delete class on Submit btn click
+function deleteClass() {
+  console.log('deleting');
+  var classCode = document.getElementById('selectedClass').value;
+
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     timetableResult.innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("POST", "handler_timetable.php", true);  // open(method, url, async)
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("action=addClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode);
+}
+
+
 selectedBatch.addEventListener('change', updateTimeTable, false);
 addClassBtn.addEventListener('click', addClass, false);
+// deleteClassBtn.addEventListener('click', deleteClass, false);
 
 // run on page laod
 updateTimeTable(selectedBatch);

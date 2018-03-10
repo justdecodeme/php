@@ -17,23 +17,4 @@
     print "Error ". $error->getMessage() ;
     die();
   }
-//
-// function db() {
-//   static $connection;
-//   if ($connection===NULL){
-//     try {
-//       $connection = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS);
-//       // Error Handling
-//       $connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//
-//       echo "Connected to Database: " . DB_NAME;
-//       // $connection = null;
-//     } catch(PDOException $error) {
-//       print "Error ". $error->getMessage() ;
-//       die();
-//     }
-//
-//   }
-//   return $connection;
-// }
  ?>

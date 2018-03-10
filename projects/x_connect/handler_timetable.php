@@ -21,13 +21,16 @@
       foreach($row as $class) {
         $timetable .= '
         <tr>
-        <td scope="row">'.$i.'</td>
-        <td>'.date('m-d-Y', strtotime($class->date)).'</td>
-        <td>'.$batch['classes'][$class->class_code].'</td>
-        <td>'.$batch['instructors'][$class->instructor_code].'</td>
-        <td>'.date('h:i A', strtotime($class->start_time)).' - '.date('h:i A', strtotime($class->end_time)).'</td>
-        <td>'.$batch['rooms'][$class->room_code].'</td>
-        <td><a class="text-danger" href="#"><i class="fa fa-edit"></i></a> | <a class="text-danger" href="#"><i class="fa fa-trash-alt"></i></a></td>
+          <td scope="row">'.$i.'</td>
+          <td>'.date('m-d-Y', strtotime($class->date)).'</td>
+          <td>'.$batch['classes'][$class->class_code].'</td>
+          <td>'.$batch['instructors'][$class->instructor_code].'</td>
+          <td>'.date('h:i A', strtotime($class->start_time)).' - '.date('h:i A', strtotime($class->end_time)).'</td>
+          <td>'.$batch['rooms'][$class->room_code].'</td>
+          <td>
+            <span class="text-danger" class="editClass" id="'.$class->id.'"><i class="fa fa-edit"></i></span> |
+            <span class="text-danger" class="deleteClass" id="'.$class->id.'"><i class="fa fa-trash-alt"></i></span>
+          </td>
         </tr>
         ';
         $i++;
