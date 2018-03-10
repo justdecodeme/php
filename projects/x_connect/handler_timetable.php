@@ -22,10 +22,13 @@
         $timetable .= '
         <tr>
           <td scope="row">'.$i.'</td>
-          <td>'.date('m-d-Y', strtotime($class->date)).'</td>
+          <td>'.date('j M y | D', strtotime($class->date)).'</td>
           <td>'.$batch['classes'][$class->class_code].'</td>
           <td>'.$batch['instructors'][$class->instructor_code].'</td>
-          <td>'.date('h:i A', strtotime($class->start_time)).' - '.date('h:i A', strtotime($class->end_time)).'</td>
+          <td>'
+            .date('h:i A', strtotime($class->start_time)).' - '
+            .date('h:i A', strtotime($class->end_time)).'
+          </td>
           <td>'.$batch['rooms'][$class->room_code].'</td>
           <td class="edit-delete-buttons">
             <span class="text-danger" id="editClass" data-class-id="'.$class->id.'">Edit</span> |
