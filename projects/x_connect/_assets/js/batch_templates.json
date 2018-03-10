@@ -1,23 +1,71 @@
 var batch = {
   "unity": {
-      "classes": ["unity1", "unity2", "unity3", "unity4"],
-      "startTimings": [],
-      "endTimings": [],
-      "instructorCodes": [],
-      "room": ["a", "b"]
+      "classes": {
+        "unity1": "Unity 1",
+        "unity2": "Unity 2",
+        "unity3": "Unity 3",
+        "unity4": "Unity 4",
+        "unity5": "Unity 5"
+      },
+      "startTimings": ["09:00", "11:30", "14:00", "16:30"],
+      "endTimings": ["11:00", "13:30", "16:00", "18:30"],
+      "instructors": {
+        "ins_varsha": "Varsha",
+        "ins_aish": "Aishwarya"
+      },
+      "rooms": {
+        "a": "A",
+        "b": "B"
+      }
   },
   "graphic": {
-      "classes": ["graphic1", "graphic2", "graphic3", "graphic4"],
-      "startTimings": [],
-      "endTimings": [],
-      "instructorCodes": [],
-      "room": ["a", "b"]
+    "classes": {
+      "gr1": "Graphic 1",
+      "gr2": "Graphic 2",
+      "gr3": "Graphic 3",
+      "gr4": "Graphic 4",
+      "gr5": "Graphic 5"
+    },
+    "startTimings": ["09:00", "11:30", "14:00", "16:30"],
+    "endTimings": ["11:00", "13:30", "16:00", "18:30"],
+    "instructors": {
+      "ins_aish": "Aishwarya",
+      "ins_rakesh": "Rakesh",
+      "ins_varsha": "Varsha",
+      "ins_pallavi": "Pallavi",
+      "ins_vinay": "Vinay",
+      "ins_asha": "Asha"
+    },
+    "rooms": {
+      "a": "A",
+      "b": "B",
+      "c": "C",
+      "d": "D",
+    }
   },
   "bootcamp": {
-      "classes": ["bootcamp1", "bootcamp2", "bootcamp3", "bootcamp4"],
-      "startTimings": [],
-      "endTimings": [],
-      "instructorCodes": [],
-      "room": ["a", "b"]
+    "classes": {
+      "bc1": "Bootcamp 1",
+      "bc2": "Bootcamp 2",
+      "bc3": "Bootcamp 3",
+      "bc4": "Bootcamp 4",
+      "bc5": "Bootcamp 5"
+    },
+    "startTimings": ["09:00", "11:30", "14:00", "16:30"],
+    "endTimings": ["11:00", "13:30", "16:00", "18:30"],
+    "instructors": {
+      "ins_aish": "Aishwarya",
+      "ins_rakesh": "Rakesh",
+      "ins_varsha": "Varsha",
+      "ins_pallavi": "Pallavi",
+      "ins_vinay": "Vinay",
+      "ins_asha": "Asha"
+    },
+    "rooms": {
+      "a": "A",
+      "b": "B",
+      "c": "C",
+      "d": "D"
+    }
   }
 }

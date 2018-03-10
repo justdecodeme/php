@@ -12,9 +12,9 @@
       <form class="form-inline">
           <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
           <select class="custom-select my-1 mr-sm-2" id="selectedBatch">
-            <option value="bc180305">bc180305 (Bootcamp)</option>
-            <option value="unity180325" selected>unity180325 (Unity)</option>
-            <option value="gr180325">gr180325 (Graphic Design)</option>
+            <option value="bc180305" data-template="bootcamp">bc180305 (Bootcamp)</option>
+            <option value="unity180325" data-template="unity" selected>unity180325 (Unity)</option>
+            <option value="gr180325" data-template="graphic">gr180325 (Graphic Design)</option>
           </select>
       </form>
     </div>
@@ -44,18 +44,18 @@
             </td>
             <td>
               <select class="custom-select" id="selectedClass">
-                <option value="u1" selected>Unity 1</option>
+                <!-- <option value="u1" selected>Unity 1</option>
                 <option value="u2">Unity 2</option>
                 <option value="u3">Unity 3</option>
-                <option value="u4">Unity 4</option>
+                <option value="u4">Unity 4</option> -->
               </select>
             </td>
             <td>
               <select class="custom-select" id="selectedInstructor">
-                <option value="ins_rakesh" selected>Rakesh</option>
+                <!-- <option value="ins_rakesh" selected>Rakesh</option>
                 <option value="ins_asha">Asha</option>
                 <option value="ins_varsha">Varsha</option>
-                <option value="ins_Pallavi">Pallavi</option>
+                <option value="ins_Pallavi">Pallavi</option> -->
               </select>
             </td>
             <td class="time-picker">
@@ -64,8 +64,8 @@
             </td>
             <td>
               <select class="custom-select" id="selectedRoom">
-                <option value="a" selected>A</option>
-                <option value="b">B</option>
+                <!-- <option value="a" selected>A</option>
+                <option value="b">B</option> -->
               </select>
             </td>
             <td>
