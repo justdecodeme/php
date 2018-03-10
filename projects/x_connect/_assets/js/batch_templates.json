@@ -30,20 +30,20 @@
   },
   "graphic": {
     "classes": {
-      "gr1": "Graphic 1",
-      "gr2": "Graphic 2",
-      "gr3": "Graphic 3",
-      "grp1": "Graphic (Practice 1)",
-      "gr4": "Graphic 4",
-      "gr5": "Graphic 5",
-      "gr6": "Graphic 6",
-      "grp2": "Graphic (Practice 2)",
-      "gr7": "Graphic 7",
-      "gr8": "Graphic 8",
-      "grp1": "Graphic (Project 1)",
-      "grp2": "Graphic (Project 2)",
-      "grp3": "Graphic (Project 3)",
-      "grp4": "Graphic (Project 4)"
+      "gr1": "GR 1",
+      "gr2": "GR 2",
+      "gr3": "GR 3",
+      "grp1": "GR (Practice 1)",
+      "gr4": "GR 4",
+      "gr5": "GR 5",
+      "gr6": "GR 6",
+      "grp2": "GR (Practice 2)",
+      "gr7": "GR 7",
+      "gr8": "GR 8",
+      "grp1": "GR (Project 1)",
+      "grp2": "GR (Project 2)",
+      "grp3": "GR (Project 3)",
+      "grp4": "GR (Project 4)"
     },
     "startTimings": ["09:00", "11:30", "14:00", "16:30"],
     "endTimings": ["11:00", "13:30", "16:00", "18:30"],
@@ -64,11 +64,11 @@
   },
   "bootcamp": {
     "classes": {
-      "bc1": "Bootcamp 1",
-      "bc2": "Bootcamp 2",
-      "bc3": "Bootcamp 3",
-      "bc4": "Bootcamp 4",
-      "bc5": "Bootcamp 5"
+      "bc1": "BC 1",
+      "bc2": "BC 2",
+      "bc3": "BC 3",
+      "bc4": "BC 4",
+      "bc5": "BC 5"
     },
     "startTimings": ["09:00", "11:30", "14:00", "16:30"],
     "endTimings": ["11:00", "13:30", "16:00", "18:30"],
