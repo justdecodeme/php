@@ -1,11 +1,16 @@
 var xhttp = new XMLHttpRequest();
 
+var timetableOuter = document.getElementById('timetableOuter');
+var selectedDateOuter = document.getElementById('selectedDateOuter');
+var selectedBatchOuter = document.getElementById('selectedBatchOuter');
 var selectedBatch = document.getElementById('selectedBatch');
+var selectedLayout = document.getElementById('selectedLayout');
 var addClassBtn = document.getElementById('addClassBtn');
 var deleteClassBtn = document.getElementById('deleteClass');
 var timetableResult = document.getElementById('timetableResult');
 
 var batchCode = null;
+var layout = 'list';
 var batchTemplate = null;
 var selectedClassEl = document.getElementById('selectedClass');
 var selectedInstructorEL = document.getElementById('selectedInstructor');
@@ -108,8 +113,20 @@ function deleteClass(e) {
   }
 }
 
+function changeLayout(e) {
+  layout = e.target.value;
+  if(layout == 'list') {
+    timetableOuter.classList.add('list');
+    timetableOuter.classList.remove('grid');
+  } else {
+    timetableOuter.classList.add('grid');
+    timetableOuter.classList.remove('list');
+  }
+  console.log(e.target.value);
+}
 
 selectedBatch.addEventListener('change', updateTimeTable, false);
+selectedLayout.addEventListener('change', changeLayout, false);
 addClassBtn.addEventListener('click', addClass, false);
 timetableResult.addEventListener('click', deleteClass, false);
 

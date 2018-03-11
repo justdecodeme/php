@@ -5,13 +5,14 @@
   // include 'includes/login_status.php';
 ?>
 
-<div class="container">
+<div class="container list" id="timetableOuter">
   <!-- <h2>Time Table</h2> -->
   <hr>
+  <!-- options -->
   <div class="row">
     <div class="col-md-9">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 list-layout">
           <form class="form-block">
             <label for="selectedBatch">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
             <select class="custom-select my-1" id="selectedBatch">
@@ -21,34 +22,39 @@
             </select>
           </form>
         </div>
-        <div class="col-md-3">
-          <form class="form-block">
-            <label for="selectedDate">Start Date</label>
-            <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
-          </form>
-        </div>
-        <div class="col-md-3">
-          <form class="form-block">
-            <label for="selectedDate">End Date</label>
-            <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
-          </form>
+        <div class="col-md-6 grid-layout">
+          <div class="row">
+            <div class="col-md-6">
+              <form class="form-block">
+                <label for="selectedDate">Start Date</label>
+                <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
+              </form>
+            </div>
+            <div class="col-md-6">
+              <form class="form-block">
+                <label for="selectedDate">End Date</label>
+                <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="col-md-3">
-      <form class="form-inline">
-          <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select Layout</label>
-          <select class="custom-select my-1 mr-sm-2" id="selectedBatch">
+      <form class="form-block">
+          <label for="selectedLayout">Select Layout</label>
+          <select class="custom-select" id="selectedLayout">
             <option value="list">List View</option>
-            <option value="grid" selected>Grid View</option>
+            <option value="grid">Grid View</option>
           </select>
       </form>
     </div>
   </div>
 
+  <!-- tables -->
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-bordered layou-list d-none" style="margin-top: 10px;">
+      <table class="table table-bordered list-layout" style="margin-top: 10px;">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -90,7 +96,7 @@
           </tr>
         </tfoot>
       </table>
-      <table class="table table-bordered layou-grid" style="margin-top: 10px;">
+      <table class="table table-bordered grid-layout" style="margin-top: 10px;">
         <thead>
           <tr>
             <th></th>

@@ -58,3 +58,13 @@ table.layou-grid td {
     margin-bottom: 0;
   }
 }
+#timetableOuter.list {
+  .grid-layout {
+    display: none;
+  }
+}
+#timetableOuter.grid {
+  .list-layout {
+    display: none;
+  }
+}
