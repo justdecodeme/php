@@ -1,20 +1,35 @@
+/********************/
+/*    Variables     */
+/********************/
 var xhttp = new XMLHttpRequest();
 
 var timetableOuter = document.getElementById('timetableOuter');
 var selectedDateOuter = document.getElementById('selectedDateOuter');
 var selectedBatchOuter = document.getElementById('selectedBatchOuter');
+
+var filterStartDate = document.getElementById('filterStartDate');
+var filterEndDate = document.getElementById('filterEndDate');
+
 var selectedBatch = document.getElementById('selectedBatch');
 var selectedLayout = document.getElementById('selectedLayout');
+
 var addClassBtn = document.getElementById('addClassBtn');
 var deleteClassBtn = document.getElementById('deleteClass');
+
 var timetableResult = document.getElementById('timetableResult');
+var timetableResult = document.getElementById('timetableResult');
+
+var selectedClassEl = document.getElementById('selectedClass');
+var selectedInstructorEL = document.getElementById('selectedInstructor');
+var selectedRoomEL = document.getElementById('selectedRoom');
 
 var batchCode = null;
 var layout = 'list';
 var batchTemplate = null;
-var selectedClassEl = document.getElementById('selectedClass');
-var selectedInstructorEL = document.getElementById('selectedInstructor');
-var selectedRoomEL = document.getElementById('selectedRoom');
+
+/********************/
+/*    Functions     */
+/********************/
 
 // find current date
 function currentDate() {
@@ -31,7 +46,7 @@ function currentDate() {
 }
 
 // Update time table on change of batch
-function updateTimeTable(e) {
+function updateTimeTableList(e) {
   if(e.target) {
     batchCode = e.target.value;
   } else {
@@ -73,7 +88,23 @@ function updateTimeTable(e) {
      timetableResult.innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET", "handler_timetable.php?action=updateTimeTable&batchCode="+batchCode+"&batchTemplate="+batchTemplate, true);  // open(method, url, async)
+  xhttp.open("GET", "handler_timetable.php?action=updateTimeTableList&batchCode="+batchCode+"&batchTemplate="+batchTemplate, true);  // open(method, url, async)
+  xhttp.send();
+}
+
+// Update time table on change of batch
+function updateTimeTableGrid() {
+  console.log('grid updating');
+  var filterStartDate = document.getElementById('filterStartDate').value;
+  var filterEndDate = document.getElementById('filterEndDate').value;
+
+  // load content from database
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     timetableResultGridTemparary.innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "handler_timetable.php?action=updateTimeTableGrid&filterStartDate="+filterStartDate+"&filterEndDate="+filterEndDate, true);  // open(method, url, async)
   xhttp.send();
 }
 
@@ -86,7 +117,7 @@ function addClass() {
   var startTime = document.getElementById('selectedStartTime').value;
   var endTime = document.getElementById('selectedEndTime').value;
   var roomCode = document.getElementById('selectedRoom').value;
-  console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
+  // console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
 
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -145,15 +176,23 @@ function updateLayout(e) {
 
 // run on page laod
 function init() {
-  updateTimeTable(selectedBatch);
-  updateLayout(selectedLayout);
   selectedDate.value = currentDate();
   filterStartDate.value = currentDate();
-  filterEndDate.value = currentDate();
+  // filterEndDate.value = currentDate();
+  filterEndDate.value = "2018-03-26";
+
+  updateTimeTableList(selectedBatch);
+  updateTimeTableGrid();
+  updateLayout(selectedLayout);
 };
 init();
 
-selectedBatch.addEventListener('change', updateTimeTable, false);
+/********************/
+/*    Events     */
+/********************/
+selectedBatch.addEventListener('change', updateTimeTableList, false);
+filterStartDate.addEventListener('change', updateTimeTableGrid, false);
+filterEndDate.addEventListener('change', updateTimeTableGrid, false);
 selectedLayout.addEventListener('change', updateLayout, false);
 addClassBtn.addEventListener('click', addClass, false);
 timetableResult.addEventListener('click', deleteClass, false);

@@ -1,10 +1,10 @@
 <?php
   include 'includes/connect.php';
-  include 'includes/template_reader.php';
+  // include 'includes/template_reader.php';
 ?>
 
 <?php
-  function update_timetable($code, $temp) {
+  function update_timetable_list($code, $temp) {
     global $connection;
     $query = "SELECT * FROM timetable WHERE batch_code=:batchCode ORDER BY date";
     $statement = $connection->prepare($query);
@@ -15,15 +15,13 @@
       $batch_template = $temp;
       global $batch_obj;
       $batch = $batch_obj[$batch_template];
-      $timetable = '';
+      $timetable_list = '';
       $i = 1;
-      $row_highlight_class = 'table-success';
 
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
       foreach($row as $class) {
 
-        // var_dump(date('Y-m-d', strtotime($class->date)));
-
+        // highlight rows for past | present | future classes
         $class_date = date('Y-m-d', strtotime($class->date));
         $now_date = date("Y-m-d", time());
         $class_date_seconds = strtotime($class_date);
@@ -40,7 +38,7 @@
           $row_highlight_class = 'table-success';
         }
 
-        $timetable .= '
+        $timetable_list .= '
         <tr class="'.$row_highlight_class.'">
           <td scope="row">'.
             $i
@@ -63,7 +61,7 @@
             $batch['rooms'][$class->room_code]
           .'</td>
           <td class="edit-delete-buttons">'.
-            (!($diff_in_seconds = 0) ?
+            (!($diff_in_seconds = 0) ? // always true (simple hack to show below buttons for each iteration)
             // (!($diff_in_seconds < 0) ?
             ' <span class="text-danger" id="editClass" data-class-id="'.$class->id.'">Edit</span>
             | <span class="text-danger" id="deleteClass" data-class-id="'.$class->id.'">Del</span>
@@ -73,13 +71,40 @@
         ';
         $i++;
       }
-      echo $timetable;
+      echo $timetable_list;
+    }
+  }
+  function update_timetable_grid($from_date, $to_date) {
+    // echo $from_date."<br>";
+    // echo $to_date;
+
+    global $connection;
+    $query = "SELECT * FROM timetable WHERE date=:fromDate ORDER BY date";
+    $statement = $connection->prepare($query);
+    $statement->bindParam(":fromDate", $from_date);
+    // $statement->bindParam(":TO", $to_date);
+
+    if($statement->execute()) {
+      $timetable_grid = '';
+      $i = 1;
+
+
+      $row = $statement->fetchAll(PDO::FETCH_OBJ);
+      foreach($row as $class) {
+        $timetable_grid .= $class->class_code.'<br>';
+      }
+      echo $timetable_grid;
     }
   }
 
-  // Update time table on change of batch
-  if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTable') {
-    update_timetable($_GET['batchCode'], $_GET['batchTemplate']);
+  // Update time table on change of batch (list-layout)
+  if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableList') {
+    update_timetable_list($_GET['batchCode'], $_GET['batchTemplate']);
+  }
+
+  // Update time table on change of date (grid-layout)
+  if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableGrid') {
+    update_timetable_grid($_GET['filterStartDate'], $_GET['filterEndDate']);
   }
 
   // Add class on Submit btn click

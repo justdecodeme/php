@@ -18,10 +18,10 @@
           <form class="form-block">
             <label for="selectedBatch">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
             <select class="custom-select my-1" id="selectedBatch">
-              <option value="bc180305" data-template="bootcamp" selected>bc180305 (Bootcamp)</option>
+              <option value="bc180305" data-template="bootcamp" >bc180305 (Bootcamp)</option>
               <option value="u180325" data-template="unity">u180325 (Unity)</option>
               <option value="gr180325" data-template="graphic" >gr180325 (Graphic Design)</option>
-              <option value="php180325" data-template="php" >php180325 (PHP & MySQL)</option>
+              <option value="php180325" data-template="php" selected>php180325 (PHP & MySQL)</option>
             </select>
           </form>
         </div>
@@ -50,7 +50,7 @@
           <label for="selectedLayout">Select Layout</label>
           <select class="custom-select" id="selectedLayout">
             <option value="list">List View</option>
-            <option value="grid">Grid View</option>
+            <option value="grid" selected>Grid View</option>
           </select>
       </form>
     </div>
@@ -99,7 +99,7 @@
           </tr>
         </tfoot>
       </table>
-      <!-- grid-layout -->
+      <!-- grid-layout | class room A -->
       <table class="table table-bordered grid-layout" style="margin-top: 10px;">
         <thead>
           <tr>
@@ -124,6 +124,9 @@
           </tr>
         </thead>
         <tbody id="timetableResultGrid">
+          <tr id="timetableResultGridTemparary">
+
+          </tr>
           <tr>
             <td>
               <p>Time</p>
@@ -302,7 +305,8 @@
         <tfoot>
         </tfoot>
       </table>
-      <table class="table table-bordered grid-layout" style="margin-top: 10px;">
+      <!-- grid-layout | class room B -->
+      <table class="table table-bordered grid-layout d-none" style="margin-top: 10px;">
         <thead>
           <tr>
             <th></th>
