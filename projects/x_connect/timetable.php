@@ -50,7 +50,7 @@
           <label for="selectedLayout">Select Layout</label>
           <select class="custom-select" id="selectedLayout">
             <option value="list">List View</option>
-            <option value="grid" selected>Grid View</option>
+            <option value="grid">Grid View</option>
           </select>
       </form>
     </div>
@@ -59,6 +59,7 @@
   <!-- tables -->
   <div class="row">
     <div class="col-md-12">
+      <!-- list-layout -->
       <table class="table table-bordered list-layout" style="margin-top: 10px;">
         <thead>
           <tr>
@@ -98,6 +99,7 @@
           </tr>
         </tfoot>
       </table>
+      <!-- grid-layout -->
       <table class="table table-bordered grid-layout" style="margin-top: 10px;">
         <thead>
           <tr>
