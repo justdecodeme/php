@@ -12,7 +12,7 @@
   <div class="row">
     <div class="col-md-9">
       <div class="row">
-        <div class="col-md-6 list-layout">
+        <div class="col-md-5 list-layout">
           <form class="form-block">
             <label for="selectedBatch">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
             <select class="custom-select my-1" id="selectedBatch">
@@ -22,7 +22,7 @@
             </select>
           </form>
         </div>
-        <div class="col-md-6 grid-layout">
+        <div class="col-md-7 grid-layout">
           <div class="row">
             <div class="col-md-6">
               <form class="form-block">
