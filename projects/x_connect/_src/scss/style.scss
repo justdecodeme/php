@@ -42,13 +42,14 @@ td.time-picker input {
   font-size: 30px;
   cursor: pointer;
 }
-table.layou-grid th {
+table.grid-layout th {
   width: 12.50%;
+  font-size: 124x;
 }
-table.layou-grid td {
-  font-size: 10px;
+table.grid-layout td {
+  font-size: 14px;
   p {
-    margin: 10px 0;
+    margin: 0;
   }
   p:first-child {
     margin-top: 0;
