@@ -86,5 +86,26 @@
       "c": "C",
       "d": "D"
     }
+  },
+  "php": {
+    "classes": {
+      "php1": "PHP 1",
+      "php2": "PHP 2",
+      "php3": "PHP 3",
+      "php4": "PHP 4",
+      "php5": "PHP 5"
+    },
+    "startTimings": ["09:00", "11:30", "14:00", "16:30"],
+    "endTimings": ["11:00", "13:30", "16:00", "18:30"],
+    "instructors": {
+      "ins_rakesh": "Rakesh",
+      "ins_pallavi": "Pallavi",
+      "ins_vinay": "Vinay",
+      "ins_asha": "Asha"
+    },
+    "rooms": {
+      "c": "C",
+      "d": "D"
+    }
   }
 }

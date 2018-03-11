@@ -64,7 +64,7 @@
           .'</td>
           <td class="edit-delete-buttons">'.
             (!($diff_in_seconds = 0) ?
-            // (!($diff_in_seconds < 0) ? 
+            // (!($diff_in_seconds < 0) ?
             ' <span class="text-danger" id="editClass" data-class-id="'.$class->id.'">Edit</span>
             | <span class="text-danger" id="deleteClass" data-class-id="'.$class->id.'">Del</span>
             ' : '')
