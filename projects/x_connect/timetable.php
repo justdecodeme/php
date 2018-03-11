@@ -18,10 +18,10 @@
           <form class="form-block">
             <label for="selectedBatch">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
             <select class="custom-select my-1" id="selectedBatch">
-              <option value="bc180305" data-template="bootcamp" >bc180305 (Bootcamp)</option>
+              <option value="bc180305" data-template="bootcamp" selected>bc180305 (Bootcamp)</option>
               <option value="u180325" data-template="unity">u180325 (Unity)</option>
               <option value="gr180325" data-template="graphic" >gr180325 (Graphic Design)</option>
-              <option value="php180325" data-template="php" selected>php180325 (PHP & MySQL)</option>
+              <option value="php180325" data-template="php" >php180325 (PHP & MySQL)</option>
             </select>
           </form>
         </div>
@@ -87,8 +87,8 @@
               <select class="custom-select" id="selectedInstructor"></select>
             </td>
             <td class="time-picker">
-              <input type="time" id="selectedStartTime" class="form-control" value="09:30">
-              <input type="time" id="selectedEndTime" class="form-control" value="13:30">
+              <input type="time" id="selectedStartTime" class="form-control" value="09:00">
+              <input type="time" id="selectedEndTime" class="form-control" value="11:00">
             </td>
             <td>
               <select class="custom-select" id="selectedRoom"></select>
