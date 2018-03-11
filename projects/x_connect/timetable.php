@@ -6,30 +6,49 @@
 ?>
 
 <div class="container">
-  <h2>Time Table</h2>
+  <!-- <h2>Time Table</h2> -->
   <hr>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-6">
+          <form class="form-block">
+            <label for="selectedBatch">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
+            <select class="custom-select my-1" id="selectedBatch">
+              <option value="bc180305" data-template="bootcamp">bc180305 (Bootcamp)</option>
+              <option value="u180325" data-template="unity">u180325 (Unity)</option>
+              <option value="gr180325" data-template="graphic" selected>gr180325 (Graphic Design)</option>
+            </select>
+          </form>
+        </div>
+        <div class="col-md-3">
+          <form class="form-block">
+            <label for="selectedDate">Start Date</label>
+            <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
+          </form>
+        </div>
+        <div class="col-md-3">
+          <form class="form-block">
+            <label for="selectedDate">End Date</label>
+            <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
       <form class="form-inline">
-          <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
+          <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select Layout</label>
           <select class="custom-select my-1 mr-sm-2" id="selectedBatch">
-            <option value="bc180305" data-template="bootcamp">bc180305 (Bootcamp)</option>
-            <option value="u180325" data-template="unity">u180325 (Unity)</option>
-            <option value="gr180325" data-template="graphic" selected>gr180325 (Graphic Design)</option>
+            <option value="list">List View</option>
+            <option value="grid" selected>Grid View</option>
           </select>
       </form>
-    </div>
-    <div class="col-md-8 text-right">
-      <div class="layout-btns">
-        <a href="#" class="list"><i class="fa fa-bars"></i></a>
-        <a href="#" class="grid"><i class="fa fa-th"></i></a>
-      </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-bordered layou-list" style="margin-top: 10px;">
+      <table class="table table-bordered layou-list d-none" style="margin-top: 10px;">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -96,13 +115,177 @@
         </thead>
         <tbody id="timetableResultGrid">
           <tr>
-            <td></td>
+            <td>
+              <p>Time</p>
+              <p>09:00 AM</p>
+              <p>11:30 AM</p>
+              <p>02:00 AM</p>
+              <p>04:30 AM</p>
+            </td>
             <td>
               <p>05-Mar</p>
-              <p>BC48 - Vinay</p>
-              <p>BC49 - Pallavi</p>
+              <p>-</p>
+              <p>-</p>
               <p>BC33 - Aishwarya</p>
               <p>BC34 - Rakesh</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>Time</p>
+              <p>09:00 AM</p>
+              <p>11:30 AM</p>
+              <p>02:00 AM</p>
+              <p>04:30 AM</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Time</p>
+              <p>09:00 AM</p>
+              <p>11:30 AM</p>
+              <p>02:00 AM</p>
+              <p>04:30 AM</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>05-Mar</p>
+              <p>-</p>
+              <p>-</p>
+              <p>BC33 - Aishwarya</p>
+              <p>BC34 - Rakesh</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>05-Mar</p>
+              <p>-</p>
+              <p>-</p>
+              <p>BC33 - Aishwarya</p>
+              <p>BC34 - Rakesh</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Time</p>
+              <p>09:00 AM</p>
+              <p>11:30 AM</p>
+              <p>02:00 AM</p>
+              <p>04:30 AM</p>
+            </td>
+            <td>
+              <p>05-Mar</p>
+              <p>-</p>
+              <p>-</p>
+              <p>BC33 - Aishwarya</p>
+              <p>BC34 - Rakesh</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>Time</p>
+              <p>09:00 AM</p>
+              <p>11:30 AM</p>
+              <p>02:00 AM</p>
+              <p>04:30 AM</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
             </td>
           </tr>
         </tbody>
