@@ -6,7 +6,7 @@
 ?>
 
 <div class="container list" id="timetableOuter">
-  <!-- <h2>Time Table</h2> -->
+  <h2>Time Table</h2>
   <hr>
   <!-- options -->
   <div class="row">
