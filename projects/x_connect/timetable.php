@@ -10,8 +10,10 @@
   <hr>
   <!-- options -->
   <div class="row">
+    <!-- filters -->
     <div class="col-md-9">
       <div class="row">
+        <!-- filter by batch -->
         <div class="col-md-5 list-layout">
           <form class="form-block">
             <label for="selectedBatch">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
@@ -23,6 +25,7 @@
             </select>
           </form>
         </div>
+        <!-- filter by date -->
         <div class="col-md-7 grid-layout">
           <div class="row">
             <div class="col-md-6">
@@ -33,14 +36,15 @@
             </div>
             <div class="col-md-6">
               <form class="form-block">
-                <label for="filterSndDate">End Date</label>
-                <input type="date" class="form-control" id="filterSndDate" value="2018-03-09">
+                <label for="filterEndDate">End Date</label>
+                <input type="date" class="form-control" id="filterEndDate" value="2018-03-09">
               </form>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- select layout -->
     <div class="col-md-3">
       <form class="form-block">
           <label for="selectedLayout">Select Layout</label>
@@ -73,7 +77,7 @@
           <tr>
             <td></td>
             <td>
-              <input type="date" class="form-control" id="selectedDate" value="2018-02-11">
+              <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
             </td>
             <td>
               <select class="custom-select" id="selectedClass"></select>
@@ -99,6 +103,208 @@
           <tr>
             <th></th>
             <th>Room - A</th>
+            <th>New Batch</th>
+            <th>Debut</th>
+            <th></th>
+            <th></th>
+            <th>March 2018</th>
+            <th>Version 2.0</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+            <th>Sun</th>
+          </tr>
+        </thead>
+        <tbody id="timetableResultGrid">
+          <tr>
+            <td>
+              <p>Time</p>
+              <p>09:00 AM</p>
+              <p>11:30 AM</p>
+              <p>02:00 AM</p>
+              <p>04:30 AM</p>
+            </td>
+            <td>
+              <p>05-Mar</p>
+              <p>-</p>
+              <p>-</p>
+              <p>BC33 - Aishwarya</p>
+              <p>BC34 - Rakesh</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>Time</p>
+              <p>09:00 AM</p>
+              <p>11:30 AM</p>
+              <p>02:00 AM</p>
+              <p>04:30 AM</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Time</p>
+              <p>09:00 AM</p>
+              <p>11:30 AM</p>
+              <p>02:00 AM</p>
+              <p>04:30 AM</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>05-Mar</p>
+              <p>-</p>
+              <p>-</p>
+              <p>BC33 - Aishwarya</p>
+              <p>BC34 - Rakesh</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>05-Mar</p>
+              <p>-</p>
+              <p>-</p>
+              <p>BC33 - Aishwarya</p>
+              <p>BC34 - Rakesh</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Time</p>
+              <p>09:00 AM</p>
+              <p>11:30 AM</p>
+              <p>02:00 AM</p>
+              <p>04:30 AM</p>
+            </td>
+            <td>
+              <p>05-Mar</p>
+              <p>-</p>
+              <p>-</p>
+              <p>BC33 - Aishwarya</p>
+              <p>BC34 - Rakesh</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+            <td>
+              <p>Time</p>
+              <p>09:00 AM</p>
+              <p>11:30 AM</p>
+              <p>02:00 AM</p>
+              <p>04:30 AM</p>
+            </td>
+            <td>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+        </tfoot>
+      </table>
+      <table class="table table-bordered grid-layout" style="margin-top: 10px;">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Room - B</th>
             <th>New Batch</th>
             <th>Debut</th>
             <th></th>

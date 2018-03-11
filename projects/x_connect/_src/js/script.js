@@ -16,6 +16,20 @@ var selectedClassEl = document.getElementById('selectedClass');
 var selectedInstructorEL = document.getElementById('selectedInstructor');
 var selectedRoomEL = document.getElementById('selectedRoom');
 
+// find current date
+function currentDate() {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+
+  dd = (dd<10 ? "0" : "") + dd;
+  mm = (mm<10 ? "0" : "") + mm;
+  var today = yyyy+'-'+mm+'-'+dd;
+
+  return today;
+}
+
 // Update time table on change of batch
 function updateTimeTable(e) {
   if(e.target) {
@@ -72,7 +86,7 @@ function addClass() {
   var startTime = document.getElementById('selectedStartTime').value;
   var endTime = document.getElementById('selectedEndTime').value;
   var roomCode = document.getElementById('selectedRoom').value;
-  // console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
+  console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
 
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -133,6 +147,9 @@ function updateLayout(e) {
 function init() {
   updateTimeTable(selectedBatch);
   updateLayout(selectedLayout);
+  selectedDate.value = currentDate();
+  filterStartDate.value = currentDate();
+  filterEndDate.value = currentDate();
 };
 init();
 
