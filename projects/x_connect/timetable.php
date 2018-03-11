@@ -6,7 +6,7 @@
 ?>
 
 <div class="container list" id="timetableOuter">
-  <h2>Time Table</h2>
+  <!-- <h2>Time Table</h2> -->
   <hr>
   <!-- options -->
   <div class="row">
@@ -45,7 +45,7 @@
           <label for="selectedLayout">Select Layout</label>
           <select class="custom-select" id="selectedLayout">
             <option value="list">List View</option>
-            <option value="grid">Grid View</option>
+            <option value="grid" selected>Grid View</option>
           </select>
       </form>
     </div>

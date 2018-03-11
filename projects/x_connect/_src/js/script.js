@@ -113,8 +113,13 @@ function deleteClass(e) {
   }
 }
 
-function changeLayout(e) {
-  layout = e.target.value;
+// Update layout on change of list or grid
+function updateLayout(e) {
+  if(e.target) {
+    layout = e.target.value;
+  } else {
+    layout = selectedBatch.value;
+  }
   if(layout == 'list') {
     timetableOuter.classList.add('list');
     timetableOuter.classList.remove('grid');
@@ -122,13 +127,15 @@ function changeLayout(e) {
     timetableOuter.classList.add('grid');
     timetableOuter.classList.remove('list');
   }
-  console.log(e.target.value);
 }
 
+// run on page laod
+(function init() {
+  updateTimeTable(selectedBatch);
+  updateLayout(selectedLayout);
+}) ();
+
 selectedBatch.addEventListener('change', updateTimeTable, false);
-selectedLayout.addEventListener('change', changeLayout, false);
+selectedLayout.addEventListener('change', updateLayout, false);
 addClassBtn.addEventListener('click', addClass, false);
 timetableResult.addEventListener('click', deleteClass, false);
-
-// run on page laod
-updateTimeTable(selectedBatch);
