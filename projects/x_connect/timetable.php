@@ -19,11 +19,17 @@
           </select>
       </form>
     </div>
+    <div class="col-md-8 text-right">
+      <div class="layout-btns">
+        <a href="#" class="list"><i class="fa fa-bars"></i></a>
+        <a href="#" class="grid"><i class="fa fa-th"></i></a>
+      </div>
+    </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-bordered" style="margin-top: 10px;">
+      <table class="table table-bordered layou-list" style="margin-top: 10px;">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -45,18 +51,10 @@
             </td>
             <td>
               <select class="custom-select" id="selectedClass">
-                <!-- <option value="u1" selected>Unity 1</option>
-                <option value="u2">Unity 2</option>
-                <option value="u3">Unity 3</option>
-                <option value="u4">Unity 4</option> -->
               </select>
             </td>
             <td>
               <select class="custom-select" id="selectedInstructor">
-                <!-- <option value="ins_rakesh" selected>Rakesh</option>
-                <option value="ins_asha">Asha</option>
-                <option value="ins_varsha">Varsha</option>
-                <option value="ins_Pallavi">Pallavi</option> -->
               </select>
             </td>
             <td class="time-picker">
@@ -65,14 +63,50 @@
             </td>
             <td>
               <select class="custom-select" id="selectedRoom">
-                <!-- <option value="a" selected>A</option>
-                <option value="b">B</option> -->
               </select>
             </td>
             <td>
               <button class="btn btn-outline-danger" id="addClassBtn">Submit</button>
             </td>
           </tr>
+        </tfoot>
+      </table>
+      <table class="table table-bordered layou-grid" style="margin-top: 10px;">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Room - A</th>
+            <th>New Batch</th>
+            <th>Debut</th>
+            <th></th>
+            <th></th>
+            <th>March 2018</th>
+            <th>Version 2.0</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+            <th>Sun</th>
+          </tr>
+        </thead>
+        <tbody id="timetableResultGrid">
+          <tr>
+            <td></td>
+            <td>
+              <p>05-Mar</p>
+              <p>BC48 - Vinay</p>
+              <p>BC49 - Pallavi</p>
+              <p>BC33 - Aishwarya</p>
+              <p>BC34 - Rakesh</p>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
         </tfoot>
       </table>
     </div>

@@ -35,3 +35,29 @@ td.time-picker {
 td.time-picker input {
   width: 46%;
 }
+.layout-btns .list {
+  margin-right: 10px;
+}
+.layout-btns a {
+  font-size: 30px;
+  cursor: pointer;
+}
+table.layou-list {
+  display: none;
+}
+table.layou-grid th {
+  width: 12.50%;
+}
+table.layou-grid td {
+  font-size: 10px;
+  p {
+    margin: 10px 0;
+  }
+  p:first-child {
+    margin-top: 0;
+    text-align: right;
+  }
+  p:last-child{
+    margin-bottom: 0;
+  }
+}
