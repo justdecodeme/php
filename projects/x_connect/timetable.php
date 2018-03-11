@@ -16,9 +16,9 @@
           <form class="form-block">
             <label for="selectedBatch">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
             <select class="custom-select my-1" id="selectedBatch">
-              <option value="bc180305" data-template="bootcamp">bc180305 (Bootcamp)</option>
+              <option value="bc180305" data-template="bootcamp" selected>bc180305 (Bootcamp)</option>
               <option value="u180325" data-template="unity">u180325 (Unity)</option>
-              <option value="gr180325" data-template="graphic" selected>gr180325 (Graphic Design)</option>
+              <option value="gr180325" data-template="graphic" >gr180325 (Graphic Design)</option>
             </select>
           </form>
         </div>
@@ -26,14 +26,14 @@
           <div class="row">
             <div class="col-md-6">
               <form class="form-block">
-                <label for="selectedDate">Start Date</label>
-                <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
+                <label for="filterStartDate">Start Date</label>
+                <input type="date" class="form-control" id="filterStartDate" value="2018-03-09">
               </form>
             </div>
             <div class="col-md-6">
               <form class="form-block">
-                <label for="selectedDate">End Date</label>
-                <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
+                <label for="filterSndDate">End Date</label>
+                <input type="date" class="form-control" id="filterSndDate" value="2018-03-09">
               </form>
             </div>
           </div>
@@ -45,7 +45,7 @@
           <label for="selectedLayout">Select Layout</label>
           <select class="custom-select" id="selectedLayout">
             <option value="list">List View</option>
-            <option value="grid" selected>Grid View</option>
+            <option value="grid">Grid View</option>
           </select>
       </form>
     </div>
@@ -72,23 +72,20 @@
           <tr>
             <td></td>
             <td>
-              <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
+              <input type="date" class="form-control" id="selectedDate" value="2018-02-11">
             </td>
             <td>
-              <select class="custom-select" id="selectedClass">
-              </select>
+              <select class="custom-select" id="selectedClass"></select>
             </td>
             <td>
-              <select class="custom-select" id="selectedInstructor">
-              </select>
+              <select class="custom-select" id="selectedInstructor"></select>
             </td>
             <td class="time-picker">
               <input type="time" id="selectedStartTime" class="form-control" value="09:30">
               <input type="time" id="selectedEndTime" class="form-control" value="13:30">
             </td>
             <td>
-              <select class="custom-select" id="selectedRoom">
-              </select>
+              <select class="custom-select" id="selectedRoom"></select>
             </td>
             <td>
               <button class="btn btn-outline-danger" id="addClassBtn">Submit</button>
