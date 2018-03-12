@@ -50,6 +50,8 @@ function currentDate() {
 function updateTimeTableList() {
   console.log('list updating...');
 
+  editingClassFlag = false;
+
   // check which batch is selected in dropdown
   batchCode = selectedBatch.value;
 
@@ -213,7 +215,6 @@ function individualClassEdit(e) {
     console.log('cancelling: ' + clickedClassId);
 
     updateTimeTableList();
-    editingClassFlag = false;
   }
 }
 
