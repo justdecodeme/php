@@ -63,8 +63,10 @@
           <td class="edit-delete-buttons">'.
             (!($diff_in_seconds = 0) ? // always true (simple hack to show below buttons for each iteration)
             // (!($diff_in_seconds < 0) ?
-            ' <span class="text-danger" id="editClass" data-class-id="'.$class->id.'">Edit</span>
-            | <span class="text-danger" id="deleteClass" data-class-id="'.$class->id.'">Del</span>
+            ' <span class="text-danger reading" id="editClass" data-class-id="'.$class->id.'">Edit</span>
+              <span class="text-danger reading" id="deleteClass" data-class-id="'.$class->id.'">Del</span>
+              <span class="text-danger editing" id="cancelEditingClass" data-class-id="'.$class->id.'">Cancel</span>
+              <span class="text-danger editing" id="submitEditingClass" data-class-id="'.$class->id.'">Submit</span>
             ' : '')
           .'</td>
         </tr>

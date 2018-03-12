@@ -70,3 +70,14 @@ table.grid-layout td {
     display: none;
   }
 }
+.editing {
+  display: none;
+}
+.editing-class {
+  .reading {
+    display: none;
+  }
+  .editing {
+    display: inline;
+  }
+}

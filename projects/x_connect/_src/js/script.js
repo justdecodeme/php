@@ -21,6 +21,7 @@ var selectedClassEl = document.getElementById('selectedClass');
 var selectedInstructorEL = document.getElementById('selectedInstructor');
 var selectedRoomEL = document.getElementById('selectedRoom');
 
+var editingClassFlag = false;
 var batchCode = null;
 var batchTemplate = null;
 var layout = 'list';
@@ -160,8 +161,10 @@ function deleteClass(e) {
       console.log('Deletion is stopped!');
     }
 
-  } else if(e.target.id == 'editClass') {
+  } else if(e.target.id == 'editClass' && !editingClassFlag) {
+    editingClassFlag = true;
     console.log('editing: ' + clickedClassId);
+
     var elementEditing = document.getElementById('editClass_'+clickedClassId);
     var elementEditingDate = elementEditing.querySelector('.edit-date');
     var elementEditingClass = elementEditing.querySelector('.edit-class');
@@ -169,17 +172,37 @@ function deleteClass(e) {
     var elementEditingTime = elementEditing.querySelector('.edit-time');
     var elementEditingRoom = elementEditing.querySelector('.edit-room');
 
+    elementEditing.classList.add('editing-class');
     elementEditingDate.innerHTML = '<input type="date" class="form-control" id="editingDate" value="2018-03-09">';
-    elementEditingClass.innerHTML = '<select class="custom-select" id="editingClass"></select>';
+    elementEditingTime.classList.add('time-picker');
+    elementEditingTime.innerHTML = '<input type="time" class="form-control" id="editingStartTime" value="09:00"><input type="time" class="form-control" id="editingEndTime" value="11:00">';
 
-    console.log(batchTemplate);
     // load classses from json, based on batch template selected
     var classesObj = batchData[batchTemplate]['classes'];
     var classesList = '';
     for (var classCode in classesObj) {
       classesList += '<option value="'+classCode+'">'+classesObj[classCode]+'</option>';
     }
-    editingClass.innerHTML = classesList;
+    elementEditingClass.innerHTML = '<select class="custom-select" id="editingClass">'+classesList+'</select>';;
+
+    // load instructors from json, based on batch template selected
+    var instructorsObj = batchData[batchTemplate]['instructors'];
+    var instructorsList = '';
+
+    for (var instructorCode in instructorsObj) {
+      instructorsList += '<option value="'+instructorCode+'">'+instructorsObj[instructorCode]+'</option>';
+    }
+    elementEditingInstructor.innerHTML = '<select class="custom-select" id="editingClass">'+instructorsList+'</select>';;
+
+    // load rooms from json, based on batch template selected
+    var roomsObj = batchData[batchTemplate]['rooms'];
+    var roomsList = '';
+
+    for (var roomCode in roomsObj) {
+      roomsList += '<option value="'+roomCode+'">'+roomsObj[roomCode]+'</option>';
+    }
+    elementEditingRoom.innerHTML = '<select class="custom-select" id="selectedRoom">'+roomsList+'</select>';
+
 
     // console.log(elementEditingDate.innerHTML);
   }
