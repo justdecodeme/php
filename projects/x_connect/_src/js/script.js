@@ -45,13 +45,12 @@ function currentDate() {
 }
 
 // Update time table on change of batch
-function updateTimeTableList(e) {
+function updateTimeTableList() {
   console.log('list updating...');
-  if(e.target) {
-    batchCode = e.target.value;
-  } else {
-    batchCode = selectedBatch.value;
-  }
+
+  // check which batch is selected in dropdown
+  batchCode = selectedBatch.value;
+
   // check which batch template needs to be used
   batchTemplate = document.querySelector("[value='"+batchCode+"']").dataset.template;
 
@@ -116,24 +115,27 @@ function updateTimeTableGrid() {
 
 // Add class on Submit btn click
 function addClass() {
-  console.log('adding');
-  var date = document.getElementById('selectedDate').value;
-  var classCode = document.getElementById('selectedClass').value;
-  var instructorCode = document.getElementById('selectedInstructor').value;
-  var startTime = document.getElementById('selectedStartTime').value;
-  var endTime = document.getElementById('selectedEndTime').value;
-  var roomCode = document.getElementById('selectedRoom').value;
-  // console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
+  if(!editingClassFlag) {
+    console.log('adding');
+    
+    var date = document.getElementById('selectedDate').value;
+    var classCode = document.getElementById('selectedClass').value;
+    var instructorCode = document.getElementById('selectedInstructor').value;
+    var startTime = document.getElementById('selectedStartTime').value;
+    var endTime = document.getElementById('selectedEndTime').value;
+    var roomCode = document.getElementById('selectedRoom').value;
+    // console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
 
-  var xhttp3 = new XMLHttpRequest();
-  xhttp3.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-     timetableResultList.innerHTML = this.responseText;
-    }
-  };
-  xhttp3.open("POST", "handler_timetable.php", true);  // open(method, url, async)
-  xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp3.send("action=addClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode);
+    var xhttp3 = new XMLHttpRequest();
+    xhttp3.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        timetableResultList.innerHTML = this.responseText;
+      }
+    };
+    xhttp3.open("POST", "handler_timetable.php", true);  // open(method, url, async)
+    xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp3.send("action=addClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode);
+  }
 }
 
 // Delete class on Submit btn click
@@ -141,7 +143,8 @@ function deleteClass(e) {
   e.stopPropagation();
   var clickedClassId = e.target.dataset.classId;
 
-  if(e.target.id == 'deleteClass') {
+  // delete class -> only if not editing any class
+  if(e.target.id == 'deleteClass' && !editingClassFlag) {
     console.log('deleting: ' + clickedClassId);
 
     var xhttp4 = new XMLHttpRequest();
@@ -160,10 +163,11 @@ function deleteClass(e) {
     } else {
       console.log('Deletion is stopped!');
     }
-
+    // edit class -> only if not editing any class
   } else if(e.target.id == 'editClass' && !editingClassFlag) {
-    editingClassFlag = true;
     console.log('editing: ' + clickedClassId);
+
+    editingClassFlag = true;
 
     var elementEditing = document.getElementById('editClass_'+clickedClassId);
     var elementEditingDate = elementEditing.querySelector('.edit-date');
@@ -202,9 +206,12 @@ function deleteClass(e) {
       roomsList += '<option value="'+roomCode+'">'+roomsObj[roomCode]+'</option>';
     }
     elementEditingRoom.innerHTML = '<select class="custom-select" id="selectedRoom">'+roomsList+'</select>';
+    // cancel class -> if editing any class
+  } else if(e.target.id == 'cancelEditingClass' && editingClassFlag) {
+    console.log('cancelling: ' + clickedClassId);
 
-
-    // console.log(elementEditingDate.innerHTML);
+    updateTimeTableList();
+    editingClassFlag = false;
   }
 }
 
