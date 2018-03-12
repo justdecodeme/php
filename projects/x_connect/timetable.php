@@ -1,7 +1,7 @@
 <?php
   include 'includes/connect.php';
   include 'includes/header.php';
-  include 'includes/template_reader.php';
+  // include 'includes/template_reader.php';
   // include 'includes/login_status.php';
 ?>
 
@@ -126,7 +126,7 @@
           </tr>
         </thead>
         <tbody id="timetableResultGrid">
-          <tr>
+          <!-- <tr>
             <td>
               <p>Time</p>
               <p>09:00 AM</p>
@@ -299,7 +299,7 @@
               <p>-</p>
               <p>-</p>
             </td>
-          </tr>
+          </tr> -->
         </tbody>
         <tfoot>
         </tfoot>

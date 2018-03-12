@@ -1,6 +1,6 @@
 <?php
   include 'includes/connect.php';
-  include 'includes/template_reader.php';
+  // include 'includes/template_reader.php';
 ?>
 
 <?php
@@ -75,24 +75,69 @@
     }
   }
   function update_timetable_grid($from_date, $to_date) {
-    // echo $from_date."<br>";
-    // echo $to_date;
-
     global $connection;
     $query = "SELECT * FROM timetable WHERE date>=:fromDate AND date<=:toDate ORDER BY date";
-    // $query = "SELECT * FROM timetable WHERE (date BETWEEN $from_date AND $to_date)";
     $statement = $connection->prepare($query);
     $statement->bindParam(":fromDate", $from_date);
     $statement->bindParam(":toDate", $to_date);
 
-    if($statement->execute()) {
-      $timetable_grid = '';
-      $i = 1;
+    // to find the number of days to generate timetable
+    $d_start    = new DateTime($from_date);
+    $d_end      = new DateTime($to_date);
+    $diff = $d_start->diff($d_end);
+    $total_days = $diff->format('%d') + 1;
 
+    $i = 1;
+    $timetable_grid = '';
+
+    if($statement->execute()) {
+      //
+      // for($i = 1; i <= $total_days; $i = $i + 7) {
+      //   $timetable_grid = '
+      //     <tr>
+      //       <td>
+      //         <p>Time</p>
+      //         <p>09:00 AM</p>
+      //         <p>11:30 AM</p>
+      //         <p>02:00 AM</p>
+      //         <p>04:30 AM</p>
+      //       </td>
+      //   ';
+      //   for($j = 1; i <= 7; $j++) {
+      //
+      //   }
+      // }
 
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
+
       foreach($row as $class) {
-        $timetable_grid .= $class->class_code.'<br>';
+        echo $i . '* | ' . $class->class_code . '<br>';
+        if($i == 1 || $i == 9 || $i == 17 || $i == 28) {
+          $timetable_grid .= "
+            <tr>
+              <td>
+                <p>Time {$i}</p>
+                <p>09:00 AM</p>
+                <p>11:30 AM</p>
+                <p>02:00 AM</p>
+                <p>04:30 AM</p>
+              </td>
+          ";
+        } else {
+          $timetable_grid .= '
+            <td>
+              <p>05-Mar</p>
+              <p>-</p>
+              <p>-</p>
+              <p>BC33 - Aishwarya</p>
+              <p>BC34 - Rakesh</p>
+            </td>
+          ';
+        }
+        if($i == 8 || $i == 16 || $i == 21 || $i == 29) {
+          $timetable_grid .= '</tr>';
+        }
+        $i++;
       }
       echo $timetable_grid;
     }

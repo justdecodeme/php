@@ -16,8 +16,8 @@ var selectedLayout = document.getElementById('selectedLayout');
 var addClassBtn = document.getElementById('addClassBtn');
 var deleteClassBtn = document.getElementById('deleteClass');
 
-var timetableResult = document.getElementById('timetableResult');
-var timetableResult = document.getElementById('timetableResult');
+var timetableResultList = document.getElementById('timetableResultList');
+var timetableResultGrid = document.getElementById('timetableResultGrid');
 
 var selectedClassEl = document.getElementById('selectedClass');
 var selectedInstructorEL = document.getElementById('selectedInstructor');
@@ -95,15 +95,13 @@ function updateTimeTableList(e) {
 // Update time table on change of batch
 function updateTimeTableGrid() {
   console.log('grid updating');
-  // var filterStartDate = document.getElementById('filterStartDate').value;
-  // var filterEndDate = document.getElementById('filterEndDate').value;
-  var filterStartDate = '2018-03-13';
-  var filterEndDate = '2018-03-26';
+  var filterStartDate = document.getElementById('filterStartDate').value;
+  var filterEndDate = document.getElementById('filterEndDate').value;
 
   // load content from database
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     timetableResultGridTemparary.innerHTML = this.responseText;
+     timetableResultGrid.innerHTML = this.responseText;
     }
   };
   xhttp.open("GET", "handler_timetable.php?action=updateTimeTableGrid&filterStartDate="+filterStartDate+"&filterEndDate="+filterEndDate, true);  // open(method, url, async)
@@ -179,9 +177,9 @@ function updateLayout(e) {
 // run on page laod
 function init() {
   selectedDate.value = currentDate();
-  filterStartDate.value = currentDate();
-  // filterEndDate.value = currentDate();
-  filterEndDate.value = "2018-03-26";
+  // filterStartDate.value = currentDate();
+  filterStartDate.value = "2018-03-05";
+  filterEndDate.value = "2018-03-25";
   updateTimeTableList(selectedBatch);
   updateTimeTableGrid();
   updateLayout(selectedLayout);
