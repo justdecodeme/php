@@ -4,9 +4,9 @@
 ?>
 
 <?php
-  function update_timetable_list($code, $temp, $order) {
+  function update_timetable_list($code, $temp, $order_by, $ascOrDesc) {
     global $connection;
-    $query = "SELECT * FROM timetable WHERE batch_code=:batchCode ORDER BY " . $order;
+    $query = "SELECT * FROM timetable WHERE batch_code=:batchCode ORDER BY " . $order_by . " " . $ascOrDesc;
     $statement = $connection->prepare($query);
     $statement->bindParam(":batchCode", $code);
 
@@ -146,7 +146,7 @@
 
   // Update time table on change of batch (list-layout)
   if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableList') {
-    update_timetable_list($_GET['batchCode'], $_GET['batchTemplate'], $_GET['orderBy']);
+    update_timetable_list($_GET['batchCode'], $_GET['batchTemplate'], $_GET['orderBy'], $_GET['ascOrDesc']);
   }
 
   // Update time table on change of date (grid-layout)

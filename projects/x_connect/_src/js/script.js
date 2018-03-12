@@ -5,7 +5,7 @@
 var timetableOuter = document.getElementById('timetableOuter');
 var selectedDateOuter = document.getElementById('selectedDateOuter');
 var selectedBatchOuter = document.getElementById('selectedBatchOuter');
-
+var orderByItems = document.querySelectorAll('[data-order-by]');
 var filterStartDate = document.getElementById('filterStartDate');
 var filterEndDate = document.getElementById('filterEndDate');
 
@@ -26,6 +26,7 @@ var batchCode = null;
 var batchTemplate = null;
 var layout = 'list';
 var orderBy = 'date';
+var ascOrDesc = 'ASC';
 
 /********************/
 /*    Functions     */
@@ -91,7 +92,7 @@ function updateTimeTableList() {
      // console.log(this.readyState, this.status);
    }
   };
-  xhttp1.open("GET", "handler_timetable.php?action=updateTimeTableList&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy, true);  // open(method, url, async)
+  xhttp1.open("GET", "handler_timetable.php?action=updateTimeTableList&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc, true);  // open(method, url, async)
   xhttp1.send();
 }
 
@@ -234,9 +235,33 @@ function updateLayout(e) {
 
 // function to order tables on click
 function orderClassBy(e) {
-  orderBy = e.target.dataset.orderBy;
-  console.log('ordering by...' + orderBy);
+  // remove active class from all columns
+  for(var i = 0; i < orderByItems.length; i++) {
+    orderByItems[i].classList.remove('active-ASC');
+    orderByItems[i].classList.remove('active-DESC');
+  }
 
+  var prevOrderBy = orderBy;
+  orderBy = e.target.dataset.orderBy;
+
+  // toggle ASC | DESC if column clicked is same as previous click
+  if(prevOrderBy == orderBy) {
+    if(ascOrDesc == 'DESC') {
+      ascOrDesc = 'ASC';
+    } else {
+      ascOrDesc = 'DESC';
+    }
+    // make ASC if column clicked is different from previous click
+  } else {
+    ascOrDesc = 'ASC';
+  }
+
+  // add active class to clicked column
+  e.target.classList.add('active-'+ascOrDesc);
+
+
+
+  console.log('ordering by...' + orderBy, ascOrDesc);
   updateTimeTableList();
 }
 
@@ -261,7 +286,6 @@ filterEndDate.addEventListener('change', updateTimeTableGrid, false);
 selectedLayout.addEventListener('change', updateLayout, false);
 addClassBtn.addEventListener('click', addClass, false);
 timetableResultList.addEventListener('click', individualClassEdit, false);
-var orderByItems = document.querySelectorAll('[data-order-by]');
 for(var i = 0; i < orderByItems.length; i++) {
   orderByItems[i].addEventListener('click', orderClassBy, false);
 }

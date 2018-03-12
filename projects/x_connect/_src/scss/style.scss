@@ -85,7 +85,31 @@ table.grid-layout td {
   th.ordered-by {
     cursor: pointer;
   }
-  th.ordered-by:hover {
+  th span {
+    display: none;
+  }
+  th.ordered-by:hover, th.active-ASC, th.active-DESC {
     background: rgba(0, 0, 0, 0.03);
+  }
+  th.active-ASC, th.active-DESC {
+    span {
+      display: inline;
+    }
+  }
+  th.active-ASC {
+    .down {
+      display: inline;
+    }
+    .up {
+      display: none;
+    }
+  }
+  th.active-DESC {
+    .down {
+      display: none;
+    }
+    .up {
+      display: inline;
+    }
   }
 }

@@ -64,11 +64,26 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col" class="ordered-by" data-order-by="date">Date</th>
-            <th scope="col" class="ordered-by" data-order-by="class_code">Class</th>
-            <th scope="col" class="ordered-by" data-order-by="instructor_code">Instructor</th>
-            <th scope="col" class="ordered-by" data-order-by="start_time">Time</th>
-            <th scope="col" class="ordered-by" data-order-by="room_code">Room</th>
+            <th scope="col" class="ordered-by active-ASC" data-order-by="date">Date
+              <span class="down"><i class="fa fa-chevron-down"></i></span>
+              <span class="up"><i class="fa fa-chevron-up"></i></span>
+            </th>
+            <th scope="col" class="ordered-by" data-order-by="class_code">Class
+              <span class="down"><i class="fa fa-chevron-down"></i></span>
+              <span class="up"><i class="fa fa-chevron-up"></i></span>
+            </th>
+            <th scope="col" class="ordered-by" data-order-by="instructor_code">Instructor
+              <span class="down"><i class="fa fa-chevron-down"></i></span>
+              <span class="up"><i class="fa fa-chevron-up"></i></span>
+            </th>
+            <th scope="col" class="ordered-by" data-order-by="start_time">Time
+              <span class="down"><i class="fa fa-chevron-down"></i></span>
+              <span class="up"><i class="fa fa-chevron-up"></i></span>
+            </th>
+            <th scope="col" class="ordered-by" data-order-by="room_code">Room
+              <span class="down"><i class="fa fa-chevron-down"></i></span>
+              <span class="up"><i class="fa fa-chevron-up"></i></span>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
