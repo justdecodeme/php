@@ -39,25 +39,25 @@
         }
 
         $timetable_list .= '
-        <tr class="'.$row_highlight_class.'">
+        <tr class="'.$row_highlight_class.'" id="editClass_'.$class->id.'">
           <td scope="row">'.
             $i
           .'</td>
-          <td>'.
+          <td class="edit-date">'.
             date('j M y | D', strtotime($class->date))
           .'</td>
-          <td>'.
+          <td class="edit-class">'.
             $batch['classes'][$class->class_code]
           .'</td>
-          <td>'.
+          <td class="edit-instructor">'.
             $batch['instructors'][$class->instructor_code]
           .'</td>
-          <td>'.
+          <td class="edit-time">'.
             date('h:i A', strtotime($class->start_time))
             .' - '.
             date('h:i A', strtotime($class->end_time))
           .'</td>
-          <td>'.
+          <td class="edit-room">'.
             $batch['rooms'][$class->room_code]
           .'</td>
           <td class="edit-delete-buttons">'.

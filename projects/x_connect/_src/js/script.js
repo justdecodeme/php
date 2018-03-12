@@ -13,7 +13,6 @@ var selectedBatch = document.getElementById('selectedBatch');
 var selectedLayout = document.getElementById('selectedLayout');
 
 var addClassBtn = document.getElementById('addClassBtn');
-var deleteClassBtn = document.getElementById('deleteClass');
 
 var timetableResultList = document.getElementById('timetableResultList');
 var timetableResultGrid = document.getElementById('timetableResultGrid');
@@ -23,6 +22,7 @@ var selectedInstructorEL = document.getElementById('selectedInstructor');
 var selectedRoomEL = document.getElementById('selectedRoom');
 
 var batchCode = null;
+var batchTemplate = null;
 var layout = 'list';
 
 /********************/
@@ -138,10 +138,10 @@ function addClass() {
 // Delete class on Submit btn click
 function deleteClass(e) {
   e.stopPropagation();
+  var clickedClassId = e.target.dataset.classId;
+
   if(e.target.id == 'deleteClass') {
-    var deleteId = e.target.dataset.classId;
-    console.log('deleting: ' + deleteId);
-    // console.log(deleteId);
+    console.log('deleting: ' + clickedClassId);
 
     var xhttp4 = new XMLHttpRequest();
     xhttp4.onreadystatechange = function() {
@@ -155,13 +155,33 @@ function deleteClass(e) {
         //Logic to delete the item
         xhttp4.open("POST", "handler_timetable.php", true);  // open(method, url, async)
         xhttp4.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp4.send("action=deleteClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&deleteId="+deleteId);
+        xhttp4.send("action=deleteClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&deleteId="+clickedClassId);
     } else {
       console.log('Deletion is stopped!');
     }
 
-  } else if(e.target.id = 'editClass') {
-    console.log('editing: ' + e.target.dataset.classId);
+  } else if(e.target.id == 'editClass') {
+    console.log('editing: ' + clickedClassId);
+    var elementEditing = document.getElementById('editClass_'+clickedClassId);
+    var elementEditingDate = elementEditing.querySelector('.edit-date');
+    var elementEditingClass = elementEditing.querySelector('.edit-class');
+    var elementEditingInstructor = elementEditing.querySelector('.edit-instructor');
+    var elementEditingTime = elementEditing.querySelector('.edit-time');
+    var elementEditingRoom = elementEditing.querySelector('.edit-room');
+
+    elementEditingDate.innerHTML = '<input type="date" class="form-control" id="editingDate" value="2018-03-09">';
+    elementEditingClass.innerHTML = '<select class="custom-select" id="editingClass"></select>';
+
+    console.log(batchTemplate);
+    // load classses from json, based on batch template selected
+    var classesObj = batchData[batchTemplate]['classes'];
+    var classesList = '';
+    for (var classCode in classesObj) {
+      classesList += '<option value="'+classCode+'">'+classesObj[classCode]+'</option>';
+    }
+    editingClass.innerHTML = classesList;
+
+    // console.log(elementEditingDate.innerHTML);
   }
 }
 
