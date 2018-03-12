@@ -65,9 +65,9 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col" class="ordered-by" data-order-by="date">Date</th>
-            <th scope="col">Class</th>
+            <th scope="col" class="ordered-by" data-order-by="class_code">Class</th>
             <th scope="col" class="ordered-by" data-order-by="instructor_code">Instructor</th>
-            <th scope="col">Time</th>
+            <th scope="col" class="ordered-by" data-order-by="start_time">Time</th>
             <th scope="col" class="ordered-by" data-order-by="room_code">Room</th>
             <th scope="col"></th>
           </tr>
