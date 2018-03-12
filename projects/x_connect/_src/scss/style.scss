@@ -81,3 +81,11 @@ table.grid-layout td {
     display: inline;
   }
 }
+.list-layout thead tr {
+  th.ordered-by {
+    cursor: pointer;
+  }
+  th.ordered-by:hover {
+    background: rgba(0, 0, 0, 0.03);
+  }
+}

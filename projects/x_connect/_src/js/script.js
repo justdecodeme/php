@@ -25,6 +25,7 @@ var editingClassFlag = false;
 var batchCode = null;
 var batchTemplate = null;
 var layout = 'list';
+var orderBy = 'date';
 
 /********************/
 /*    Functions     */
@@ -90,7 +91,7 @@ function updateTimeTableList() {
      // console.log(this.readyState, this.status);
    }
   };
-  xhttp1.open("GET", "handler_timetable.php?action=updateTimeTableList&batchCode="+batchCode+"&batchTemplate="+batchTemplate, true);  // open(method, url, async)
+  xhttp1.open("GET", "handler_timetable.php?action=updateTimeTableList&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy, true);  // open(method, url, async)
   xhttp1.send();
 }
 
@@ -231,6 +232,14 @@ function updateLayout(e) {
   }
 }
 
+// function to order tables on click
+function orderClassBy(e) {
+  orderBy = e.target.dataset.orderBy;
+  console.log('ordering by...' + orderBy);
+
+  updateTimeTableList();
+}
+
 // run on page laod
 function init() {
   selectedDate.value = currentDate();
@@ -252,3 +261,7 @@ filterEndDate.addEventListener('change', updateTimeTableGrid, false);
 selectedLayout.addEventListener('change', updateLayout, false);
 addClassBtn.addEventListener('click', addClass, false);
 timetableResultList.addEventListener('click', individualClassEdit, false);
+var orderByItems = document.querySelectorAll('[data-order-by]');
+for(var i = 0; i < orderByItems.length; i++) {
+  orderByItems[i].addEventListener('click', orderClassBy, false);
+}

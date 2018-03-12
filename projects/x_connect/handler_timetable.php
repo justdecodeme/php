@@ -4,9 +4,9 @@
 ?>
 
 <?php
-  function update_timetable_list($code, $temp) {
+  function update_timetable_list($code, $temp, $order) {
     global $connection;
-    $query = "SELECT * FROM timetable WHERE batch_code=:batchCode ORDER BY date";
+    $query = "SELECT * FROM timetable WHERE batch_code=:batchCode ORDER BY " . $order;
     $statement = $connection->prepare($query);
     $statement->bindParam(":batchCode", $code);
 
@@ -65,8 +65,8 @@
             // (!($diff_in_seconds < 0) ?
             ' <span class="text-danger reading" id="editClass" data-class-id="'.$class->id.'">Edit</span>
               <span class="text-danger reading" id="deleteClass" data-class-id="'.$class->id.'">Del</span>
-              <span class="text-danger editing" id="cancelEditingClass" data-class-id="'.$class->id.'">Cancel</span>
-              <span class="text-danger editing" id="submitEditingClass" data-class-id="'.$class->id.'">Submit</span>
+              <span class="text-danger editing" id="cancelEditingClass" data-class-id="'.$class->id.'">Can</span>
+              <span class="text-danger editing" id="submitEditingClass" data-class-id="'.$class->id.'">Sub</span>
             ' : '')
           .'</td>
         </tr>
@@ -146,7 +146,7 @@
 
   // Update time table on change of batch (list-layout)
   if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableList') {
-    update_timetable_list($_GET['batchCode'], $_GET['batchTemplate']);
+    update_timetable_list($_GET['batchCode'], $_GET['batchTemplate'], $_GET['orderBy']);
   }
 
   // Update time table on change of date (grid-layout)

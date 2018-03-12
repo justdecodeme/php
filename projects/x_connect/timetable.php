@@ -64,11 +64,11 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Date</th>
+            <th scope="col" class="ordered-by" data-order-by="date">Date</th>
             <th scope="col">Class</th>
-            <th scope="col">Instructor</th>
+            <th scope="col" class="ordered-by" data-order-by="instructor_code">Instructor</th>
             <th scope="col">Time</th>
-            <th scope="col">Room</th>
+            <th scope="col" class="ordered-by" data-order-by="room_code">Room</th>
             <th scope="col"></th>
           </tr>
         </thead>
