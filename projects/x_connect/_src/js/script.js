@@ -88,7 +88,7 @@ function updateTimeTableList(e) {
     if (this.readyState == 4 && this.status == 200) {
      timetableResultList.innerHTML = this.responseText;
    } else {
-     console.log(this.readyState, this.status);
+     // console.log(this.readyState, this.status);
    }
   };
   xhttp1.open("GET", "handler_timetable.php?action=updateTimeTableList&batchCode="+batchCode+"&batchTemplate="+batchTemplate, true);  // open(method, url, async)
@@ -107,7 +107,7 @@ function updateTimeTableGrid() {
     if (this.readyState == 4 && this.status == 200) {
      timetableResultGrid.innerHTML = this.responseText;
    } else {
-     console.log(this.readyState, this.status);
+     // console.log(this.readyState, this.status);
    }
   };
   xhttp2.open("GET", "handler_timetable.php?action=updateTimeTableGrid&filterStartDate="+filterStartDate+"&filterEndDate="+filterEndDate, true);  // open(method, url, async)
