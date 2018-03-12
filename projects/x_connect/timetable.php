@@ -56,6 +56,8 @@
     </div>
   </div>
 
+  <div id="timetableResultGridTemparary"></div>
+
   <!-- tables -->
   <div class="row">
     <div class="col-md-12">
@@ -124,9 +126,6 @@
           </tr>
         </thead>
         <tbody id="timetableResultGrid">
-          <tr id="timetableResultGridTemparary">
-
-          </tr>
           <tr>
             <td>
               <p>Time</p>

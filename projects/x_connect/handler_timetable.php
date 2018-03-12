@@ -1,6 +1,6 @@
 <?php
   include 'includes/connect.php';
-  // include 'includes/template_reader.php';
+  include 'includes/template_reader.php';
 ?>
 
 <?php
@@ -79,10 +79,11 @@
     // echo $to_date;
 
     global $connection;
-    $query = "SELECT * FROM timetable WHERE date=:fromDate ORDER BY date";
+    $query = "SELECT * FROM timetable WHERE date>=:fromDate AND date<=:toDate ORDER BY date";
+    // $query = "SELECT * FROM timetable WHERE (date BETWEEN $from_date AND $to_date)";
     $statement = $connection->prepare($query);
     $statement->bindParam(":fromDate", $from_date);
-    // $statement->bindParam(":TO", $to_date);
+    $statement->bindParam(":toDate", $to_date);
 
     if($statement->execute()) {
       $timetable_grid = '';

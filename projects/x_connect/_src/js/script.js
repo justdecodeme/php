@@ -95,8 +95,10 @@ function updateTimeTableList(e) {
 // Update time table on change of batch
 function updateTimeTableGrid() {
   console.log('grid updating');
-  var filterStartDate = document.getElementById('filterStartDate').value;
-  var filterEndDate = document.getElementById('filterEndDate').value;
+  // var filterStartDate = document.getElementById('filterStartDate').value;
+  // var filterEndDate = document.getElementById('filterEndDate').value;
+  var filterStartDate = '2018-03-13';
+  var filterEndDate = '2018-03-26';
 
   // load content from database
   xhttp.onreadystatechange = function() {
@@ -180,7 +182,6 @@ function init() {
   filterStartDate.value = currentDate();
   // filterEndDate.value = currentDate();
   filterEndDate.value = "2018-03-26";
-
   updateTimeTableList(selectedBatch);
   updateTimeTableGrid();
   updateLayout(selectedLayout);
