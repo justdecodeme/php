@@ -117,7 +117,7 @@ function updateTimeTableGrid() {
 function addClass() {
   if(!editingClassFlag) {
     console.log('adding');
-    
+
     var date = document.getElementById('selectedDate').value;
     var classCode = document.getElementById('selectedClass').value;
     var instructorCode = document.getElementById('selectedInstructor').value;
@@ -139,7 +139,7 @@ function addClass() {
 }
 
 // Delete class on Submit btn click
-function deleteClass(e) {
+function individualClassEdit(e) {
   e.stopPropagation();
   var clickedClassId = e.target.dataset.classId;
 
@@ -251,4 +251,4 @@ filterStartDate.addEventListener('change', updateTimeTableGrid, false);
 filterEndDate.addEventListener('change', updateTimeTableGrid, false);
 selectedLayout.addEventListener('change', updateLayout, false);
 addClassBtn.addEventListener('click', addClass, false);
-timetableResultList.addEventListener('click', deleteClass, false);
+timetableResultList.addEventListener('click', individualClassEdit, false);
