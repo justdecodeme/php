@@ -111,29 +111,28 @@
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
 
       foreach($row as $class) {
-        echo $i . '* | ' . $class->class_code . '<br>';
+        echo $i . '* | ' . $class->date . '<br>';
         if($i == 1 || $i == 9 || $i == 17 || $i == 28) {
           $timetable_grid .= "
             <tr>
               <td>
-                <p>Time {$i}</p>
+                <p>Time</p>
                 <p>09:00 AM</p>
                 <p>11:30 AM</p>
                 <p>02:00 AM</p>
                 <p>04:30 AM</p>
               </td>
           ";
-        } else {
-          $timetable_grid .= '
-            <td>
-              <p>05-Mar</p>
-              <p>-</p>
-              <p>-</p>
-              <p>BC33 - Aishwarya</p>
-              <p>BC34 - Rakesh</p>
-            </td>
-          ';
         }
+        $timetable_grid .= "
+          <td>
+            <p>".date('j M', strtotime($class->date))."</p>
+            <p>$class->class_code</p>
+            <p>$class->instructor_code</p>
+            <p>-</p>
+            <p>-</p>
+          </td>
+        ";
         if($i == 8 || $i == 16 || $i == 21 || $i == 29) {
           $timetable_grid .= '</tr>';
         }

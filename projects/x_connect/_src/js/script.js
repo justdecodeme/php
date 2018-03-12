@@ -178,7 +178,7 @@ function updateLayout(e) {
 function init() {
   selectedDate.value = currentDate();
   // filterStartDate.value = currentDate();
-  filterStartDate.value = "2018-03-05";
+  filterStartDate.value = "2018-03-02";
   filterEndDate.value = "2018-03-25";
   updateTimeTableList(selectedBatch);
   updateTimeTableGrid();
