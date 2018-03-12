@@ -24,7 +24,6 @@ var selectedRoomEL = document.getElementById('selectedRoom');
 
 var batchCode = null;
 var layout = 'list';
-var batchTemplate = null;
 
 /********************/
 /*    Functions     */
@@ -125,14 +124,15 @@ function addClass() {
   var roomCode = document.getElementById('selectedRoom').value;
   // console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
 
-  xhttp.onreadystatechange = function() {
+  var xhttp3 = new XMLHttpRequest();
+  xhttp3.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      timetableResultList.innerHTML = this.responseText;
     }
   };
-  xhttp.open("POST", "handler_timetable.php", true);  // open(method, url, async)
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("action=addClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode);
+  xhttp3.open("POST", "handler_timetable.php", true);  // open(method, url, async)
+  xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp3.send("action=addClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode);
 }
 
 // Delete class on Submit btn click
@@ -143,7 +143,8 @@ function deleteClass(e) {
     console.log('deleting: ' + deleteId);
     // console.log(deleteId);
 
-    xhttp.onreadystatechange = function() {
+    var xhttp4 = new XMLHttpRequest();
+    xhttp4.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
        timetableResultList.innerHTML = this.responseText;
       }
@@ -152,9 +153,9 @@ function deleteClass(e) {
     var deleteConfirmation = confirm("Want to delete?");
     if (deleteConfirmation) {
         //Logic to delete the item
-        xhttp.open("POST", "handler_timetable.php", true);  // open(method, url, async)
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("action=deleteClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&deleteId="+deleteId);
+        xhttp4.open("POST", "handler_timetable.php", true);  // open(method, url, async)
+        xhttp4.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp4.send("action=deleteClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&deleteId="+deleteId);
     } else {
       console.log('Deletion is stopped!');
     }

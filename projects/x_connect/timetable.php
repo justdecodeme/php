@@ -1,7 +1,7 @@
 <?php
   include 'includes/connect.php';
   include 'includes/header.php';
-  // include 'includes/template_reader.php';
+  include 'includes/template_reader.php';
   // include 'includes/login_status.php';
 ?>
 
@@ -49,7 +49,7 @@
       <form class="form-block">
           <label for="selectedLayout">Select Layout</label>
           <select class="custom-select" id="selectedLayout">
-            <option value="list">List View</option>
+            <option value="list" selected>List View</option>
             <option value="grid" >Grid View</option>
           </select>
       </form>

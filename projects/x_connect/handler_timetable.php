@@ -1,6 +1,6 @@
 <?php
   include 'includes/connect.php';
-  // include 'includes/template_reader.php';
+  include 'includes/template_reader.php';
 ?>
 
 <?php
@@ -91,7 +91,7 @@
     $timetable_grid = '';
 
     if($statement->execute()) {
-      //
+
       // for($i = 1; i <= $total_days; $i = $i + 7) {
       //   $timetable_grid = '
       //     <tr>
@@ -173,7 +173,7 @@
 
     // Update timetable if query is successful
     if($statement->execute($params)) {
-      update_timetable($batch_code, $batch_template);
+      update_timetable_list($batch_code, $batch_template);
     }
   }
 
@@ -188,11 +188,11 @@
     $statement = $connection->prepare($query);
     $statement->bindParam(":deleteId", $delete_id);
     if($statement->execute()) {
-      update_timetable($batch_code, $batch_template);
+      update_timetable_list($batch_code, $batch_template);
     } else {
       echo "Something went wrong!";
     }
 
-    // update_timetable($batch_code, $batch_template);
+    // update_timetable_list($batch_code, $batch_template);
   }
  ?>

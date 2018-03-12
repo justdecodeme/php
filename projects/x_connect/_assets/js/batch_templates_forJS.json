@@ -1,0 +1,123 @@
+var batchData = {
+  "unity": {
+      "classes": {
+        "u1": "Unity 1",
+        "u2": "Unity 2",
+        "u3": "Unity 3",
+        "ur1": "Unity (Review 1)",
+        "u4": "Unity 4",
+        "u5": "Unity 5",
+        "ur2": "Unity (Review 2)",
+        "u6": "Unity 6",
+        "u7": "Unity 7",
+        "u8": "Unity 8",
+        "ur3": "Unity (Review 3)",
+        "u9": "Unity 9",
+        "u10": "Unity 10",
+        "up1": "Unity (Project 1)",
+        "ue1": "Unity (Exam 1)"
+      },
+      "startTimings": ["09:00", "11:30", "14:00", "16:30"],
+      "endTimings": ["11:00", "13:30", "16:00", "18:30"],
+      "instructors": {
+        "ins_varsha": "Varsha",
+        "ins_aish": "Aishwarya"
+      },
+      "rooms": {
+        "a": "A",
+        "b": "B"
+      }
+  },
+  "graphic": {
+    "classes": {
+      "gr1": "GR 1",
+      "gr2": "GR 2",
+      "gr3": "GR 3",
+      "grp1": "GR (Practice 1)",
+      "gr4": "GR 4",
+      "gr5": "GR 5",
+      "gr6": "GR 6",
+      "grp2": "GR (Practice 2)",
+      "gr7": "GR 7",
+      "gr8": "GR 8",
+      "grp1": "GR (Project 1)",
+      "grp2": "GR (Project 2)",
+      "grp3": "GR (Project 3)",
+      "grp4": "GR (Project 4)"
+    },
+    "startTimings": ["09:00", "11:30", "14:00", "16:30"],
+    "endTimings": ["11:00", "13:30", "16:00", "18:30"],
+    "instructors": {
+      "ins_aish": "Aishwarya",
+      "ins_rakesh": "Rakesh",
+      "ins_varsha": "Varsha",
+      "ins_pallavi": "Pallavi",
+      "ins_vinay": "Vinay",
+      "ins_asha": "Asha"
+    },
+    "rooms": {
+      "a": "A",
+      "b": "B",
+      "c": "C",
+      "d": "D"
+    }
+  },
+  "bootcamp": {
+    "classes": {
+      "bc1": "BC 1",
+      "bc2": "BC 2",
+      "bc3": "BC 3",
+      "bc4": "BC 4",
+      "bc5": "BC 5",
+      "bc6": "BC 6",
+      "bc7": "BC 7",
+      "bc8": "BC 8",
+      "bc9": "BC 9",
+      "bc10": "BC 10"
+    },
+    "startTimings": ["09:00", "11:30", "14:00", "16:30"],
+    "endTimings": ["11:00", "13:30", "16:00", "18:30"],
+    "instructors": {
+      "ins_aish": "Aishwarya",
+      "ins_rakesh": "Rakesh",
+      "ins_varsha": "Varsha",
+      "ins_pallavi": "Pallavi",
+      "ins_vinay": "Vinay",
+      "ins_asha": "Asha"
+    },
+    "rooms": {
+      "a": "A",
+      "b": "B",
+      "c": "C",
+      "d": "D"
+    }
+  },
+  "php": {
+    "classes": {
+      "php1": "PHP 1",
+      "php2": "PHP 2",
+      "php3": "PHP 3",
+      "php4": "PHP 4",
+      "php5": "PHP 5",
+      "php6": "PHP 6",
+      "php7": "PHP 7",
+      "php8": "PHP 8",
+      "phpp1": "PHP (Project 1)",
+      "phpp2": "PHP (Project 2)",
+      "phpp3": "PHP (Project 3)",
+      "phpp4": "PHP (Project 4)",
+      "phpp5": "PHP (Project 5)"
+    },
+    "startTimings": ["09:00", "11:30", "14:00", "16:30"],
+    "endTimings": ["11:00", "13:30", "16:00", "18:30"],
+    "instructors": {
+      "ins_rakesh": "Rakesh",
+      "ins_vinay": "Vinay",
+      "ins_asha": "Asha"
+    },
+    "rooms": {
+      "a": "A",
+      "b": "B"
+    }
+  }
+}
