@@ -1,7 +1,6 @@
 /********************/
 /*    Variables     */
 /********************/
-var xhttp = new XMLHttpRequest();
 
 var timetableOuter = document.getElementById('timetableOuter');
 var selectedDateOuter = document.getElementById('selectedDateOuter');
@@ -47,6 +46,7 @@ function currentDate() {
 
 // Update time table on change of batch
 function updateTimeTableList(e) {
+  console.log('list updating...');
   if(e.target) {
     batchCode = e.target.value;
   } else {
@@ -83,29 +83,35 @@ function updateTimeTableList(e) {
   selectedRoomEL.innerHTML = roomsList;
 
   // load content from database
-  xhttp.onreadystatechange = function() {
+  var xhttp1 = new XMLHttpRequest();
+  xhttp1.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     timetableResult.innerHTML = this.responseText;
-    }
+     timetableResultList.innerHTML = this.responseText;
+   } else {
+     console.log(this.readyState, this.status);
+   }
   };
-  xhttp.open("GET", "handler_timetable.php?action=updateTimeTableList&batchCode="+batchCode+"&batchTemplate="+batchTemplate, true);  // open(method, url, async)
-  xhttp.send();
+  xhttp1.open("GET", "handler_timetable.php?action=updateTimeTableList&batchCode="+batchCode+"&batchTemplate="+batchTemplate, true);  // open(method, url, async)
+  xhttp1.send();
 }
 
 // Update time table on change of batch
 function updateTimeTableGrid() {
-  console.log('grid updating');
+  console.log('grid updating...');
   var filterStartDate = document.getElementById('filterStartDate').value;
   var filterEndDate = document.getElementById('filterEndDate').value;
 
   // load content from database
-  xhttp.onreadystatechange = function() {
+  var xhttp2 = new XMLHttpRequest();
+  xhttp2.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      timetableResultGrid.innerHTML = this.responseText;
-    }
+   } else {
+     console.log(this.readyState, this.status);
+   }
   };
-  xhttp.open("GET", "handler_timetable.php?action=updateTimeTableGrid&filterStartDate="+filterStartDate+"&filterEndDate="+filterEndDate, true);  // open(method, url, async)
-  xhttp.send();
+  xhttp2.open("GET", "handler_timetable.php?action=updateTimeTableGrid&filterStartDate="+filterStartDate+"&filterEndDate="+filterEndDate, true);  // open(method, url, async)
+  xhttp2.send();
 }
 
 // Add class on Submit btn click
@@ -121,7 +127,7 @@ function addClass() {
 
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     timetableResult.innerHTML = this.responseText;
+     timetableResultList.innerHTML = this.responseText;
     }
   };
   xhttp.open("POST", "handler_timetable.php", true);  // open(method, url, async)
@@ -139,7 +145,7 @@ function deleteClass(e) {
 
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-       timetableResult.innerHTML = this.responseText;
+       timetableResultList.innerHTML = this.responseText;
       }
     };
 
@@ -194,4 +200,4 @@ filterStartDate.addEventListener('change', updateTimeTableGrid, false);
 filterEndDate.addEventListener('change', updateTimeTableGrid, false);
 selectedLayout.addEventListener('change', updateLayout, false);
 addClassBtn.addEventListener('click', addClass, false);
-timetableResult.addEventListener('click', deleteClass, false);
+timetableResultList.addEventListener('click', deleteClass, false);

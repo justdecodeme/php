@@ -111,7 +111,7 @@
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
 
       foreach($row as $class) {
-        echo $i . '* | ' . $class->date . '<br>';
+        // echo $i . '* | ' . $class->date . '<br>';
         if($i == 1 || $i == 9 || $i == 17 || $i == 28) {
           $timetable_grid .= "
             <tr>

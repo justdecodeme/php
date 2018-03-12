@@ -50,13 +50,11 @@
           <label for="selectedLayout">Select Layout</label>
           <select class="custom-select" id="selectedLayout">
             <option value="list">List View</option>
-            <option value="grid" selected>Grid View</option>
+            <option value="grid" >Grid View</option>
           </select>
       </form>
     </div>
   </div>
-
-  <div id="timetableResultGridTemparary"></div>
 
   <!-- tables -->
   <div class="row">
@@ -74,8 +72,7 @@
             <th scope="col"></th>
           </tr>
         </thead>
-        <tbody id="timetableResult">
-        </tbody>
+        <tbody id="timetableResultList"></tbody>
         <tfoot>
           <tr>
             <td></td>
@@ -125,182 +122,7 @@
             <th>Sun</th>
           </tr>
         </thead>
-        <tbody id="timetableResultGrid">
-          <!-- <tr>
-            <td>
-              <p>Time</p>
-              <p>09:00 AM</p>
-              <p>11:30 AM</p>
-              <p>02:00 AM</p>
-              <p>04:30 AM</p>
-            </td>
-            <td>
-              <p>05-Mar</p>
-              <p>-</p>
-              <p>-</p>
-              <p>BC33 - Aishwarya</p>
-              <p>BC34 - Rakesh</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>Time</p>
-              <p>09:00 AM</p>
-              <p>11:30 AM</p>
-              <p>02:00 AM</p>
-              <p>04:30 AM</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>Time</p>
-              <p>09:00 AM</p>
-              <p>11:30 AM</p>
-              <p>02:00 AM</p>
-              <p>04:30 AM</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>05-Mar</p>
-              <p>-</p>
-              <p>-</p>
-              <p>BC33 - Aishwarya</p>
-              <p>BC34 - Rakesh</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>05-Mar</p>
-              <p>-</p>
-              <p>-</p>
-              <p>BC33 - Aishwarya</p>
-              <p>BC34 - Rakesh</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>Time</p>
-              <p>09:00 AM</p>
-              <p>11:30 AM</p>
-              <p>02:00 AM</p>
-              <p>04:30 AM</p>
-            </td>
-            <td>
-              <p>05-Mar</p>
-              <p>-</p>
-              <p>-</p>
-              <p>BC33 - Aishwarya</p>
-              <p>BC34 - Rakesh</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>Time</p>
-              <p>09:00 AM</p>
-              <p>11:30 AM</p>
-              <p>02:00 AM</p>
-              <p>04:30 AM</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-          </tr> -->
-        </tbody>
+        <tbody id="timetableResultGrid"></tbody>
         <tfoot>
         </tfoot>
       </table>
