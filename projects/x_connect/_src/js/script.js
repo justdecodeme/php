@@ -141,11 +141,10 @@ function addClass() {
 // Edit -> Delete -> Cancel -> Submit class fuctions
 function individualClassEdit(e) {
   e.stopPropagation();
-  var clickedClassId = e.target.dataset.classId;
-
   // delete class -> only if not editing any class
   if(e.target.id == 'deleteClass' && !editingClassFlag) {
-    console.log('deleting: ' + clickedClassId);
+    var deleteCalssId = e.target.dataset.classId;
+    console.log('deleting: ' + deleteCalssId);
 
     var xhttp4 = new XMLHttpRequest();
     xhttp4.onreadystatechange = function() {
@@ -159,17 +158,19 @@ function individualClassEdit(e) {
         //Logic to delete the item
         xhttp4.open("POST", "handler_timetable.php", true);  // open(method, url, async)
         xhttp4.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp4.send("action=deleteClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&deleteId="+clickedClassId);
+        xhttp4.send("action=deleteClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&deleteId="+deleteCalssId);
     } else {
       console.log('Deletion is stopped!');
     }
-    // edit class -> only if not editing any class
-  } else if(e.target.id == 'editClass' && !editingClassFlag) {
-    console.log('editing: ' + clickedClassId);
+  }
+  // edit class -> only if not editing any class
+  else if(e.target.id == 'editClass' && !editingClassFlag) {
+    var editClassId = e.target.dataset.classId;
+    console.log('editing: ' + editClassId);
 
     editingClassFlag = true;
 
-    var elementEditing = document.getElementById('editClass_'+clickedClassId);
+    var elementEditing = document.getElementById('editClass_'+editClassId);
     var elementEditingDate = elementEditing.querySelector('.edit-date');
     var elementEditingClass = elementEditing.querySelector('.edit-class');
     var elementEditingInstructor = elementEditing.querySelector('.edit-instructor');
@@ -196,7 +197,7 @@ function individualClassEdit(e) {
     for (var instructorCode in instructorsObj) {
       instructorsList += '<option value="'+instructorCode+'">'+instructorsObj[instructorCode]+'</option>';
     }
-    elementEditingInstructor.innerHTML = '<select class="custom-select" id="editingClass">'+instructorsList+'</select>';;
+    elementEditingInstructor.innerHTML = '<select class="custom-select" id="editingInstructors">'+instructorsList+'</select>';;
 
     // load rooms from json, based on batch template selected
     var roomsObj = batchData[batchTemplate]['rooms'];
@@ -205,12 +206,39 @@ function individualClassEdit(e) {
     for (var roomCode in roomsObj) {
       roomsList += '<option value="'+roomCode+'">'+roomsObj[roomCode]+'</option>';
     }
-    elementEditingRoom.innerHTML = '<select class="custom-select" id="selectedRoom">'+roomsList+'</select>';
-    // cancel class -> if editing any class
-  } else if(e.target.id == 'cancelEditingClass' && editingClassFlag) {
-    console.log('cancelling: ' + clickedClassId);
+    elementEditingRoom.innerHTML = '<select class="custom-select" id="editingRoom">'+roomsList+'</select>';
+  }
+  // cancel class -> if editing any class
+  else if(e.target.id == 'cancelClass' && editingClassFlag) {
+    var cancelClassId = e.target.dataset.classId;
+    console.log('cancelling: ' + cancelClassId);
 
     updateTimeTableList();
+  }
+  // submit class -> if editing any class
+  else if(e.target.id == 'submitClass' && editingClassFlag) {
+    var submitClassId = e.target.dataset.classId;
+    console.log('submitting: ' + submitClassId);
+
+    var date = document.getElementById('editingDate').value;
+    var classCode = document.getElementById('editingClass').value;
+    var instructorCode = document.getElementById('editingInstructors').value;
+    var startTime = document.getElementById('editingStartTime').value;
+    var endTime = document.getElementById('editingEndTime').value;
+    var roomCode = document.getElementById('editingRoom').value;
+    // console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
+
+    // var xhttp5 = new XMLHttpRequest();
+    // xhttp5.onreadystatechange = function() {
+    //   if (this.readyState == 4 && this.status == 200) {
+    //     timetableResultList.innerHTML = this.responseText;
+    //   }
+    // };
+    // xhttp5.open("POST", "handler_timetable.php", true);  // open(method, url, async)
+    // xhttp5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // xhttp5.send("action=submitClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode+"&submitId="+submitClassId);
+
+    // updateTimeTableList();
   }
 }
 

@@ -65,8 +65,8 @@
             // (!($diff_in_seconds < 0) ?
             ' <span class="text-danger reading" id="editClass" data-class-id="'.$class->id.'">Edit</span>
               <span class="text-danger reading" id="deleteClass" data-class-id="'.$class->id.'">Del</span>
-              <span class="text-danger editing" id="cancelEditingClass" data-class-id="'.$class->id.'">Can</span>
-              <span class="text-danger editing" id="submitEditingClass" data-class-id="'.$class->id.'">Sub</span>
+              <span class="text-danger editing" id="cancelClass" data-class-id="'.$class->id.'">Can</span>
+              <span class="text-danger editing" id="submitClass" data-class-id="'.$class->id.'">Sub</span>
             ' : '')
           .'</td>
         </tr>
