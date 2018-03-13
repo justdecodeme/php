@@ -1,6 +1,4 @@
-/********************/
-/*    Variables     */
-/********************/
+/****************Variables****************/
 
 var timetableOuter = document.getElementById('timetableOuter');
 var selectedDateOuter = document.getElementById('selectedDateOuter');
@@ -28,9 +26,7 @@ var layout = 'list';
 var orderBy = 'date';
 var ascOrDesc = 'ASC';
 
-/********************/
-/*    Functions     */
-/********************/
+/****************Functions****************/
 
 // find current date
 function currentDate() {
@@ -138,11 +134,11 @@ function addClass() {
     };
     xhttp3.open("POST", "handler_timetable.php", true);  // open(method, url, async)
     xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp3.send("action=addClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode);
+    xhttp3.send("action=addClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode);
   }
 }
 
-// Delete class on Submit btn click
+// Edit -> Delete -> Cancel -> Submit class fuctions
 function individualClassEdit(e) {
   e.stopPropagation();
   var clickedClassId = e.target.dataset.classId;
@@ -163,7 +159,7 @@ function individualClassEdit(e) {
         //Logic to delete the item
         xhttp4.open("POST", "handler_timetable.php", true);  // open(method, url, async)
         xhttp4.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp4.send("action=deleteClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&deleteId="+clickedClassId);
+        xhttp4.send("action=deleteClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&deleteId="+clickedClassId);
     } else {
       console.log('Deletion is stopped!');
     }
@@ -236,34 +232,36 @@ function updateLayout(e) {
 
 // function to order tables on click
 function orderClassBy(e) {
-  // remove active class from all columns
-  for(var i = 0; i < orderByItems.length; i++) {
-    orderByItems[i].classList.remove('active-ASC');
-    orderByItems[i].classList.remove('active-DESC');
-  }
+  if(e.target.tagName == 'TH') {
+    var prevOrderBy = orderBy;
 
-  var prevOrderBy = orderBy;
-  orderBy = e.target.dataset.orderBy;
-
-  // toggle ASC | DESC if column clicked is same as previous click
-  if(prevOrderBy == orderBy) {
-    if(ascOrDesc == 'DESC') {
-      ascOrDesc = 'ASC';
-    } else {
-      ascOrDesc = 'DESC';
+    // remove active class from all columns
+    for(var i = 0; i < orderByItems.length; i++) {
+      orderByItems[i].classList.remove('active-ASC');
+      orderByItems[i].classList.remove('active-DESC');
     }
-    // make ASC if column clicked is different from previous click
-  } else {
-    ascOrDesc = 'ASC';
+
+    orderBy = e.target.dataset.orderBy;
+
+    // toggle ASC | DESC if column clicked is same as previous click
+    if(prevOrderBy == orderBy) {
+      if(ascOrDesc == 'DESC') {
+        ascOrDesc = 'ASC';
+      } else {
+        ascOrDesc = 'DESC';
+      }
+      // make ASC if column clicked is different from previous click
+    } else {
+      ascOrDesc = 'ASC';
+    }
+
+    // add active class to clicked column
+    e.target.classList.add('active-'+ascOrDesc);
+
+    console.log('ordering by...' + orderBy, ascOrDesc);
+
+    updateTimeTableList();
   }
-
-  // add active class to clicked column
-  e.target.classList.add('active-'+ascOrDesc);
-
-
-
-  console.log('ordering by...' + orderBy, ascOrDesc);
-  updateTimeTableList();
 }
 
 // run on page laod
@@ -278,9 +276,7 @@ function init() {
 };
 init();
 
-/********************/
-/*    Events     */
-/********************/
+/****************Events****************/
 selectedBatch.addEventListener('change', updateTimeTableList, false);
 filterStartDate.addEventListener('change', updateTimeTableGrid, false);
 filterEndDate.addEventListener('change', updateTimeTableGrid, false);

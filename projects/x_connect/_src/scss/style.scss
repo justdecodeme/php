@@ -94,6 +94,7 @@ table.grid-layout td {
   th.active-ASC, th.active-DESC {
     span {
       display: inline;
+      pointer-events: none;
     }
   }
   th.active-ASC {
