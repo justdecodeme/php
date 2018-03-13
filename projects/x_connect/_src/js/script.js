@@ -90,7 +90,7 @@ function updateTimeTableList() {
      // console.log(this.readyState, this.status);
    }
   };
-  xhttp1.open("GET", "handler_timetable.php?action=updateTimeTableList&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc, true);  // open(method, url, async)
+  xhttp1.open("GET", "timetable_handler.php?action=updateTimeTableList&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc, true);  // open(method, url, async)
   xhttp1.send();
 }
 
@@ -109,7 +109,7 @@ function updateTimeTableGrid() {
      // console.log(this.readyState, this.status);
    }
   };
-  xhttp2.open("GET", "handler_timetable.php?action=updateTimeTableGrid&filterStartDate="+filterStartDate+"&filterEndDate="+filterEndDate, true);  // open(method, url, async)
+  xhttp2.open("GET", "timetable_handler.php?action=updateTimeTableGrid&filterStartDate="+filterStartDate+"&filterEndDate="+filterEndDate, true);  // open(method, url, async)
   xhttp2.send();
 }
 
@@ -132,7 +132,7 @@ function addClass() {
         timetableResultList.innerHTML = this.responseText;
       }
     };
-    xhttp3.open("POST", "handler_timetable.php", true);  // open(method, url, async)
+    xhttp3.open("POST", "timetable_handler.php", true);  // open(method, url, async)
     xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp3.send("action=addClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode);
   }
@@ -156,7 +156,7 @@ function individualClassEdit(e) {
     var deleteConfirmation = confirm("Want to delete?");
     if (deleteConfirmation) {
         //Logic to delete the item
-        xhttp4.open("POST", "handler_timetable.php", true);  // open(method, url, async)
+        xhttp4.open("POST", "timetable_handler.php", true);  // open(method, url, async)
         xhttp4.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp4.send("action=deleteClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&deleteId="+deleteCalssId);
     } else {
@@ -235,7 +235,7 @@ function individualClassEdit(e) {
         editingClassFlag = false;
       }
     };
-    xhttp5.open("POST", "handler_timetable.php", true);  // open(method, url, async)
+    xhttp5.open("POST", "timetable_handler.php", true);  // open(method, url, async)
     xhttp5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp5.send("action=submitClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+
     "&ascOrDesc="+ascOrDesc+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+
