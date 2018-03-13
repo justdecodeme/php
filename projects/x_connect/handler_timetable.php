@@ -183,6 +183,8 @@
   if(isset($_POST['action']) && $_POST['action'] == 'deleteClass') {
     $batch_code = $_POST['batchCode'];
     $batch_template = $_POST['batchTemplate'];
+    $orderBy = $_POST['orderBy'];
+    $ascOrDesc = $_POST['ascOrDesc'];
 
     $delete_id = $_POST['deleteId'];
 
@@ -190,7 +192,7 @@
     $statement = $connection->prepare($query);
     $statement->bindParam(":deleteId", $delete_id);
     if($statement->execute()) {
-      update_timetable_list($batch_code, $batch_template);
+      update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
     } else {
       echo "Something went wrong!";
     }
