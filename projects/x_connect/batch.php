@@ -57,23 +57,22 @@
           <tr>
             <td></td>
             <td>
-              <input type="date" class="form-control" id="selectedDate" value="2018-03-09">
+              <input type="text" class="form-control" id="selectedBatchCode" placeholder="bc180305">
             </td>
             <td>
-              <select class="custom-select" id="selectedClass"></select>
+              <input type="text" class="form-control" id="selectedBatchName" placeholder="Bootcamp">
             </td>
             <td>
-              <select class="custom-select" id="selectedInstructor"></select>
-            </td>
-            <td class="time-picker">
-              <input type="time" id="selectedStartTime" class="form-control" value="09:00">
-              <input type="time" id="selectedEndTime" class="form-control" value="11:00">
+              <input type="date" class="form-control" id="selectedStartDate" value="yyyy-mm-dd" disabled>
             </td>
             <td>
-              <select class="custom-select" id="selectedRoom"></select>
+              <input type="date" class="form-control" id="selectedEndDate" value="yyyy-mm-dd" disabled>
             </td>
             <td>
-              <button class="btn btn-outline-danger" id="addClassBtn">Submit</button>
+              <input type="number" class="form-control" id="selectedStuents" value="0" disabled>
+            </td>
+            <td>
+              <button class="btn btn-outline-danger" id="addBatchBtn">Add Batch</button>
             </td>
           </tr>
         </tfoot>
