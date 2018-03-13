@@ -154,7 +154,7 @@
     update_timetable_grid($_GET['filterStartDate'], $_GET['filterEndDate']);
   }
 
-  // Add class on Submit btn click
+  // Add class on click of Submit button in tfoot
   if(isset($_POST['action']) && $_POST['action'] == 'addClass') {
     $batch_code = $_POST['batchCode'];
     $batch_template = $_POST['batchTemplate'];
@@ -178,6 +178,44 @@
     // Update timetable if query is successful
     if($statement->execute($params)) {
       update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
+    }
+  }
+
+  // Submit class on click of submit button after editing
+  if(isset($_POST['action']) && $_POST['action'] == 'submitClass') {
+    $batch_code = $_POST['batchCode'];
+    $batch_template = $_POST['batchTemplate'];
+    $orderBy = $_POST['orderBy'];
+    $ascOrDesc = $_POST['ascOrDesc'];
+
+    $date = $_POST['date'];
+    $class_code = $_POST['classCode'];
+    $instructor_code = $_POST['instructorCode'];
+    $start_time = $_POST['startTime'];
+    $end_time = $_POST['endTime'];
+    $room_code = $_POST['roomCode'];
+
+    $submit_id = $_POST['submitId'];
+
+    $query = "UPDATE `timetable`
+      SET
+        `date` = :SELECTED_DATE,
+        `class_code` = :CLASS_CODE,
+        `instructor_code` = :INSTRUCTOR_CODE,
+        `start_time` = :STARTTIME,
+        `end_time` = :ENDTIME,
+        `room_code` = :ROOM
+      WHERE
+        `id` = $submit_id
+      LIMIT 1";
+    $statement = $connection->prepare($query);
+    $params = array ('SELECTED_DATE'=>$date,'CLASS_CODE'=>$class_code,'INSTRUCTOR_CODE'=>$instructor_code,'STARTTIME'=>$start_time,'ENDTIME'=>$end_time,'ROOM'=>$room_code);
+
+    // Update timetable if query is successful
+    if($statement->execute($params)) {
+      update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
+    } else {
+      echo "Something went wrong!";
     }
   }
 

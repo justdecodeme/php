@@ -228,15 +228,18 @@ function individualClassEdit(e) {
     var roomCode = document.getElementById('editingRoom').value;
     // console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
 
-    // var xhttp5 = new XMLHttpRequest();
-    // xhttp5.onreadystatechange = function() {
-    //   if (this.readyState == 4 && this.status == 200) {
-    //     timetableResultList.innerHTML = this.responseText;
-    //   }
-    // };
-    // xhttp5.open("POST", "handler_timetable.php", true);  // open(method, url, async)
-    // xhttp5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // xhttp5.send("action=submitClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode+"&submitId="+submitClassId);
+    var xhttp5 = new XMLHttpRequest();
+    xhttp5.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        timetableResultList.innerHTML = this.responseText;
+        editingClassFlag = false;
+      }
+    };
+    xhttp5.open("POST", "handler_timetable.php", true);  // open(method, url, async)
+    xhttp5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp5.send("action=submitClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+
+    "&ascOrDesc="+ascOrDesc+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+
+    "&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode+"&submitId="+submitClassId);
 
     // updateTimeTableList();
   }
