@@ -16,7 +16,7 @@
         <!-- filter by batch -->
         <div class="col-md-5 list-layout">
           <form class="form-block">
-            <label for="selectedBatch">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Add New</a></small></label>
+            <label for="selectedBatch">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Manage</a></small></label>
             <select class="custom-select my-1" id="selectedBatch">
               <option value="bc180305" data-template="bootcamp" selected>bc180305 (Bootcamp)</option>
               <option value="u180325" data-template="unity">u180325 (Unity)</option>
@@ -108,7 +108,7 @@
               <select class="custom-select" id="selectedRoom"></select>
             </td>
             <td>
-              <button class="btn btn-outline-danger" id="addClassBtn">Submit</button>
+              <button class="btn btn-outline-danger btn-sm" id="addClassBtn">Add Class</button>
             </td>
           </tr>
         </tfoot>
