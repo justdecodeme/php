@@ -178,15 +178,19 @@ function individualClassEdit(e) {
     var elementEditingRoom = elementEditing.querySelector('.edit-room');
 
     elementEditing.classList.add('editing-class');
-    elementEditingDate.innerHTML = '<input type="date" class="form-control" id="editingDate" value="2018-03-09">';
+    elementEditingDate.innerHTML = '<input type="date" class="form-control" id="editingDate" value="'+elementEditingDate.dataset.date+'">';
     elementEditingTime.classList.add('time-picker');
-    elementEditingTime.innerHTML = '<input type="time" class="form-control" id="editingStartTime" value="09:00"><input type="time" class="form-control" id="editingEndTime" value="11:00">';
+    elementEditingTime.innerHTML = '<input type="time" class="form-control" id="editingStartTime" value="'+elementEditingTime.dataset.starttime+'"><input type="time" class="form-control" id="editingEndTime" value="'+elementEditingTime.dataset.endtime+'">';
 
     // load classses from json, based on batch template selected
     var classesObj = batchData[batchTemplate]['classes'];
     var classesList = '';
     for (var classCode in classesObj) {
-      classesList += '<option value="'+classCode+'">'+classesObj[classCode]+'</option>';
+      if(classCode == elementEditingClass.dataset.class) {
+        classesList += '<option value="'+classCode+'" selected>'+classesObj[classCode]+'</option>';
+      } else {
+        classesList += '<option value="'+classCode+'">'+classesObj[classCode]+'</option>';
+      }
     }
     elementEditingClass.innerHTML = '<select class="custom-select" id="editingClass">'+classesList+'</select>';;
 
@@ -195,7 +199,11 @@ function individualClassEdit(e) {
     var instructorsList = '';
 
     for (var instructorCode in instructorsObj) {
-      instructorsList += '<option value="'+instructorCode+'">'+instructorsObj[instructorCode]+'</option>';
+      if(instructorCode == elementEditingInstructor.dataset.instructor) {
+        instructorsList += '<option value="'+instructorCode+'" selected>'+instructorsObj[instructorCode]+'</option>';
+      } else {
+        instructorsList += '<option value="'+instructorCode+'">'+instructorsObj[instructorCode]+'</option>';
+      }
     }
     elementEditingInstructor.innerHTML = '<select class="custom-select" id="editingInstructors">'+instructorsList+'</select>';;
 
@@ -204,7 +212,11 @@ function individualClassEdit(e) {
     var roomsList = '';
 
     for (var roomCode in roomsObj) {
-      roomsList += '<option value="'+roomCode+'">'+roomsObj[roomCode]+'</option>';
+      if(roomCode == elementEditingRoom.dataset.room) {
+        roomsList += '<option value="'+roomCode+'" selected>'+roomsObj[roomCode]+'</option>';
+      } else {
+        roomsList += '<option value="'+roomCode+'">'+roomsObj[roomCode]+'</option>';
+      }
     }
     elementEditingRoom.innerHTML = '<select class="custom-select" id="editingRoom">'+roomsList+'</select>';
   }

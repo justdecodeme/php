@@ -43,21 +43,21 @@
           <td scope="row">'.
             $i
           .'</td>
-          <td class="edit-date">'.
+          <td class="edit-date" data-date='.$class->date.'>'.
             date('j M y | D', strtotime($class->date))
           .'</td>
-          <td class="edit-class">'.
+          <td class="edit-class" data-class='.$class->class_code.'>'.
             $batch['classes'][$class->class_code]
           .'</td>
-          <td class="edit-instructor">'.
+          <td class="edit-instructor" data-instructor='.$class->instructor_code.'>'.
             $batch['instructors'][$class->instructor_code]
           .'</td>
-          <td class="edit-time">'.
+          <td class="edit-time" data-starttime='.$class->start_time.' data-endtime='.$class->end_time.'>'.
             date('h:i A', strtotime($class->start_time))
             .' - '.
             date('h:i A', strtotime($class->end_time))
           .'</td>
-          <td class="edit-room">'.
+          <td class="edit-room" data-room='.$class->room_code.'>'.
             $batch['rooms'][$class->room_code]
           .'</td>
           <td class="edit-delete-buttons">'.
