@@ -158,6 +158,8 @@
   if(isset($_POST['action']) && $_POST['action'] == 'addClass') {
     $batch_code = $_POST['batchCode'];
     $batch_template = $_POST['batchTemplate'];
+    $orderBy = $_POST['orderBy'];
+    $ascOrDesc = $_POST['ascOrDesc'];
 
     $date = $_POST['date'];
     $class_code = $_POST['classCode'];
@@ -175,7 +177,7 @@
 
     // Update timetable if query is successful
     if($statement->execute($params)) {
-      update_timetable_list($batch_code, $batch_template);
+      update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
     }
   }
 

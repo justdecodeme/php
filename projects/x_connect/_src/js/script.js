@@ -90,7 +90,6 @@ function updateTimeTableList() {
      // console.log(this.readyState, this.status);
    }
   };
-  console.log(orderBy, ascOrDesc);
   xhttp1.open("GET", "handler_timetable.php?action=updateTimeTableList&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc, true);  // open(method, url, async)
   xhttp1.send();
 }
