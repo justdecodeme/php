@@ -21,7 +21,7 @@
         </select>
       </form>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <form class="form-block">
         <label for="selectedBatch">Select Class</label>
         <select class="custom-select my-1" id="currentClass">
@@ -41,15 +41,21 @@
     </div>
     <div class="col-md-3">
       <form class="form-block">
-        <label for="selectedBatch">Select Students Present</label>
+        <!-- <label for="selectedBatch">Select Students Present</label> -->
         <!-- <select class="custom-select my-1" id="selectedBatch"> -->
-        <select id="selectedBatch" class="multiselect-ui form-control" multiple="multiple">
+        <!-- <select id="selectedBatch" class="multiselect-ui form-control" multiple="multiple">
           <option value="std130308" selected>Nagraj</option>
           <option value="std130301" selected>Sachin</option>
           <option value="std130208" selected>Bhagya</option>
           <option value="std130108" selected>Amit</option>
-        </select>
+        </select> -->
+
+<div class="myDropdownCheckbox"></div>
       </form>
+    </div>
+    <div class="col-md-1">
+      <label style="visibility: hidden;">.</label>
+      <button class="btn btn-outline-danger">Submit</button>
     </div>
   </div>
 </div>
@@ -57,9 +63,10 @@
 <?php include 'includes/footer.php'; ?>
 
 <script type="text/javascript">
-$(function() {
-    $('.multiselect-ui').multiselect({
-        includeSelectAllOption: true
-    });
+var myData = [{id: 1, label: "Test" }];
+$(".myDropdownCheckbox").dropdownCheckbox({
+  data: myData,
+  title: "Dropdown Checkbox"
 });
+
 </script>
