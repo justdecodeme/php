@@ -6,7 +6,7 @@
 ?>
 
 <div class="container" id="attendanceOuter">
-  <!-- <h2>Attendance</h2> -->
+  <h2>Attendance</h2>
   <hr>
 
   <div class="row">

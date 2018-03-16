@@ -6,7 +6,7 @@
 ?>
 
 <div class="container list" id="timetableOuter">
-  <!-- <h2>Manage Batches</h2> -->
+  <h2>Manage Batches</h2>
   <hr><a href="timetable.php">timetable</a>
 
   <!-- tables -->

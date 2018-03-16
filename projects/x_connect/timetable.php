@@ -6,7 +6,7 @@
 ?>
 
 <div class="container list" id="timetableOuter">
-  <!-- <h2>Time Table</h2> -->
+  <h2>Time Table</h2>
   <hr>
   <!-- options -->
   <div class="row">
@@ -349,3 +349,4 @@
 </div>
 
 <?php include 'includes/footer.php'; ?>
+<script src="./_assets/js/timetable.min.js" charset="utf-8"></script>
