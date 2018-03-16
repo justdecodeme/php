@@ -49,9 +49,21 @@
           <option value="std130208" selected>Bhagya</option>
           <option value="std130108" selected>Amit</option>
         </select> -->
-
-<div class="myDropdownCheckbox"></div>
       </form>
+
+    <div class="button-group">
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+       <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 1</a></li>
+       <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 2</a></li>
+       <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 3</a></li>
+       <li><a href="#" class="small" data-value="option4" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 4</a></li>
+       <li><a href="#" class="small" data-value="option5" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 5</a></li>
+       <li><a href="#" class="small" data-value="option6" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 6</a></li>
+      </ul>
+     </div>
+
+
     </div>
     <div class="col-md-1">
       <label style="visibility: hidden;">.</label>
@@ -63,10 +75,27 @@
 <?php include 'includes/footer.php'; ?>
 
 <script type="text/javascript">
-var myData = [{id: 1, label: "Test" }];
-$(".myDropdownCheckbox").dropdownCheckbox({
-  data: myData,
-  title: "Dropdown Checkbox"
+var options = [];
+
+$( '.dropdown-menu a' ).on( 'click', function( event ) {
+
+   var $target = $( event.currentTarget ),
+       val = $target.attr( 'data-value' ),
+       $inp = $target.find( 'input' ),
+       idx;
+
+   if ( ( idx = options.indexOf( val ) ) > -1 ) {
+      options.splice( idx, 1 );
+      setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
+   } else {
+      options.push( val );
+      setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+   }
+
+   $( event.target ).blur();
+
+   console.log( options );
+   return false;
 });
 
 </script>
