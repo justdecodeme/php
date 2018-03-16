@@ -114,3 +114,16 @@ table.grid-layout td {
     }
   }
 }
+
+.selectStudentsDropdown {
+  ul {
+    padding: 0;
+    a {
+      background: rgba(0,0,0,0.03);
+      display: block;
+      padding: 6px;
+    } a:hover {
+      background: rgba(0,0,0,0.07);
+    }    
+  }
+}

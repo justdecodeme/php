@@ -10,7 +10,7 @@
   <hr>
 
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <form class="form-block">
         <label for="selectedBatch">Select Batch</label>
         <select class="custom-select my-1" id="currentBatch">
@@ -39,10 +39,10 @@
         <input type="time" disabled class="form-control" id="endClassTime" value="13:00">
       </form>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <form class="form-block">
-        <!-- <label for="selectedBatch">Select Students Present</label> -->
         <!-- <select class="custom-select my-1" id="selectedBatch"> -->
+        <!-- <label for="selectedBatch">Select Students Present</label> -->
         <!-- <select id="selectedBatch" class="multiselect-ui form-control" multiple="multiple">
           <option value="std130308" selected>Nagraj</option>
           <option value="std130301" selected>Sachin</option>
@@ -51,15 +51,16 @@
         </select> -->
       </form>
 
-    <div class="button-group">
-      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></button>
+    <div class="button-group selectStudentsDropdown">
+      <label for="">Select Students</label>
+      <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">0</button>
       <ul class="dropdown-menu">
-       <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 1</a></li>
-       <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 2</a></li>
-       <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 3</a></li>
-       <li><a href="#" class="small" data-value="option4" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 4</a></li>
-       <li><a href="#" class="small" data-value="option5" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 5</a></li>
-       <li><a href="#" class="small" data-value="option6" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 6</a></li>
+       <li><a href="#" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 1</a></li>
+       <li><a href="#" data-value="option2" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 2</a></li>
+       <li><a href="#" data-value="option3" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 3</a></li>
+       <li><a href="#" data-value="option4" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 4</a></li>
+       <li><a href="#" data-value="option5" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 5</a></li>
+       <li><a href="#" data-value="option6" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 6</a></li>
       </ul>
      </div>
 
@@ -73,29 +74,4 @@
 </div>
 
 <?php include 'includes/footer.php'; ?>
-
-<script type="text/javascript">
-var options = [];
-
-$( '.dropdown-menu a' ).on( 'click', function( event ) {
-
-   var $target = $( event.currentTarget ),
-       val = $target.attr( 'data-value' ),
-       $inp = $target.find( 'input' ),
-       idx;
-
-   if ( ( idx = options.indexOf( val ) ) > -1 ) {
-      options.splice( idx, 1 );
-      setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
-   } else {
-      options.push( val );
-      setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
-   }
-
-   $( event.target ).blur();
-
-   console.log( options );
-   return false;
-});
-
-</script>
+<script src="./_assets/js/attendance.min.js" charset="utf-8"></script>
