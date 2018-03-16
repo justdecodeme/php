@@ -6,7 +6,7 @@
 ?>
 
 <div class="container" id="attendanceOuter">
-  <h2>Feedback <small style="font-size: 50%;"><a href="feedback_student.php">Student Views</a></small></h2>
+  <h2>Feedback</h2>
   <hr>
 
   <div class="row">

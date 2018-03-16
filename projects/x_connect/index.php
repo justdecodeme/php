@@ -25,7 +25,7 @@
       </a>
     </div>
     <div class="col-md-3">
-      <a class="card" href="#">
+      <a class="card" href="feedback.php">
         <img class="card-img-top" src="./_assets/images/feedback.jpeg" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">
           <h4 class="card-title text-center" style="margin: 0;">Feedback</h4>
