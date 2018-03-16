@@ -40,31 +40,16 @@
       </form>
     </div>
     <div class="col-md-2">
-      <form class="form-block">
-        <!-- <select class="custom-select my-1" id="selectedBatch"> -->
-        <!-- <label for="selectedBatch">Select Students Present</label> -->
-        <!-- <select id="selectedBatch" class="multiselect-ui form-control" multiple="multiple">
-          <option value="std130308" selected>Nagraj</option>
-          <option value="std130301" selected>Sachin</option>
-          <option value="std130208" selected>Bhagya</option>
-          <option value="std130108" selected>Amit</option>
-        </select> -->
-      </form>
-
-    <div class="button-group selectStudentsDropdown">
-      <label for="">Select Students</label>
-      <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">0</button>
-      <ul class="dropdown-menu">
-       <li><a href="#" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 1</a></li>
-       <li><a href="#" data-value="option2" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 2</a></li>
-       <li><a href="#" data-value="option3" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 3</a></li>
-       <li><a href="#" data-value="option4" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 4</a></li>
-       <li><a href="#" data-value="option5" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 5</a></li>
-       <li><a href="#" data-value="option6" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 6</a></li>
-      </ul>
-     </div>
-
-
+      <div class="button-group selectStudentsDropdown">
+        <label for="">Select Students</label>
+        <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">0</button>
+        <ul class="dropdown-menu">
+         <li><a href="#" data-value="std130308" tabIndex="-1"><input type="checkbox"/>&nbsp;Nagraj</a></li>
+         <li><a href="#" data-value="std130301" tabIndex="-1"><input type="checkbox"/>&nbsp;Sachin</a></li>
+         <li><a href="#" data-value="std130208" tabIndex="-1"><input type="checkbox"/>&nbsp;Bhagya</a></li>
+         <li><a href="#" data-value="std130108" tabIndex="-1"><input type="checkbox"/>&nbsp;Amit</a></li>
+        </ul>
+       </div>
     </div>
     <div class="col-md-1">
       <label style="visibility: hidden;">.</label>

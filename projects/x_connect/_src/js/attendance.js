@@ -18,7 +18,6 @@ $( '.dropdown-menu a' ).on( 'click', function( event ) {
    $( event.target ).blur();
 
    console.log( options );
-   console.log($('.selectStudentsDropdown').find('button'));
    $('.selectStudentsDropdown').find('button').html(options.length);
    return false;
 });
