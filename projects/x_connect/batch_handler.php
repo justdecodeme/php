@@ -4,29 +4,24 @@
 ?>
 
 <?php
-  function update_timetable_list($code, $temp, $order_by, $ascOrDesc) {
+  function update_batch_list($order_by, $ascOrDesc) {
     global $connection;
-    $query = "SELECT * FROM timetable WHERE batch_code=:batchCode ORDER BY " . $order_by . " " . $ascOrDesc;
+    $query = "SELECT * FROM batch ORDER BY " . $order_by . " " . $ascOrDesc;
     $statement = $connection->prepare($query);
-    $statement->bindParam(":batchCode", $code);
 
     if($statement->execute()) {
-      $date_now = new DateTime("now");
-      $batch_template = $temp;
-      global $batch_obj;
-      $batch = $batch_obj[$batch_template];
-      $timetable_list = '';
+      $batch_list = '';
       $i = 1;
 
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
-      foreach($row as $class) {
+      foreach($row as $batch) {
 
         // highlight rows for past | present | future classes
-        $class_date = date('Y-m-d', strtotime($class->date));
+        $batch_end_date = date('Y-m-d', strtotime($batch->batch_end_date));
         $now_date = date("Y-m-d", time());
-        $class_date_seconds = strtotime($class_date);
+        $batch_date_seconds = strtotime($batch_end_date);
         $now_date_seconds = strtotime($now_date);
-        $diff_in_seconds = $class_date_seconds - $now_date_seconds;
+        $diff_in_seconds = $batch_date_seconds - $now_date_seconds;
         // past
         if($diff_in_seconds < 0) {
           $row_highlight_class = 'table-active';
@@ -38,217 +33,46 @@
           $row_highlight_class = 'table-success';
         }
 
-        $timetable_list .= '
-        <tr class="'.$row_highlight_class.'" id="editClass_'.$class->id.'">
+        $batch_list .= '
+        <tr class="'.$row_highlight_class.'" id="editbatch_'.$batch->id.'">
           <td scope="row">'.
             $i
           .'</td>
-          <td class="edit-date" data-date='.$class->date.'>'.
-            date('j M y | D', strtotime($class->date))
+          <td class="edit-batch" data-batch='.$batch->batch_code.'>'.
+          $batch->batch_code
           .'</td>
-          <td class="edit-class" data-class='.$class->class_code.'>'.
-            $batch['classes'][$class->class_code]
+          <td class="edit-batch" data-batch='.$batch->batch_name.'>'.
+          $batch->batch_name
           .'</td>
-          <td class="edit-instructor" data-instructor='.$class->instructor_code.'>'.
-            $batch['instructors'][$class->instructor_code]
+          <td class="edit-start-date" data-startdate='.$batch->batch_start_date.'>'.
+            date('j M y | D', strtotime($batch->batch_start_date))
           .'</td>
-          <td class="edit-time" data-starttime='.$class->start_time.' data-endtime='.$class->end_time.'>'.
-            date('h:i A', strtotime($class->start_time))
-            .' - '.
-            date('h:i A', strtotime($class->end_time))
+          <td class="edit-end-date" data-enddate='.$batch->batch_end_date.'>'.
+            date('j M y | D', strtotime($batch->batch_end_date))
           .'</td>
-          <td class="edit-room" data-room='.$class->room_code.'>'.
-            $batch['rooms'][$class->room_code]
+          <td class="edit-end-date" data-enddate='.$batch->batch_students.'>'.
+            $batch->batch_students
           .'</td>
           <td class="edit-delete-buttons">'.
             (!($diff_in_seconds = 0) ? // always true (simple hack to show below buttons for each iteration)
             // (!($diff_in_seconds < 0) ?
-            ' <span class="text-danger reading" id="editClass" data-class-id="'.$class->id.'">Edit</span>
-              <span class="text-danger reading" id="deleteClass" data-class-id="'.$class->id.'">Del</span>
-              <span class="text-danger editing" id="cancelClass" data-class-id="'.$class->id.'">Can</span>
-              <span class="text-danger editing" id="submitClass" data-class-id="'.$class->id.'">Sub</span>
+            ' <span class="text-danger reading" id="editClass" data-class-id="'.$batch->id.'">Edit</span>
+              <span class="text-danger reading" id="deleteClass" data-class-id="'.$batch->id.'">Del</span>
+              <span class="text-danger editing" id="cancelClass" data-class-id="'.$batch->id.'">Can</span>
+              <span class="text-danger editing" id="submitClass" data-class-id="'.$batch->id.'">Sub</span>
             ' : '')
           .'</td>
         </tr>
         ';
         $i++;
       }
-      echo $timetable_list;
+      echo $batch_list;
     }
-  }
-  function update_timetable_grid_A($from_date, $to_date) {
-    global $connection;
-
-    $rowNum = 0;
-    $colNum = 0;
-    $timetable_grid = '';
-
-    // to find the number of days to generate timetable
-    $d_start = new DateTime($from_date);
-    $d_end   = new DateTime($to_date);
-    $d_end   = $d_end->modify( '+1 day' );
-    $interval = new DateInterval('P1D');
-    $daterange = new DatePeriod($d_start, $interval ,$d_end);
-    // $diff = $d_start->diff($d_end);
-    // $total_days = $diff->format('%d') + 1;
-
-    foreach($daterange as $date) {
-      $date   = $date->format("Y-m-d");
-
-      $query = "SELECT * FROM timetable WHERE date=:clssDATE AND `room_code`='a'";
-      $statement = $connection->prepare($query);
-      $statement->bindParam(":clssDATE", $date);
-
-      if((8 * $rowNum) + 1 == $colNum + 1) {
-        $colNum++;
-        $timetable_grid .= "
-        <tr>
-          <td>
-            <p>Time</p>
-            <p>09:00 AM</p>
-            <p>11:30 AM</p>
-            <p>02:00 AM</p>
-            <p>04:30 AM</p>
-          </td>
-        ";
-      }
-
-      if($statement->execute() AND $statement->rowCount() !== 0) {
-        $classes = $statement->fetchAll();
-        $colNum++;
-
-        $classNumber = 0;
-        $totalClass = $statement->rowCount();
-
-        foreach($classes as $class) {
-          if($classNumber == 0) {
-            $timetable_grid .= "<td><p>".date('j M', strtotime($classes[$classNumber]['date'])) . "</p>";
-          }
-          while($totalClass) {
-            $timetable_grid .= "<p>".$classes[$classNumber]['class_code']." (". $classes[$classNumber]['instructor_code'] .")</p>";
-            $totalClass--;
-            $classNumber++;
-          }
-          while($classNumber < 4) {
-            $timetable_grid .= "<p></p>";
-            $classNumber++;
-          }
-          $timetable_grid .= "</td>";
-        }
-      } else {
-        $colNum++;
-        $timetable_grid .= "
-        <td>
-        <p>".date('j M', strtotime($date))."</p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        </td>
-        ";
-      }
-
-      if(8 * ($rowNum + 1) == $colNum) {
-        $timetable_grid .= '</tr>';
-        $rowNum++;
-      }
-    }
-    echo $timetable_grid;
-
-  }
-  function update_timetable_grid_B($from_date, $to_date) {
-    global $connection;
-
-    $rowNum = 0;
-    $colNum = 0;
-    $timetable_grid = '';
-
-    // to find the number of days to generate timetable
-    $d_start = new DateTime($from_date);
-    $d_end   = new DateTime($to_date);
-    $d_end   = $d_end->modify( '+1 day' );
-    $interval = new DateInterval('P1D');
-    $daterange = new DatePeriod($d_start, $interval ,$d_end);
-    // $diff = $d_start->diff($d_end);
-    // $total_days = $diff->format('%d') + 1;
-
-    foreach($daterange as $date) {
-      $date   = $date->format("Y-m-d");
-
-      $query = "SELECT * FROM timetable WHERE date=:clssDATE AND `room_code`='b'";
-      $statement = $connection->prepare($query);
-      $statement->bindParam(":clssDATE", $date);
-
-      if((8 * $rowNum) + 1 == $colNum + 1) {
-        $colNum++;
-        $timetable_grid .= "
-        <tr>
-          <td>
-            <p>Time</p>
-            <p>09:00 AM</p>
-            <p>11:30 AM</p>
-            <p>02:00 AM</p>
-            <p>04:30 AM</p>
-          </td>
-        ";
-      }
-
-      if($statement->execute() AND $statement->rowCount() !== 0) {
-        $classes = $statement->fetchAll();
-        $colNum++;
-
-        $classNumber = 0;
-        $totalClass = $statement->rowCount();
-
-        foreach($classes as $class) {
-          if($classNumber == 0) {
-            $timetable_grid .= "<td><p>".date('j M', strtotime($classes[$classNumber]['date'])) . "</p>";
-          }
-          while($totalClass) {
-            $timetable_grid .= "<p>".$classes[$classNumber]['class_code']." (". $classes[$classNumber]['instructor_code'] .")</p>";
-            $totalClass--;
-            $classNumber++;
-          }
-          while($classNumber < 4) {
-            $timetable_grid .= "<p></p>";
-            $classNumber++;
-          }
-          $timetable_grid .= "</td>";
-        }
-      } else {
-        $colNum++;
-        $timetable_grid .= "
-        <td>
-        <p>".date('j M', strtotime($date))."</p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        </td>
-        ";
-      }
-
-      if(8 * ($rowNum + 1) == $colNum) {
-        $timetable_grid .= '</tr>';
-        $rowNum++;
-      }
-    }
-    echo $timetable_grid;
-
   }
 
   // Update time table on change of batch (list-layout)
-  if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableList') {
-    update_timetable_list($_GET['batchCode'], $_GET['batchTemplate'], $_GET['orderBy'], $_GET['ascOrDesc']);
-  }
-
-  // Update time table on change of date (grid-layout)
-  if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableGrid_A') {
-    update_timetable_grid_A($_GET['filterStartDate'], $_GET['filterEndDate']);
-  }
-  // Update time table on change of date (grid-layout)
-  if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableGrid_B') {
-    update_timetable_grid_B($_GET['filterStartDate'], $_GET['filterEndDate']);
+  if(isset($_GET['action']) && $_GET['action'] == 'updateBatchList') {
+    update_batch_list($_GET['orderBy'], $_GET['ascOrDesc']);
   }
 
   // Add class on click of Submit button in tfoot
