@@ -69,8 +69,8 @@
             $batch->batch_students
           .'</td>
           <td class="edit-delete-buttons">'.
-            // (!($diff_in_seconds_end = 0) ? // always true (simple hack to show below buttons for each iteration)
-            (!($diff_in_seconds_end < 0) ?
+            (!($diff_in_seconds_end = 0) ? // always true (simple hack to show below buttons for each iteration)
+            // (!($diff_in_seconds_end < 0) ?
             ' <span class="text-danger reading" id="editBatch" data-batch-id="'.$batch->id.'">Edit</span>
               <span class="text-danger reading" id="deleteBatch" data-batch-id="'.$batch->id.'">Del</span>
               <span class="text-danger editing" id="cancelBatch" data-batch-id="'.$batch->id.'">Can</span>
