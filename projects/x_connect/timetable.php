@@ -5,7 +5,7 @@
   // include 'includes/login_status.php';
 ?>
 
-<div class="container list" id="timetableOuter">
+<div class="container-fluid list" id="timetableOuter">
   <h2>Time Table</h2>
   <hr>
   <!-- options -->

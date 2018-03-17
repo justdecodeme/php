@@ -296,7 +296,7 @@ function init() {
   selectedDate.value = currentDate();
   // filterStartDate.value = currentDate();
   filterStartDate.value = "2018-03-05";
-  filterEndDate.value = "2018-03-18";
+  filterEndDate.value = "2018-03-25";
   updateTimeTableList(selectedBatch);
   updateTimeTableGrid();
   updateLayout(selectedLayout);

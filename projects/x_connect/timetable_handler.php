@@ -79,7 +79,8 @@
   function update_timetable_grid($from_date, $to_date) {
     global $connection;
 
-    $i = 1;
+    $rowNum = 0;
+    $colNum = 0;
     $timetable_grid = '';
 
     // to find the number of days to generate timetable
@@ -98,46 +99,60 @@
       $statement = $connection->prepare($query);
       $statement->bindParam(":clssDATE", $date);
 
-      if($i == 1 || $i == 9 || $i == 17 || $i == 28) {
+      if((8 * $rowNum) + 1 == $colNum + 1) {
+        $colNum++;
         $timetable_grid .= "
         <tr>
           <td>
-            <p>Time</p>
+            <p>Time $rowNum $colNum</p>
             <p>09:00 AM</p>
             <p>11:30 AM</p>
             <p>02:00 AM</p>
             <p>04:30 AM</p>
           </td>
         ";
-      } else if($i == 8 || $i == 16 || $i == 21 || $i == 29) {
-        $timetable_grid .= '</tr>';
-      } else if($statement->execute() AND $statement->rowCount() !== 0) {
+      }
+
+      if($statement->execute() AND $statement->rowCount() !== 0) {
         $row = $statement->fetchAll(PDO::FETCH_OBJ);
+        $colNum++;
+
+        $classNumber = 1;
+        $totalClass = $statement->rowCount();
 
         foreach($row as $class) {
-          $timetable_grid .= "
-          <td>
-            <p>".date('j M', strtotime($class->date))."</p>
-            <p>$class->class_code</p>
-            <p>$class->instructor_code</p>
-            <p>-</p>
-            <p>-</p>
-          </td>
-          ";
+
+          if($classNumber == 1) {
+            $timetable_grid .= "<td><p>".date('j M', strtotime($class->date)) . " $rowNum  $colNum</p>";
+          }
+          while($totalClass) {
+            $timetable_grid .= "<p>$class->class_code ($class->instructor_code)</p>";
+            $totalClass--;
+            $classNumber++;
+          }
+          while($classNumber !== 4) {
+            $timetable_grid .= "<p>-</p>";
+            $classNumber++;
+          }
+          $timetable_grid .= "</td>";
         }
       } else {
+        $colNum++;
         $timetable_grid .= "
         <td>
-          <p>-</p>
-          <p>-</p>
-          <p>-</p>
-          <p>-</p>
-          <p>-</p>
+        <p>$rowNum $colNum</p>
+        <p>-</p>
+        <p>-</p>
+        <p>-</p>
+        <p>-</p>
         </td>
         ";
       }
 
-      $i++;
+      if(8 * ($rowNum + 1) == $colNum) {
+        $timetable_grid .= '</tr>';
+        $rowNum++;
+      }
     }
     echo $timetable_grid;
 
