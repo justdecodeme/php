@@ -104,7 +104,7 @@
         $timetable_grid .= "
         <tr>
           <td>
-            <p>Time $rowNum $colNum</p>
+            <p>Time</p>
             <p>09:00 AM</p>
             <p>11:30 AM</p>
             <p>02:00 AM</p>
@@ -114,23 +114,22 @@
       }
 
       if($statement->execute() AND $statement->rowCount() !== 0) {
-        $row = $statement->fetchAll(PDO::FETCH_OBJ);
+        $classes = $statement->fetchAll();
         $colNum++;
 
-        $classNumber = 1;
+        $classNumber = 0;
         $totalClass = $statement->rowCount();
 
-        foreach($row as $class) {
-
-          if($classNumber == 1) {
-            $timetable_grid .= "<td><p>".date('j M', strtotime($class->date)) . " $rowNum  $colNum</p>";
+        foreach($classes as $class) {
+          if($classNumber == 0) {
+            $timetable_grid .= "<td><p>".date('j M', strtotime($classes[$classNumber]['date'])) . "</p>";
           }
           while($totalClass) {
-            $timetable_grid .= "<p>$class->class_code ($class->instructor_code)</p>";
+            $timetable_grid .= "<p>".$classes[$classNumber]['class_code']." (". $classes[$classNumber]['instructor_code'] .")</p>";
             $totalClass--;
             $classNumber++;
           }
-          while($classNumber !== 4) {
+          while($classNumber < 4) {
             $timetable_grid .= "<p>-</p>";
             $classNumber++;
           }
@@ -140,7 +139,7 @@
         $colNum++;
         $timetable_grid .= "
         <td>
-        <p>$rowNum $colNum</p>
+        <p>".date('j M', strtotime($date))."</p>
         <p>-</p>
         <p>-</p>
         <p>-</p>
