@@ -82,6 +82,7 @@
     $rowNum = 0;
     $colNum = 0;
     $timetable_grid = '';
+    $now = new DateTime();
 
     // to find the number of days to generate timetable
     $d_start = new DateTime($from_date);
@@ -117,28 +118,36 @@
         $classes = $statement->fetchAll();
         $colNum++;
 
-        $classNumber = 0;
+        $i = 0;
         $totalClass = $statement->rowCount();
 
         foreach($classes as $class) {
-          if($classNumber == 0) {
-            $timetable_grid .= "<td><p>".date('j M', strtotime($classes[$classNumber]['date'])) . "</p>";
+          if($i == 0) {
+            if(date('Y-m-d', strtotime($classes[$i]['date'])) == $now->format('Y-m-d')) {
+              $timetable_grid .= "<td class='table-primary'><p>".date('j M', strtotime($classes[$i]['date'])) . "</p>";
+            } else {
+              $timetable_grid .= "<td><p>".date('j M', strtotime($classes[$i]['date'])) . "</p>";
+            }
           }
           while($totalClass) {
-            $timetable_grid .= "<p>".$classes[$classNumber]['class_code']." (". $classes[$classNumber]['instructor_code'] .")</p>";
+            $timetable_grid .= "<p>".$classes[$i]['class_code']." (". $classes[$i]['instructor_code'] .")</p>";
             $totalClass--;
-            $classNumber++;
+            $i++;
           }
-          while($classNumber < 4) {
+          while($i < 4) {
             $timetable_grid .= "<p></p>";
-            $classNumber++;
+            $i++;
           }
           $timetable_grid .= "</td>";
         }
       } else {
         $colNum++;
+        if($date == $now->format('Y-m-d')) {
+          $timetable_grid .= "<td class='table-primary'>";
+        } else {
+          $timetable_grid .= "<td>";
+        }
         $timetable_grid .= "
-        <td>
         <p>".date('j M', strtotime($date))."</p>
         <p></p>
         <p></p>
@@ -162,6 +171,7 @@
     $rowNum = 0;
     $colNum = 0;
     $timetable_grid = '';
+    $now = new DateTime();
 
     // to find the number of days to generate timetable
     $d_start = new DateTime($from_date);
@@ -197,28 +207,36 @@
         $classes = $statement->fetchAll();
         $colNum++;
 
-        $classNumber = 0;
+        $i = 0;
         $totalClass = $statement->rowCount();
 
         foreach($classes as $class) {
-          if($classNumber == 0) {
-            $timetable_grid .= "<td><p>".date('j M', strtotime($classes[$classNumber]['date'])) . "</p>";
+          if($i == 0) {
+            if(date('Y-m-d', strtotime($classes[$i]['date'])) == $now->format('Y-m-d')) {
+              $timetable_grid .= "<td class='table-primary'><p>".date('j M', strtotime($classes[$i]['date'])) . "</p>";
+            } else {
+              $timetable_grid .= "<td><p>".date('j M', strtotime($classes[$i]['date'])) . "</p>";
+            }
           }
           while($totalClass) {
-            $timetable_grid .= "<p>".$classes[$classNumber]['class_code']." (". $classes[$classNumber]['instructor_code'] .")</p>";
+            $timetable_grid .= "<p>".$classes[$i]['class_code']." (". $classes[$i]['instructor_code'] .")</p>";
             $totalClass--;
-            $classNumber++;
+            $i++;
           }
-          while($classNumber < 4) {
+          while($i < 4) {
             $timetable_grid .= "<p></p>";
-            $classNumber++;
+            $i++;
           }
           $timetable_grid .= "</td>";
         }
       } else {
         $colNum++;
+        if($date == $now->format('Y-m-d')) {
+          $timetable_grid .= "<td class='table-primary'>";
+        } else {
+          $timetable_grid .= "<td>";
+        }
         $timetable_grid .= "
-        <td>
         <p>".date('j M', strtotime($date))."</p>
         <p></p>
         <p></p>
