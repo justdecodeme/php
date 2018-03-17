@@ -139,12 +139,12 @@
             <th>Sun</th>
           </tr>
         </thead>
-        <tbody id="timetableResultGrid"></tbody>
+        <tbody id="timetableResultGrid_A"></tbody>
         <tfoot>
         </tfoot>
       </table>
       <!-- grid-layout | class room B -->
-      <table class="table table-bordered grid-layout d-none" style="margin-top: 10px;">
+      <table class="table table-bordered grid-layout" style="margin-top: 10px;">
         <thead>
           <tr>
             <th></th>
@@ -167,182 +167,7 @@
             <th>Sun</th>
           </tr>
         </thead>
-        <tbody id="timetableResultGrid">
-          <tr>
-            <td>
-              <p>Time</p>
-              <p>09:00 AM</p>
-              <p>11:30 AM</p>
-              <p>02:00 AM</p>
-              <p>04:30 AM</p>
-            </td>
-            <td>
-              <p>05-Mar</p>
-              <p>-</p>
-              <p>-</p>
-              <p>BC33 - Aishwarya</p>
-              <p>BC34 - Rakesh</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>Time</p>
-              <p>09:00 AM</p>
-              <p>11:30 AM</p>
-              <p>02:00 AM</p>
-              <p>04:30 AM</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>Time</p>
-              <p>09:00 AM</p>
-              <p>11:30 AM</p>
-              <p>02:00 AM</p>
-              <p>04:30 AM</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>05-Mar</p>
-              <p>-</p>
-              <p>-</p>
-              <p>BC33 - Aishwarya</p>
-              <p>BC34 - Rakesh</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>05-Mar</p>
-              <p>-</p>
-              <p>-</p>
-              <p>BC33 - Aishwarya</p>
-              <p>BC34 - Rakesh</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>Time</p>
-              <p>09:00 AM</p>
-              <p>11:30 AM</p>
-              <p>02:00 AM</p>
-              <p>04:30 AM</p>
-            </td>
-            <td>
-              <p>05-Mar</p>
-              <p>-</p>
-              <p>-</p>
-              <p>BC33 - Aishwarya</p>
-              <p>BC34 - Rakesh</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-            <td>
-              <p>Time</p>
-              <p>09:00 AM</p>
-              <p>11:30 AM</p>
-              <p>02:00 AM</p>
-              <p>04:30 AM</p>
-            </td>
-            <td>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-              <p>-</p>
-            </td>
-          </tr>
-        </tbody>
+        <tbody id="timetableResultGrid_B"></tbody>
         <tfoot>
         </tfoot>
       </table>

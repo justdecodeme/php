@@ -76,7 +76,7 @@
       echo $timetable_list;
     }
   }
-  function update_timetable_grid($from_date, $to_date) {
+  function update_timetable_grid_A($from_date, $to_date) {
     global $connection;
 
     $rowNum = 0;
@@ -156,6 +156,86 @@
     echo $timetable_grid;
 
   }
+  function update_timetable_grid_B($from_date, $to_date) {
+    global $connection;
+
+    $rowNum = 0;
+    $colNum = 0;
+    $timetable_grid = '';
+
+    // to find the number of days to generate timetable
+    $d_start = new DateTime($from_date);
+    $d_end   = new DateTime($to_date);
+    $d_end   = $d_end->modify( '+1 day' );
+    $interval = new DateInterval('P1D');
+    $daterange = new DatePeriod($d_start, $interval ,$d_end);
+    // $diff = $d_start->diff($d_end);
+    // $total_days = $diff->format('%d') + 1;
+
+    foreach($daterange as $date) {
+      $date   = $date->format("Y-m-d");
+
+      $query = "SELECT * FROM timetable WHERE date=:clssDATE AND `room_code`='b'";
+      $statement = $connection->prepare($query);
+      $statement->bindParam(":clssDATE", $date);
+
+      if((8 * $rowNum) + 1 == $colNum + 1) {
+        $colNum++;
+        $timetable_grid .= "
+        <tr>
+          <td>
+            <p>Time</p>
+            <p>09:00 AM</p>
+            <p>11:30 AM</p>
+            <p>02:00 AM</p>
+            <p>04:30 AM</p>
+          </td>
+        ";
+      }
+
+      if($statement->execute() AND $statement->rowCount() !== 0) {
+        $classes = $statement->fetchAll();
+        $colNum++;
+
+        $classNumber = 0;
+        $totalClass = $statement->rowCount();
+
+        foreach($classes as $class) {
+          if($classNumber == 0) {
+            $timetable_grid .= "<td><p>".date('j M', strtotime($classes[$classNumber]['date'])) . "</p>";
+          }
+          while($totalClass) {
+            $timetable_grid .= "<p>".$classes[$classNumber]['class_code']." (". $classes[$classNumber]['instructor_code'] .")</p>";
+            $totalClass--;
+            $classNumber++;
+          }
+          while($classNumber < 4) {
+            $timetable_grid .= "<p></p>";
+            $classNumber++;
+          }
+          $timetable_grid .= "</td>";
+        }
+      } else {
+        $colNum++;
+        $timetable_grid .= "
+        <td>
+        <p>".date('j M', strtotime($date))."</p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        </td>
+        ";
+      }
+
+      if(8 * ($rowNum + 1) == $colNum) {
+        $timetable_grid .= '</tr>';
+        $rowNum++;
+      }
+    }
+    echo $timetable_grid;
+
+  }
 
   // Update time table on change of batch (list-layout)
   if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableList') {
@@ -163,8 +243,12 @@
   }
 
   // Update time table on change of date (grid-layout)
-  if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableGrid') {
-    update_timetable_grid($_GET['filterStartDate'], $_GET['filterEndDate']);
+  if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableGrid_A') {
+    update_timetable_grid_A($_GET['filterStartDate'], $_GET['filterEndDate']);
+  }
+  // Update time table on change of date (grid-layout)
+  if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableGrid_B') {
+    update_timetable_grid_B($_GET['filterStartDate'], $_GET['filterEndDate']);
   }
 
   // Add class on click of Submit button in tfoot

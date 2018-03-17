@@ -13,7 +13,8 @@ var selectedLayout = document.getElementById('selectedLayout');
 var addClassBtn = document.getElementById('addClassBtn');
 
 var timetableResultList = document.getElementById('timetableResultList');
-var timetableResultGrid = document.getElementById('timetableResultGrid');
+var timetableResultGrid_A = document.getElementById('timetableResultGrid_A');
+var timetableResultGrid_B = document.getElementById('timetableResultGrid_B');
 
 var selectedClassEl = document.getElementById('selectedClass');
 var selectedInstructorEL = document.getElementById('selectedInstructor');
@@ -90,13 +91,25 @@ function updateTimeTableGrid() {
   var xhttp2 = new XMLHttpRequest();
   xhttp2.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     timetableResultGrid.innerHTML = this.responseText;
+     timetableResultGrid_A.innerHTML = this.responseText;
    } else {
      // console.log(this.readyState, this.status);
    }
   };
-  xhttp2.open("GET", "timetable_handler.php?action=updateTimeTableGrid&filterStartDate="+filterStartDate+"&filterEndDate="+filterEndDate, true);  // open(method, url, async)
+  xhttp2.open("GET", "timetable_handler.php?action=updateTimeTableGrid_A&filterStartDate="+filterStartDate+"&filterEndDate="+filterEndDate, true);  // open(method, url, async)
   xhttp2.send();
+
+  // load content from database
+  var xhttp2b = new XMLHttpRequest();
+  xhttp2b.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     timetableResultGrid_B.innerHTML = this.responseText;
+   } else {
+     // console.log(this.readyState, this.status);
+   }
+  };
+  xhttp2b.open("GET", "timetable_handler.php?action=updateTimeTableGrid_B&filterStartDate="+filterStartDate+"&filterEndDate="+filterEndDate, true);  // open(method, url, async)
+  xhttp2b.send();
 }
 
 // Add class on Submit btn click
