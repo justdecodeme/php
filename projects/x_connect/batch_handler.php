@@ -4,6 +4,7 @@
 ?>
 
 <?php
+  
   function update_batch_list($order_by, $ascOrDesc) {
     global $connection;
     $query = "SELECT * FROM batch ORDER BY  $order_by $ascOrDesc";
