@@ -95,7 +95,7 @@
     foreach($daterange as $date) {
       $date   = $date->format("Y-m-d");
 
-      $query = "SELECT * FROM timetable WHERE date=:clssDATE";
+      $query = "SELECT * FROM timetable WHERE date=:clssDATE AND `room_code`='a'";
       $statement = $connection->prepare($query);
       $statement->bindParam(":clssDATE", $date);
 
@@ -130,7 +130,7 @@
             $classNumber++;
           }
           while($classNumber < 4) {
-            $timetable_grid .= "<p>-</p>";
+            $timetable_grid .= "<p></p>";
             $classNumber++;
           }
           $timetable_grid .= "</td>";
@@ -140,10 +140,10 @@
         $timetable_grid .= "
         <td>
         <p>".date('j M', strtotime($date))."</p>
-        <p>-</p>
-        <p>-</p>
-        <p>-</p>
-        <p>-</p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
         </td>
         ";
       }
