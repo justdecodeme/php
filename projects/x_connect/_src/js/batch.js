@@ -218,7 +218,7 @@ init();
 
 /****************Events****************/
 addBatchBtn.addEventListener('click', addClass, false);
-// timetableBatchList.addEventListener('click', individualClassEdit, false);
-// for(var i = 0; i < orderByItems.length; i++) {
-//   orderByItems[i].addEventListener('click', orderClassBy, false);
-// }
+timetableBatchList.addEventListener('click', individualClassEdit, false);
+for(var i = 0; i < orderByItems.length; i++) {
+  orderByItems[i].addEventListener('click', orderClassBy, false);
+}

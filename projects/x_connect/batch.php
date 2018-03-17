@@ -36,7 +36,7 @@
               <span class="up"><i class="fa fa-chevron-up"></i></span>
             </th>
             <!-- total students = students registered for the current course (fro users table) -->
-            <th scope="col" class="ordered-by" data-order-by="total_students">Total Students
+            <th scope="col" class="ordered-by" data-order-by="batch_students">Total Students
               <span class="down"><i class="fa fa-chevron-down"></i></span>
               <span class="up"><i class="fa fa-chevron-up"></i></span>
             </th>
