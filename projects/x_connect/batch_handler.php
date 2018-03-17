@@ -71,10 +71,10 @@
           <td class="edit-delete-buttons">'.
             // (!($diff_in_seconds_end = 0) ? // always true (simple hack to show below buttons for each iteration)
             (!($diff_in_seconds_end < 0) ?
-            ' <span class="text-danger reading" id="editClass" data-class-id="'.$batch->id.'">Edit</span>
-              <span class="text-danger reading" id="deleteClass" data-class-id="'.$batch->id.'">Del</span>
-              <span class="text-danger editing" id="cancelClass" data-class-id="'.$batch->id.'">Can</span>
-              <span class="text-danger editing" id="submitClass" data-class-id="'.$batch->id.'">Sub</span>
+            ' <span class="text-danger reading" id="editBatch" data-batch-id="'.$batch->id.'">Edit</span>
+              <span class="text-danger reading" id="deleteBatch" data-batch-id="'.$batch->id.'">Del</span>
+              <span class="text-danger editing" id="cancelBatch" data-batch-id="'.$batch->id.'">Can</span>
+              <span class="text-danger editing" id="submitBatch" data-batch-id="'.$batch->id.'">Sub</span>
             ' : '')
           .'</td>
         </tr>
@@ -154,23 +154,19 @@
   }
 
   // Delete class on click of delete button
-  if(isset($_POST['action']) && $_POST['action'] == 'deleteClass') {
-    $batch_code = $_POST['batchCode'];
-    $batch_template = $_POST['batchTemplate'];
+  if(isset($_POST['action']) && $_POST['action'] == 'deleteBatch') {
     $orderBy = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];
 
     $delete_id = $_POST['deleteId'];
 
-    $query = "DELETE FROM timetable WHERE id=:deleteId LIMIT 1";
+    $query = "DELETE FROM batch WHERE id=:deleteId LIMIT 1";
     $statement = $connection->prepare($query);
     $statement->bindParam(":deleteId", $delete_id);
     if($statement->execute()) {
-      update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
+      update_batch_list($orderBy, $ascOrDesc);
     } else {
       echo "Something went wrong!";
     }
-
-    // update_timetable_list($batch_code, $batch_template);
   }
  ?>

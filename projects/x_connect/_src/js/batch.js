@@ -12,7 +12,7 @@ var selectedInstructorEL = document.getElementById('selectedInstructor');
 var selectedRoomEL = document.getElementById('selectedRoom');
 
 var editingBatchFlag = false;
-var orderBy = 'batch_start_date';
+var orderBy = 'batch_name';
 var ascOrDesc = 'ASC';
 
 /****************Functions****************/
@@ -46,7 +46,7 @@ function addBatch() {
     var batchStartDate = document.getElementById('selectedBatchStartDate').value;
     var batchEndDate = document.getElementById('selectedBatchEndDate').value;
     var batchStuents = document.getElementById('selectedBatchStuents').value;
-    console.log(batchCode, batchName, batchStartDate, batchEndDate, batchStuents);
+    // console.log(batchCode, batchName, batchStartDate, batchEndDate, batchStuents);
 
     var xhttp2 = new XMLHttpRequest();
     xhttp2.onreadystatechange = function() {
@@ -63,15 +63,15 @@ function addBatch() {
 }
 
 // Edit -> Delete -> Cancel -> Submit class fuctions
-function individualClassEdit(e) {
+function individualBatchEdit(e) {
   e.stopPropagation();
   // delete class -> only if not editing any class
-  if(e.target.id == 'deleteClass' && !editingBatchFlag) {
-    var deleteCalssId = e.target.dataset.classId;
-    console.log('deleting: ' + deleteCalssId);
+  if(e.target.id == 'deleteBatch' && !editingBatchFlag) {
+    var deleteBatchId = e.target.dataset.batchId;
+    console.log('deleting: ' + deleteBatchId);
 
-    var xhttp4 = new XMLHttpRequest();
-    xhttp4.onreadystatechange = function() {
+    var xhttp3 = new XMLHttpRequest();
+    xhttp3.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
        timetableBatchList.innerHTML = this.responseText;
       }
@@ -80,15 +80,15 @@ function individualClassEdit(e) {
     var deleteConfirmation = confirm("Want to delete?");
     if (deleteConfirmation) {
         //Logic to delete the item
-        xhttp4.open("POST", "timetable_handler.php", true);  // open(method, url, async)
-        xhttp4.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp4.send("action=deleteClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&deleteId="+deleteCalssId);
+        xhttp3.open("POST", "batch_handler.php", true);  // open(method, url, async)
+        xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp3.send("action=deleteBatch&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&deleteId="+deleteBatchId);
     } else {
       console.log('Deletion is stopped!');
     }
   }
   // edit class -> only if not editing any class
-  else if(e.target.id == 'editClass' && !editingBatchFlag) {
+  else if(e.target.id == 'editBatch' && !editingBatchFlag) {
     var editClassId = e.target.dataset.classId;
     console.log('editing: ' + editClassId);
 
@@ -145,14 +145,14 @@ function individualClassEdit(e) {
     elementEditingRoom.innerHTML = '<select class="custom-select" id="editingRoom">'+roomsList+'</select>';
   }
   // cancel class -> if editing any class
-  else if(e.target.id == 'cancelClass' && editingBatchFlag) {
+  else if(e.target.id == 'cancelBatch' && editingBatchFlag) {
     var cancelClassId = e.target.dataset.classId;
     console.log('cancelling: ' + cancelClassId);
 
     updateBatchList();
   }
   // submit class -> if editing any class
-  else if(e.target.id == 'submitClass' && editingBatchFlag) {
+  else if(e.target.id == 'submitBatch' && editingBatchFlag) {
     var submitClassId = e.target.dataset.classId;
     console.log('submitting: ' + submitClassId);
 
@@ -219,7 +219,7 @@ init();
 
 /****************Events****************/
 addBatchBtn.addEventListener('click', addBatch, false);
-timetableBatchList.addEventListener('click', individualClassEdit, false);
+timetableBatchList.addEventListener('click', individualBatchEdit, false);
 for(var i = 0; i < orderByItems.length; i++) {
   orderByItems[i].addEventListener('click', orderClassBy, false);
 }
