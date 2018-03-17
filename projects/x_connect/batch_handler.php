@@ -4,7 +4,6 @@
 ?>
 
 <?php
-  
   function update_batch_list($order_by, $ascOrDesc) {
     global $connection;
     $query = "SELECT * FROM batch ORDER BY  $order_by $ascOrDesc";
@@ -18,6 +17,13 @@
 
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
       foreach($row as $batch) {
+
+        $query = "SELECT COUNT(*) FROM users WHERE batch_code='$batch->batch_code'";
+        $statement = $connection->prepare($query);
+
+        if($statement->execute()) {
+          $students = $statement->fetchColumn();
+        }
 
         // highlight rows for past | present | future classes
         $batch_start_date = date('Y-m-d', strtotime($batch->batch_start_date));
@@ -66,8 +72,8 @@
           <td class="edit-batch-end-date ' . $row_highlight_class_end . '" data-batch-end-date='.$batch->batch_end_date.'>'.
             date('j M y | D', strtotime($batch->batch_end_date))
           .'</td>
-          <td class="edit-batch-students" data-batch-students='.$batch->batch_students.'>'.
-            $batch->batch_students
+          <td class="edit-batch-students" data-batch-students='.$students.'>'.
+            $students
           .'</td>
           <td class="edit-delete-buttons">'.
             (!($diff_in_seconds_end = 0) ? // always true (simple hack to show below buttons for each iteration)
