@@ -124,7 +124,7 @@
         foreach($classes as $class) {
           if($i == 0) {
             if(date('Y-m-d', strtotime($classes[$i]['date'])) == $now->format('Y-m-d')) {
-              $timetable_grid .= "<td class='table-primary'><p>".date('j M', strtotime($classes[$i]['date'])) . "</p>";
+              $timetable_grid .= "<td class='table-success'><p>".date('j M', strtotime($classes[$i]['date'])) . "</p>";
             } else {
               $timetable_grid .= "<td><p>".date('j M', strtotime($classes[$i]['date'])) . "</p>";
             }
@@ -143,7 +143,7 @@
       } else {
         $colNum++;
         if($date == $now->format('Y-m-d')) {
-          $timetable_grid .= "<td class='table-primary'>";
+          $timetable_grid .= "<td class='table-success'>";
         } else {
           $timetable_grid .= "<td>";
         }
@@ -213,7 +213,7 @@
         foreach($classes as $class) {
           if($i == 0) {
             if(date('Y-m-d', strtotime($classes[$i]['date'])) == $now->format('Y-m-d')) {
-              $timetable_grid .= "<td class='table-primary'><p>".date('j M', strtotime($classes[$i]['date'])) . "</p>";
+              $timetable_grid .= "<td class='table-success'><p>".date('j M', strtotime($classes[$i]['date'])) . "</p>";
             } else {
               $timetable_grid .= "<td><p>".date('j M', strtotime($classes[$i]['date'])) . "</p>";
             }
@@ -232,7 +232,7 @@
       } else {
         $colNum++;
         if($date == $now->format('Y-m-d')) {
-          $timetable_grid .= "<td class='table-primary'>";
+          $timetable_grid .= "<td class='table-success'>";
         } else {
           $timetable_grid .= "<td>";
         }
