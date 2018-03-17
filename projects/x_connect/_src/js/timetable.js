@@ -295,8 +295,8 @@ function orderClassBy(e) {
 function init() {
   selectedDate.value = currentDate();
   // filterStartDate.value = currentDate();
-  filterStartDate.value = "2018-03-02";
-  filterEndDate.value = "2018-03-25";
+  filterStartDate.value = "2018-03-05";
+  filterEndDate.value = "2018-03-18";
   updateTimeTableList(selectedBatch);
   updateTimeTableGrid();
   updateLayout(selectedLayout);

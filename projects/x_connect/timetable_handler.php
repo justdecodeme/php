@@ -78,55 +78,44 @@
   }
   function update_timetable_grid($from_date, $to_date) {
     global $connection;
-    $query = "SELECT * FROM timetable WHERE date>=:fromDate AND date<=:toDate ORDER BY date";
-    $statement = $connection->prepare($query);
-    $statement->bindParam(":fromDate", $from_date);
-    $statement->bindParam(":toDate", $to_date);
-
-    // to find the number of days to generate timetable
-    $d_start    = new DateTime($from_date);
-    $d_end      = new DateTime($to_date);
-    $diff = $d_start->diff($d_end);
-    $total_days = $diff->format('%d') + 1;
 
     $i = 1;
     $timetable_grid = '';
 
-    if($statement->execute()) {
+    // to find the number of days to generate timetable
+    $d_start = new DateTime($from_date);
+    $d_end   = new DateTime($to_date);
+    $d_end   = $d_end->modify( '+1 day' );
+    $interval = new DateInterval('P1D');
+    $daterange = new DatePeriod($d_start, $interval ,$d_end);
+    // $diff = $d_start->diff($d_end);
+    // $total_days = $diff->format('%d') + 1;
 
-      // for($i = 1; i <= $total_days; $i = $i + 7) {
-      //   $timetable_grid = '
-      //     <tr>
-      //       <td>
-      //         <p>Time</p>
-      //         <p>09:00 AM</p>
-      //         <p>11:30 AM</p>
-      //         <p>02:00 AM</p>
-      //         <p>04:30 AM</p>
-      //       </td>
-      //   ';
-      //   for($j = 1; i <= 7; $j++) {
-      //
-      //   }
-      // }
+    foreach($daterange as $date) {
+      $date   = $date->format("Y-m-d");
 
-      $row = $statement->fetchAll(PDO::FETCH_OBJ);
+      $query = "SELECT * FROM timetable WHERE date=:clssDATE";
+      $statement = $connection->prepare($query);
+      $statement->bindParam(":clssDATE", $date);
 
-      foreach($row as $class) {
-        // echo $i . '* | ' . $class->date . '<br>';
-        if($i == 1 || $i == 9 || $i == 17 || $i == 28) {
-          $timetable_grid .= "
-            <tr>
-              <td>
-                <p>Time</p>
-                <p>09:00 AM</p>
-                <p>11:30 AM</p>
-                <p>02:00 AM</p>
-                <p>04:30 AM</p>
-              </td>
-          ";
-        }
+      if($i == 1 || $i == 9 || $i == 17 || $i == 28) {
         $timetable_grid .= "
+        <tr>
+          <td>
+            <p>Time</p>
+            <p>09:00 AM</p>
+            <p>11:30 AM</p>
+            <p>02:00 AM</p>
+            <p>04:30 AM</p>
+          </td>
+        ";
+      } else if($i == 8 || $i == 16 || $i == 21 || $i == 29) {
+        $timetable_grid .= '</tr>';
+      } else if($statement->execute() AND $statement->rowCount() !== 0) {
+        $row = $statement->fetchAll(PDO::FETCH_OBJ);
+
+        foreach($row as $class) {
+          $timetable_grid .= "
           <td>
             <p>".date('j M', strtotime($class->date))."</p>
             <p>$class->class_code</p>
@@ -134,14 +123,24 @@
             <p>-</p>
             <p>-</p>
           </td>
-        ";
-        if($i == 8 || $i == 16 || $i == 21 || $i == 29) {
-          $timetable_grid .= '</tr>';
+          ";
         }
-        $i++;
+      } else {
+        $timetable_grid .= "
+        <td>
+          <p>-</p>
+          <p>-</p>
+          <p>-</p>
+          <p>-</p>
+          <p>-</p>
+        </td>
+        ";
       }
-      echo $timetable_grid;
+
+      $i++;
     }
+    echo $timetable_grid;
+
   }
 
   // Update time table on change of batch (list-layout)

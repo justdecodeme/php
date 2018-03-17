@@ -49,8 +49,8 @@
       <form class="form-block">
           <label for="selectedLayout">Select Layout</label>
           <select class="custom-select" id="selectedLayout">
-            <option value="list" selected>List View</option>
-            <option value="grid" >Grid View</option>
+            <option value="list" >List View</option>
+            <option value="grid" selected>Grid View</option>
           </select>
       </form>
     </div>
