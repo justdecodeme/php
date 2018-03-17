@@ -18,9 +18,11 @@
           <form class="form-block">
             <label for="selectedBatch">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Manage</a></small></label>
             <select class="custom-select my-1" id="selectedBatch">
-              <option value="bc180305" data-template="bootcamp" selected>bc180305 (Bootcamp)</option>
+              <option value="bc180305a" data-template="bootcamp" selected>bc180305a (Bootcamp)</option>
+              <option value="bc180305b" data-template="bootcamp" selected>bc180305b (Bootcamp)</option>
               <option value="u180325" data-template="unity">u180325 (Unity)</option>
               <option value="gr180325" data-template="graphic" >gr180325 (Graphic Design)</option>
+              <option value="wd180325" data-template="development" >wd180325 (Web Development)</option>
               <option value="php180325" data-template="php" >php180325 (PHP & MySQL)</option>
             </select>
           </form>
