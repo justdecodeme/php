@@ -12,29 +12,44 @@
     if($statement->execute()) {
       $batch_list = '';
       $i = 1;
+      $now_date = date("Y-m-d", time());
+      $now_date_seconds = strtotime($now_date);
 
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
       foreach($row as $batch) {
 
         // highlight rows for past | present | future classes
-        $batch_end_date = date('Y-m-d', strtotime($batch->batch_end_date));
-        $now_date = date("Y-m-d", time());
-        $batch_date_seconds = strtotime($batch_end_date);
-        $now_date_seconds = strtotime($now_date);
-        $diff_in_seconds = $batch_date_seconds - $now_date_seconds;
+        $batch_start_date = date('Y-m-d', strtotime($batch->batch_start_date));
+        $batch_date_seconds = strtotime($batch_start_date);
+        $diff_in_seconds_start = $batch_date_seconds - $now_date_seconds;
         // past
-        if($diff_in_seconds < 0) {
-          $row_highlight_class = 'table-active';
+        if($diff_in_seconds_start < 0) {
+          $row_highlight_class_start = 'table-active';
           // future
-        } else if($diff_in_seconds > 0) {
-          $row_highlight_class = 'table-primary';
+        } else if($diff_in_seconds_start > 0) {
+          $row_highlight_class_start = 'table-primary';
           // present
         } else {
-          $row_highlight_class = 'table-success';
+          $row_highlight_class_start = 'table-success';
+        }
+
+        // highlight rows for past | present | future classes
+        $batch_end_date = date('Y-m-d', strtotime($batch->batch_end_date));
+        $batch_date_seconds = strtotime($batch_end_date);
+        $diff_in_seconds_end = $batch_date_seconds - $now_date_seconds;
+        // past
+        if($diff_in_seconds_end < 0) {
+          $row_highlight_class_end = 'table-active';
+          // future
+        } else if($diff_in_seconds_end > 0) {
+          $row_highlight_class_end = 'table-primary';
+          // present
+        } else {
+          $row_highlight_class_end = 'table-success';
         }
 
         $batch_list .= '
-        <tr class="'.$row_highlight_class.'" id="editbatch_'.$batch->id.'">
+        <tr id="editbatch_'.$batch->id.'">
           <td scope="row">'.
             $i
           .'</td>
@@ -44,10 +59,10 @@
           <td class="edit-batch" data-batch='.$batch->batch_name.'>'.
           $batch->batch_name
           .'</td>
-          <td class="edit-start-date" data-startdate='.$batch->batch_start_date.'>'.
+          <td class="edit-start-date ' . $row_highlight_class_start . '" data-startdate='.$batch->batch_start_date.'>'.
             date('j M y | D', strtotime($batch->batch_start_date))
           .'</td>
-          <td class="edit-end-date" data-enddate='.$batch->batch_end_date.'>'.
+          <td class="edit-end-date ' . $row_highlight_class_end . '" data-enddate='.$batch->batch_end_date.'>'.
             date('j M y | D', strtotime($batch->batch_end_date))
           .'</td>
           <td class="edit-end-date" data-enddate='.$batch->batch_students.'>'.
