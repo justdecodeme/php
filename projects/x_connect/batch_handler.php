@@ -49,23 +49,23 @@
         }
 
         $batch_list .= '
-        <tr id="editbatch_'.$batch->id.'">
+        <tr id="editBatch_'.$batch->id.'">
           <td scope="row">'.
             $i
           .'</td>
-          <td class="edit-batch" data-batch='.$batch->batch_code.'>'.
+          <td class="edit-batch-code" data-batch-code='.$batch->batch_code.'>'.
           $batch->batch_code
           .'</td>
-          <td class="edit-batch" data-batch='.$batch->batch_name.'>'.
+          <td class="edit-batch-name" data-batch-name='.$batch->batch_name.'>'.
           $batch->batch_name
           .'</td>
-          <td class="edit-start-date ' . $row_highlight_class_start . '" data-startdate='.$batch->batch_start_date.'>'.
+          <td class="edit-batch-start-date ' . $row_highlight_class_start . '" data-batch-start-date='.$batch->batch_start_date.'>'.
             date('j M y | D', strtotime($batch->batch_start_date))
           .'</td>
-          <td class="edit-end-date ' . $row_highlight_class_end . '" data-enddate='.$batch->batch_end_date.'>'.
+          <td class="edit-batch-end-date ' . $row_highlight_class_end . '" data-batch-end-date='.$batch->batch_end_date.'>'.
             date('j M y | D', strtotime($batch->batch_end_date))
           .'</td>
-          <td class="edit-end-date" data-enddate='.$batch->batch_students.'>'.
+          <td class="edit-batch-students" data-batch-students='.$batch->batch_students.'>'.
             $batch->batch_students
           .'</td>
           <td class="edit-delete-buttons">'.
@@ -115,45 +115,42 @@
     }
   }
 
-  // Submit class on click of submit button after editing
-  if(isset($_POST['action']) && $_POST['action'] == 'submitClass') {
-    $batch_code = $_POST['batchCode'];
-    $batch_template = $_POST['batchTemplate'];
+  // Submit batch on click of submit button after editing
+  if(isset($_POST['action']) && $_POST['action'] == 'submitBatch') {
     $orderBy = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];
 
-    $date = $_POST['date'];
-    $class_code = $_POST['classCode'];
-    $instructor_code = $_POST['instructorCode'];
-    $start_time = $_POST['startTime'];
-    $end_time = $_POST['endTime'];
-    $room_code = $_POST['roomCode'];
+    $batch_code = $_POST['batchCode'];
+    // $batch_template = $_POST['batchTemplate'];
+    $batch_name = $_POST['batchName'];
+    $batch_start_date = $_POST['batchStartDate'];
+    $batch_end_date = $_POST['batchEndDate'];
+    $batch_students = $_POST['batchStuents'];
 
     $submit_id = $_POST['submitId'];
 
-    $query = "UPDATE `timetable`
+    $query = "UPDATE `batch`
       SET
-        `date` = :SELECTED_DATE,
-        `class_code` = :CLASS_CODE,
-        `instructor_code` = :INSTRUCTOR_CODE,
-        `start_time` = :STARTTIME,
-        `end_time` = :ENDTIME,
-        `room_code` = :ROOM
+        `batch_code` = :BATCH_CODE,
+        `batch_name` = :BATCH_NAME,
+        `batch_start_date` = :BATCH_START_DATE,
+        `batch_end_date` = :BATCH_END_DATE,
+        `batch_students` = :BATCH_STUDENTS
       WHERE
         `id` = $submit_id
       LIMIT 1";
     $statement = $connection->prepare($query);
-    $params = array ('SELECTED_DATE'=>$date,'CLASS_CODE'=>$class_code,'INSTRUCTOR_CODE'=>$instructor_code,'STARTTIME'=>$start_time,'ENDTIME'=>$end_time,'ROOM'=>$room_code);
+    $params = array ('BATCH_CODE'=>$batch_code,'BATCH_NAME'=>$batch_name,'BATCH_START_DATE'=>$batch_start_date,'BATCH_END_DATE'=>$batch_end_date,'BATCH_STUDENTS'=>$batch_students);
 
     // Update timetable if query is successful
     if($statement->execute($params)) {
-      update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
+      update_batch_list($orderBy, $ascOrDesc);
     } else {
       echo "Something went wrong!";
     }
   }
 
-  // Delete class on click of delete button
+  // Delete batch on click of delete button
   if(isset($_POST['action']) && $_POST['action'] == 'deleteBatch') {
     $orderBy = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];

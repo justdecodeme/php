@@ -65,7 +65,7 @@ function addBatch() {
 // Edit -> Delete -> Cancel -> Submit class fuctions
 function individualBatchEdit(e) {
   e.stopPropagation();
-  // delete class -> only if not editing any class
+  // delete batch -> only if not editing any batch
   if(e.target.id == 'deleteBatch' && !editingBatchFlag) {
     var deleteBatchId = e.target.dataset.batchId;
     console.log('deleting: ' + deleteBatchId);
@@ -87,95 +87,58 @@ function individualBatchEdit(e) {
       console.log('Deletion is stopped!');
     }
   }
-  // edit class -> only if not editing any class
+  // edit batch -> only if not editing any batch
   else if(e.target.id == 'editBatch' && !editingBatchFlag) {
-    var editClassId = e.target.dataset.classId;
-    console.log('editing: ' + editClassId);
+    var editBatchId = e.target.dataset.batchId;
+    console.log('editing: ' + editBatchId);
 
     editingBatchFlag = true;
 
-    var elementEditing = document.getElementById('editClass_'+editClassId);
-    var elementEditingDate = elementEditing.querySelector('.edit-date');
-    var elementEditingClass = elementEditing.querySelector('.edit-class');
-    var elementEditingInstructor = elementEditing.querySelector('.edit-instructor');
-    var elementEditingTime = elementEditing.querySelector('.edit-time');
-    var elementEditingRoom = elementEditing.querySelector('.edit-room');
+    var elementEditing = document.getElementById('editBatch_'+editBatchId);
+    var elementEditingCode = elementEditing.querySelector('.edit-batch-code');
+    var elementEditingName = elementEditing.querySelector('.edit-batch-name');
+    var elementEditingStartDate = elementEditing.querySelector('.edit-batch-start-date');
+    var elementEditingEndDate = elementEditing.querySelector('.edit-batch-end-date');
+    var elementEditingStudents = elementEditing.querySelector('.edit-batch-students');
 
     elementEditing.classList.add('editing-class');
-    elementEditingDate.innerHTML = '<input type="date" class="form-control" id="editingDate" value="'+elementEditingDate.dataset.date+'">';
-    elementEditingTime.classList.add('time-picker');
-    elementEditingTime.innerHTML = '<input type="time" class="form-control" id="editingStartTime" value="'+elementEditingTime.dataset.starttime+'"><input type="time" class="form-control" id="editingEndTime" value="'+elementEditingTime.dataset.endtime+'">';
-
-    // load classses from json, based on batch template selected
-    var classesObj = batchData[batchTemplate]['classes'];
-    var classesList = '';
-    for (var classCode in classesObj) {
-      if(classCode == elementEditingClass.dataset.class) {
-        classesList += '<option value="'+classCode+'" selected>'+classesObj[classCode]+'</option>';
-      } else {
-        classesList += '<option value="'+classCode+'">'+classesObj[classCode]+'</option>';
-      }
-    }
-    elementEditingClass.innerHTML = '<select class="custom-select" id="editingClass">'+classesList+'</select>';;
-
-    // load instructors from json, based on batch template selected
-    var instructorsObj = batchData[batchTemplate]['instructors'];
-    var instructorsList = '';
-
-    for (var instructorCode in instructorsObj) {
-      if(instructorCode == elementEditingInstructor.dataset.instructor) {
-        instructorsList += '<option value="'+instructorCode+'" selected>'+instructorsObj[instructorCode]+'</option>';
-      } else {
-        instructorsList += '<option value="'+instructorCode+'">'+instructorsObj[instructorCode]+'</option>';
-      }
-    }
-    elementEditingInstructor.innerHTML = '<select class="custom-select" id="editingInstructors">'+instructorsList+'</select>';;
-
-    // load rooms from json, based on batch template selected
-    var roomsObj = batchData[batchTemplate]['rooms'];
-    var roomsList = '';
-
-    for (var roomCode in roomsObj) {
-      if(roomCode == elementEditingRoom.dataset.room) {
-        roomsList += '<option value="'+roomCode+'" selected>'+roomsObj[roomCode]+'</option>';
-      } else {
-        roomsList += '<option value="'+roomCode+'">'+roomsObj[roomCode]+'</option>';
-      }
-    }
-    elementEditingRoom.innerHTML = '<select class="custom-select" id="editingRoom">'+roomsList+'</select>';
+    elementEditingCode.innerHTML = '<input type="text" class="form-control" id="editingCode" value="'+elementEditingCode.dataset.batchCode+'">';
+    elementEditingName.innerHTML = '<input type="text" class="form-control" id="editingName" value="'+elementEditingName.dataset.batchName+'">';
+    elementEditingStartDate.innerHTML = '<input type="date" class="form-control" id="editingStartDate" value="'+elementEditingStartDate.dataset.batchStartDate+'">';
+    elementEditingEndDate.innerHTML = '<input type="date" class="form-control" id="editingEndDate" value="'+elementEditingEndDate.dataset.batchEndDate+'">';
+    elementEditingStudents.innerHTML = '<input type="number" class="form-control" id="editingStudents" value="'+elementEditingStudents.dataset.batchStudents+'">';
   }
-  // cancel class -> if editing any class
+  // cancel batch -> if editing any batch
   else if(e.target.id == 'cancelBatch' && editingBatchFlag) {
-    var cancelClassId = e.target.dataset.classId;
-    console.log('cancelling: ' + cancelClassId);
+    var cancelBatchId = e.target.dataset.batchId;
+    console.log('cancelling: ' + cancelBatchId);
 
     updateBatchList();
   }
-  // submit class -> if editing any class
+  // submit batch -> if editing any batch
   else if(e.target.id == 'submitBatch' && editingBatchFlag) {
-    var submitClassId = e.target.dataset.classId;
-    console.log('submitting: ' + submitClassId);
+    var submitBatchId = e.target.dataset.batchId;
+    console.log('submitting: ' + submitBatchId);
 
-    var date = document.getElementById('editingDate').value;
-    var classCode = document.getElementById('editingClass').value;
-    var instructorCode = document.getElementById('editingInstructors').value;
-    var startTime = document.getElementById('editingStartTime').value;
-    var endTime = document.getElementById('editingEndTime').value;
-    var roomCode = document.getElementById('editingRoom').value;
-    // console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
+    var batchCode = document.getElementById('editingCode').value;
+    var batchName = document.getElementById('editingName').value;
+    var batchStartDate = document.getElementById('editingStartDate').value;
+    var batchEndDate = document.getElementById('editingEndDate').value;
+    var batchStuents = document.getElementById('editingStudents').value;
+    // console.log(batchCode, batchName, batchStartDate, batchEndDate, batchStuents);
 
-    var xhttp5 = new XMLHttpRequest();
-    xhttp5.onreadystatechange = function() {
+    var xhttp4 = new XMLHttpRequest();
+    xhttp4.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         timetableBatchList.innerHTML = this.responseText;
         editingBatchFlag = false;
       }
     };
-    xhttp5.open("POST", "timetable_handler.php", true);  // open(method, url, async)
-    xhttp5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp5.send("action=submitClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+
-    "&ascOrDesc="+ascOrDesc+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+
-    "&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode+"&submitId="+submitClassId);
+    xhttp4.open("POST", "batch_handler.php", true);  // open(method, url, async)
+    xhttp4.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp4.send("action=submitBatch&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&batchCode="+batchCode+
+    "&batchName="+batchName+"&batchStartDate="+batchStartDate+"&batchEndDate="+batchEndDate+
+    "&batchStuents="+batchStuents+"&submitId="+submitBatchId);
   }
 }
 
