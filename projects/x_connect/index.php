@@ -9,8 +9,16 @@
   <hr>
   <div class="row">
     <div class="col-md-3">
+      <a class="card" href="batch.php">
+        <img class="card-img-top" src="./_assets/images/batch.png" alt="Card image cap">
+        <div class="card-body" style="padding: 1rem;">
+          <h4 class="card-title text-center" style="margin: 0;">Batches</h4>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
       <a class="card" href="timetable.php">
-        <img class="card-img-top" src="./_assets/images/time-table.jpg" alt="Card image cap">
+        <img class="card-img-top" src="./_assets/images/timetable.jpg" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">
           <h4 class="card-title text-center" style="margin: 0;">Time Table</h4>
         </div>
