@@ -91,29 +91,27 @@
   }
 
   // Add class on click of Submit button in tfoot
-  if(isset($_POST['action']) && $_POST['action'] == 'addClass') {
-    $batch_code = $_POST['batchCode'];
-    $batch_template = $_POST['batchTemplate'];
+  if(isset($_POST['action']) && $_POST['action'] == 'addBatch') {
     $orderBy = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];
 
-    $date = $_POST['date'];
-    $class_code = $_POST['classCode'];
-    $instructor_code = $_POST['instructorCode'];
-    $start_time = $_POST['startTime'];
-    $end_time = $_POST['endTime'];
-    $room_code = $_POST['roomCode'];
+    $batch_code = $_POST['batchCode'];
+    // $batch_template = $_POST['batchTemplate'];
+    $batch_name = $_POST['batchName'];
+    $batch_start_date = $_POST['batchStartDate'];
+    $batch_end_date = $_POST['batchEndDate'];
+    $batch_students = $_POST['batchStuents'];
 
-    $query = "INSERT INTO `timetable`
-    ( `batch_code`, `date`, `class_code`, `instructor_code`, `start_time`, `end_time`, `room_code`)
+    $query = "INSERT INTO `batch`
+    ( `batch_code`, `batch_name`, `batch_start_date`, `batch_end_date`, `batch_students`)
     VALUES
-    (:BATCH_CODE,:SELECTED_DATE,:CLASS_CODE,:INSTRUCTOR_CODE,:STARTTIME,:ENDTIME,:ROOM)";
+    (:BATCH_CODE,:BATCH_NAME,:BATCH_START_DATE,:BATCH_END_DATE,:BATCH_STUDENTS)";
     $statement = $connection->prepare($query);
-    $params = array ('BATCH_CODE'=>$batch_code,'SELECTED_DATE'=>$date,'CLASS_CODE'=>$class_code,'INSTRUCTOR_CODE'=>$instructor_code,'STARTTIME'=>$start_time,'ENDTIME'=>$end_time,'ROOM'=>$room_code);
+    $params = array ('BATCH_CODE'=>$batch_code,'BATCH_NAME'=>$batch_name,'BATCH_START_DATE'=>$batch_start_date,'BATCH_END_DATE'=>$batch_end_date,'BATCH_STUDENTS'=>$batch_students);
 
     // Update timetable if query is successful
     if($statement->execute($params)) {
-      update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
+      update_batch_list($orderBy, $ascOrDesc);
     }
   }
 

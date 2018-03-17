@@ -11,7 +11,7 @@ var selectedClassEl = document.getElementById('selectedClass');
 var selectedInstructorEL = document.getElementById('selectedInstructor');
 var selectedRoomEL = document.getElementById('selectedRoom');
 
-var editingClassFlag = false;
+var editingBatchFlag = false;
 var orderBy = 'batch_start_date';
 var ascOrDesc = 'ASC';
 
@@ -21,7 +21,7 @@ var ascOrDesc = 'ASC';
 function updateBatchList() {
   console.log('batch list updating...');
 
-  editingClassFlag = false;
+  editingBatchFlag = false;
 
   // load content from database
   var xhttp1 = new XMLHttpRequest();
@@ -37,27 +37,28 @@ function updateBatchList() {
 }
 
 // Add class on Submit btn click
-function addClass() {
-  if(!editingClassFlag) {
+function addBatch() {
+  if(!editingBatchFlag) {
     console.log('adding');
 
-    var date = document.getElementById('selectedDate').value;
-    var classCode = document.getElementById('selectedClass').value;
-    var instructorCode = document.getElementById('selectedInstructor').value;
-    var startTime = document.getElementById('selectedStartTime').value;
-    var endTime = document.getElementById('selectedEndTime').value;
-    var roomCode = document.getElementById('selectedRoom').value;
-    // console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
+    var batchCode = document.getElementById('selectedBatchCode').value;
+    var batchName = document.getElementById('selectedBatchName').value;
+    var batchStartDate = document.getElementById('selectedBatchStartDate').value;
+    var batchEndDate = document.getElementById('selectedBatchEndDate').value;
+    var batchStuents = document.getElementById('selectedBatchStuents').value;
+    console.log(batchCode, batchName, batchStartDate, batchEndDate, batchStuents);
 
-    var xhttp3 = new XMLHttpRequest();
-    xhttp3.onreadystatechange = function() {
+    var xhttp2 = new XMLHttpRequest();
+    xhttp2.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         timetableBatchList.innerHTML = this.responseText;
       }
     };
-    xhttp3.open("POST", "timetable_handler.php", true);  // open(method, url, async)
-    xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp3.send("action=addClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode);
+    xhttp2.open("POST", "batch_handler.php", true);  // open(method, url, async)
+    xhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp2.send("action=addBatch&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&batchCode="+batchCode+
+    "&batchName="+batchName+"&batchStartDate="+batchStartDate+"&batchEndDate="+batchEndDate+
+    "&batchStuents="+batchStuents);
   }
 }
 
@@ -65,7 +66,7 @@ function addClass() {
 function individualClassEdit(e) {
   e.stopPropagation();
   // delete class -> only if not editing any class
-  if(e.target.id == 'deleteClass' && !editingClassFlag) {
+  if(e.target.id == 'deleteClass' && !editingBatchFlag) {
     var deleteCalssId = e.target.dataset.classId;
     console.log('deleting: ' + deleteCalssId);
 
@@ -87,11 +88,11 @@ function individualClassEdit(e) {
     }
   }
   // edit class -> only if not editing any class
-  else if(e.target.id == 'editClass' && !editingClassFlag) {
+  else if(e.target.id == 'editClass' && !editingBatchFlag) {
     var editClassId = e.target.dataset.classId;
     console.log('editing: ' + editClassId);
 
-    editingClassFlag = true;
+    editingBatchFlag = true;
 
     var elementEditing = document.getElementById('editClass_'+editClassId);
     var elementEditingDate = elementEditing.querySelector('.edit-date');
@@ -144,14 +145,14 @@ function individualClassEdit(e) {
     elementEditingRoom.innerHTML = '<select class="custom-select" id="editingRoom">'+roomsList+'</select>';
   }
   // cancel class -> if editing any class
-  else if(e.target.id == 'cancelClass' && editingClassFlag) {
+  else if(e.target.id == 'cancelClass' && editingBatchFlag) {
     var cancelClassId = e.target.dataset.classId;
     console.log('cancelling: ' + cancelClassId);
 
     updateBatchList();
   }
   // submit class -> if editing any class
-  else if(e.target.id == 'submitClass' && editingClassFlag) {
+  else if(e.target.id == 'submitClass' && editingBatchFlag) {
     var submitClassId = e.target.dataset.classId;
     console.log('submitting: ' + submitClassId);
 
@@ -167,7 +168,7 @@ function individualClassEdit(e) {
     xhttp5.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         timetableBatchList.innerHTML = this.responseText;
-        editingClassFlag = false;
+        editingBatchFlag = false;
       }
     };
     xhttp5.open("POST", "timetable_handler.php", true);  // open(method, url, async)
@@ -217,7 +218,7 @@ function init() {
 init();
 
 /****************Events****************/
-addBatchBtn.addEventListener('click', addClass, false);
+addBatchBtn.addEventListener('click', addBatch, false);
 timetableBatchList.addEventListener('click', individualClassEdit, false);
 for(var i = 0; i < orderByItems.length; i++) {
   orderByItems[i].addEventListener('click', orderClassBy, false);

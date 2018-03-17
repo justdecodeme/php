@@ -57,19 +57,19 @@
           <tr>
             <td></td>
             <td>
-              <input type="text" class="form-control" id="selectedBatchCode" placeholder="bc180305">
+              <input type="text" class="form-control" id="selectedBatchCode" placeholder="bc180305" required>
             </td>
             <td>
-              <input type="text" class="form-control" id="selectedBatchName" placeholder="Bootcamp">
+              <input type="text" class="form-control" id="selectedBatchName" placeholder="Bootcamp" required>
             </td>
             <td>
-              <input type="date" class="form-control" id="selectedStartDate" value="2018-03-01">
+              <input type="date" class="form-control" id="selectedBatchStartDate" value="2018-03-01" required>
             </td>
             <td>
-              <input type="date" class="form-control" id="selectedEndDate" value="2018-04-30">
+              <input type="date" class="form-control" id="selectedBatchEndDate" value="2018-04-30" required>
             </td>
             <td>
-              <input type="number" class="form-control" id="selectedStuents" value="0">
+              <input type="number" class="form-control" id="selectedBatchStuents" value="0" required>
             </td>
             <td>
               <button class="btn btn-outline-danger" id="addBatchBtn">Add Batch</button>
