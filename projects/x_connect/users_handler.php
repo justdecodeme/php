@@ -6,9 +6,13 @@
 <?php
   function update_users_list($code, $order_by, $ascOrDesc) {
     global $connection;
-    $query = "SELECT * FROM users WHERE batch_code=:batchCode ORDER BY $order_by $ascOrDesc";
+    if($code == 'all') {
+      $code = '';
+    }
+
+    // $query = "SELECT * FROM users WHERE ("."batch_code LIKE $code AND role LIKE '%student%' ".") ORDER BY $order_by $ascOrDesc";
+    $query = "SELECT * FROM users WHERE batch_code LIKE '%$code%' ORDER BY $order_by $ascOrDesc";
     $statement = $connection->prepare($query);
-    $statement->bindParam(":batchCode", $code);
 
     if($statement->execute()) {
       $users_list = '';
@@ -32,6 +36,12 @@
           .'</td>
           <td class="edit-code" data-code='.$user->student_code.'>'.
           $user->student_code
+          .'</td>
+          <td class="edit-code" data-code='.$user->batch_code.'>'.
+          $user->batch_code
+          .'</td>
+          <td class="edit-code" data-code='.$user->instructor_code.'>'.
+          $user->instructor_code
           .'</td>
           <td class="edit-gender" data-gender='.$user->gender.'>'.
             $user->gender

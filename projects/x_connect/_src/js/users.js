@@ -91,6 +91,7 @@ function init() {
 init();
 
 /****************Events****************/
+selectedBatch.addEventListener('change', updateUsersList, false);
 for(var i = 0; i < orderByItems.length; i++) {
   orderByItems[i].addEventListener('click', orderUsersBy, false);
 }

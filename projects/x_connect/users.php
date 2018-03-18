@@ -15,12 +15,12 @@
         <label for="selectedBatch">Select Batch</label>
         <select class="custom-select my-1" id="selectedBatch">
           <option value="all" >All</option>
-          <option value="bc180305a" >bc180305a (Bootcamp)</option>
-          <option value="bc180305b" >bc180305b (Bootcamp)</option>
-          <option value="u180325">u180325 (Unity)</option>
-          <option value="gr180325">gr180325 (Graphic Design)</option>
-          <option value="wd180325" selected>wd180325 (Web Development)</option>
-          <option value="php180325">php180325 (PHP & MySQL)</option>
+          <option value="bc180305a" >bc180305a</option>
+          <option value="bc180305b" >bc180305b</option>
+          <option value="u180325">u180325</option>
+          <option value="gr180325">gr180325</option>
+          <option value="wd180325" selected>wd180325</option>
+          <option value="php180325">php180325</option>
         </select>
       </form>
     </div>
@@ -85,7 +85,15 @@
               <span class="down"><i class="fa fa-chevron-down"></i></span>
               <span class="up"><i class="fa fa-chevron-up"></i></span>
             </th>
-            <th scope="col" class="ordered-by" data-order-by="student_code">Code
+            <th scope="col" class="ordered-by" data-order-by="student_code">Student Code
+              <span class="down"><i class="fa fa-chevron-down"></i></span>
+              <span class="up"><i class="fa fa-chevron-up"></i></span>
+            </th>
+            <th scope="col" class="ordered-by" data-order-by="student_code">Batch Code
+              <span class="down"><i class="fa fa-chevron-down"></i></span>
+              <span class="up"><i class="fa fa-chevron-up"></i></span>
+            </th>
+            <th scope="col" class="ordered-by" data-order-by="student_code">Instructor Code
               <span class="down"><i class="fa fa-chevron-down"></i></span>
               <span class="up"><i class="fa fa-chevron-up"></i></span>
             </th>
