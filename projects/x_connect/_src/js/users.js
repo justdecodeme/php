@@ -10,6 +10,7 @@ var orderByItems = document.querySelectorAll('[data-order-by]');
 var selectedBatch = document.getElementById('selectedBatch');
 var selectedRole = document.getElementById('selectedRole');
 var selectedGender = document.getElementById('selectedGender');
+var selectedDOJ = document.getElementById('selectedDOJ');
 //
 // var addClassBtn = document.getElementById('addClassBtn');
 //
@@ -71,7 +72,7 @@ function updateUsersList() {
   batchCode = selectedBatch.value;
   role = selectedRole.value;
   gender = selectedGender.value;
-  console.log(batchCode);
+  doj = selectedDOJ.value;
 
   // load content from database
   var xhttp1 = new XMLHttpRequest();
@@ -82,7 +83,12 @@ function updateUsersList() {
      // console.log(this.readyState, this.status);
    }
   };
-  xhttp1.open("GET", "users_handler.php?action=updateUsersList&batchCode="+batchCode+"&role="+role+"&gender="+gender+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc, true);  // open(method, url, async)
+  xhttp1.open("GET", "users_handler.php?action=updateUsersList&batchCode="+batchCode+
+    "&role="+role+
+    "&gender="+gender+
+    "&orderBy="+orderBy+
+    "&doj="+doj+
+    "&ascOrDesc="+ascOrDesc, true);
   xhttp1.send();
 }
 
@@ -97,6 +103,7 @@ init();
 selectedBatch.addEventListener('change', updateUsersList, false);
 selectedRole.addEventListener('change', updateUsersList, false);
 selectedGender.addEventListener('change', updateUsersList, false);
+selectedDOJ.addEventListener('change', updateUsersList, false);
 for(var i = 0; i < orderByItems.length; i++) {
   orderByItems[i].addEventListener('click', orderUsersBy, false);
 }

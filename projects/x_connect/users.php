@@ -48,8 +48,8 @@
     </div>
     <div class="col-md-2">
       <form class="form-block">
-        <label for="filterStartDate">Joined before</label>
-        <input type="date" class="form-control" id="filterStartDate" value="2016-01-01">
+        <label for="selectedDOJ">Joined before</label>
+        <input type="date" class="form-control" id="selectedDOJ" value="2018-01-01">
       </form>
     </div>
     <div class="col-md-3">
