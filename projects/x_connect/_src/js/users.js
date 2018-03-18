@@ -67,7 +67,7 @@ function updateUsersList() {
 // Edit -> Delete -> Cancel -> Submit users fuctions
 function individualEdit(e) {
   e.stopPropagation();
-  // delete class -> only if not editing any class
+  // delete user -> only if not editing any user
   if(e.target.id == 'delete' && !editingUserFlag) {
     var deleteId = e.target.dataset.id;
     console.log('deleting: ' + deleteId);
@@ -76,7 +76,11 @@ function individualEdit(e) {
     xhttp2.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
        usersResultList.innerHTML = this.responseText;
-      }
+       // count the total number of rows return
+       selectedTotal.value = usersResultList.getElementsByTagName('tr').length;
+     } else {
+       console.log(this.status);
+     }
     };
 
     var deleteConfirmation = confirm("Want to delete?");
@@ -98,12 +102,12 @@ function individualEdit(e) {
   }
   // edit class -> only if not editing any class
   else if(e.target.id == 'edit' && !editingUserFlag) {
-    var editClassId = e.target.dataset.id;
-    console.log('editing: ' + editClassId);
+    var editId = e.target.dataset.id;
+    console.log('editing: ' + editId);
 
     editingUserFlag = true;
 
-    var elementEditing = document.getElementById('edit_'+editClassId);
+    var elementEditing = document.getElementById('edit_'+editId);
     var elementEditingRole = elementEditing.querySelector('.edit-role');
     var elementEditingStudentCode = elementEditing.querySelector('.edit-student-code');
 
@@ -119,36 +123,32 @@ function individualEdit(e) {
   }
   // cancel user -> if editing any user
   else if(e.target.id == 'cancel' && editingUserFlag) {
-    var cancelClassId = e.target.dataset.id;
-    console.log('cancelling: ' + cancelClassId);
+    var cancelId = e.target.dataset.id;
+    console.log('cancelling: ' + cancelId);
 
     updateUsersList();
   }
   // submit class -> if editing any class
   else if(e.target.id == 'submit' && editingUserFlag) {
-    var submitClassId = e.target.dataset.classId;
-    console.log('submitting: ' + submitClassId);
+    var submitId = e.target.dataset.id;
+    console.log('submitting: ' + submitId);
 
-    var date = document.getElementById('editingDate').value;
-    var classCode = document.getElementById('editingClass').value;
-    var instructorCode = document.getElementById('editingInstructors').value;
-    var startTime = document.getElementById('editingStartTime').value;
-    var endTime = document.getElementById('editingEndTime').value;
-    var roomCode = document.getElementById('editingRoom').value;
-    // console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
+    var role = document.getElementById('editingRole').value;
+    var studentCode = document.getElementById('editingStudentCode').value;
+    // console.log(batchCode, batchTemplate, role, studentCode);
 
-    var xhttp5 = new XMLHttpRequest();
-    xhttp5.onreadystatechange = function() {
+    var xhttp3 = new XMLHttpRequest();
+    xhttp3.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         usersResultList.innerHTML = this.responseText;
         editingUserFlag = false;
       }
     };
-    xhttp5.open("POST", "users_handler.php", true);  // open(method, url, async)
-    xhttp5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp5.send("action=submitClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+
+    xhttp3.open("POST", "users_handler.php", true);  // open(method, url, async)
+    xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp3.send("action=submitClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+
     "&ascOrDesc="+ascOrDesc+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+
-    "&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode+"&submitId="+submitClassId);
+    "&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode+"&submitId="+submitId);
 
     // updateTimeTableList();
   }
