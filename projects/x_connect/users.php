@@ -49,18 +49,13 @@
     <div class="col-md-2">
       <form class="form-block">
         <label for="selectedDOJ">Joined before</label>
-        <input type="date" class="form-control" id="selectedDOJ" value="2018-01-01">
+        <input type="date" class="form-control" id="selectedDOJ" value="2018-05-01">
       </form>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <form class="form-block">
-        <label for="selectedLayout">Search User</label>
-        <div class="input-group mb-3">
-          <input type="text" name="search" placeholder="abc@example.com" class="form-control">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button"><i class="fa fa-search"></i></button>
-          </div>
-        </div>
+        <label for="selectedSearch">Search User</label>
+          <input type="text" name="search" id="selectedSearch" placeholder="abc@example.com" class="form-control">
       </form>
     </div>
   </div>
@@ -89,11 +84,11 @@
               <span class="down"><i class="fa fa-chevron-down"></i></span>
               <span class="up"><i class="fa fa-chevron-up"></i></span>
             </th>
-            <th scope="col" class="ordered-by" data-order-by="student_code">Batch Code
+            <th scope="col" class="ordered-by" data-order-by="batch_code">Batch Code
               <span class="down"><i class="fa fa-chevron-down"></i></span>
               <span class="up"><i class="fa fa-chevron-up"></i></span>
             </th>
-            <th scope="col" class="ordered-by" data-order-by="student_code">Instructor Code
+            <th scope="col" class="ordered-by" data-order-by="instructor_code">Instructor Code
               <span class="down"><i class="fa fa-chevron-down"></i></span>
               <span class="up"><i class="fa fa-chevron-up"></i></span>
             </th>

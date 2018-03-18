@@ -11,6 +11,7 @@ var selectedBatch = document.getElementById('selectedBatch');
 var selectedRole = document.getElementById('selectedRole');
 var selectedGender = document.getElementById('selectedGender');
 var selectedDOJ = document.getElementById('selectedDOJ');
+var selectedSearch = document.getElementById('selectedSearch');
 //
 // var addClassBtn = document.getElementById('addClassBtn');
 //
@@ -73,6 +74,7 @@ function updateUsersList() {
   role = selectedRole.value;
   gender = selectedGender.value;
   doj = selectedDOJ.value;
+  search = selectedSearch.value;
 
   // load content from database
   var xhttp1 = new XMLHttpRequest();
@@ -88,6 +90,7 @@ function updateUsersList() {
     "&gender="+gender+
     "&orderBy="+orderBy+
     "&doj="+doj+
+    "&search="+search+
     "&ascOrDesc="+ascOrDesc, true);
   xhttp1.send();
 }
@@ -104,6 +107,7 @@ selectedBatch.addEventListener('change', updateUsersList, false);
 selectedRole.addEventListener('change', updateUsersList, false);
 selectedGender.addEventListener('change', updateUsersList, false);
 selectedDOJ.addEventListener('change', updateUsersList, false);
+selectedSearch.addEventListener('change', updateUsersList, false);
 for(var i = 0; i < orderByItems.length; i++) {
   orderByItems[i].addEventListener('click', orderUsersBy, false);
 }

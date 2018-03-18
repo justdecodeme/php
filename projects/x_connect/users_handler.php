@@ -4,9 +4,9 @@
 ?>
 
 <?php
-  function update_users_list($code, $role, $gender, $doj, $order_by, $ascOrDesc) {
+  function update_users_list($code, $role, $gender, $doj, $search, $order_by, $ascOrDesc) {
     global $connection;
-    
+
     // if it is all selected in dropdown then please make it blank to match everything in LIKE
     if($code == 'all') { $code = ''; }
     if($role == 'all') { $role = ''; }
@@ -16,6 +16,8 @@
     batch_code LIKE '%$code%' AND
     role LIKE '%$role%' AND
     gender LIKE '$gender%' AND
+    username LIKE '$search%' OR
+    email LIKE '$search%' AND
     doj <= '$doj'
     ORDER BY $order_by $ascOrDesc";
 
@@ -72,7 +74,7 @@
 
   // Update users list
   if(isset($_GET['action']) && $_GET['action'] == 'updateUsersList') {
-    update_users_list($_GET['batchCode'], $_GET['role'], $_GET['gender'], $_GET['doj'], $_GET['orderBy'], $_GET['ascOrDesc']);
+    update_users_list($_GET['batchCode'], $_GET['role'], $_GET['gender'], $_GET['doj'], $_GET['search'], $_GET['orderBy'], $_GET['ascOrDesc']);
   }
 
 
