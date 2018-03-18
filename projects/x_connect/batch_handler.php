@@ -31,7 +31,7 @@
         $diff_in_seconds_start = $batch_date_seconds - $now_date_seconds;
         // past
         if($diff_in_seconds_start < 0) {
-          $row_highlight_class_start = 'table-active';
+          $row_highlight_class_start = 'table-danger';
           // future
         } else if($diff_in_seconds_start > 0) {
           $row_highlight_class_start = 'table-primary';
@@ -46,7 +46,7 @@
         $diff_in_seconds_end = $batch_date_seconds - $now_date_seconds;
         // past
         if($diff_in_seconds_end < 0) {
-          $row_highlight_class_end = 'table-active';
+          $row_highlight_class_end = 'table-danger';
           // future
         } else if($diff_in_seconds_end > 0) {
           $row_highlight_class_end = 'table-primary';

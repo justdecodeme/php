@@ -29,7 +29,7 @@
         $diff_in_seconds = $class_date_seconds - $now_date_seconds;
         // past
         if($diff_in_seconds < 0) {
-          $row_highlight_class = 'table-active';
+          $row_highlight_class = 'table-danger';
           // future
         } else if($diff_in_seconds > 0) {
           $row_highlight_class = 'table-primary';

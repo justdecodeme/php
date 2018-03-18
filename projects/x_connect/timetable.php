@@ -62,7 +62,7 @@
   <div class="row">
     <div class="col-md-12">
       <!-- list-layout -->
-      <table class="table table-bordered list-layout" style="margin-top: 10px;">
+      <table class="table table-bordered table-hover list-layout" style="margin-top: 10px;">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -116,7 +116,7 @@
         </tfoot>
       </table>
       <!-- grid-layout | class room A -->
-      <table class="table table-bordered grid-layout" style="margin-top: 10px;">
+      <table class="table table-bordered table-hover grid-layout" style="margin-top: 10px;">
         <thead>
           <tr>
             <th></th>
@@ -144,7 +144,7 @@
         </tfoot>
       </table>
       <!-- grid-layout | class room B -->
-      <table class="table table-bordered grid-layout" style="margin-top: 10px;">
+      <table class="table table-bordered table-hover grid-layout" style="margin-top: 10px;">
         <thead>
           <tr>
             <th></th>

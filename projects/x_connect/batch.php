@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col-md-12">
       <!-- list-layout -->
-      <table class="table table-bordered list-layout" style="margin-top: 10px;">
+      <table class="table table-bordered table-hover list-layout" style="margin-top: 10px;">
         <thead>
           <tr>
             <th scope="col">#</th>
