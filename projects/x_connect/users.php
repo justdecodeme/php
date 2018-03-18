@@ -14,20 +14,20 @@
       <form class="form-block">
         <label for="selectedBatch">Select Batch</label>
         <select class="custom-select my-1" id="selectedBatch">
-          <option value="all" >All</option>
+          <option value="all" selected>All</option>
           <option value="bc180305a" >bc180305a</option>
           <option value="bc180305b" >bc180305b</option>
           <option value="u180325">u180325</option>
           <option value="gr180325">gr180325</option>
-          <option value="wd180325" selected>wd180325</option>
+          <option value="wd180325" >wd180325</option>
           <option value="php180325">php180325</option>
         </select>
       </form>
     </div>
     <div class="col-md-2">
       <form class="form-block">
-        <label for="selectedBatch">Select Role</label>
-        <select class="custom-select my-1" id="selectedBatch">
+        <label for="selectedRole">Select Role</label>
+        <select class="custom-select my-1" id="selectedRole">
           <option value="all" selected>All</option>
           <option value="admin">Admin</option>
           <option value="instructor">Instructor</option>
@@ -38,8 +38,8 @@
     </div>
     <div class="col-md-2 list-layout">
       <form class="form-block">
-        <label for="selectedBatch">Select Gender</label>
-        <select class="custom-select my-1" id="selectedBatch">
+        <label for="selectedGender">Select Gender</label>
+        <select class="custom-select my-1" id="selectedGender">
           <option value="all" selected>All</option>
           <option value="male">Male</option>
           <option value="female">Female</option>

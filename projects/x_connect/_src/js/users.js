@@ -8,7 +8,8 @@ var orderByItems = document.querySelectorAll('[data-order-by]');
 // var filterEndDate = document.getElementById('filterEndDate');
 //
 var selectedBatch = document.getElementById('selectedBatch');
-// var selectedLayout = document.getElementById('selectedLayout');
+var selectedRole = document.getElementById('selectedRole');
+var selectedGender = document.getElementById('selectedGender');
 //
 // var addClassBtn = document.getElementById('addClassBtn');
 //
@@ -21,7 +22,7 @@ var selectedBatch = document.getElementById('selectedBatch');
 // var selectedRoomEL = document.getElementById('selectedRoom');
 //
 var editingUserFlag = false;
-var batchCode = null;
+var batchCode = role = gender = null;
 // var layout = 'list';
 var orderBy = 'doj';
 var ascOrDesc = 'ASC';
@@ -68,6 +69,8 @@ function updateUsersList() {
 
   // check which batch is selected in dropdown
   batchCode = selectedBatch.value;
+  role = selectedRole.value;
+  gender = selectedGender.value;
   console.log(batchCode);
 
   // load content from database
@@ -79,7 +82,7 @@ function updateUsersList() {
      // console.log(this.readyState, this.status);
    }
   };
-  xhttp1.open("GET", "users_handler.php?action=updateUsersList&batchCode="+batchCode+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc, true);  // open(method, url, async)
+  xhttp1.open("GET", "users_handler.php?action=updateUsersList&batchCode="+batchCode+"&role="+role+"&gender="+gender+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc, true);  // open(method, url, async)
   xhttp1.send();
 }
 
@@ -92,6 +95,8 @@ init();
 
 /****************Events****************/
 selectedBatch.addEventListener('change', updateUsersList, false);
+selectedRole.addEventListener('change', updateUsersList, false);
+selectedGender.addEventListener('change', updateUsersList, false);
 for(var i = 0; i < orderByItems.length; i++) {
   orderByItems[i].addEventListener('click', orderUsersBy, false);
 }

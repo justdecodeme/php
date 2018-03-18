@@ -4,14 +4,14 @@
 ?>
 
 <?php
-  function update_users_list($code, $order_by, $ascOrDesc) {
+  function update_users_list($code, $role, $gender, $order_by, $ascOrDesc) {
     global $connection;
-    if($code == 'all') {
-      $code = '';
-    }
+    if($code == 'all') { $code = ''; }
+    if($role == 'all') { $role = ''; }
+    if($gender == 'all') { $gender = ''; }
 
     // $query = "SELECT * FROM users WHERE ("."batch_code LIKE $code AND role LIKE '%student%' ".") ORDER BY $order_by $ascOrDesc";
-    $query = "SELECT * FROM users WHERE batch_code LIKE '%$code%' ORDER BY $order_by $ascOrDesc";
+    $query = "SELECT * FROM users WHERE ".'('."batch_code LIKE '%"."$code"."%' AND gender LIKE '"."$gender"."%'".')'."ORDER BY $order_by $ascOrDesc";
     $statement = $connection->prepare($query);
 
     if($statement->execute()) {
@@ -65,7 +65,7 @@
 
   // Update users list
   if(isset($_GET['action']) && $_GET['action'] == 'updateUsersList') {
-    update_users_list($_GET['batchCode'], $_GET['orderBy'], $_GET['ascOrDesc']);
+    update_users_list($_GET['batchCode'], $_GET['role'], $_GET['gender'], $_GET['orderBy'], $_GET['ascOrDesc']);
   }
 
 
