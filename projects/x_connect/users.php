@@ -6,10 +6,14 @@
 ?>
 
 <div class="container-fluid list" id="usersOuter">
-  <!-- <h2>Users <span class="badge badge-secondary badge-pill" style="font-size: 50%;">13</span></h2> -->
+  <h2>Users</h2>
   <hr>
   <!-- filters -->
   <div class="row">
+    <div class="col-md-1">
+      <label for="selectedTotal">Total</label>
+      <input type="text" name="search" id="selectedTotal" class="form-control" disabled style="text-align: center;" placeholder="0">
+    </div>
     <div class="col-md-2">
       <form class="form-block">
         <label for="selectedBatch">Select Batch</label>
@@ -52,10 +56,10 @@
         <input type="date" class="form-control" id="selectedDOJ" value="2018-05-01">
       </form>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <form class="form-block">
         <label for="selectedSearch">Search User (Username or Email)</label>
-          <input type="text" name="search" id="selectedSearch" placeholder="abc@example.com" class="form-control">
+        <input type="text" name="search" id="selectedSearch" placeholder="abc@example.com" class="form-control">
       </form>
     </div>
   </div>

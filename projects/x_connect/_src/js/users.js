@@ -7,6 +7,7 @@ var orderByItems = document.querySelectorAll('[data-order-by]');
 // var filterStartDate = document.getElementById('filterStartDate');
 // var filterEndDate = document.getElementById('filterEndDate');
 //
+var selectedTotal = document.getElementById('selectedTotal');
 var selectedBatch = document.getElementById('selectedBatch');
 var selectedRole = document.getElementById('selectedRole');
 var selectedGender = document.getElementById('selectedGender');
@@ -81,6 +82,8 @@ function updateUsersList() {
   xhttp1.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      usersResultList.innerHTML = this.responseText;
+     // count the total number of rows return
+     selectedTotal.value = usersResultList.getElementsByTagName('tr').length;
    } else {
      // console.log(this.readyState, this.status);
    }
