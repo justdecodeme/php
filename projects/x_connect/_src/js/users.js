@@ -107,7 +107,7 @@ selectedBatch.addEventListener('change', updateUsersList, false);
 selectedRole.addEventListener('change', updateUsersList, false);
 selectedGender.addEventListener('change', updateUsersList, false);
 selectedDOJ.addEventListener('change', updateUsersList, false);
-selectedSearch.addEventListener('change', updateUsersList, false);
+selectedSearch.addEventListener('keyup', updateUsersList, false);
 for(var i = 0; i < orderByItems.length; i++) {
   orderByItems[i].addEventListener('click', orderUsersBy, false);
 }

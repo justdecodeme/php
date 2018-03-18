@@ -54,7 +54,7 @@
     </div>
     <div class="col-md-4">
       <form class="form-block">
-        <label for="selectedSearch">Search User</label>
+        <label for="selectedSearch">Search User (Username or Email)</label>
           <input type="text" name="search" id="selectedSearch" placeholder="abc@example.com" class="form-control">
       </form>
     </div>

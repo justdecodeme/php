@@ -12,14 +12,15 @@
     if($role == 'all') { $role = ''; }
     if($gender == 'all') { $gender = ''; }
 
-    $query = "SELECT * FROM users WHERE
-    batch_code LIKE '%$code%' AND
-    role LIKE '%$role%' AND
-    gender LIKE '$gender%' AND
-    username LIKE '$search%' OR
-    email LIKE '$search%' AND
-    doj <= '$doj'
-    ORDER BY $order_by $ascOrDesc";
+    $query = "SELECT * FROM users
+      WHERE
+        (username LIKE '%$search%' OR  email LIKE '%$search%') AND
+        batch_code LIKE '%$code%' AND
+        role LIKE '%$role%' AND
+        gender LIKE '$gender%' AND
+        doj <= '$doj'
+      ORDER BY
+        $order_by $ascOrDesc";
 
     $statement = $connection->prepare($query);
 
