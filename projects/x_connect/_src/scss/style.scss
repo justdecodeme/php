@@ -31,7 +31,134 @@ a.card:hover {
 td.time-picker {
   display: flex;
   justify-content: space-between;
+  border: none;
 }
 td.time-picker input {
   width: 46%;
+}
+.layout-btns .list {
+  margin-right: 10px;
+}
+.layout-btns a {
+  font-size: 30px;
+  cursor: pointer;
+}
+table.grid-layout th {
+  width: 12.50%;
+  font-size: 124x;
+}
+table.grid-layout td {
+  font-size: 14px;
+  p {
+    margin: 0;
+  }
+  p:first-child {
+    margin-top: 0;
+    text-align: right;
+  }
+  p:last-child{
+    margin-bottom: 0;
+  }
+}
+#timetableOuter.list {
+  .grid-layout {
+    display: none;
+  }
+}
+#timetableOuter.grid {
+  .list-layout {
+    display: none;
+  }
+}
+.editing {
+  display: none;
+}
+.editing-class {
+  .reading {
+    display: none;
+  }
+  .editing {
+    display: inline;
+  }
+}
+.list-layout thead tr {
+  th.ordered-by {
+    cursor: pointer;
+  }
+  th span {
+    display: none;
+  }
+  th.ordered-by:hover, th.active-ASC, th.active-DESC {
+    background: rgba(0, 0, 0, 0.03);
+  }
+  th.active-ASC, th.active-DESC {
+    span {
+      display: inline;
+      pointer-events: none;
+    }
+  }
+  th.active-ASC {
+    .down {
+      display: inline;
+    }
+    .up {
+      display: none;
+    }
+  }
+  th.active-DESC {
+    .down {
+      display: none;
+    }
+    .up {
+      display: inline;
+    }
+  }
+}
+
+.selectStudentsDropdown {
+  ul {
+    padding: 0;
+    a {
+      background: rgba(0,0,0,0.03);
+      display: block;
+      padding: 6px;
+    } a:hover {
+      background: rgba(0,0,0,0.07);
+    }
+  }
+}
+
+.feedback-outer {
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 20px;
+  .ins-img {
+    background: rgba(0,0,0,0.03);
+    padding: 10px;
+    height: 200px;
+    width: 200px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.1);
+    img {
+      max-width: 100px;
+      border-radius: 4px;
+    }
+  }
+  .rating {
+    font-size: 30px;
+    margin: 10px 0;
+    path {
+      fill: rgba(0,0,0,0.3);
+      cursor: pointer;
+    }
+    path:hover {
+      fill: rgba(0,0,0,0.8);
+    }
+  }
+  .comment {
+    margin-bottom: 20px;
+  }
 }
