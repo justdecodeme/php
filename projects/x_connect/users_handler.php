@@ -6,12 +6,18 @@
 <?php
   function update_users_list($code, $role, $gender, $order_by, $ascOrDesc) {
     global $connection;
+
+    // if it is all selected in dropdown then please make it blank to match everything in LIKE
     if($code == 'all') { $code = ''; }
     if($role == 'all') { $role = ''; }
     if($gender == 'all') { $gender = ''; }
 
-    // $query = "SELECT * FROM users WHERE ("."batch_code LIKE $code AND role LIKE '%student%' ".") ORDER BY $order_by $ascOrDesc";
-    $query = "SELECT * FROM users WHERE ".'('."batch_code LIKE '%"."$code"."%' AND gender LIKE '"."$gender"."%'".')'."ORDER BY $order_by $ascOrDesc";
+    $query = "SELECT * FROM users WHERE
+    batch_code LIKE '%$code%' AND
+    role LIKE '%$role%' AND
+    gender LIKE '$gender%'
+    ORDER BY $order_by $ascOrDesc";
+
     $statement = $connection->prepare($query);
 
     if($statement->execute()) {

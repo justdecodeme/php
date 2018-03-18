@@ -31,7 +31,7 @@
           <option value="all" selected>All</option>
           <option value="admin">Admin</option>
           <option value="instructor">Instructor</option>
-          <option value="students">Students</option>
+          <option value="student">Students</option>
           <option value="subscriber">Subscriber</option>
         </select>
       </form>
