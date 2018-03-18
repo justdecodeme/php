@@ -31,7 +31,7 @@
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
       foreach($row as $user) {
         $users_list .= '
-        <tr id="editClass_'.$user->id.'">
+        <tr id="edit_'.$user->id.'">
           <td scope="row">'.
             $i
           .'</td>
@@ -44,7 +44,7 @@
           <td class="edit-role" data-role='.$user->role.'>'.
             $user->role
           .'</td>
-          <td class="edit-code" data-code='.$user->student_code.'>'.
+          <td class="edit-student-code" data-student-code='.$user->student_code.'>'.
           $user->student_code
           .'</td>
           <td class="edit-code" data-code='.$user->batch_code.'>'.

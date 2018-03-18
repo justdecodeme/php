@@ -97,71 +97,35 @@ function individualEdit(e) {
     }
   }
   // edit class -> only if not editing any class
-  else if(e.target.id == 'editUser' && !editingUserFlag) {
-    var editClassId = e.target.dataset.classId;
+  else if(e.target.id == 'edit' && !editingUserFlag) {
+    var editClassId = e.target.dataset.id;
     console.log('editing: ' + editClassId);
 
     editingUserFlag = true;
 
-    var elementEditing = document.getElementById('editClass_'+editClassId);
-    var elementEditingDate = elementEditing.querySelector('.edit-date');
-    var elementEditingClass = elementEditing.querySelector('.edit-class');
-    var elementEditingInstructor = elementEditing.querySelector('.edit-instructor');
-    var elementEditingTime = elementEditing.querySelector('.edit-time');
-    var elementEditingRoom = elementEditing.querySelector('.edit-room');
+    var elementEditing = document.getElementById('edit_'+editClassId);
+    var elementEditingRole = elementEditing.querySelector('.edit-role');
+    var elementEditingStudentCode = elementEditing.querySelector('.edit-student-code');
 
     elementEditing.classList.add('editing-class');
-    elementEditingDate.innerHTML = '<input type="date" class="form-control" id="editingDate" value="'+elementEditingDate.dataset.date+'">';
-    elementEditingTime.classList.add('time-picker');
-    elementEditingTime.innerHTML = '<input type="time" class="form-control" id="editingStartTime" value="'+elementEditingTime.dataset.starttime+'"><input type="time" class="form-control" id="editingEndTime" value="'+elementEditingTime.dataset.endtime+'">';
+    elementEditingStudentCode.innerHTML = '<input type="text" class="form-control" id="editingStudentCode" value="'+elementEditingStudentCode.dataset.studentCode+'">';
 
-    // load classses from json, based on batch template selected
-    var classesObj = batchData[batchTemplate]['classes'];
-    var classesList = '';
-    for (var classCode in classesObj) {
-      if(classCode == elementEditingClass.dataset.class) {
-        classesList += '<option value="'+classCode+'" selected>'+classesObj[classCode]+'</option>';
-      } else {
-        classesList += '<option value="'+classCode+'">'+classesObj[classCode]+'</option>';
-      }
-    }
-    elementEditingClass.innerHTML = '<select class="custom-select" id="editingClass">'+classesList+'</select>';;
-
-    // load instructors from json, based on batch template selected
-    var instructorsObj = batchData[batchTemplate]['instructors'];
-    var instructorsList = '';
-
-    for (var instructorCode in instructorsObj) {
-      if(instructorCode == elementEditingInstructor.dataset.instructor) {
-        instructorsList += '<option value="'+instructorCode+'" selected>'+instructorsObj[instructorCode]+'</option>';
-      } else {
-        instructorsList += '<option value="'+instructorCode+'">'+instructorsObj[instructorCode]+'</option>';
-      }
-    }
-    elementEditingInstructor.innerHTML = '<select class="custom-select" id="editingInstructors">'+instructorsList+'</select>';;
-
-    // load rooms from json, based on batch template selected
-    var roomsObj = batchData[batchTemplate]['rooms'];
-    var roomsList = '';
-
-    for (var roomCode in roomsObj) {
-      if(roomCode == elementEditingRoom.dataset.room) {
-        roomsList += '<option value="'+roomCode+'" selected>'+roomsObj[roomCode]+'</option>';
-      } else {
-        roomsList += '<option value="'+roomCode+'">'+roomsObj[roomCode]+'</option>';
-      }
-    }
-    elementEditingRoom.innerHTML = '<select class="custom-select" id="editingRoom">'+roomsList+'</select>';
+    elementEditingRole.innerHTML = `
+      <select class="custom-select my-1" id="editingRole">
+        <option value="instructor">Instructor</option>
+        <option value="student">Students</option>
+        <option value="subscriber" selected>Subscriber</option>
+      </select>`;
   }
-  // cancel class -> if editing any class
-  else if(e.target.id == 'cancelUser' && editingUserFlag) {
-    var cancelClassId = e.target.dataset.classId;
+  // cancel user -> if editing any user
+  else if(e.target.id == 'cancel' && editingUserFlag) {
+    var cancelClassId = e.target.dataset.id;
     console.log('cancelling: ' + cancelClassId);
 
-    updateTimeTableList();
+    updateUsersList();
   }
   // submit class -> if editing any class
-  else if(e.target.id == 'submitUser' && editingUserFlag) {
+  else if(e.target.id == 'submit' && editingUserFlag) {
     var submitClassId = e.target.dataset.classId;
     console.log('submitting: ' + submitClassId);
 
