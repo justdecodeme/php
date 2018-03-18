@@ -31,7 +31,7 @@ var ascOrDesc = 'ASC';
 
 // Update time table on change of batch
 function updateTimeTableList() {
-  console.log('list updating...');
+  console.log('timetable list updating...');
 
   editingClassFlag = false;
 
@@ -317,6 +317,7 @@ function init() {
 init();
 
 /****************Events****************/
+
 selectedBatch.addEventListener('change', updateTimeTableList, false);
 filterStartDate.addEventListener('change', updateTimeTableGrid, false);
 filterEndDate.addEventListener('change', updateTimeTableGrid, false);

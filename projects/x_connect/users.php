@@ -14,13 +14,13 @@
       <form class="form-block">
         <label for="selectedBatch">Select Batch</label>
         <select class="custom-select my-1" id="selectedBatch">
-          <option value="all" data-template="bootcamp" selected>All</option>
-          <option value="bc180305a" data-template="bootcamp">bc180305a (Bootcamp)</option>
-          <option value="bc180305b" data-template="bootcamp">bc180305b (Bootcamp)</option>
-          <option value="u180325" data-template="unity">u180325 (Unity)</option>
-          <option value="gr180325" data-template="graphic" >gr180325 (Graphic Design)</option>
-          <option value="wd180325" data-template="development" >wd180325 (Web Development)</option>
-          <option value="php180325" data-template="php" >php180325 (PHP & MySQL)</option>
+          <option value="all" >All</option>
+          <option value="bc180305a" >bc180305a (Bootcamp)</option>
+          <option value="bc180305b" >bc180305b (Bootcamp)</option>
+          <option value="u180325">u180325 (Unity)</option>
+          <option value="gr180325">gr180325 (Graphic Design)</option>
+          <option value="wd180325" selected>wd180325 (Web Development)</option>
+          <option value="php180325">php180325 (PHP & MySQL)</option>
         </select>
       </form>
     </div>
@@ -65,7 +65,7 @@
     </div>
   </div>
 
-  <!-- tables -->
+  <!-- table -->
   <div class="row">
     <div class="col-md-12">
       <!-- list-layout -->
@@ -85,19 +85,19 @@
               <span class="down"><i class="fa fa-chevron-down"></i></span>
               <span class="up"><i class="fa fa-chevron-up"></i></span>
             </th>
+            <th scope="col" class="ordered-by" data-order-by="student_code">Code
+              <span class="down"><i class="fa fa-chevron-down"></i></span>
+              <span class="up"><i class="fa fa-chevron-up"></i></span>
+            </th>
             <th scope="col" class="ordered-by" data-order-by="gender">Gender
               <span class="down"><i class="fa fa-chevron-down"></i></span>
               <span class="up"><i class="fa fa-chevron-up"></i></span>
             </th>
-            <th scope="col" class="ordered-by" data-order-by="doj">DOJ
+            <th scope="col" class="ordered-by" data-order-by="doj">Joining Date
               <span class="down"><i class="fa fa-chevron-down"></i></span>
               <span class="up"><i class="fa fa-chevron-up"></i></span>
             </th>
-            <th scope="col" class="ordered-by" data-order-by="student_code">Student Code
-              <span class="down"><i class="fa fa-chevron-down"></i></span>
-              <span class="up"><i class="fa fa-chevron-up"></i></span>
-            </th>
-            <th scope="col"></th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody id="usersResultList"></tbody>
