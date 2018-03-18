@@ -60,10 +60,10 @@
             date('j M y | D', strtotime($user->doj))
           .'</td>
           <td class="edit-delete-buttons">
-            <span class="text-danger reading" id="editClass" data-class-id="'.$user->id.'">Edit</span>
-            <span class="text-danger reading" id="deleteClass" data-class-id="'.$user->id.'">Del</span>
-            <span class="text-danger editing" id="cancelClass" data-class-id="'.$user->id.'">Can</span>
-            <span class="text-danger editing" id="submitClass" data-class-id="'.$user->id.'">Sub</span>
+            <span class="text-danger reading" id="edit" data-id="'.$user->id.'">Edit</span>
+            <span class="text-danger reading" id="delete" data-id="'.$user->id.'">Del</span>
+            <span class="text-danger editing" id="cancel" data-id="'.$user->id.'">Can</span>
+            <span class="text-danger editing" id="submit" data-id="'.$user->id.'">Sub</span>
           </td>
         </tr>
         ';
@@ -80,7 +80,7 @@
 
 
   // Add class on click of Submit button in tfoot
-  if(isset($_POST['action']) && $_POST['action'] == 'addClass') {
+  if(isset($_POST['action']) && $_POST['action'] == 'add') {
     $batch_code = $_POST['batchCode'];
     $batch_template = $_POST['batchTemplate'];
     $orderBy = $_POST['orderBy'];
@@ -102,12 +102,12 @@
 
     // Update timetable if query is successful
     if($statement->execute($params)) {
-      update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
+      update_users_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
     }
   }
 
   // Submit class on click of submit button after editing
-  if(isset($_POST['action']) && $_POST['action'] == 'submitClass') {
+  if(isset($_POST['action']) && $_POST['action'] == 'submit') {
     $batch_code = $_POST['batchCode'];
     $batch_template = $_POST['batchTemplate'];
     $orderBy = $_POST['orderBy'];
@@ -138,30 +138,34 @@
 
     // Update timetable if query is successful
     if($statement->execute($params)) {
-      update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
+      update_users_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
     } else {
       echo "Something went wrong!";
     }
   }
 
   // Delete class on click of delete button
-  if(isset($_POST['action']) && $_POST['action'] == 'deleteClass') {
+  if(isset($_POST['action']) && $_POST['action'] == 'delete') {
     $batch_code = $_POST['batchCode'];
-    $batch_template = $_POST['batchTemplate'];
-    $orderBy = $_POST['orderBy'];
+    $order_by = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];
+
+    $role = $_POST['role'];
+    $gender = $_POST['gender'];
+    $doj = $_POST['doj'];
+    $search = $_POST['search'];
 
     $delete_id = $_POST['deleteId'];
 
-    $query = "DELETE FROM timetable WHERE id=:deleteId LIMIT 1";
+    $query = "DELETE FROM users WHERE id=:deleteId LIMIT 1";
     $statement = $connection->prepare($query);
     $statement->bindParam(":deleteId", $delete_id);
     if($statement->execute()) {
-      update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
+      update_users_list($batch_code, $role, $gender, $doj, $search, $order_by, $ascOrDesc);
     } else {
       echo "Something went wrong!";
     }
 
-    // update_timetable_list($batch_code, $batch_template);
+    // update_users_list($batch_code, $batch_template);
   }
  ?>
