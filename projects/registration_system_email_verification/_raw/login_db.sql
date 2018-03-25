@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2018 at 12:00 PM
+-- Generation Time: Mar 25, 2018 at 07:08 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -33,6 +33,7 @@ CREATE TABLE `users` (
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` text NOT NULL,
   `validation_code` text NOT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '0'
@@ -42,8 +43,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `validation_code`, `active`) VALUES
-(1, 'rakesh', 'kumar', 'rakko', 'p', '', 0);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `validation_code`, `active`) VALUES
+(1, 'rakesh', 'kumar', 'a', 'a@gmail.com', 'ar', '', 0);
 
 --
 -- Indexes for dumped tables
