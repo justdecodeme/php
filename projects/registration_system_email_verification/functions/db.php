@@ -5,6 +5,10 @@
 		echo 'Not connected to DB';
 	}
 
+	function row_count($result) {
+		return mysqli_num_rows($result);
+	}
+
 	function escape($string) {
 		global $con;
 		
