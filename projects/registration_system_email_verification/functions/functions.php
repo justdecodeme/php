@@ -112,7 +112,35 @@ function validate_user_registration() {
 			foreach ($errors as $error) {
 				echo validation_errors($error);	
 			}
+		} else {
+			register_usre($first_name, $last_name, $username, $email, $password);			
+			echo "User Registered";
 		}
+	}
+}
+
+function register_usre($first_name, $last_name, $username, $email, $password) {
+	$first_name			= escape('$first_name');
+	$last_name 			= escape('$last_name');
+	$username 			= escape('$username');
+	$email 				= escape('$email');
+	$password 			= escape('$password');
+
+	if(email_exists($email)) {
+		return false;
+	} else if(username_exists($username)) {
+		return false;
+	} else {
+		$password = md5($password);
+		$validation_code = md5($username + microtime());
+		var_dump($validation_code);
+
+		$sql = "INSERT INTO users(first_name, last_name, username, email, password, validation_code, 0";
+		$sql .= " VALUES('$first_name', '$last_name', '$username', '$email', '$password', '$validation_code', 0)";
+		$result = query($sql);
+		confirm($result);
+
+		return true;
 	}
 }
 
