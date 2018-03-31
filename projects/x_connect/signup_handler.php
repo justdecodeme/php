@@ -4,22 +4,33 @@
 
 <?php
   // register user
-  if(isset($_POST['submit_signup'])) {
+  if(isset($_POST['action']) && $_POST['action'] == 'submitSignup') {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
+    $confirm_password = $_POST['confirmPassword'];
     $role = 'subscriber';
-    // $doj = now();
-    $errors = '';
+    $message = '';
 
     if(empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
-      $errors = 'One or more fields are empty!<br>';
+      $message =
+      '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        One or more fields are <strong>empty!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>';
     }
     if($password !== $confirm_password) {
-      $errors .= 'Passwords do not match!';
+      $message .=
+      '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Passwords do not <strong>match!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>';
     }
-    if($errors == '') {
+    if($message == '') {
       $query = "INSERT INTO `users`
       ( `username`, `email`, `password`, `role`)
       VALUES
@@ -28,11 +39,25 @@
       $params = array ('USERNAME'=>$username, 'EMAIL'=>$email, 'PASSWORD'=>$password, 'ROLE'=>$role);
 
       // Update timetable if query is successful
-      if($statement->execute($params)) {
-        echo 'rows affected: ' . $statement->rowCount();
+      if($statement->execute($params) && $statement->rowCount() == 1) {
+        $message =
+        '<div class="alert alert-success alert-dismissible fade show" role="alert">
+          Registration <strong>successful!</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>';
+      } else {
+        $message =
+        '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+          Qeury <strong>error!</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>';
       }
     }
-    echo 'errors: '. $errors;
+    echo $message;
   }
 
 
