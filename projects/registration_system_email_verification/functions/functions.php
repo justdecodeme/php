@@ -117,12 +117,18 @@ function validate_user_registration() {
 				echo validation_errors($error);	
 			}
 		} else {
-			register_usre($first_name, $last_name, $username, $email, $password);			
-			set_message('<p class="bg-success text-center">Please check your email or span folder for activation link</p>');
-			redirect('index.php');
+			if(register_usre($first_name, $last_name, $username, $email, $password)){
+				set_message('<p class="bg-success text-center">Please check your email or span folder for activation link</p>');
+				redirect('index.php');
+			} else {
+				set_message('<p class="bg-danger text-center">Sorry, some error occured!</p>');
+				redirect('index.php');
+			}			
 		}
 	}
 }
+
+############## register user functions ##############
 
 function register_usre($first_name, $last_name, $username, $email, $password) {
 	$first_name			= escape($first_name);
@@ -155,4 +161,30 @@ function register_usre($first_name, $last_name, $username, $email, $password) {
 	}
 }
 
+############## activate user functions ##############
+
+function activate_user() {
+	if($_SERVER['REQUEST_METHOD'] == "GET") {
+		if(isset($_GET['email'])) {
+			$email = clean($_GET['email']);
+			$validation_code = clean($_GET['code']);
+
+			$sql = "SELECT id FROM users WHERE email = '".escape($_GET['email'])."' AND validation_code = '" . escape($_GET['code'])."'";
+			$result = query($sql);
+			confirm($result);
+
+			if(row_count($result) == 1) {
+				$sql2 = "UPDATE users SET active = 1, validation_code = 0 WHERE email = '".escape($_GET['email'])."' AND validation_code = '" . escape($_GET['code'])."'";
+				$result2 = query($sql2);
+				confirm($result2);
+
+				set_message('Your account has been activated');
+				redirect('login.php');
+			} else {
+				set_message('Sorry, Your account could not be activated');
+				redirect('login.php');
+			}
+		}
+	}
+}
 ?>
