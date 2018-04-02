@@ -11,11 +11,11 @@
       <form id="submitForm">
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp" placeholder="r_kumar">
+          <input type="text" class="form-control" name="username" id="username" placeholder="r_kumar">
         </div>
         <div class="form-group">
           <label for="email">Email address</label>
-          <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="example@gmail.com">
+          <input type="email" class="form-control" name="email" id="email" placeholder="example@gmail.com">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
