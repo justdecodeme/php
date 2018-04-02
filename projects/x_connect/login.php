@@ -1,4 +1,5 @@
 <?php
+  session_start();
   include 'includes/connect.php';
   include 'includes/header.php';
 ?>
@@ -7,6 +8,12 @@
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <h2>Login to xConnect</h2>
+      <?php
+        if(isset($_SESSION['message'])) {
+          echo $_SESSION['message'];
+        }
+        session_destroy();
+      ?>
       <form>
         <div class="form-group">
           <label for="email">Email address</label>
@@ -19,7 +26,7 @@
         <button type="submit" class="btn btn-primary" name="submit_login">Submit</button>
 
         <small style="margin-top: 10px;" class="form-text text-muted">Don’t have an account? <a href="signup.php">Signup</a></small>
-      </form>      
+      </form>
     </div>
   </div>
 </div>

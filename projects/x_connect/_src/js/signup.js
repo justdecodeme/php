@@ -17,7 +17,13 @@ submitForm.addEventListener('submit', function(e){
   var xhttp1 = new XMLHttpRequest();
   xhttp1.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     message.innerHTML = this.responseText;
+      if(this.responseText == 1) {
+        // console.log('if');
+        location.href = "login.php";
+      } else {
+        // console.log('else');
+        message.innerHTML = this.responseText;
+      }
    } else {
      console.log(this.readyState, this.status);
    }

@@ -6,7 +6,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <!-- <h2>Signup to xConnect</h2> -->
+      <h2>Signup to xConnect</h2>
       <div id="message"></div>
       <form id="submitForm">
         <div class="form-group">

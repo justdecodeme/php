@@ -1,4 +1,5 @@
 <?php
+  session_start();
   include 'includes/connect.php';
 ?>
 
@@ -40,13 +41,15 @@
 
       // Update timetable if query is successful
       if($statement->execute($params) && $statement->rowCount() == 1) {
-        $message =
+        $_SESSION['message'] =
         '<div class="alert alert-success alert-dismissible fade show" role="alert">
           Registration <strong>successful!</strong>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>';
+
+        echo 1; // 1 for success
       } else {
         $message =
         '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -56,8 +59,9 @@
           </button>
         </div>';
       }
+    } else {
+      echo $message;
     }
-    echo $message;
   }
 
 
