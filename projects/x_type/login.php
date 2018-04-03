@@ -52,7 +52,7 @@
 		}
 	}
 
-	# check login status
+	# check login error
 	#####################
 
 	$login_err = '';
@@ -78,10 +78,10 @@
 
 		<label for="email">Email</label>
 		<input type="text" id="email" name="user_email" placeholder="example@gmail.com">
-		
+
 		<label for="password">Password</label>
 		<input type="password" id="password" name="password" placeholder="••••••••••"> <br>
-		
+
 		<!-- <input type="checkbox" id="remember" name="remember" value="yes"> -->
 		<!-- <label for="remember">Remember Me</label> -->
 

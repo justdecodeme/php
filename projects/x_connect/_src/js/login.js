@@ -16,10 +16,8 @@ submitLoginForm.addEventListener('submit', function(e){
   xhttp1.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       if(this.responseText == 1) {
-        console.log('if');
-        location.href = "index.php";
+        location.href = "xconnect.php";
       } else {
-        console.log('else');
         message.innerHTML = this.responseText;
       }
    } else {

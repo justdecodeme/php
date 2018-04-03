@@ -1,8 +1,23 @@
 <?php
   include 'includes/init.php';
-  include 'includes/header.php';
-  include 'includes/login_status.php';    
+
+  // if session variables are set redirect user to index.php page
+  if(isset($_SESSION['email']) && isset($_SESSION['password'])){
+    $query = "SELECT *
+      FROM users
+      WHERE email=:EMAIL
+      AND password=:PASSWORD
+    ";
+    $statement = $connection->prepare($query);
+    $params = array ('EMAIL'=>$_SESSION['email'], 'PASSWORD'=>$_SESSION['password']);
+
+    if($statement->execute($params) && $statement->rowCount() == 1) {
+      redirect('index.php');
+    }
+  }
 ?>
+
+<?php include 'includes/header.php'; ?>
 
 <div class="container">
   <div class="row">

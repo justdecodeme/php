@@ -1,5 +1,6 @@
 <?php
   // if session variables are set
+  $user_email = '';
   if(isset($_SESSION['email']) && isset($_SESSION['password'])){
     $query = "SELECT *
       FROM users
@@ -12,10 +13,8 @@
     if($statement->execute($params) && $statement->rowCount() == 1) {
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
       foreach($row as $user) {
-        echo $user->email;
+        $user_email = $user->email;
       }
-      // redirect('index.php');
-      // header('Location: index.php');
     // if login is not validated
     } else {
       header('Location: login.php');
