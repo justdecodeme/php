@@ -27,7 +27,6 @@
         AND `password`=:PASSWORD
       ";
       $statement = $connection->prepare($query);
-      $statement->bindParam(":clssDATE", $date);
       $params = array ('EMAIL'=>$email, 'PASSWORD'=>$password);
 
       // Update timetable if query is successful

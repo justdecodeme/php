@@ -1,6 +1,5 @@
 <?php
-  session_start();
-  include 'includes/connect.php';
+  include 'includes/init.php';
 ?>
 
 <?php
@@ -17,6 +16,24 @@
       $message =
       '<div class="alert alert-danger alert-dismissible fade show" role="alert">
         One or more fields are <strong>empty!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>';
+    }
+    if(email_exists($email)) {
+      $message .=
+      '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Email already <strong>exists!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>';
+    }
+    if(username_exists($username)) {
+      $message .=
+      '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Username already <strong>exists!</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
