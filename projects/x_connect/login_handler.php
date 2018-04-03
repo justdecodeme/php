@@ -1,6 +1,5 @@
 <?php
-  session_start();
-  include 'includes/connect.php';
+  include 'includes/init.php';
 ?>
 
 <?php
@@ -31,7 +30,11 @@
 
       // Update timetable if query is successful
       if($statement->execute($params) && $statement->rowCount() == 1) {
-        echo 1; // 1 for success
+        // set session for user details
+        $_SESSION['email'] = $email;
+        $_SESSION['password'] = $password;
+        // 1 for success
+        echo 1;
       } else {
         $message =
         '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -45,6 +48,5 @@
       }
     }
   }
-
 
  ?>

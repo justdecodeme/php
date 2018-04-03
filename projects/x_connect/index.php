@@ -1,7 +1,7 @@
 <?php
-  include 'includes/connect.php';
+  include 'includes/init.php';
   include 'includes/header.php';
-  // include 'includes/login_status.php';
+  include 'includes/login_status.php';
 ?>
 
 <div class="container">

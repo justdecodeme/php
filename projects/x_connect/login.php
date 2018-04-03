@@ -1,7 +1,7 @@
 <?php
-  session_start();
-  include 'includes/connect.php';
+  include 'includes/init.php';
   include 'includes/header.php';
+  include 'includes/login_status.php';    
 ?>
 
 <div class="container">
@@ -12,7 +12,7 @@
         if(isset($_SESSION['message'])) {
           echo $_SESSION['message'];
         }
-        session_destroy();
+        unset($_SESSION['message'])
       ?>
       <div id="message"></div>
       <form id="submitLoginForm">
