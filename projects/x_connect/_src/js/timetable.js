@@ -83,21 +83,21 @@ function updateTimeTableList() {
 
 // Update time table on change of batch
 function updateTimeTableGrid() {
-  console.log('grid updating...');
+  console.log('timetable grid updating...');
   var filterStartDate = document.getElementById('filterStartDate').value;
   var filterEndDate = document.getElementById('filterEndDate').value;
 
   // load content from database
-  var xhttp2 = new XMLHttpRequest();
-  xhttp2.onreadystatechange = function() {
+  var xhttp2a = new XMLHttpRequest();
+  xhttp2a.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      timetableResultGrid_A.innerHTML = this.responseText;
    } else {
      // console.log(this.readyState, this.status);
    }
   };
-  xhttp2.open("GET", "timetable_handler.php?action=updateTimeTableGrid_A&filterStartDate="+filterStartDate+"&filterEndDate="+filterEndDate, true);  // open(method, url, async)
-  xhttp2.send();
+  xhttp2a.open("GET", "timetable_handler.php?action=updateTimeTableGrid_A&filterStartDate="+filterStartDate+"&filterEndDate="+filterEndDate, true);  // open(method, url, async)
+  xhttp2a.send();
 
   // load content from database
   var xhttp2b = new XMLHttpRequest();

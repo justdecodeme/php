@@ -76,6 +76,7 @@
       echo $timetable_list;
     }
   }
+
   function update_timetable_grid_A($from_date, $to_date) {
     global $connection;
 
@@ -130,12 +131,32 @@
             }
           }
           while($totalClass) {
-            $timetable_grid .= "<p>".$classes[$i]['class_code']." (". $classes[$i]['instructor_code'] .")</p>";
+            $batch1 ="11:30:00";
+            // if ($classes[$i]['start_time'] !== strtotime($batch1)) {
+            //   $timetable_grid .= "<p>".strtotime($batch1)."</p>";
+            // } else {
+            //   $timetable_grid .= "<p>".$classes[$i]['start_time']."</p>";
+            // }
+
+            if(strtotime("09:00:00") == strtotime($classes[$i]['start_time'])) {
+              $timetable_grid .= "<p> 1".$classes[$i]['class_code']." (". $classes[$i]['instructor_code'] .")</p>";
+            } else {
+              $timetable_grid .= "<p>-</p>";
+            }
+            if(strtotime("11:30:00") == strtotime($classes[$i]['start_time'])) {
+              $timetable_grid .= "<p> 2".$classes[$i]['class_code']." (". $classes[$i]['instructor_code'] .")</p>";
+            } else {
+              $timetable_grid .= "<p>-</p>";
+            }
+
+            // $timetable_grid .= "<p>" . strtotime($batch1) . "</p>";
+            // $timetable_grid .= "<p>" . strtotime($classes[$i]['start_time']) . "</p>";
+            // $timetable_grid .= "<p>".$classes[$i]['class_code']." (". $classes[$i]['instructor_code'] .")</p>";
             $totalClass--;
             $i++;
           }
           while($i < 4) {
-            $timetable_grid .= "<p></p>";
+            $timetable_grid .= "<p>-</p>";
             $i++;
           }
           $timetable_grid .= "</td>";
@@ -165,6 +186,7 @@
     echo $timetable_grid;
 
   }
+
   function update_timetable_grid_B($from_date, $to_date) {
     global $connection;
 
@@ -264,6 +286,7 @@
   if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableGrid_A') {
     update_timetable_grid_A($_GET['filterStartDate'], $_GET['filterEndDate']);
   }
+
   // Update time table on change of date (grid-layout)
   if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableGrid_B') {
     update_timetable_grid_B($_GET['filterStartDate'], $_GET['filterEndDate']);
