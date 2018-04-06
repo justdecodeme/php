@@ -8,6 +8,10 @@ submitLoginForm.addEventListener('submit', function(e){
   e.preventDefault();
   console.log('loging user...');
 
+  if(document.getElementById('sessonMessage')) {
+    document.getElementById('sessonMessage').remove();
+  }
+
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
 
@@ -16,7 +20,7 @@ submitLoginForm.addEventListener('submit', function(e){
   xhttp1.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       if(this.responseText == 1) {
-        location.href = "xconnect.php";
+        location.href = "index.php";
       } else {
         message.innerHTML = this.responseText;
       }

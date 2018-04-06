@@ -162,3 +162,14 @@ table.grid-layout td {
     margin-bottom: 20px;
   }
 }
+
+/************* Today's Quote *************/
+.quote {
+    background: #c5c5c591;
+    padding: 15px;
+    border-radius: 6px;
+    color: #505050;
+    span {
+      font-weight: bold;
+    }
+}

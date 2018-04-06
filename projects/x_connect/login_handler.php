@@ -33,6 +33,7 @@
         // set session for user details
         $_SESSION['email'] = $email;
         $_SESSION['password'] = $password;
+
         // 1 for success
         echo 1;
       } else {

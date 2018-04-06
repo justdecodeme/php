@@ -59,7 +59,7 @@
       // Update timetable if query is successful
       if($statement->execute($params) && $statement->rowCount() == 1) {
         $_SESSION['message'] =
-        '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        '<div class="alert alert-success alert-dismissible fade show" role="alert" id="sessonMessage">
           Registration <strong>successful!</strong> You can login now.
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
