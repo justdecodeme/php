@@ -11,7 +11,7 @@
   <!-- options -->
   <div class="row">
     <!-- filters -->
-    <div class="col-md-9">
+    <div class="col-md-8">
       <div class="row">
         <!-- filter by batch -->
         <div class="col-md-5 list-layout">
@@ -55,6 +55,10 @@
             <option value="grid" selected>Grid View</option>
           </select>
       </form>
+    </div>
+    <div class="col-md-1">
+      <label style="opacity: 0;">Refresh</label>
+      <button type="button" id="refreshBtn" class="btn btn-secondary"><i class="fas fa-sync"></i></button>
     </div>
   </div>
 

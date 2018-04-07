@@ -15,6 +15,7 @@ var addClassBtn = document.getElementById('addClassBtn');
 var timetableResultList = document.getElementById('timetableResultList');
 var timetableResultGrid_A = document.getElementById('timetableResultGrid_A');
 var timetableResultGrid_B = document.getElementById('timetableResultGrid_B');
+var refreshBtn = document.getElementById('refreshBtn');
 
 var selectedClassEl = document.getElementById('selectedClass');
 var selectedInstructorEL = document.getElementById('selectedInstructor');
@@ -92,16 +93,6 @@ function updateTimeTableGrid() {
   xhttp2a.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      timetableResultGrid_A.innerHTML = this.responseText;
-     // 
-     // // for(let r = 0; r < timetableResultGrid_A.querySelectorAll('tr').length; r++) {
-     // for(let r = 0; r < 1; r++) {
-     //   // for(let c = 1; c < timetableResultGrid_A.querySelectorAll('tr')[r].querySelectorAll('td').length; c++) {
-     //   for(let c = 1; c < 2; c++) {
-     //     let col = timetableResultGrid_A.querySelectorAll('tr')[0].querySelectorAll('td')[c];
-     //     console.log(col);
-     //   }
-     // }
-
    } else {
      // console.log(this.readyState, this.status);
    }
@@ -332,6 +323,7 @@ selectedBatch.addEventListener('change', updateTimeTableList, false);
 filterStartDate.addEventListener('change', updateTimeTableGrid, false);
 filterEndDate.addEventListener('change', updateTimeTableGrid, false);
 selectedLayout.addEventListener('change', updateLayout, false);
+refreshBtn.addEventListener('click', init, false);
 addClassBtn.addEventListener('click', addClass, false);
 timetableResultList.addEventListener('click', individualClassEdit, false);
 for(var i = 0; i < orderByItems.length; i++) {
