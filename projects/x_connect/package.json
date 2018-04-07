@@ -37,19 +37,14 @@
     "Internet Academy",
     "IBJ"
   ],
-  "files": [
-    "*.js",
-    "*.html",
-    "build",
-    "node_modules"
-  ],
   "author": "xLab",
   "license": "Copyright ©️ 2018 xLab",
   "devDependencies": {
     "electron": "~1.7.8",
+    "gulp": "^3.9.1",
+    "gulp-connect-php": "^0.0.8",
     "electron-builder": "^19.46.9",
     "browser-sync": "^2.23.3",
-    "gulp": "^3.9.1",
     "gulp-connect": "^5.2.0",
     "gulp-livereload": "^3.8.1",
     "gulp-minify": "^2.1.0",
