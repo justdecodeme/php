@@ -14,6 +14,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
     $row = $statement->fetchAll(PDO::FETCH_OBJ);
     foreach($row as $user) {
       $user_email = $user->email;
+      $user_role = $user->role;
     }
   // if login is not validated
   } else {

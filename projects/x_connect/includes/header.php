@@ -34,7 +34,11 @@
             echo '
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" href="profile.php">Profile (' . $user_email . ')</a>
+                <a class="nav-link" href="profile.php">Profile ('
+                . $user_email
+                . ' | '
+                . $user_role
+                . ')</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="includes/logout.php">Logout</a>
