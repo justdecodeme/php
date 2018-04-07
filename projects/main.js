@@ -17,7 +17,7 @@ function createWindow () {
   mainWindow.setMenu(null);
 
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'xconnect.html'),
+    pathname: path.join(__dirname, 'x_connect/xconnect.php'),
     protocol: 'file:',
     slashes: true
   }));

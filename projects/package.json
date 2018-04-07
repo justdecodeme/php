@@ -37,6 +37,12 @@
     "Internet Academy",
     "IBJ"
   ],
+  "files": [
+    "*.js",
+    "*.html",
+    "build",
+    "node_modules"
+  ],
   "author": "xLab",
   "license": "Copyright ©️ 2018 xLab",
   "devDependencies": {
