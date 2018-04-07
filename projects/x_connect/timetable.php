@@ -1,8 +1,8 @@
 <?php
-  include 'includes/connect.php';
+  include 'includes/init.php';
+  include 'includes/login_status.php';
   include 'includes/header.php';
   include 'includes/template_reader.php';
-  // include 'includes/login_status.php';
 ?>
 
 <div class="container-fluid list" id="timetableOuter">
@@ -58,7 +58,7 @@
     </div>
     <div class="col-md-1">
       <label style="opacity: 0;">Refresh</label>
-      <button type="button" id="refreshBtn" class="btn btn-secondary"><i class="fas fa-sync"></i></button>
+      <button type="button" id="refreshBtn" class="btn btn-outline-secondary"><i class="fas fa-sync"></i></button>
     </div>
   </div>
 

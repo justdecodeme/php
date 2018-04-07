@@ -1,5 +1,5 @@
 <?php
-  include 'includes/connect.php';
+  include 'includes/init.php';
   include 'includes/header.php';
 ?>
 

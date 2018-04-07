@@ -1,8 +1,7 @@
 <?php
-  include 'includes/connect.php';
+  include 'includes/init.php';
+  include 'includes/login_status.php';
   include 'includes/header.php';
-  // include 'includes/template_reader.php';
-  // include 'includes/login_status.php';
 ?>
 
 <div class="container-fluid list" id="usersOuter">
