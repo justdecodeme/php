@@ -53,7 +53,7 @@
         </div>
       </a>
     </div>
-    <!-- <div class="col-md-3">
+    <div class="col-md-3">
       <a class="card" href="#">
         <img class="card-img-top" src="./_assets/images/quizzes.jpg" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">
@@ -92,7 +92,7 @@
           <h4 class="card-title text-center" style="margin: 0;">Download</h4>
         </div>
       </a>
-    </div> -->
+    </div>
 
   </div>
 </div>

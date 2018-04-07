@@ -1,0 +1,57 @@
+{
+  "name": "xConncet",
+  "version": "1.0.0",
+  "description": "xLab Students and Classes management system.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "postinstall": "install-app-deps",
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "build": {
+    "appId": "com.makexhappen",
+    "productName": "xConncet",
+    "copyright": "Copyright ©️ 2018 xLab",
+    "asar": true,
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": false,
+      "deleteAppDataOnUninstall": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "displayLanguageSelector": false,
+      "menuCategory": "xLab Apps",
+      "shortcutName": "xConncet"
+    }
+  },
+  "keywords": [
+    "xLab",
+    "xConnect",
+    "xType",
+    "Internet Academy",
+    "IBJ"
+  ],
+  "author": "xLab",
+  "license": "Copyright ©️ 2018 xLab",
+  "devDependencies": {
+    "electron": "~1.7.8",
+    "electron-builder": "^19.46.9",
+    "browser-sync": "^2.23.3",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.2.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify": "^2.1.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-riot": "^1.1.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-watch": "^4.3.11"
+  }
+}
