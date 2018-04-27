@@ -3,13 +3,14 @@
 var selectedDateOuter = document.getElementById('selectedDateOuter');
 var orderByItems = document.querySelectorAll('[data-order-by]');
 
+var selectedBatchCode = document.getElementById('selectedBatchCode');
+var selectedBatchName = document.getElementById('selectedBatchName');
+var selectedBatchStartDate = document.getElementById('selectedBatchStartDate');
+var selectedBatchEndDate = document.getElementById('selectedBatchEndDate');
+
 var addBatchBtn = document.getElementById('addBatchBtn');
 
 var timetableBatchList = document.getElementById('timetableBatchList');
-
-var selectedClassEl = document.getElementById('selectedClass');
-var selectedInstructorEL = document.getElementById('selectedInstructor');
-var selectedRoomEL = document.getElementById('selectedRoom');
 
 var editingBatchFlag = false;
 var orderBy = 'batch_name';
@@ -28,6 +29,8 @@ function updateBatchList() {
   xhttp1.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      timetableBatchList.innerHTML = this.responseText;
+     // clearning+updating fileds after successful addtion of batch
+     selectedBatchCode.value = selectedBatchName.value = '';
    } else {
      // console.log(this.readyState, this.status);
    }
@@ -39,26 +42,31 @@ function updateBatchList() {
 // Add class on Submit btn click
 function addBatch() {
   if(!editingBatchFlag) {
-    console.log('adding');
+    console.log('adding batch...');
 
-    var batchCode = document.getElementById('selectedBatchCode').value;
-    var batchName = document.getElementById('selectedBatchName').value;
-    var batchStartDate = document.getElementById('selectedBatchStartDate').value;
-    var batchEndDate = document.getElementById('selectedBatchEndDate').value;
-    var batchStuents = document.getElementById('selectedBatchStuents').value;
+    var batchCode = selectedBatchCode.value;
+    var batchName = selectedBatchName.value;
+    var batchStartDate = currentDate();
+    var batchEndDate = currentDate();
     // console.log(batchCode, batchName, batchStartDate, batchEndDate, batchStuents);
 
     var xhttp2 = new XMLHttpRequest();
     xhttp2.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        timetableBatchList.innerHTML = this.responseText;
+        // update batch list
+        // timetableBatchList.innerHTML = this.responseText;
+        updateBatchList();
       }
     };
     xhttp2.open("POST", "batch_handler.php", true);  // open(method, url, async)
     xhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp2.send("action=addBatch&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&batchCode="+batchCode+
-    "&batchName="+batchName+"&batchStartDate="+batchStartDate+"&batchEndDate="+batchEndDate+
-    "&batchStuents="+batchStuents);
+    xhttp2.send("action=addBatch&orderBy=" + orderBy +
+      "&ascOrDesc=" + ascOrDesc +
+      "&batchCode=" + batchCode +
+      "&batchName=" + batchName +
+      "&batchStartDate=" + batchStartDate +
+      "&batchEndDate=" + batchEndDate
+    );
   }
 }
 
@@ -73,7 +81,7 @@ function individualBatchEdit(e) {
     var xhttp3 = new XMLHttpRequest();
     xhttp3.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-       timetableBatchList.innerHTML = this.responseText;
+       updateBatchList();
       }
     };
 
@@ -112,7 +120,6 @@ function individualBatchEdit(e) {
   else if(e.target.id == 'cancelBatch' && editingBatchFlag) {
     var cancelBatchId = e.target.dataset.batchId;
     console.log('cancelling: ' + cancelBatchId);
-
     updateBatchList();
   }
   // submit batch -> if editing any batch
@@ -130,7 +137,7 @@ function individualBatchEdit(e) {
     var xhttp4 = new XMLHttpRequest();
     xhttp4.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        timetableBatchList.innerHTML = this.responseText;
+        updateBatchList();
         editingBatchFlag = false;
       }
     };

@@ -24,7 +24,7 @@ function createWindow () {
   // mainWindow.setFullScreen(true);
   mainWindow.setFullScreen(false);
   mainWindow.setMenu(null);
-  mainWindow.loadURL("http://localhost:8080/php/projects/x_connect/xconnect.php");
+  mainWindow.loadURL("http://localhost:8080/xconnect.php");
   // mainWindow.loadURL(url.format({
   //   pathname: path.join(__dirname, 'http://localhost:8080/php/projects/x_connect/xconnect.php'),
   //   protocol: 'file:',

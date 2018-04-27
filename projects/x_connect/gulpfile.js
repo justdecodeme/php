@@ -1,17 +1,6 @@
 // Port#
 const PORT = '8080';
 
-// Paths
-// const scssPathSource = 'php/projects/x_type/_src/*.scss';
-// const scssPathDestination = 'php/projects/x_type/_assets';
-// const jsPathSource = 'php/projects/x_type/_src/*.js';
-// const jsPathDestination = 'php/projects/x_type/_assets';
-
-const scssPathSource = 'php/projects/x_connect/_src/scss/*.scss';
-const scssPathDestination = 'php/projects/x_connect/_assets/css';
-const jsPathSource = 'php/projects/x_connect/_src/js/*.js';
-const jsPathDestination = 'php/projects/x_connect/_assets/js';
-
 // Imports
 var gulp   = require('gulp'),
     exec   = require('child_process').exec,
@@ -93,24 +82,10 @@ gulp.task('watch', (cb) => {
   console.log('==================================');
 
 
-  /* Minifying + Watching Riot | JS | SCSS files */
+  /* Minifying + Watching JS | SCSS files */
   /*************************************/
 
-  watch('_src/tag/*.tag', (e) => {
-    gulp.src(e.path)
-    .pipe(riot({
-      compact: true
-    }))
-    .pipe(minify({
-      ext: {
-        min: '.min.js'
-      },
-      noSource: true
-    }))
-    .pipe(gulp.dest('_assets/tag'));
-  });
-
-  watch(scssPathSource, (e) => {
+  watch('_src/scss/*.scss', (e) => {
     gulp.src(e.path)
     .pipe(plumber())
     .pipe(sourcemaps.init())
@@ -121,11 +96,11 @@ gulp.task('watch', (cb) => {
       suffix: ".min"
     }))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(scssPathDestination))
+    .pipe(gulp.dest('_assets/css'))
     .pipe(livereload());
   });
 
-  watch(jsPathSource, (e) => {
+  watch('_src/js/*.js', (e) => {
     gulp.src(e.path)
     .pipe(plumber())
     .pipe(sourcemaps.init())
@@ -136,12 +111,12 @@ gulp.task('watch', (cb) => {
       noSource: true
     }))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(jsPathDestination))
+    .pipe(gulp.dest('_assets/js'))
     .pipe(livereload());
   });
 
   console.log('==================================');
-  console.log('Watching + Minifing a Riot | JS | SCSS files.');
+  console.log('Watching + Minifing a JS | SCSS files.');
   console.log('==================================');
 
   cb();

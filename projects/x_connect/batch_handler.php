@@ -107,14 +107,13 @@
     $batch_name = $_POST['batchName'];
     $batch_start_date = $_POST['batchStartDate'];
     $batch_end_date = $_POST['batchEndDate'];
-    $batch_students = $_POST['batchStuents'];
 
     $query = "INSERT INTO `batch`
-    ( `batch_code`, `batch_name`, `batch_start_date`, `batch_end_date`, `batch_students`)
+    ( `batch_code`, `batch_name`, `batch_start_date`, `batch_end_date`)
     VALUES
-    (:BATCH_CODE,:BATCH_NAME,:BATCH_START_DATE,:BATCH_END_DATE,:BATCH_STUDENTS)";
+    (:BATCH_CODE,:BATCH_NAME,:BATCH_START_DATE,:BATCH_END_DATE)";
     $statement = $connection->prepare($query);
-    $params = array ('BATCH_CODE'=>$batch_code,'BATCH_NAME'=>$batch_name,'BATCH_START_DATE'=>$batch_start_date,'BATCH_END_DATE'=>$batch_end_date,'BATCH_STUDENTS'=>$batch_students);
+    $params = array ('BATCH_CODE'=>$batch_code,'BATCH_NAME'=>$batch_name,'BATCH_START_DATE'=>$batch_start_date,'BATCH_END_DATE'=>$batch_end_date);
 
     // Update timetable if query is successful
     if($statement->execute($params)) {

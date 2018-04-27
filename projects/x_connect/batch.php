@@ -63,13 +63,16 @@
               <input type="text" class="form-control" id="selectedBatchName" placeholder="Bootcamp" required>
             </td>
             <td>
-              <input type="date" class="form-control" id="selectedBatchStartDate" value="2018-03-01" required>
+              <!-- <input type="date" class="form-control" id="selectedBatchStartDate" value="2018-03-01" required> -->
+              = first class date
             </td>
             <td>
-              <input type="date" class="form-control" id="selectedBatchEndDate" value="2018-04-30" required>
+              <!-- <input type="date" class="form-control" id="selectedBatchEndDate" value="2018-04-30" required> -->
+              = last class date
             </td>
             <td>
-              <input type="number" class="form-control" id="selectedBatchStuents" value="0" required>
+              <!-- <input type="number" class="form-control" id="selectedBatchStuents" value="0" disabled> -->
+              = total stds registered
             </td>
             <td>
               <button class="btn btn-outline-danger" id="addBatchBtn">Add Batch</button>
