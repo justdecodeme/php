@@ -54,8 +54,7 @@ function addBatch() {
     xhttp2.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         // update batch list
-        // timetableBatchList.innerHTML = this.responseText;
-        updateBatchList();
+        timetableBatchList.innerHTML = this.responseText;
       }
     };
     xhttp2.open("POST", "batch_handler.php", true);  // open(method, url, async)
@@ -81,7 +80,7 @@ function individualBatchEdit(e) {
     var xhttp3 = new XMLHttpRequest();
     xhttp3.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-       updateBatchList();
+       timetableBatchList.innerHTML = this.responseText;
       }
     };
 
@@ -137,7 +136,7 @@ function individualBatchEdit(e) {
     var xhttp4 = new XMLHttpRequest();
     xhttp4.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        updateBatchList();
+        timetableBatchList.innerHTML = this.responseText;
         editingBatchFlag = false;
       }
     };

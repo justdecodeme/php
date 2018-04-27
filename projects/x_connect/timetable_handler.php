@@ -198,7 +198,7 @@ function update_timetable_grid_B($from_date, $to_date) {
   foreach($daterange as $date) {
     $date = $date->format("Y-m-d");
 
-    $query = "SELECT * FROM timetable WHERE date=:clssDATE AND `room_code`='a'";
+    $query = "SELECT * FROM timetable WHERE date=:clssDATE AND `room_code`='b'";
     $statement = $connection->prepare($query);
     $statement->bindParam(":clssDATE", $date);
 
@@ -289,7 +289,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableGrid_A') {
 
 // Update time table on change of date (grid-layout)
 if(isset($_GET['action']) && $_GET['action'] == 'updateTimeTableGrid_B') {
-  update_timetable_grid($_GET['filterStartDate'], $_GET['filterEndDate']);
+  update_timetable_grid_B($_GET['filterStartDate'], $_GET['filterEndDate']);
 }
 
 // Add class on click of Submit button in tfoot
