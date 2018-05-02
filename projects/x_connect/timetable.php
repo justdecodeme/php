@@ -6,7 +6,7 @@
 ?>
 
 <div class="container-fluid list" id="timetableOuter">
-  <!-- <h2>Time Table</h2> -->
+  <h2>Time Table</h2>
   <hr>
   <!-- options -->
   <div class="row">
@@ -18,12 +18,12 @@
           <form class="form-block">
             <label for="selectedBatch">Select Batch <small style="margin-left: 10px;"><a href="batch.php">Manage</a></small></label>
             <select class="custom-select my-1" id="selectedBatch">
-              <option value="bc180305a" data-template="bootcamp" >bc180305a (Bootcamp)</option>
+              <!-- <option value="bc180305a" data-template="bootcamp" >bc180305a (Bootcamp)</option>
               <option value="bc180305b" data-template="bootcamp" >bc180305b (Bootcamp)</option>
               <option value="gr180325" data-template="graphic" >gr180325 (Graphic Design)</option>
               <option value="wd180325" data-template="development" >wd180325 (Web Development)</option>
               <option value="php180325" data-template="php" >php180325 (PHP & MySQL)</option>
-              <option value="u180325" data-template="unity" selected>u180325 (Unity)</option>
+              <option value="u180325" data-template="unity" selected>u180325 (Unity)</option> -->
             </select>
           </form>
         </div>
@@ -51,8 +51,8 @@
       <form class="form-block">
           <label for="selectedLayout">Select Layout</label>
           <select class="custom-select" id="selectedLayout">
-            <option value="list" >List View</option>
-            <option value="grid" selected>Grid View</option>
+            <option value="list" selected>List View</option>
+            <option value="grid" >Grid View</option>
           </select>
       </form>
     </div>

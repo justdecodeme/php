@@ -6,7 +6,7 @@
 ?>
 
 <div class="container list" id="timetableOuter">
-  <!-- <h2>Batches</h2> -->
+  <h2>Batches</h2>
   <hr>
 
   <!-- tables -->

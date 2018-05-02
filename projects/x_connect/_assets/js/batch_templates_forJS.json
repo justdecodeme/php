@@ -206,5 +206,35 @@ var batchData = {
       "a": "A",
       "b": "B"
     }
+  },
+  "marketing": {
+    "classes": {
+      "dm1": "DM 1",
+      "dm2": "DM 2",
+      "dm3": "DM 3",
+      "dm4": "DM 4",
+      "dm5": "DM 5",
+      "dm6": "DM 6",
+      "dm7": "DM 7",
+      "dm8": "DM 8",
+      "dmp1": "DM (Project 1)",
+      "dmp2": "DM (Project 2)",
+      "dmp3": "DM (Project 3)",
+      "dmp4": "DM (Project 4)",
+      "dmp5": "DM (Project 5)"
+    },
+    "startTimings": ["09:00", "11:30", "14:00", "16:30"],
+    "endTimings": ["11:00", "13:30", "16:00", "18:30"],
+    "instructors": {
+      "ins_aish": "Aishwarya",
+      "ins_rakesh": "Rakesh",
+      "ins_varsha": "Varsha",
+      "ins_pallavi": "Pallavi",
+      "ins_asha": "Asha"
+    },
+    "rooms": {
+      "a": "A",
+      "b": "B"
+    }
   }
 }
