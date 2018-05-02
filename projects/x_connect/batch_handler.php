@@ -129,24 +129,30 @@
     $batch_code = $_POST['batchCode'];
     // $batch_template = $_POST['batchTemplate'];
     $batch_name = $_POST['batchName'];
-    $batch_start_date = $_POST['batchStartDate'];
-    $batch_end_date = $_POST['batchEndDate'];
-    $batch_students = $_POST['batchStuents'];
+    // $batch_start_date = $_POST['batchStartDate'];
+    // $batch_end_date = $_POST['batchEndDate'];
+    // $batch_students = $_POST['batchStuents'];
 
     $submit_id = $_POST['submitId'];
 
+    // `batch_start_date` = :BATCH_START_DATE,
+    // `batch_end_date` = :BATCH_END_DATE,
+    // `batch_students` = :BATCH_STUDENTS
     $query = "UPDATE `batch`
       SET
         `batch_code` = :BATCH_CODE,
-        `batch_name` = :BATCH_NAME,
-        `batch_start_date` = :BATCH_START_DATE,
-        `batch_end_date` = :BATCH_END_DATE,
-        `batch_students` = :BATCH_STUDENTS
+        `batch_name` = :BATCH_NAME
       WHERE
         `id` = $submit_id
       LIMIT 1";
     $statement = $connection->prepare($query);
-    $params = array ('BATCH_CODE'=>$batch_code,'BATCH_NAME'=>$batch_name,'BATCH_START_DATE'=>$batch_start_date,'BATCH_END_DATE'=>$batch_end_date,'BATCH_STUDENTS'=>$batch_students);
+    $params = array (
+      'BATCH_CODE'=>$batch_code,
+      'BATCH_NAME'=>$batch_name
+    );
+    // 'BATCH_START_DATE'=>$batch_start_date,
+    // 'BATCH_END_DATE'=>$batch_end_date,
+    // 'BATCH_STUDENTS'=>$batch_students
 
     // Update timetable if query is successful
     if($statement->execute($params)) {

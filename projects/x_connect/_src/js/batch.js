@@ -29,8 +29,6 @@ function updateBatchList() {
   xhttp1.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      timetableBatchList.innerHTML = this.responseText;
-     // clearning+updating fileds after successful addtion of batch
-     selectedBatchCode.value = selectedBatchName.value = '';
    } else {
      // console.log(this.readyState, this.status);
    }
@@ -39,7 +37,7 @@ function updateBatchList() {
   xhttp1.send();
 }
 
-// Add class on Submit btn click
+// Add batch on Submit btn click
 function addBatch() {
   if(!editingBatchFlag) {
     console.log('adding batch...');
@@ -55,6 +53,8 @@ function addBatch() {
       if (this.readyState == 4 && this.status == 200) {
         // update batch list
         timetableBatchList.innerHTML = this.responseText;
+        // clearning+updating fileds after successful addtion of batch
+        selectedBatchCode.value = selectedBatchName.value = '';
       }
     };
     xhttp2.open("POST", "batch_handler.php", true);  // open(method, url, async)
@@ -69,7 +69,7 @@ function addBatch() {
   }
 }
 
-// Edit -> Delete -> Cancel -> Submit class fuctions
+// Edit -> Delete -> Cancel -> Submit batch fuctions
 function individualBatchEdit(e) {
   e.stopPropagation();
   // delete batch -> only if not editing any batch
@@ -104,16 +104,16 @@ function individualBatchEdit(e) {
     var elementEditing = document.getElementById('editBatch_'+editBatchId);
     var elementEditingCode = elementEditing.querySelector('.edit-batch-code');
     var elementEditingName = elementEditing.querySelector('.edit-batch-name');
-    var elementEditingStartDate = elementEditing.querySelector('.edit-batch-start-date');
-    var elementEditingEndDate = elementEditing.querySelector('.edit-batch-end-date');
-    var elementEditingStudents = elementEditing.querySelector('.edit-batch-students');
+    // var elementEditingStartDate = elementEditing.querySelector('.edit-batch-start-date');
+    // var elementEditingEndDate = elementEditing.querySelector('.edit-batch-end-date');
+    // var elementEditingStudents = elementEditing.querySelector('.edit-batch-students');
 
     elementEditing.classList.add('editing-class');
     elementEditingCode.innerHTML = '<input type="text" class="form-control" id="editingCode" value="'+elementEditingCode.dataset.batchCode+'">';
     elementEditingName.innerHTML = '<input type="text" class="form-control" id="editingName" value="'+elementEditingName.dataset.batchName+'">';
-    elementEditingStartDate.innerHTML = '<input type="date" class="form-control" id="editingStartDate" value="'+elementEditingStartDate.dataset.batchStartDate+'">';
-    elementEditingEndDate.innerHTML = '<input type="date" class="form-control" id="editingEndDate" value="'+elementEditingEndDate.dataset.batchEndDate+'">';
-    elementEditingStudents.innerHTML = '<input type="number" class="form-control" id="editingStudents" value="'+elementEditingStudents.dataset.batchStudents+'">';
+    // elementEditingStartDate.innerHTML = '<input type="date" class="form-control" id="editingStartDate" value="'+elementEditingStartDate.dataset.batchStartDate+'">';
+    // elementEditingEndDate.innerHTML = '<input type="date" class="form-control" id="editingEndDate" value="'+elementEditingEndDate.dataset.batchEndDate+'">';
+    // elementEditingStudents.innerHTML = '<input type="number" class="form-control" id="editingStudents" value="'+elementEditingStudents.dataset.batchStudents+'">';
   }
   // cancel batch -> if editing any batch
   else if(e.target.id == 'cancelBatch' && editingBatchFlag) {
@@ -128,9 +128,9 @@ function individualBatchEdit(e) {
 
     var batchCode = document.getElementById('editingCode').value;
     var batchName = document.getElementById('editingName').value;
-    var batchStartDate = document.getElementById('editingStartDate').value;
-    var batchEndDate = document.getElementById('editingEndDate').value;
-    var batchStuents = document.getElementById('editingStudents').value;
+    // var batchStartDate = document.getElementById('editingStartDate').value;
+    // var batchEndDate = document.getElementById('editingEndDate').value;
+    // var batchStuents = document.getElementById('editingStudents').value;
     // console.log(batchCode, batchName, batchStartDate, batchEndDate, batchStuents);
 
     var xhttp4 = new XMLHttpRequest();
@@ -142,9 +142,12 @@ function individualBatchEdit(e) {
     };
     xhttp4.open("POST", "batch_handler.php", true);  // open(method, url, async)
     xhttp4.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp4.send("action=submitBatch&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&batchCode="+batchCode+
-    "&batchName="+batchName+"&batchStartDate="+batchStartDate+"&batchEndDate="+batchEndDate+
-    "&batchStuents="+batchStuents+"&submitId="+submitBatchId);
+    xhttp4.send("action=submitBatch&orderBy=" + orderBy +
+      "&ascOrDesc=" + ascOrDesc +
+      "&batchCode=" + batchCode +
+      "&batchName=" + batchName +
+      "&submitId="+submitBatchId
+    );
   }
 }
 

@@ -6,7 +6,7 @@
 ?>
 
 <div class="container list" id="timetableOuter">
-  <h2>Batches</h2>
+  <!-- <h2>Batches</h2> -->
   <hr>
 
   <!-- tables -->
@@ -64,15 +64,15 @@
             </td>
             <td>
               <!-- <input type="date" class="form-control" id="selectedBatchStartDate" value="2018-03-01" required> -->
-              = first class date
+              = first class date <br> (default today's date)
             </td>
             <td>
               <!-- <input type="date" class="form-control" id="selectedBatchEndDate" value="2018-04-30" required> -->
-              = last class date
+              = last class date <br> (default today's date)
             </td>
             <td>
               <!-- <input type="number" class="form-control" id="selectedBatchStuents" value="0" disabled> -->
-              = total stds registered
+              = total stds registered <br> (default 0)
             </td>
             <td>
               <button class="btn btn-outline-danger" id="addBatchBtn">Add Batch</button>
