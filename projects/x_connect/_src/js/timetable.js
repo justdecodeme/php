@@ -30,6 +30,24 @@ var ascOrDesc = 'ASC';
 
 /****************Functions****************/
 
+// fetch the batch list
+function fetchBatchList() {
+  console.log('fetching batch list...');
+  // load content from database
+  var xhttp0 = new XMLHttpRequest();
+  xhttp0.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     selectedBatch.innerHTML = this.responseText;
+     updateTimeTableList(selectedBatch);
+     updateTimeTableGrid();
+   } else {
+     // console.log(this.readyState, this.status);
+   }
+  };
+  xhttp0.open("GET", "batch_handler.php?action=fetchBatchList", true);  // open(method, url, async)
+  xhttp0.send();
+}
+
 // Update time table on change of batch
 function updateTimeTableList() {
   console.log('timetable list updating...');
@@ -309,10 +327,9 @@ function orderClassBy(e) {
 function init() {
   selectedDate.value = currentDate();
   // filterStartDate.value = currentDate();
-  filterStartDate.value = "2018-03-05";
-  filterEndDate.value = "2018-03-25";
-  updateTimeTableList(selectedBatch);
-  updateTimeTableGrid();
+  filterStartDate.value = "2018-04-09";
+  filterEndDate.value = "2018-05-20";
+  fetchBatchList();
   updateLayout(selectedLayout);
 };
 init();

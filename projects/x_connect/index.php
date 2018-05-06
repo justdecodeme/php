@@ -48,46 +48,46 @@
         </div>
       </a>
     </div>
-    <!-- <div class="col-md-3">
+    <div class="col-md-3">
       <a class="card" href="#">
         <img class="card-img-top" src="./_assets/images/quizzes.jpg" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">
           <h4 class="card-title text-center" style="margin: 0;">Quizzes</h4>
         </div>
       </a>
-    </div> -->
-    <!-- <div class="col-md-3">
+    </div>
+    <div class="col-md-3">
       <a class="card" href="#">
         <img class="card-img-top" src="./_assets/images/badges.jpg" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">
           <h4 class="card-title text-center" style="margin: 0;">Badges</h4>
         </div>
       </a>
-    </div> -->
-    <!-- <div class="col-md-3">
+    </div>
+    <div class="col-md-3">
       <a class="card" href="#">
         <img class="card-img-top" src="./_assets/images/ranking.jpeg" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">
           <h4 class="card-title text-center" style="margin: 0;">xType Ranking</h4>
         </div>
       </a>
-    </div> -->
-    <!-- <div class="col-md-3">
+    </div>
+    <div class="col-md-3">
       <a class="card" href="#">
         <img class="card-img-top" src="./_assets/images/events.jpg" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">
           <h4 class="card-title text-center" style="margin: 0;">Events</h4>
         </div>
       </a>
-    </div> -->
-    <!-- <div class="col-md-3">
+    </div>
+    <div class="col-md-3">
       <a class="card" href="#">
         <img class="card-img-top" src="./_assets/images/downloads.jpg" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">
           <h4 class="card-title text-center" style="margin: 0;">Download</h4>
         </div>
       </a>
-    </div> -->
+    </div>
 
   </div>
 </div>

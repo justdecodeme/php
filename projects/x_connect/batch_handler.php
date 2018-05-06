@@ -4,6 +4,29 @@
 ?>
 
 <?php
+  function fetch_batch_list() {
+    global $connection;
+    $query = "SELECT * FROM batch ORDER BY batch_code";
+    $statement = $connection->prepare($query);
+    if($statement->execute()) {
+      $row = $statement->fetchAll(PDO::FETCH_OBJ);
+      $batch_list = '';
+      $i = 0;
+      foreach($row as $batch) {
+        // mark first option selected by default
+        if($i == 0) {
+          $batch_list .= '<option value="'.$batch->batch_code.'" data-template="'.$batch->batch_template.'" selected>'.$batch->batch_code.' ('.$batch->batch_name.')</option>';
+          $i++;
+        } else {
+          $batch_list .= '<option value="'.$batch->batch_code.'" data-template="'.$batch->batch_template.'">'.$batch->batch_code.' ('.$batch->batch_name.')</option>';
+        }
+      }
+      echo $batch_list;
+    } else {
+      echo "Something went wrong!";
+    }
+  }
+  
   function update_batch_list($order_by, $ascOrDesc) {
     global $connection;
     $query = "SELECT * FROM batch ORDER BY  $order_by $ascOrDesc";
@@ -177,5 +200,10 @@
     } else {
       echo "Something went wrong!";
     }
+  }
+
+  // fetch batch list
+  if(isset($_GET['action']) && $_GET['action'] == 'fetchBatchList') {
+    fetch_batch_list();
   }
  ?>
