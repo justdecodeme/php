@@ -7,7 +7,9 @@
 
 <div class="container list" id="timetableOuter">
   <h2>Batches</h2>
-  <hr>
+  <div class="progress" id="progressBar">
+    <div class="progress-bar" role="progressbar" style="width: 50%"></div>
+  </div>
 
   <!-- tables -->
   <div class="row">

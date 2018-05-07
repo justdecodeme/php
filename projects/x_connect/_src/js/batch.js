@@ -16,6 +16,9 @@ var editingBatchFlag = false;
 var orderBy = 'batch_name';
 var ascOrDesc = 'ASC';
 
+var progressBar = document.getElementById('progressBar');
+var progressBarInner = progressBar.querySelector('.progress-bar');
+
 /****************Functions****************/
 
 // Update time table on change of batch
@@ -28,11 +31,15 @@ function updateBatchList() {
   var xhttp1 = new XMLHttpRequest();
   xhttp1.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     timetableBatchList.innerHTML = this.responseText;
+     setTimeout(()=>{
+       progressBarInner.style.width = '0%';
+       timetableBatchList.innerHTML = this.responseText;
+     }, 2000);
    } else {
      // console.log(this.readyState, this.status);
    }
   };
+  console.log(xhttp1);
   xhttp1.open("GET", "batch_handler.php?action=updateBatchList&orderBy="+
     orderBy+"&ascOrDesc="+
     ascOrDesc
