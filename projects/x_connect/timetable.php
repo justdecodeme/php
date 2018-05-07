@@ -44,8 +44,8 @@
       <form class="form-block">
           <label for="selectedLayout">Select Layout</label>
           <select class="custom-select" id="selectedLayout">
-            <option value="list" selected>List View</option>
-            <option value="grid" >Grid View</option>
+            <option value="list" >List View</option>
+            <option value="grid" selected>Grid View</option>
           </select>
       </form>
     </div>
@@ -116,24 +116,24 @@
       <table class="table table-bordered table-hover grid-layout" style="margin-top: 10px;">
         <thead>
           <tr>
+            <th class="table-active">Room - A</th>
+            <th class="table-warning">New Batch</th>
+            <th class="table-info">Debut</th>
             <th></th>
-            <th>Room - A</th>
-            <th>New Batch</th>
-            <th>Debut</th>
             <th></th>
             <th></th>
             <th>March 2018</th>
             <th>Version 2.0</th>
           </tr>
           <tr>
-            <th></th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-            <th>Sun</th>
+            <th class="table-active"></th>
+            <th class="table-active">Mon</th>
+            <th class="table-active">Tue</th>
+            <th class="table-active">Wed</th>
+            <th class="table-active">Thu</th>
+            <th class="table-active">Fri</th>
+            <th class="table-active">Sat</th>
+            <th class="table-active">Sun</th>
           </tr>
         </thead>
         <tbody id="timetableResultGrid_A"></tbody>
@@ -144,24 +144,23 @@
       <table class="table table-bordered table-hover grid-layout" style="margin-top: 10px;">
         <thead>
           <tr>
+            <th class="table-active" rowspan="2">Room - B</th>
+            <th class="table-warning">New Batch</th>
+            <th class="table-info">Debut</th>
             <th></th>
-            <th>Room - B</th>
-            <th>New Batch</th>
-            <th>Debut</th>
             <th></th>
             <th></th>
             <th>March 2018</th>
             <th>Version 2.0</th>
           </tr>
           <tr>
-            <th></th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-            <th>Sun</th>
+            <th class="table-active">Mon</th>
+            <th class="table-active">Tue</th>
+            <th class="table-active">Wed</th>
+            <th class="table-active">Thu</th>
+            <th class="table-active">Fri</th>
+            <th class="table-active">Sat</th>
+            <th class="table-active">Sun</th>
           </tr>
         </thead>
         <tbody id="timetableResultGrid_B"></tbody>
