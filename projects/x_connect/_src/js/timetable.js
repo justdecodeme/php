@@ -140,7 +140,6 @@ function updateTimeTableGrid() {
 function addClass() {
   if(!editingClassFlag) {
     console.log('adding class..');
-    console.log('updating batch dates..');
 
     var date = document.getElementById('selectedDate').value;
     var classCode = document.getElementById('selectedClass').value;

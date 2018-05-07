@@ -27,11 +27,6 @@
     }
   }
 
-  // start date = first batch class, end date = last batch class
-  // function fetch_batch_dates() {
-  //
-  // }
-
   function update_batch_list($order_by, $ascOrDesc) {
     global $connection;
     $query = "SELECT * FROM batch ORDER BY  $order_by $ascOrDesc";
@@ -46,9 +41,26 @@
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
       foreach($row as $batch) {
 
+        // fetch batch start date, start date = first batch class
+        $query1a = "SELECT * FROM timetable WHERE batch_code='$batch->batch_code' ORDER BY class_date ASC LIMIT 1";
+        // update batch start date
+        foreach($connection->query($query1a) as $row){
+          $start_date = $row['class_date'];
+          $query1b = "UPDATE `batch` SET `batch_start_date` ='$start_date' WHERE batch_code='$batch->batch_code'";
+          $result = $connection->exec($query1b);
+        }
+        // fetch batch end date, end date = last batch class
+        $query2a = "SELECT * FROM timetable WHERE batch_code='$batch->batch_code' ORDER BY class_date DESC LIMIT 1";
+        // update batch end date
+        foreach($connection->query($query2a) as $row){
+          $end_date = $row['class_date'];
+          $query2b = "UPDATE `batch` SET `batch_end_date` ='$end_date' WHERE batch_code='$batch->batch_code'";
+          $result = $connection->exec($query2b);
+        }
+
+        // calculate total number of students in the each batch
         $query = "SELECT COUNT(*) FROM users WHERE batch_code='$batch->batch_code'";
         $statement = $connection->prepare($query);
-
         if($statement->execute()) {
           $students = $statement->fetchColumn();
         } else {
