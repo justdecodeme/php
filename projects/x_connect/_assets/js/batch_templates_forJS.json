@@ -139,7 +139,8 @@ var batchData = {
       "ins_varsha": "Varsha",
       "ins_pallavi": "Pallavi",
       "ins_vinay": "Vinay",
-      "ins_asha": "Asha"
+      "ins_asha": "Asha",
+      "ins_shankar": "Shankar"
     },
     "rooms": {
       "a": "A",
