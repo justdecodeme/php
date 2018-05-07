@@ -26,7 +26,12 @@
       echo "Something went wrong!";
     }
   }
-  
+
+  // start date = first batch class, end date = last batch class
+  // function fetch_batch_dates() {
+  //
+  // }
+
   function update_batch_list($order_by, $ascOrDesc) {
     global $connection;
     $query = "SELECT * FROM batch ORDER BY  $order_by $ascOrDesc";
@@ -46,9 +51,11 @@
 
         if($statement->execute()) {
           $students = $statement->fetchColumn();
+        } else {
+          $students = '-';
         }
 
-        // highlight rows for past | present | future classes
+        // Batch Start: highlight rows for past | present | future classes
         $batch_start_date = date('Y-m-d', strtotime($batch->batch_start_date));
         $batch_date_seconds = strtotime($batch_start_date);
         $diff_in_seconds_start = $batch_date_seconds - $now_date_seconds;
@@ -63,7 +70,7 @@
           $row_highlight_class_start = 'table-success';
         }
 
-        // highlight rows for past | present | future classes
+        // Batch end: highlight rows for past | present | future classes
         $batch_end_date = date('Y-m-d', strtotime($batch->batch_end_date));
         $batch_date_seconds = strtotime($batch_end_date);
         $diff_in_seconds_end = $batch_date_seconds - $now_date_seconds;

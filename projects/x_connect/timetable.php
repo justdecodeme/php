@@ -63,7 +63,7 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col" class="ordered-by active-ASC" data-order-by="date">Date
+            <th scope="col" class="ordered-by active-ASC" data-order-by="class_date">Date
               <span class="down"><i class="fa fa-chevron-down"></i></span>
               <span class="up"><i class="fa fa-chevron-up"></i></span>
             </th>

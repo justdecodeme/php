@@ -25,12 +25,12 @@ var editingClassFlag = false;
 var batchCode = null;
 var batchTemplate = null;
 var layout = 'list';
-var orderBy = 'date';
+var orderBy = 'class_date';
 var ascOrDesc = 'ASC';
 
 /****************Functions****************/
 
-// fetch the batch list
+// fetch the batch list to make drop down
 function fetchBatchList() {
   console.log('fetching batch list...');
   // load content from database
@@ -96,7 +96,12 @@ function updateTimeTableList() {
      // console.log(this.readyState, this.status);
    }
   };
-  xhttp1.open("GET", "timetable_handler.php?action=updateTimeTableList&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc, true);  // open(method, url, async)
+  xhttp1.open("GET", "timetable_handler.php?action=updateTimeTableList"+
+    "&batchCode="+batchCode+
+    "&batchTemplate="+batchTemplate+
+    "&orderBy="+orderBy+
+    "&ascOrDesc="+ascOrDesc
+  , true);  // open(method, url, async)
   xhttp1.send();
 }
 
@@ -134,7 +139,8 @@ function updateTimeTableGrid() {
 // Add class on Submit btn click
 function addClass() {
   if(!editingClassFlag) {
-    console.log('adding');
+    console.log('adding class..');
+    console.log('updating batch dates..');
 
     var date = document.getElementById('selectedDate').value;
     var classCode = document.getElementById('selectedClass').value;
@@ -148,11 +154,24 @@ function addClass() {
     xhttp3.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         timetableResultList.innerHTML = this.responseText;
+      } else {
+        // console.log(this.readyState, this.status);
       }
     };
     xhttp3.open("POST", "timetable_handler.php", true);  // open(method, url, async)
     xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp3.send("action=addClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+"&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode);
+    xhttp3.send("action=addClass"+
+      "&batchCode="+batchCode+
+      "&batchTemplate="+batchTemplate+
+      "&orderBy="+orderBy+
+      "&ascOrDesc="+ascOrDesc+
+      "&date="+date+
+      "&classCode="+classCode+
+      "&instructorCode="+instructorCode+
+      "&startTime="+startTime+
+      "&endTime="+endTime+
+      "&roomCode="+roomCode
+    );
   }
 }
 
@@ -168,7 +187,9 @@ function individualClassEdit(e) {
     xhttp4.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
        timetableResultList.innerHTML = this.responseText;
-      }
+     } else {
+       // console.log(this.readyState, this.status);
+     }
     };
 
     var deleteConfirmation = confirm("Want to delete?");

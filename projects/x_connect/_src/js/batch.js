@@ -33,7 +33,10 @@ function updateBatchList() {
      // console.log(this.readyState, this.status);
    }
   };
-  xhttp1.open("GET", "batch_handler.php?action=updateBatchList&orderBy="+orderBy+"&ascOrDesc="+ascOrDesc, true);  // open(method, url, async)
+  xhttp1.open("GET", "batch_handler.php?action=updateBatchList&orderBy="+
+    orderBy+"&ascOrDesc="+
+    ascOrDesc
+  , true);  // open(method, url, async)
   xhttp1.send();
 }
 

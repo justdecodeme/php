@@ -4,6 +4,30 @@ include 'includes/template_reader.php';
 ?>
 
 <?php
+
+// start date = first batch class, end date = last batch class
+function update_batch_dates($code) {
+  global $connection;
+  // fetch batch start date
+  $query1 = "SELECT * FROM timetable WHERE batch_code='$code' ORDER BY class_date ASC LIMIT 1";
+  // fetch batch end date
+  $query2 = "SELECT * FROM timetable WHERE batch_code='$code' ORDER BY class_date DESC LIMIT 1";
+
+  // update batch end date
+  foreach($connection->query($query1) as $row){
+    $start_date = $row['class_date'];
+    $query3 = "UPDATE `batch` SET `batch_start_date` ='$start_date' WHERE batch_code='$code'";
+    $result = $connection->exec($query3);
+  }
+  // update batch end date
+  foreach($connection->query($query2) as $row){
+    $end_date = $row['class_date'];
+    $query4 = "UPDATE `batch` SET `batch_end_date` ='$end_date' WHERE batch_code='$code'";
+    $result = $connection->exec($query4);
+  }
+
+}
+
 function update_timetable_list($code, $temp, $order_by, $ascOrDesc) {
   global $connection;
   $query = "SELECT * FROM timetable WHERE batch_code=:batchCode ORDER BY " . $order_by . " " . $ascOrDesc;
@@ -22,7 +46,7 @@ function update_timetable_list($code, $temp, $order_by, $ascOrDesc) {
     foreach($row as $class) {
 
       // highlight rows for past | present | future classes
-      $class_date = date('Y-m-d', strtotime($class->date));
+      $class_date = date('Y-m-d', strtotime($class->class_date));
       $now_date = date("Y-m-d", time());
       $class_date_seconds = strtotime($class_date);
       $now_date_seconds = strtotime($now_date);
@@ -43,8 +67,8 @@ function update_timetable_list($code, $temp, $order_by, $ascOrDesc) {
       <td scope="row">'.
       $i
       .'</td>
-      <td class="edit-date" data-date='.$class->date.'>'.
-      date('j M y | D', strtotime($class->date))
+      <td class="edit-date" data-date='.$class->class_date.'>'.
+      date('j M y | D', strtotime($class->class_date))
       .'</td>
       <td class="edit-class" data-class='.$class->class_code.'>'.
       $batch['classes'][$class->class_code]
@@ -125,10 +149,10 @@ function update_timetable_grid($from_date, $to_date) {
       $totalClass = $statement->rowCount();
 
       // hightlight class as active if date is matching with today's date
-      if(date('Y-m-d', strtotime($classes[0]['date'])) == $now->format('Y-m-d')) {
-        $timetable_grid .= "<td class='table-success'><p>".date('j M', strtotime($classes[0]['date'])) . "</p>";
+      if(date('Y-m-d', strtotime($classes[0]['class_date'])) == $now->format('Y-m-d')) {
+        $timetable_grid .= "<td class='table-success'><p>".date('j M', strtotime($classes[0]['class_date'])) . "</p>";
       } else {
-        $timetable_grid .= "<td><p>".date('j M', strtotime($classes[0]['date'])) . "</p>";
+        $timetable_grid .= "<td><p>".date('j M', strtotime($classes[0]['class_date'])) . "</p>";
       }
 
       $timings = array('09:00:00', '11:30:00', '14:00:00', '16:30:00');
@@ -225,10 +249,10 @@ function update_timetable_grid_B($from_date, $to_date) {
       $totalClass = $statement->rowCount();
 
       // hightlight class as active if date is matching with today's date
-      if(date('Y-m-d', strtotime($classes[0]['date'])) == $now->format('Y-m-d')) {
-        $timetable_grid .= "<td class='table-success'><p>".date('j M', strtotime($classes[0]['date'])) . "</p>";
+      if(date('Y-m-d', strtotime($classes[0]['class_date'])) == $now->format('Y-m-d')) {
+        $timetable_grid .= "<td class='table-success'><p>".date('j M', strtotime($classes[0]['class_date'])) . "</p>";
       } else {
-        $timetable_grid .= "<td><p>".date('j M', strtotime($classes[0]['date'])) . "</p>";
+        $timetable_grid .= "<td><p>".date('j M', strtotime($classes[0]['class_date'])) . "</p>";
       }
 
       $timings = array('09:00:00', '11:30:00', '14:00:00', '16:30:00');
@@ -307,7 +331,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'addClass') {
   $room_code = $_POST['roomCode'];
 
   $query = "INSERT INTO `timetable`
-  ( `batch_code`, `date`, `class_code`, `instructor_code`, `start_time`, `end_time`, `room_code`)
+  ( `batch_code`, `class_date`, `class_code`, `instructor_code`, `start_time`, `end_time`, `room_code`)
   VALUES
   (:BATCH_CODE,:SELECTED_DATE,:CLASS_CODE,:INSTRUCTOR_CODE,:STARTTIME,:ENDTIME,:ROOM)";
   $statement = $connection->prepare($query);
@@ -316,6 +340,9 @@ if(isset($_POST['action']) && $_POST['action'] == 'addClass') {
   // Update timetable if query is successful
   if($statement->execute($params)) {
     update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
+    update_batch_dates($batch_code);
+  } else {
+    echo "<script>alert('Sorry, Class not added!')</script>";
   }
 }
 
@@ -337,7 +364,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'submitClass') {
 
   $query = "UPDATE `timetable`
   SET
-  `date` = :SELECTED_DATE,
+  `class_date` = :SELECTED_DATE,
   `class_code` = :CLASS_CODE,
   `instructor_code` = :INSTRUCTOR_CODE,
   `start_time` = :STARTTIME,
@@ -352,6 +379,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'submitClass') {
   // Update timetable if query is successful
   if($statement->execute($params)) {
     update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
+    update_batch_dates($batch_code);
   } else {
     echo "Something went wrong!";
   }
@@ -371,6 +399,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'deleteClass') {
   $statement->bindParam(":deleteId", $delete_id);
   if($statement->execute()) {
     update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
+    update_batch_dates($batch_code);
   } else {
     echo "Something went wrong!";
   }
