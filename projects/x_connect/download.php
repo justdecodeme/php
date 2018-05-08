@@ -1,4 +1,6 @@
 <?php
+  include 'includes/init.php';
+  include 'includes/login_status.php';
   include 'includes/header.php';
 ?>
 
