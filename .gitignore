@@ -1,8 +1,9 @@
 node_modules
 projects/x_connect/node_modules/.staging/7zip-bin-4d6b70e6/7x.sh
-projects/x_connect/_assets/js/*.min.js
-projects/x_connect/_assets/js/*.min.js.map
-projects/x_connect/_assets/css/*.min.css
-projects/x_connect/_assets/css/*.min.css.map
-projects/x_connect/_assets/js/batch.min.js.map
-*.css
+projects/x_connect/_assets/js/**.min.js
+projects/x_connect/_assets/js/**.min.js.map
+projects/x_connect/_assets/css/**.min.css
+projects/x_connect/_assets/css/**.min.css.map
+projects/x_connect/_assets/css/style.min.css
+projects/x_connect/_assets/css/style.min.css.map
+*.map
