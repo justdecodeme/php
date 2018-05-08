@@ -1,2 +1,5 @@
 node_modules
 projects/x_connect/node_modules/.staging/7zip-bin-4d6b70e6/7x.sh
+projects/x_connect/_assets/js/*.js
+projects/x_connect/_assets/js/*.js.map
+projects/x_connect/_assets/css/*.css

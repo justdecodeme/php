@@ -32,7 +32,7 @@ function updateBatchList() {
   xhttp1.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      setTimeout(()=>{
-       progressBarInner.style.width = '0%';
+       progressBarInner.style.width = '100%';
        timetableBatchList.innerHTML = this.responseText;
      }, 2000);
    } else {
