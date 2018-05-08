@@ -6,7 +6,7 @@
 ?>
 
 <div class="container list" id="timetableOuter">
-  <h2>Batches</h2>
+  <h2>Batches<span id="loadingBtn"><i class="fas fa-spinner"></i></span></h2>
   <div class="progress" id="progressBar">
     <div class="progress-bar" role="progressbar" style="width: 0%"></div>
   </div>

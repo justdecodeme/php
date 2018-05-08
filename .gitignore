@@ -4,3 +4,5 @@ projects/x_connect/_assets/js/*.min.js
 projects/x_connect/_assets/js/*.min.js.map
 projects/x_connect/_assets/css/*.min.css
 projects/x_connect/_assets/css/*.min.css.map
+projects/x_connect/_assets/js/batch.min.js.map
+*.css

@@ -50,6 +50,7 @@ function fetchBatchList() {
 
 // Update time table on change of batch
 function updateTimeTableList() {
+  loadingInProgress();
   console.log('timetable list updating...');
 
   editingClassFlag = false;
@@ -92,6 +93,7 @@ function updateTimeTableList() {
   xhttp1.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      timetableResultList.innerHTML = this.responseText;
+      loadingFinished();
    } else {
      // console.log(this.readyState, this.status);
    }

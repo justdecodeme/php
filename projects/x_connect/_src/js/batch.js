@@ -23,27 +23,39 @@ var progressBarInner = progressBar.querySelector('.progress-bar');
 
 // Update time table on change of batch
 function updateBatchList() {
+  loadingInProgress();
   console.log('batch list updating...');
 
   editingBatchFlag = false;
 
   // load content from database
   var xhttp1 = new XMLHttpRequest();
-  xhttp1.onreadystatechange = function() {
+  xhttp1.onreadystatechange = function(e) {
     if (this.readyState == 4 && this.status == 200) {
-     setTimeout(()=>{
+     // setTimeout(()=>{
        progressBarInner.style.width = '100%';
        timetableBatchList.innerHTML = this.responseText;
-     }, 2000);
+       loadingFinished();
+     // }, 2000);
    } else {
      // console.log(this.readyState, this.status);
    }
   };
-  console.log(xhttp1);
   xhttp1.open("GET", "batch_handler.php?action=updateBatchList&orderBy="+
     orderBy+"&ascOrDesc="+
     ascOrDesc
   , true);  // open(method, url, async)
+  // xhttp1.loadstart = function(e) {
+  //     console.log(e);
+  // }
+  // xhttp1.loadend = function(e) {
+  //     console.log(e);
+  // }
+  // xhttp1.onprogress = function(e) {
+  //     console.log(e);
+  //     var percentLoaded = e.loaded/e.total;
+  //     console.log(e.loaded);
+  // }
   xhttp1.send();
 }
 

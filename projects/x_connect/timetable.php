@@ -6,7 +6,7 @@
 ?>
 
 <div class="container-fluid list" id="timetableOuter">
-  <h2>Time Table</h2>
+  <h2>Time Table<span id="loadingBtn"><i class="fas fa-spinner"></i></span></h2>
   <hr>
   <!-- options -->
   <div class="row">
