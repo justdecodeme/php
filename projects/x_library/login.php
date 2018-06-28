@@ -72,7 +72,7 @@
 
 <main>
 	<form action="login.php" method='post' class="main-form">
-		<h1>Log in to <b>xType</b></h1>
+		<h1>Log in to <b>xLibrary</b></h1>
 
 		<?php echo ($login_err != '' ? '<p class="error">' . $login_err . '</p>' : ''); ?>
 
