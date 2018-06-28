@@ -1,6 +1,6 @@
 <?php
 // if session variables are set
-$user_email = '';
+$email = '';
 if(isset($_SESSION['email']) && isset($_SESSION['password'])){
   $query = "SELECT *
     FROM users
@@ -13,8 +13,16 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
   if($statement->execute($params) && $statement->rowCount() == 1) {
     $row = $statement->fetchAll(PDO::FETCH_OBJ);
     foreach($row as $user) {
-      $user_email = $user->email;
-      $user_role = $user->role;
+      $image = $user->image;
+      $f_name = $user->f_name;
+      $l_name = $user->l_name;
+      $username = $user->username;
+      $email = $user->email;
+      $role = $user->role;
+      $doj = $user->doj;
+      $batch_code = $user->batch_code;
+      $student_code = $user->student_code;
+      $instructor_code = $user->instructor_code;
     }
   // if login is not validated
   } else {

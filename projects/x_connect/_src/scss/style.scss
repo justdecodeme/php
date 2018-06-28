@@ -205,7 +205,13 @@ table.grid-layout td {
 /************* Profile Page *************/
 .profile-page {
   input {
-    max-width: 400px;
-    margin: 10px auto;
+    // max-width: 400px;
+  }
+}
+
+/************* header Page *************/
+.main-navigation {
+  .username {
+    cursor: pointer;
   }
 }

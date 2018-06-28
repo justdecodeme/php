@@ -116,7 +116,7 @@
       <table class="table table-bordered table-hover grid-layout" style="margin-top: 10px;">
         <thead>
           <tr>
-            <th class="table-active">Room - A</th>
+            <th class="table-active" rowspan="2">Room - A</th>
             <th class="table-warning">New Batch</th>
             <th class="table-info">Debut</th>
             <th></th>
@@ -126,7 +126,6 @@
             <th>Version 2.0</th>
           </tr>
           <tr>
-            <th class="table-active"></th>
             <th class="table-active">Mon</th>
             <th class="table-active">Tue</th>
             <th class="table-active">Wed</th>

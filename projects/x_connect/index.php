@@ -9,6 +9,14 @@
   <hr>
   <div class="row">
     <div class="col-md-3">
+      <a class="card" href="profile.php">
+        <img class="card-img-top" src="./_assets/images/profile.jpg" alt="Card image cap">
+        <div class="card-body" style="padding: 1rem;">
+          <h4 class="card-title text-center" style="margin: 0;">Profile</h4>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
       <a class="card" href="batch.php">
         <img class="card-img-top" src="./_assets/images/batch.png" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">

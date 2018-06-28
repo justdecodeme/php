@@ -1,0 +1,347 @@
+/*********************************/
+/*     variables     */
+/*********************************/
+$active: rgba(0, 0, 255, 0.5);
+$success: rgba(0, 255, 0, 0.5);
+$error: rgba(255, 0, 0, 0.5);
+$black25: rgba(0, 0, 0, 0.25);
+$black5: rgba(0, 0, 0, 0.05);
+$white25: rgba(255, 255, 255, 0.25);
+$white2: rgba(255, 255, 255, 0.2);
+$white3: rgba(255, 255, 255, 0.3);
+$white5: rgba(255, 255, 255, 0.5);
+$white8: rgba(255, 255, 255, 0.8);
+$primary: rgba(96, 29, 134, 1);
+$primary5: rgba(96, 29, 134, 0.5);
+$primary25: rgba(96, 29, 134, 0.25);
+$primary8: rgba(96, 29, 134, 0.8);
+
+/*********************************/
+/*     Universal CSS     */
+/*********************************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Comfortaa', cursive;
+}
+html {
+    position: relative;
+    background: $primary25;
+    /*background-image: url(../_assets/images/typing-bg.jpg);*/
+    background-size: cover;
+    background-position: center top;
+    min-height: 100%;
+}
+html:after {
+    content: "";
+    position: absolute;
+    background: $primary8;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: -1;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(255,255,255,.35);
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(255,255,255,.35);
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(255,255,255,.35);
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: rgba(255,255,255,.35);
+}
+.flex-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-h {
+  display: flex;
+  align-items: center;
+}
+.flex-v {
+  display: flex;
+  /*align-items: center;*/
+  justify-content: center;
+}
+a {
+  font-family: 'Comfortaa', cursive;
+  text-decoration: none;
+}
+
+a.link {
+    color: $primary;
+    :hover {
+      color: $primary5;
+    }
+}
+a.bg-link {
+    color: white;
+    background: $white2;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+a.bg-link:hover {
+  background: $white3;
+}
+.transition:hover {
+  transition: all 0.2s ease;
+}
+
+span.active { background: $active; }
+span.success { color: $success; }
+span.error { background: $error; }
+
+/*********************************/
+/*     SVG Loader     */
+/*********************************/
+#loaderOuter {
+  background: $primary;
+  width:100%;
+  height:100%;
+  position:fixed;
+  z-index:9999;
+  .loader {
+    background: $primary;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    svg {
+      padding-top: 15px;
+      path {
+        fill: #fff;
+        stroke: #fff;
+        stroke-width: 14px;
+        fill: #fff;
+        fill-opacity: 0;
+      }
+      path#a {
+        /*opacity: .1;*/
+        stroke-dasharray: 305;
+        stroke-dashoffset: -305px;
+      }
+      path.a {
+        animation: draw-a .2s reverse ease-in forwards;
+      }
+      path#b {
+        /*opacity: .3;*/
+        stroke-dasharray: 308;
+        stroke-dashoffset: -308px;
+      }
+      path.b {
+        animation: draw-b .2s .2s reverse ease-in forwards;
+      }
+      path#c {
+        /*opacity: .5;*/
+        stroke-dasharray: 305;
+        stroke-dashoffset: -305px;
+      }
+      path.c {
+        animation: draw-c .2s .4s reverse ease-in forwards;
+      }
+      path#d {
+        /*opacity: .7;*/
+        stroke-dasharray: 315;
+        stroke-dashoffset: -315px;
+      }
+      path.d {
+        animation: draw-d .2s .6s reverse ease-in forwards;
+      }
+    }
+  }
+}
+@keyframes draw-a {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 305; }
+}
+@keyframes draw-b {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 308; }
+}
+@keyframes draw-c {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 305; }
+}
+@keyframes draw-d {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 315; }
+}
+
+/*********************************/
+/*     Login + Signup Page     */
+/*********************************/
+form.main-form {
+    color: white;
+    max-width: 400px;
+    margin: 100px auto;
+    text-align: left;
+    h1 {
+      font-size: 30px;
+      font-weight: lighter;
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin: 20px 0 10px 0;
+      a {
+        font-size: 12px;
+      }
+    }
+    label[for='remember'] {
+        display: inline-block;
+        margin-top: 30px;
+    }
+    input[type='text'], input[type='password'] {
+        border: 1px solid white;
+        background: $white25;
+        color: white;
+        padding: 10px 5px;
+        font-size: 18px;
+        border-radius: 4px;
+        width: 80%;
+    }
+    input[type='submit'] {
+        color: white;
+        display: block;
+        margin-top: 20px;
+        background: $primary;
+        border: 1px solid white;
+        padding: 12px 30px;
+        border-radius: 4px;
+        cursor: pointer;
+        :hover {
+          background: $primary8;
+        }
+    }
+    p.last {
+      margin-top: 20px;
+    }
+    p.error {
+      margin-top: 20px;
+      font-size: 15px;
+      color: $white8;
+      background: $error;
+      padding: 10px;
+      border: 1px solid red;
+      border-radius: 4px;
+      margin: 0 0 10px;
+      display: inline-block;
+    }
+}
+
+/*********************************/
+/*     Index Page     */
+/*********************************/
+.index_page form {
+  text-align: center;
+  .heading {
+    margin: 0;
+    line-height: 1.5;
+    span {
+      color: rgb(255, 255, 255);
+      border: 1px solid rgba(255, 255, 255, 0.29);
+      padding: 4px 20px;
+      border-radius: 4px;
+      font-size: 60%;
+      font-weight: bold;
+    }
+  }
+  .user-img {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 20px auto;
+    border: 1px solid $white2;
+    padding: 4px;
+    border-radius: 4px;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 4px;
+    }
+  }
+  .user-options {
+    width: 200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    .bg-link {
+      width: 48%;
+      .fa-arrow-right, .fa-sign-out-alt {
+        transition: .1s all ease-out;
+      }
+    }
+    .bg-link:hover .fa-arrow-right, .bg-link:hover .fa-sign-out-alt {
+      margin-left: 5px;
+    }
+  }
+}
+
+/*********************************/
+/*     Typing Page     */
+/*********************************/
+.grid_container {
+  display: grid;
+  grid-template-columns: 200px auto 300px;
+  grid-template-rows: auto auto;
+  grid-gap: 1px;
+  background-color: $active;
+  padding: 10px;
+  .grid_item {
+    background-color: $white8;
+    padding: 10px;
+  }
+  .grid_item:nth-child(1) { grid-area: 1 / 1 / 3 / 2; }
+  .grid_item:nth-child(2) { grid-area: 1 / 2 / 2 / 3; }
+  .grid_item:nth-child(3) { grid-area: 2 / 2 / 3 / 3; }
+  .grid_item:nth-child(4) { grid-area: 1 / 3 / 3 / 4; }
+}
+
+#toggleTypingBtn {
+  background: $success;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+  display: inline-block;
+}
+
+#toggleTypingBtn.active {
+  background: $active;
+}
+
+div#progressBar {
+  height: 10px;
+  background: black;
+  border-radius: 20px;
+  margin: 10px 0;
+  #seekBar {
+    width: 0%;
+    background: $active;
+    height: 100%;
+    border-radius: 20px;
+    transition: 1s width linear;
+  }
+}
+
+#typingArea {
+  font-size: 30px;
+  max-height: 250px;
+  overflow: scroll;
+  background:$black5;
+  padding: 10px;
+  border-radius: 10px;
+}

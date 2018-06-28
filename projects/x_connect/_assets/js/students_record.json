@@ -1,0 +1,13 @@
+var studentsRecord = {
+  "std1": {
+    "batch": ["design"],
+    "finish": ["gr1", "gr2", "gr4"],
+    "missed": ["gr3"]
+  },
+  "std2": {
+    "batch": ["unity", "bootcamp"],
+  },
+  "std3": {
+    "batch": ["design", "development", "marketing"],
+  }
+}

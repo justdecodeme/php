@@ -4,8 +4,8 @@
   include 'includes/header.php';
 ?>
 
-<div class="container downlod-page">
-  <h2>Bootcamp course</h2>
+<div class="container timeline-page">
+  <h2>Timeline</h2>
   <hr>
 
   <div class="row">
