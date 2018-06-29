@@ -22,7 +22,8 @@
 <div class="container login-page">
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <!-- <h2>Login to xConnect</h2> -->
+      <h2>Login to xLibrary</h2>
+      <br>
       <?php
         if(isset($_SESSION['message'])) {
           echo $_SESSION['message'];

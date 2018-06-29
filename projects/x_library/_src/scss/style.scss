@@ -9,3 +9,10 @@ body {
 /********** login **********/
 
 /********** dashboard **********/
+.table tr th, .table tr td {
+  vertical-align: middle;
+  border: none;
+}
+.table thead, .table tbody {
+  border-bottom: 1px solid #dee2e6;
+}

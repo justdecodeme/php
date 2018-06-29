@@ -7,8 +7,9 @@
 <div class="container-fluid dashboard-page" id="dashboard">
   <h2>xLibrary</h2>
   <hr>
-  <table class="table">
-    <tr>
+  <table class="table table-hover">
+    <thead>
+      <tr>
       <td>Select Borrower</td>
       <td>Select Book</td>
       <td>Issue Date</td>
@@ -18,7 +19,7 @@
       <td>Checked By</td>
       <td>Action</td>
     </tr>
-    <tr>
+      <tr>
       <td>
         <select class="custom-select" id="selectedBatch">
           <option value="rakesh">Rakesh Kumar</option>
@@ -62,17 +63,18 @@
       </td>
       <td>
         <button type="button" class="btn btn-success btn-block" id="approveBookBtn">Approve Book</button>
-        <button type="button" class="btn btn-success btn-block" id="confirmReturnBtn">Confirm Return</button>
       </td>
     </tr>
-    <tr>
+    </thead>
+    <tbody>
+      <tr>
       <td>Rakesh</td>
       <td>Nudge</td>
       <td>09-March-2018</td>
       <td>16-March-2018</td>
       <td>Eric</td>
       <td>
-        <input type="date" class="form-control" id="returnDate" value="2018-03-09">
+        <input type="date" class="form-control" id="returnDate" value="2018-03-16">
       </td>
       <td>
         <select class="custom-select" id="selectedBatch">
@@ -84,6 +86,45 @@
         <button type="button" class="btn btn-success btn-block" id="confirmReturn">Confirm Return</button>
       </td>
     </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>Rakesh</td>
+        <td>Nudge</td>
+        <td>09-March-2018</td>
+        <td>16-March-2018</td>
+        <td>Eric</td>
+        <td>16-March-2018</td>
+        <td>Hiroki</td>
+        <td>
+          <button type="button" class="btn btn-success btn-block" disabled>Returned</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Rakesh</td>
+        <td>Nudge</td>
+        <td>09-March-2018</td>
+        <td>16-March-2018</td>
+        <td>Eric</td>
+        <td>16-March-2018</td>
+        <td>Hiroki</td>
+        <td>
+          <button type="button" class="btn btn-primary btn-block" disabled>Returned</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Rakesh</td>
+        <td>Nudge</td>
+        <td>09-March-2018</td>
+        <td>16-March-2018</td>
+        <td>Eric</td>
+        <td>16-March-2018</td>
+        <td>Hiroki</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-block" disabled>Returned</button>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 </div>
 
