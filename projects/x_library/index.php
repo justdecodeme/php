@@ -5,7 +5,7 @@
 ?>
 
 <div class="container-fluid dashboard-page" id="dashboard">
-  <h2>xLibrary</h2>
+  <h2>Dashboard</h2>
   <hr>
   <table class="table table-hover">
     <thead>
