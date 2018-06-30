@@ -11,7 +11,7 @@
     // Error Handling
     $connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // echo "Connected to Database: " . DB_NAME;
+    echo "Connected to Database: " . DB_NAME;
     // $connection = null;
   } catch(PDOException $error) {
     print "Error ". $error->getMessage() ;
