@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>xConnect by xLab</title>
+    <title>xLibrary by xLab</title>
     <link rel="stylesheet" href="./_assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./_assets/css/style.min.css">
     <link rel="shortcut icon" href="./_assets/images/favicon.ico">
@@ -13,7 +13,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark main-navigation justify-content-between">
-      <a class="navbar-brand" href="index.php">xConnect &nbsp;&nbsp;&nbsp;| </a>
+      <a class="navbar-brand" href="index.php">xLibrary &nbsp;&nbsp;&nbsp;| </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
