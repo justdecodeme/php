@@ -16,7 +16,7 @@
       <td>Due Date</td>
       <td>Approved By</td>
       <td>Return Date</td>
-      <td>Checked By</td>
+      <td>Confirmed By</td>
       <td>Action</td>
     </tr>
       <tr>
