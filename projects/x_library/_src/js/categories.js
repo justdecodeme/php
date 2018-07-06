@@ -1,5 +1,3 @@
-var xhttp = null;
-var isEditing = false;
 var categoryParent, categoryCode, categoryName, categoryCodeValue, categoryNameValue;
 var categoriesListContainer = document.getElementById('categoriesListContainer');
 var addBtn = document.getElementById('addBtn');
@@ -44,7 +42,7 @@ function individualOperations(e) {
     categoryCodeValue = categoryCode.innerHTML;
     categoryNameValue = categoryName.innerHTML;
 
-    categoryParent.classList.add('editing-class');
+    categoryParent.classList.add('editing-outer');
     categoryCode.innerHTML = '<input type="text" class="form-control" id="newCode" value="'+categoryCodeValue+'">';
     categoryName.innerHTML = '<input type="text" class="form-control" id="newName" value="'+categoryNameValue+'">';
   }
@@ -54,7 +52,7 @@ function individualOperations(e) {
     var cancelId = e.target.dataset.id;
     console.log('cancelling: ' + cancelId);
 
-    categoryParent.classList.remove('editing-class');
+    categoryParent.classList.remove('editing-outer');
     categoryCode.innerHTML = categoryCodeValue;
     categoryName.innerHTML = categoryNameValue;
   }
@@ -93,9 +91,7 @@ function fetchCategories() {
   };
   xhttp.open("GET", "categories_handler.php?action=fetchCategories", true);  // open(method, url, async)
   xhttp.send();
-  xhttp = null;
 }
-
 
 // Add Category on add btn click
 function addCategory() {

@@ -1,1 +1,2 @@
-// console.log('Hi, from common Script file!');
+var xhttp = null;
+var isEditing = false;

@@ -10,13 +10,15 @@ include 'includes/header.php';
   <table class="table table-hover">
     <thead>
       <tr>
+        <td class="serial-no">S.No.</td>
         <td>Title</td>
         <td>Author</td>
         <td>Stock</td>
-        <td>Category <a href="category.php" class="edit-categories"><i class="fas fa-edit"></i></a></td>
+        <td>Category <a href="categories.php" class="edit-categories"><i class="fas fa-edit"></i></a></td>
         <td>Action</td>
       </tr>
       <tr>
+        <td>#</td>
         <td>
           <input type="text" class="form-control" name="title">
         </td>
@@ -24,7 +26,7 @@ include 'includes/header.php';
           <input type="text" class="form-control" name="author">
         </td>
         <td>
-          <input type="number" class="form-control" id="dueDate" min="0" max="100" value="1">
+          <input type="number" class="form-control" id="dueDate" min="0" max="100">
         </td>
         <td>
           <select class="custom-select" id="selectedBatch">
@@ -41,28 +43,7 @@ include 'includes/header.php';
         </td>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>Nudge</td>
-        <td>Rechard H. Thaler</td>
-        <td>4</td>
-        <td>business</td>
-        <td>
-          <button type="button" class="btn btn-primary" id="editBtn"><i class="fas fa-edit"></i></button>
-          <button type="button" class="btn btn-danger" id="deleteBtn"><i class="fas fa-trash-alt"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td>The leader who has no title</td>
-        <td>Robin Sharma</td>
-        <td>2</td>
-        <td>self-help</td>
-        <td>
-          <button type="button" class="btn btn-primary" id="editBtn"><i class="fas fa-edit"></i></button>
-          <button type="button" class="btn btn-danger" id="deleteBtn"><i class="fas fa-trash-alt"></i></button>
-        </td>
-      </tr>
-    </tbody>
+    <tbody id="booksListContainer"></tbody>
   </table>
 </div>
 
