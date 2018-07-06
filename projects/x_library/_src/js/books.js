@@ -58,14 +58,20 @@ function individualOperations(e) {
     bookTitle = bookParent.querySelector('.book-title');
     bookAuthor = bookParent.querySelector('.book-author');
     bookStock = bookParent.querySelector('.book-stock');
+    bookCategory = bookParent.querySelector('.book-category');
     bookTitleValue = bookTitle.innerHTML;
     bookAuthorValue = bookAuthor.innerHTML;
     bookStockValue = bookStock.innerHTML;
+    bookCategoryValue = bookCategory.innerHTML;
 
     bookParent.classList.add('editing-outer');
     bookTitle.innerHTML = '<input type="text" class="form-control" id="newTitle" value="'+bookTitleValue+'">';
     bookAuthor.innerHTML = '<input type="text" class="form-control" id="newAuthor" value="'+bookAuthorValue+'">';
     bookStock.innerHTML = '<input type="number" class="form-control" id="newStock" value="'+bookStockValue+'" min="0" max="100">';
+    bookCategory.innerHTML = '<select></select>';
+    // var cloneSelectedCategory = selectCategory;
+    // var clone = cloneSelectedCategory.cloneNode(false);
+    // bookCategory.appendChild(cloneSelectedCategory);
   }
   // cancel -> if editing
   else if(e.target.id == 'cancelBtn' && isEditing) {
