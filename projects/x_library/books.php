@@ -37,7 +37,7 @@ include 'includes/header.php';
           </select>
         </td>
         <td>
-          <button type="button" class="btn btn-success" id="submitBtn">Submit Book</button>
+          <button type="button" class="btn btn-success" id="submitBtn">Submit</button>
         </td>
       </tr>
     </thead>
@@ -50,7 +50,6 @@ include 'includes/header.php';
         <td>
           <button type="button" class="btn btn-primary" id="editBtn"><i class="fas fa-edit"></i></button>
           <button type="button" class="btn btn-danger" id="deleteBtn"><i class="fas fa-trash-alt"></i></button>
-
         </td>
       </tr>
       <tr>
