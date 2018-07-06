@@ -20,13 +20,13 @@ include 'includes/header.php';
       <tr>
         <td>#</td>
         <td>
-          <input type="text" class="form-control" name="title">
+          <input type="text" class="form-control" name="title" id="addTitle">
         </td>
         <td>
-          <input type="text" class="form-control" name="author">
+          <input type="text" class="form-control" name="author" id="addAuthor">
         </td>
         <td>
-          <input type="number" class="form-control" id="dueDate" min="0" max="100">
+          <input type="number" class="form-control" min="0" max="100" id="addStock" value="1">
         </td>
         <td>
           <select class="custom-select" id="selectedBatch">

@@ -38,12 +38,13 @@
     returnBooks();
   }
 
-  // Add category on click of add button
+  // Add book on click of add button
   if(isset($_POST['action']) && $_POST['action'] == 'add') {
-    $addCode = $_POST['addCode'];
-    $addName = $_POST['addName'];
+    $addTitle = $_POST['addTitle'];
+    $addAuthor = $_POST['addAuthor'];
+    $addStock = $_POST['addStock'];
 
-    $query = "INSERT INTO categories (code, name) VALUES ('".$addCode."','".$addName."')";
+    $query = "INSERT INTO books (title, author, stock) VALUES ('".$addTitle."','".$addAuthor."','".$addStock."')";
     $statement = $connection->prepare($query);
 
     if($statement->execute()) {
@@ -68,11 +69,12 @@
 
   // update on click of update button after editing
   if(isset($_POST['action']) && $_POST['action'] == 'update') {
-    $newCode = $_POST['newCode'];
-    $newName = $_POST['newName'];
+    $newTitle = $_POST['newTitle'];
+    $newAuthor = $_POST['newAuthor'];
+    $newStock = $_POST['newStock'];
     $updateId = $_POST['updateId'];
 
-    $query = "UPDATE categories SET code = '$newCode', name = '$newName' WHERE id = $updateId LIMIT 1";
+    $query = "UPDATE books SET title = '$newTitle', author = '$newAuthor', stock = '$newStock' WHERE id = $updateId LIMIT 1";
     $statement = $connection->prepare($query);
 
     if($statement->execute()) {

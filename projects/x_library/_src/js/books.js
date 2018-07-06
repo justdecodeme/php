@@ -1,11 +1,10 @@
-var categoryParent, categoryCode, categoryName, categoryCodeValue, categoryNameValue;
+var bookParent, bookTitle, bookStock, bookStock, bookTitleValue, bookAuthorValue, bookStockValue;
 var booksListContainer = document.getElementById('booksListContainer');
 var addBtn = document.getElementById('addBtn');
 
 // Edit -> Delete -> Cancel -> Submit functions
 function individualOperations(e) {
   e.stopPropagation();
-  console.log(e.target.id);
 
   // delete -> only if not editing
   if(e.target.id == 'deleteBtn' && !isEditing) {
@@ -36,7 +35,6 @@ function individualOperations(e) {
   else if(e.target.id == 'editBtn' && !isEditing) {
     isEditing = true;
     bookParent = e.target.parentNode.parentNode;
-    console.log('cliked');
     var editId = bookParent.dataset.id;
     console.log('editing: ' + editId);
 
@@ -45,30 +43,35 @@ function individualOperations(e) {
     bookStock = bookParent.querySelector('.book-stock');
     bookTitleValue = bookTitle.innerHTML;
     bookAuthorValue = bookAuthor.innerHTML;
-    bookStockValue = parseInt(bookStock.innerHTML);
+    bookStockValue = bookStock.innerHTML;
+
     bookParent.classList.add('editing-outer');
     bookTitle.innerHTML = '<input type="text" class="form-control" id="newTitle" value="'+bookTitleValue+'">';
     bookAuthor.innerHTML = '<input type="text" class="form-control" id="newAuthor" value="'+bookAuthorValue+'">';
-    bookStock.innerHTML = '<input type="number" class="form-control" id="newStock" value="'+bookStockValue+' min='0' max='100'">';
+    bookStock.innerHTML = '<input type="number" class="form-control" id="newStock" value="'+bookStockValue+'" min="0" max="100">';
   }
   // cancel -> if editing
   else if(e.target.id == 'cancelBtn' && isEditing) {
     isEditing = false;
-    var cancelId = e.target.dataset.id;
+    bookParent = e.target.parentNode.parentNode;
+    var cancelId = bookParent.dataset.id;
     console.log('cancelling: ' + cancelId);
 
-    categoryParent.classList.remove('editing-outer');
-    categoryCode.innerHTML = categoryCodeValue;
-    categoryName.innerHTML = categoryNameValue;
+    bookParent.classList.remove('editing-outer');
+    bookTitle.innerHTML = bookTitleValue;
+    bookAuthor.innerHTML = bookAuthorValue;
+    bookStock.innerHTML = bookStockValue;
   }
   // update -> if editing
   else if(e.target.id == 'updateBtn' && isEditing) {
     isEditing = false;
-    var updateId = e.target.dataset.id;
+    bookParent = e.target.parentNode.parentNode;
+    var updateId = bookParent.dataset.id;
     console.log('updating: ' + updateId);
 
-    var newCode = document.getElementById('newCode').value;
-    var newName = document.getElementById('newName').value;
+    var newTitle = document.getElementById('newTitle').value;
+    var newAuthor = document.getElementById('newAuthor').value;
+    var newStock = document.getElementById('newStock').value;
 
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -78,7 +81,11 @@ function individualOperations(e) {
     };
     xhttp.open("POST", "books_handler.php", true);  // open(method, url, async)
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("action=update&newCode="+newCode+"&newName="+newName+"&updateId="+updateId);
+    xhttp.send("action=update&newTitle="+newTitle+
+      "&newAuthor="+newAuthor+
+      "&newStock="+newStock+
+      "&updateId="+updateId
+    );
   }
 }
 
@@ -101,12 +108,14 @@ function fetchBooks() {
 // Add Category on add btn click
 function addBook() {
   if(!isEditing) {
-    console.log('adding category..');
+    console.log('adding book..');
 
-    var addCode = document.getElementById('addCode').value;
-    var addName = document.getElementById('addName').value;
-    document.getElementById('addCode').value = '';
-    document.getElementById('addName').value = '';
+    var addTitle = document.getElementById('addTitle').value;
+    var addAuthor = document.getElementById('addAuthor').value;
+    var addStock = document.getElementById('addStock').value;
+    document.getElementById('addTitle').value = '';
+    document.getElementById('addAuthor').value = '';
+    document.getElementById('addStock').value = 1;
 
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -118,9 +127,9 @@ function addBook() {
     };
     xhttp.open("POST", "books_handler.php", true);  // open(method, url, async)
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("action=add"+
-      "&addCode="+addCode+
-      "&addName="+addName
+    xhttp.send("action=add&addTitle="+addTitle+
+      "&addAuthor="+addAuthor+
+      "&addStock="+addStock
     );
   }
 }
