@@ -108,14 +108,14 @@ function fetchBooks() {
 
 // fetch the categories list
 function fetchCategoriesForBooks() {
-  console.log('fetching categories list...');
+  console.log('fetching categories for books list...');
   // load content from database
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      selectCategory.innerHTML = this.responseText;
    } else {
-     // console.log(this.readyState, this.status);
+     console.log(this.readyState, this.status);
    }
   };
   xhttp.open("GET", "books_handler.php?action=fetchCategoriesForBooks", true);  // open(method, url, async)
@@ -153,7 +153,7 @@ function addBook() {
 
 // run on page laod
 function init() {
-  // fetchCategoriesForBooks();
+  fetchCategoriesForBooks();
   fetchBooks();
 };
 init();

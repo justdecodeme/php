@@ -11,9 +11,9 @@ function fetchCategoriesForBooks() {
     foreach($row as $category) {
       // mark 'uncategorised' option selected by default
       if($category->category_code == 'default') {
-        $category_list .= '<option value="'.$category->category_code.'" selected>'.$category->category_name.')</option>';
+        $categories_list .= "<option value='$category->category_code' selected>$category->category_name</option>";
       } else {
-        $category_list .= '<option value="'.$category->category_code.'">'.$category->category_name.')</option>';
+        $categories_list .= "<option value='$category->category_code'>$category->category_name</option>";
       }
     }
     echo $categories_list;
