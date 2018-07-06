@@ -29,14 +29,7 @@ include 'includes/header.php';
           <input type="number" class="form-control" min="0" max="100" id="addStock" value="1">
         </td>
         <td>
-          <select class="custom-select" id="selectedBatch">
-            <option value="-">-</option>
-            <option value="business">business</option>
-            <option value="marketing">marketing</option>
-            <option value="technical">technical</option>
-            <option value="selfhelp">self-help</option>
-            <option value="autobiography">autobiography</option>
-          </select>
+          <select class="custom-select" id="selectCategory"></select>
         </td>
         <td>
           <button type="button" class="btn btn-success" id="addBtn">Add Book</button>

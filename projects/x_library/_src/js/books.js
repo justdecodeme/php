@@ -1,5 +1,6 @@
 var bookParent, bookTitle, bookStock, bookStock, bookTitleValue, bookAuthorValue, bookStockValue;
 var booksListContainer = document.getElementById('booksListContainer');
+var selectCategory = document.getElementById('selectCategory');
 var addBtn = document.getElementById('addBtn');
 
 // Edit -> Delete -> Cancel -> Submit functions
@@ -105,6 +106,22 @@ function fetchBooks() {
   xhttp.send();
 }
 
+// fetch the categories list
+function fetchCategoriesForBooks() {
+  console.log('fetching categories list...');
+  // load content from database
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     selectCategory.innerHTML = this.responseText;
+   } else {
+     // console.log(this.readyState, this.status);
+   }
+  };
+  xhttp.open("GET", "books_handler.php?action=fetchCategoriesForBooks", true);  // open(method, url, async)
+  xhttp.send();
+}
+
 // Add Category on add btn click
 function addBook() {
   if(!isEditing) {
@@ -136,6 +153,7 @@ function addBook() {
 
 // run on page laod
 function init() {
+  // fetchCategoriesForBooks();
   fetchBooks();
 };
 init();
