@@ -12,17 +12,17 @@
       foreach($row as $book) {
         $i++;
         $books_list .= "
-        <tr>
+        <tr data-id='$book->id'>
           <td>$i</td>
           <td class='book-title'>$book->title</td>
           <td class='book-author'>$book->author</td>
           <td class='book-stock'>$book->stock</td>
           <td class='book-category'>$book->category_id</td>
           <td>
-            <button type='button' class='btn btn-primary reading' data-id='$book->id' id='editBtn'><i class='fas fa-edit'></i></button>
-            <button type='button' class='btn btn-danger reading' data-id='$book->id' id='deleteBtn'><i class='fas fa-trash-alt'></i></button>
-            <button type='button' class='btn btn-success editing' data-id='$book->id' id='submitBtn'><i class='fas fa-check'></i></button>
-            <button type='button' class='btn btn-primary editing' data-id='$book->id' id='cancelBtn'><i class='fas fa-times'></i></button>
+            <button type='button' class='btn btn-primary reading' id='editBtn'><i class='fas fa-edit'></i></button>
+            <button type='button' class='btn btn-danger reading' id='deleteBtn'><i class='fas fa-trash-alt'></i></button>
+            <button type='button' class='btn btn-success editing' id='updateBtn'><i class='fas fa-check'></i></button>
+            <button type='button' class='btn btn-primary editing' id='cancelBtn'><i class='fas fa-times'></i></button>
           </td>
         </tr>
         ";
@@ -33,7 +33,7 @@
     }
   }
 
-  // fetch batch list
+  // return books list
   if(isset($_GET['action']) && $_GET['action'] == 'fetchBooks') {
     returnBooks();
   }
@@ -57,7 +57,7 @@
   if(isset($_POST['action']) && $_POST['action'] == 'delete') {
     $deleteId = $_POST['deleteId'];
 
-    $query = "DELETE FROM categories WHERE id=$deleteId LIMIT 1";
+    $query = "DELETE FROM books WHERE id=$deleteId LIMIT 1";
     $statement = $connection->prepare($query);
     if($statement->execute()) {
       returnBooks();
@@ -66,13 +66,13 @@
     }
   }
 
-  // Submit class on click of submit button after editing
-  if(isset($_POST['action']) && $_POST['action'] == 'submit') {
+  // update on click of update button after editing
+  if(isset($_POST['action']) && $_POST['action'] == 'update') {
     $newCode = $_POST['newCode'];
     $newName = $_POST['newName'];
-    $submitId = $_POST['submitId'];
+    $updateId = $_POST['updateId'];
 
-    $query = "UPDATE categories SET code = '$newCode', name = '$newName' WHERE id = $submitId LIMIT 1";
+    $query = "UPDATE categories SET code = '$newCode', name = '$newName' WHERE id = $updateId LIMIT 1";
     $statement = $connection->prepare($query);
 
     if($statement->execute()) {

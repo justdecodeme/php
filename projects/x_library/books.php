@@ -13,7 +13,7 @@ include 'includes/header.php';
         <td class="serial-no">S.No.</td>
         <td>Title</td>
         <td>Author</td>
-        <td>Stock</td>
+        <td class="w150">Stock</td>
         <td>Category <a href="categories.php" class="edit-categories"><i class="fas fa-edit"></i></a></td>
         <td>Action</td>
       </tr>
@@ -39,7 +39,7 @@ include 'includes/header.php';
           </select>
         </td>
         <td>
-          <button type="button" class="btn btn-success" id="submitBtn">Submit</button>
+          <button type="button" class="btn btn-success" id="addBtn">Add Book</button>
         </td>
       </tr>
     </thead>

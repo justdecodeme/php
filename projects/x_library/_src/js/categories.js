@@ -2,11 +2,11 @@ var categoryParent, categoryCode, categoryName, categoryCodeValue, categoryNameV
 var categoriesListContainer = document.getElementById('categoriesListContainer');
 var addBtn = document.getElementById('addBtn');
 
-// Edit -> Delete -> Cancel -> Submit functions
+// Edit -> Delete -> Cancel -> Update functions
 function individualOperations(e) {
   e.stopPropagation();
 
-  // delete -> only if not editing any other
+  // delete -> only if not editing
   if(e.target.id == 'deleteBtn' && !isEditing) {
     var deleteId = e.target.dataset.id;
     console.log('deleting: ' + deleteId);
@@ -30,7 +30,7 @@ function individualOperations(e) {
       console.log('Deletion is stopped!');
     }
   }
-  // edit class -> only if not editing any class
+  // edit -> only if not editing
   else if(e.target.id == 'editBtn' && !isEditing) {
     isEditing = true;
     var editId = e.target.dataset.id;
@@ -46,7 +46,7 @@ function individualOperations(e) {
     categoryCode.innerHTML = '<input type="text" class="form-control" id="newCode" value="'+categoryCodeValue+'">';
     categoryName.innerHTML = '<input type="text" class="form-control" id="newName" value="'+categoryNameValue+'">';
   }
-  // cancel class -> if editing any class
+  // cancel -> if editing
   else if(e.target.id == 'cancelBtn' && isEditing) {
     isEditing = false;
     var cancelId = e.target.dataset.id;
@@ -56,11 +56,11 @@ function individualOperations(e) {
     categoryCode.innerHTML = categoryCodeValue;
     categoryName.innerHTML = categoryNameValue;
   }
-  // submit class -> if editing any class
-  else if(e.target.id == 'submitBtn' && isEditing) {
+  // update -> if editing
+  else if(e.target.id == 'updateBtn' && isEditing) {
     isEditing = false;
-    var submitId = e.target.dataset.id;
-    console.log('submitting: ' + submitId);
+    var updateId = e.target.dataset.id;
+    console.log('updating: ' + updateId);
 
     var newCode = document.getElementById('newCode').value;
     var newName = document.getElementById('newName').value;
@@ -73,7 +73,7 @@ function individualOperations(e) {
     };
     xhttp.open("POST", "categories_handler.php", true);  // open(method, url, async)
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("action=submit&newCode="+newCode+"&newName="+newName+"&submitId="+submitId);
+    xhttp.send("action=update&newCode="+newCode+"&newName="+newName+"&updateId="+updateId);
   }
 }
 
