@@ -2,8 +2,10 @@ var xhttp = null;
 var isEditing = false;
 
 // Edit -> Delete -> Cancel -> Submit functions
+var categoryParent, categoryCode, categoryName, categoryCodeValue, categoryNameValue;
 function individualOperations(e) {
   e.stopPropagation();
+
   // delete -> only if not editing any other
   if(e.target.id == 'deleteBtn' && !isEditing) {
     var deleteId = e.target.dataset.id;
@@ -34,15 +36,15 @@ function individualOperations(e) {
     var editId = e.target.dataset.id;
     console.log('editing: ' + editId);
 
-    var parent = e.target.parentNode.parentNode;
-    var code = parent.querySelector('.code');
-    var name = parent.querySelector('.name');
-    var codeValue = code.innerHTML;
-    var nameValue = name.innerHTML;
+    categoryParent = e.target.parentNode.parentNode;
+    categoryCode = categoryParent.querySelector('.category-code');
+    categoryName = categoryParent.querySelector('.category-name');
+    categoryCodeValue = categoryCode.innerHTML;
+    categoryNameValue = categoryName.innerHTML;
 
-    parent.classList.add('editing-class');
-    code.innerHTML = '<input type="text" class="form-control" id="newCode" value="'+codeValue+'">';
-    name.innerHTML = '<input type="text" class="form-control" id="newName" value="'+nameValue+'">';
+    categoryParent.classList.add('editing-class');
+    categoryCode.innerHTML = '<input type="text" class="form-control" id="newCode" value="'+categoryCodeValue+'">';
+    categoryName.innerHTML = '<input type="text" class="form-control" id="newName" value="'+categoryNameValue+'">';
   }
   // cancel class -> if editing any class
   else if(e.target.id == 'cancelBtn' && isEditing) {
@@ -50,35 +52,28 @@ function individualOperations(e) {
     var cancelId = e.target.dataset.id;
     console.log('cancelling: ' + cancelId);
 
-    fetchCategories();
+    categoryParent.classList.remove('editing-class');
+    categoryCode.innerHTML = categoryCodeValue;
+    categoryName.innerHTML = categoryNameValue;
   }
   // submit class -> if editing any class
-  else if(e.target.id == 'submitClass' && isEditing) {
-    var submitClassId = e.target.dataset.classId;
-    console.log('submitting: ' + submitClassId);
+  else if(e.target.id == 'submitBtn' && isEditing) {
+    isEditing = false;
+    var submitId = e.target.dataset.id;
+    console.log('submitting: ' + submitId);
 
-    var date = document.getElementById('editingDate').value;
-    var classCode = document.getElementById('editingClass').value;
-    var instructorCode = document.getElementById('editingInstructors').value;
-    var startTime = document.getElementById('editingStartTime').value;
-    var endTime = document.getElementById('editingEndTime').value;
-    var roomCode = document.getElementById('editingRoom').value;
-    // console.log(batchCode, batchTemplate, date, classCode, instructorCode, startTime, endTime, roomCode);
+    var newCode = document.getElementById('newCode').value;
+    var newName = document.getElementById('newName').value;
 
-    var xhttp5 = new XMLHttpRequest();
-    xhttp5.onreadystatechange = function() {
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        timetableResultList.innerHTML = this.responseText;
-        isEditing = false;
+        categoriesListContainer.innerHTML = this.responseText;
       }
     };
-    xhttp5.open("POST", "timetable_handler.php", true);  // open(method, url, async)
-    xhttp5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp5.send("action=submitClass&batchCode="+batchCode+"&batchTemplate="+batchTemplate+"&orderBy="+orderBy+
-    "&ascOrDesc="+ascOrDesc+"&date="+date+"&classCode="+classCode+"&instructorCode="+instructorCode+
-    "&startTime="+startTime+"&endTime="+endTime+"&roomCode="+roomCode+"&submitId="+submitClassId);
-
-    // updateTimeTableList();
+    xhttp.open("POST", "categories_handler.php", true);  // open(method, url, async)
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("action=submit&newCode="+newCode+"&newName="+newName+"&submitId="+submitId);
   }
 }
 

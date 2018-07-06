@@ -16,7 +16,7 @@ include 'includes/header.php';
         <td>Action</td>
       </tr>
       <tr>
-        <td></td>
+        <td>#</td>
         <td>
           <input type="text" class="form-control" name="code">
         </td>
