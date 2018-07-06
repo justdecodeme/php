@@ -10,7 +10,7 @@ include 'includes/header.php';
   <table class="table table-hover">
     <thead>
       <tr>
-        <td style="width: 20px;">S.No.</td>
+        <td class="serial-no">S.No.</td>
         <td>Code</td>
         <td>Name</td>
         <td>Action</td>

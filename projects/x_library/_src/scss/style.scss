@@ -17,3 +17,23 @@ nav {
 .table thead, .table tbody {
   border-bottom: 1px solid #dee2e6;
 }
+
+/********** categories **********/
+.serial-no {
+  width: 20px;
+}
+button svg {
+  pointer-events: none;
+}
+.editing {
+  display: none;
+}
+.editing-class {
+  background: rgba(0,0,0,.075);
+  .reading {
+    display: none;
+  }
+  .editing {
+    display: inline;
+  }
+}

@@ -1,1 +1,1 @@
-console.log('Hi, from common Script file!');
+// console.log('Hi, from common Script file!');
