@@ -11,9 +11,9 @@ function fetchCategoriesForBooks() {
     foreach($row as $category) {
       // mark 'uncategorised' option selected by default
       if($category->category_code == 'default') {
-        $categories_list .= "<option value='$category->category_code' selected>$category->category_name</option>";
+        $categories_list .= "<option data-category-id='$category->id' value='$category->category_code' selected>$category->category_name</option>";
       } else {
-        $categories_list .= "<option value='$category->category_code'>$category->category_name</option>";
+        $categories_list .= "<option data-category-id='$category->id' value='$category->category_code'>$category->category_name</option>";
       }
     }
     echo $categories_list;
@@ -24,7 +24,7 @@ function fetchCategoriesForBooks() {
 
 function returnBooks() {
   global $connection;
-  $query = "SELECT * FROM books LEFT JOIN categories ON books.category_id = categories.id ORDER BY title";
+  $query = "SELECT books.id as bookId, title, author, stock, category_id as categoryId, category_code, category_name  FROM books LEFT JOIN categories ON books.category_id = categories.id ORDER BY title";
   // $query = "SELECT * FROM books ORDER BY title";
   $statement = $connection->prepare($query);
   if($statement->execute()) {
@@ -34,7 +34,7 @@ function returnBooks() {
     foreach($row as $book) {
       $i++;
       $books_list .= "
-      <tr data-id='$book->id'>
+      <tr data-book-id='$book->bookId'>
         <td>$i</td>
         <td class='book-title'>$book->title</td>
         <td class='book-author'>$book->author</td>
@@ -70,8 +70,9 @@ if(isset($_POST['action']) && $_POST['action'] == 'add') {
   $addTitle = $_POST['addTitle'];
   $addAuthor = $_POST['addAuthor'];
   $addStock = $_POST['addStock'];
+  $addCategory = $_POST['addCategory'];
 
-  $query = "INSERT INTO books (title, author, stock) VALUES ('".$addTitle."','".$addAuthor."','".$addStock."')";
+  $query = "INSERT INTO books (title, author, stock, category_id) VALUES ('".$addTitle."','".$addAuthor."','".$addStock."','".$addCategory."')";
   $statement = $connection->prepare($query);
 
   if($statement->execute()) {

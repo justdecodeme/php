@@ -3,6 +3,22 @@ var booksListContainer = document.getElementById('booksListContainer');
 var selectCategory = document.getElementById('selectCategory');
 var addBtn = document.getElementById('addBtn');
 
+// fetch the categories list
+function fetchCategoriesForBooks() {
+  console.log('fetching categories for books list...');
+  // load content from database
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      selectCategory.innerHTML = this.responseText;
+    } else {
+      // console.log(this.readyState, this.status);
+    }
+  };
+  xhttp.open("GET", "books_handler.php?action=fetchCategoriesForBooks", true);  // open(method, url, async)
+  xhttp.send();
+}
+
 // Edit -> Delete -> Cancel -> Submit functions
 function individualOperations(e) {
   e.stopPropagation();
@@ -10,7 +26,7 @@ function individualOperations(e) {
   // delete -> only if not editing
   if(e.target.id == 'deleteBtn' && !isEditing) {
     bookParent = e.target.parentNode.parentNode;
-    var deleteId = bookParent.dataset.id;
+    var deleteId = bookParent.dataset.bookId;
     console.log('deleting: ' + deleteId);
 
     xhttp = new XMLHttpRequest();
@@ -36,7 +52,7 @@ function individualOperations(e) {
   else if(e.target.id == 'editBtn' && !isEditing) {
     isEditing = true;
     bookParent = e.target.parentNode.parentNode;
-    var editId = bookParent.dataset.id;
+    var editId = bookParent.dataset.bookId;
     console.log('editing: ' + editId);
 
     bookTitle = bookParent.querySelector('.book-title');
@@ -55,7 +71,7 @@ function individualOperations(e) {
   else if(e.target.id == 'cancelBtn' && isEditing) {
     isEditing = false;
     bookParent = e.target.parentNode.parentNode;
-    var cancelId = bookParent.dataset.id;
+    var cancelId = bookParent.dataset.bookId;
     console.log('cancelling: ' + cancelId);
 
     bookParent.classList.remove('editing-outer');
@@ -67,7 +83,7 @@ function individualOperations(e) {
   else if(e.target.id == 'updateBtn' && isEditing) {
     isEditing = false;
     bookParent = e.target.parentNode.parentNode;
-    var updateId = bookParent.dataset.id;
+    var updateId = bookParent.dataset.bookId;
     console.log('updating: ' + updateId);
 
     var newTitle = document.getElementById('newTitle').value;
@@ -106,22 +122,6 @@ function fetchBooks() {
   xhttp.send();
 }
 
-// fetch the categories list
-function fetchCategoriesForBooks() {
-  console.log('fetching categories for books list...');
-  // load content from database
-  xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-     selectCategory.innerHTML = this.responseText;
-   } else {
-     console.log(this.readyState, this.status);
-   }
-  };
-  xhttp.open("GET", "books_handler.php?action=fetchCategoriesForBooks", true);  // open(method, url, async)
-  xhttp.send();
-}
-
 // Add Category on add btn click
 function addBook() {
   if(!isEditing) {
@@ -130,9 +130,11 @@ function addBook() {
     var addTitle = document.getElementById('addTitle').value;
     var addAuthor = document.getElementById('addAuthor').value;
     var addStock = document.getElementById('addStock').value;
+    var addCategory = selectCategory.selectedOptions[0].dataset.bookId;
     document.getElementById('addTitle').value = '';
     document.getElementById('addAuthor').value = '';
     document.getElementById('addStock').value = 1;
+    // document.getElementById('selectCategory').value = 1;
 
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -146,7 +148,8 @@ function addBook() {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("action=add&addTitle="+addTitle+
       "&addAuthor="+addAuthor+
-      "&addStock="+addStock
+      "&addStock="+addStock+
+      "&addCategory="+addCategory
     );
   }
 }
