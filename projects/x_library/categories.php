@@ -18,13 +18,13 @@ include 'includes/header.php';
       <tr>
         <td>#</td>
         <td>
-          <input type="text" class="form-control" name="code">
+          <input type="text" class="form-control" name="code" id="addCode">
         </td>
         <td>
-          <input type="text" class="form-control" name="name">
+          <input type="text" class="form-control" name="name" id="addName">
         </td>
         <td>
-          <button type="button" class="btn btn-success" id="submitBtn">Submit</button>
+          <button type="button" class="btn btn-success" id="addBtn">Add Category</button>
         </td>
       </tr>
     </thead>

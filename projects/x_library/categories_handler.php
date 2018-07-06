@@ -15,7 +15,7 @@
         <tr>
           <td>$i</td>
           <td class='category-code'>$category->code</td>
-          <td class='category-name'>$category->full_name</td>
+          <td class='category-name'>$category->name</td>
           <td>
             <button type='button' class='btn btn-primary reading' data-id='$category->id' id='editBtn'><i class='fas fa-edit'></i></button>
             <button type='button' class='btn btn-danger reading' data-id='$category->id' id='deleteBtn'><i class='fas fa-trash-alt'></i></button>
@@ -37,32 +37,18 @@
   }
 
 
-  // Add class on click of Submit button in tfoot
-  if(isset($_POST['action']) && $_POST['action'] == 'addClass') {
-    $batch_code = $_POST['batchCode'];
-    $batch_template = $_POST['batchTemplate'];
-    $orderBy = $_POST['orderBy'];
-    $ascOrDesc = $_POST['ascOrDesc'];
+  // Add category on click of add button
+  if(isset($_POST['action']) && $_POST['action'] == 'add') {
+    $addCode = $_POST['addCode'];
+    $addName = $_POST['addName'];
 
-    $date = $_POST['date'];
-    $class_code = $_POST['classCode'];
-    $instructor_code = $_POST['instructorCode'];
-    $start_time = $_POST['startTime'];
-    $end_time = $_POST['endTime'];
-    $room_code = $_POST['roomCode'];
-
-    $query = "INSERT INTO `timetable`
-    ( `batch_code`, `class_date`, `class_code`, `instructor_code`, `start_time`, `end_time`, `room_code`)
-    VALUES
-    (:BATCH_CODE,:SELECTED_DATE,:CLASS_CODE,:INSTRUCTOR_CODE,:STARTTIME,:ENDTIME,:ROOM)";
+    $query = "INSERT INTO categories (code, name) VALUES ('".$addCode."','".$addName."')";
     $statement = $connection->prepare($query);
-    $params = array ('BATCH_CODE'=>$batch_code,'SELECTED_DATE'=>$date,'CLASS_CODE'=>$class_code,'INSTRUCTOR_CODE'=>$instructor_code,'STARTTIME'=>$start_time,'ENDTIME'=>$end_time,'ROOM'=>$room_code);
 
-    // Update timetable if query is successful
-    if($statement->execute($params)) {
-      update_timetable_list($batch_code, $batch_template, $orderBy, $ascOrDesc);
+    if($statement->execute()) {
+      returnCategories();
     } else {
-      echo "<script>alert('Sorry, Class not added!')</script>";
+      echo "Something went wrong!";
     }
   }
 
@@ -85,7 +71,7 @@
     $newName = $_POST['newName'];
     $submitId = $_POST['submitId'];
 
-    $query = "UPDATE categories SET code = '$newCode', full_name = '$newName' WHERE id = $submitId LIMIT 1";
+    $query = "UPDATE categories SET code = '$newCode', name = '$newName' WHERE id = $submitId LIMIT 1";
     $statement = $connection->prepare($query);
 
     if($statement->execute()) {

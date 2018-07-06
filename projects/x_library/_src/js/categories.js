@@ -1,8 +1,10 @@
 var xhttp = null;
 var isEditing = false;
+var categoryParent, categoryCode, categoryName, categoryCodeValue, categoryNameValue;
+var categoriesListContainer = document.getElementById('categoriesListContainer');
+var addBtn = document.getElementById('addBtn');
 
 // Edit -> Delete -> Cancel -> Submit functions
-var categoryParent, categoryCode, categoryName, categoryCodeValue, categoryNameValue;
 function individualOperations(e) {
   e.stopPropagation();
 
@@ -94,6 +96,34 @@ function fetchCategories() {
   xhttp = null;
 }
 
+
+// Add Category on add btn click
+function addCategory() {
+  if(!isEditing) {
+    console.log('adding category..');
+
+    var addCode = document.getElementById('addCode').value;
+    var addName = document.getElementById('addName').value;
+    document.getElementById('addCode').value = '';
+    document.getElementById('addName').value = '';
+
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        categoriesListContainer.innerHTML = this.responseText;
+      } else {
+        // console.log(this.readyState, this.status);
+      }
+    };
+    xhttp.open("POST", "categories_handler.php", true);  // open(method, url, async)
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("action=add"+
+      "&addCode="+addCode+
+      "&addName="+addName
+    );
+  }
+}
+
 // run on page laod
 function init() {
   fetchCategories();
@@ -101,3 +131,4 @@ function init() {
 init();
 
 categoriesListContainer.addEventListener('click', individualOperations, false);
+addBtn.addEventListener('click', addCategory, false);
