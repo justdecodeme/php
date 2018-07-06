@@ -15,12 +15,12 @@
         <tr>
           <td>$i</td>
           <td class='category-code'>$category->code</td>
-          <td class='category-name'>$category->name</td>
+          <td class='category-name'>$category->full_name</td>
           <td>
             <button type='button' class='btn btn-primary reading' data-id='$category->id' id='editBtn'><i class='fas fa-edit'></i></button>
             <button type='button' class='btn btn-danger reading' data-id='$category->id' id='deleteBtn'><i class='fas fa-trash-alt'></i></button>
-            <button type='button' class='btn btn-primary editing' data-id='$category->id' id='cancelBtn'><i class='fas fa-times'></i></button>
             <button type='button' class='btn btn-success editing' data-id='$category->id' id='submitBtn'><i class='fas fa-check'></i></button>
+            <button type='button' class='btn btn-primary editing' data-id='$category->id' id='cancelBtn'><i class='fas fa-times'></i></button>
           </td>
         </tr>
         ";
@@ -85,17 +85,10 @@
     $newName = $_POST['newName'];
     $submitId = $_POST['submitId'];
 
-    $query = "UPDATE `categories`
-      SET
-        `code` = $newCode,
-        `name` = $newName,
-      WHERE
-        `id` = $submitId
-      LIMIT 1";
+    $query = "UPDATE categories SET code = '$newCode', full_name = '$newName' WHERE id = $submitId LIMIT 1";
     $statement = $connection->prepare($query);
 
-    // Update timetable if query is successful
-    if($statement->execute($params)) {
+    if($statement->execute()) {
       returnCategories();
     } else {
       echo "Something went wrong!";
