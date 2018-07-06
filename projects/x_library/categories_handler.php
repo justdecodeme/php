@@ -11,19 +11,31 @@
       $i = 0;
       foreach($row as $category) {
         $i++;
-        $categories_list .= "
-        <tr>
-          <td>$i</td>
-          <td class='category-code'>$category->code</td>
-          <td class='category-name'>$category->name</td>
-          <td>
-            <button type='button' class='btn btn-primary reading' data-id='$category->id' id='editBtn'><i class='fas fa-edit'></i></button>
-            <button type='button' class='btn btn-danger reading' data-id='$category->id' id='deleteBtn'><i class='fas fa-trash-alt'></i></button>
-            <button type='button' class='btn btn-success editing' data-id='$category->id' id='updateBtn'><i class='fas fa-check'></i></button>
-            <button type='button' class='btn btn-primary editing' data-id='$category->id' id='cancelBtn'><i class='fas fa-times'></i></button>
-          </td>
-        </tr>
-        ";
+        if($category->code !== 'default') {
+          $categories_list .= "
+            <tr>
+              <td>$i</td>
+              <td class='category-code'>$category->code</td>
+              <td class='category-name'>$category->name</td>
+              <td>
+                <button type='button' class='btn btn-primary reading' data-id='$category->id' id='editBtn'><i class='fas fa-edit'></i></button>
+                <button type='button' class='btn btn-danger reading' data-id='$category->id' id='deleteBtn'><i class='fas fa-trash-alt'></i></button>
+                <button type='button' class='btn btn-success editing' data-id='$category->id' id='updateBtn'><i class='fas fa-check'></i></button>
+                <button type='button' class='btn btn-primary editing' data-id='$category->id' id='cancelBtn'><i class='fas fa-times'></i></button>
+              </td>
+            </tr>
+          ";
+        } else {
+          $categories_list .= "
+            <tr>
+              <td>$i</td>
+              <td class='category-code'>$category->code</td>
+              <td class='category-name'>$category->name</td>
+              <td></td>
+            </tr>
+          ";
+
+        }
       }
       echo $categories_list;
     } else {
