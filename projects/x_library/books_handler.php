@@ -3,7 +3,8 @@
 
   function returnBooks() {
     global $connection;
-    $query = "SELECT * FROM books ORDER BY title";
+    $query = "SELECT * FROM books LEFT JOIN categories ON books.category_id = categories.id ORDER BY title";
+    // $query = "SELECT * FROM books ORDER BY title";
     $statement = $connection->prepare($query);
     if($statement->execute()) {
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -17,7 +18,7 @@
           <td class='book-title'>$book->title</td>
           <td class='book-author'>$book->author</td>
           <td class='book-stock'>$book->stock</td>
-          <td class='book-category'>$book->category_id</td>
+          <td class='book-category'>$book->name</td>
           <td>
             <button type='button' class='btn btn-primary reading' id='editBtn'><i class='fas fa-edit'></i></button>
             <button type='button' class='btn btn-danger reading' id='deleteBtn'><i class='fas fa-trash-alt'></i></button>

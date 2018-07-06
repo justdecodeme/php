@@ -3,7 +3,7 @@
 
   function returnCategories() {
     global $connection;
-    $query = "SELECT * FROM categories ORDER BY code";
+    $query = "SELECT * FROM categories ORDER BY category_code";
     $statement = $connection->prepare($query);
     if($statement->execute()) {
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -11,12 +11,12 @@
       $i = 0;
       foreach($row as $category) {
         $i++;
-        if($category->code !== 'default') {
+        if($category->category_code !== 'default') {
           $categories_list .= "
             <tr>
               <td>$i</td>
-              <td class='category-code'>$category->code</td>
-              <td class='category-name'>$category->name</td>
+              <td class='category-code'>$category->category_code</td>
+              <td class='category-name'>$category->category_name</td>
               <td>
                 <button type='button' class='btn btn-primary reading' data-id='$category->id' id='editBtn'><i class='fas fa-edit'></i></button>
                 <button type='button' class='btn btn-danger reading' data-id='$category->id' id='deleteBtn'><i class='fas fa-trash-alt'></i></button>
@@ -29,8 +29,8 @@
           $categories_list .= "
             <tr>
               <td>$i</td>
-              <td class='category-code'>$category->code</td>
-              <td class='category-name'>$category->name</td>
+              <td class='category-code'>$category->category_code</td>
+              <td class='category-name'>$category->category_name</td>
               <td></td>
             </tr>
           ";
@@ -54,7 +54,7 @@
     $addCode = $_POST['addCode'];
     $addName = $_POST['addName'];
 
-    $query = "INSERT INTO categories (code, name) VALUES ('".$addCode."','".$addName."')";
+    $query = "INSERT INTO categories (category_code, category_name) VALUES ('".$addCode."','".$addName."')";
     $statement = $connection->prepare($query);
 
     if($statement->execute()) {
@@ -83,7 +83,7 @@
     $newName = $_POST['newName'];
     $updateId = $_POST['updateId'];
 
-    $query = "UPDATE categories SET code = '$newCode', name = '$newName' WHERE id = $updateId LIMIT 1";
+    $query = "UPDATE categories SET category_code = '$newCode', category_name = '$newName' WHERE id = $updateId LIMIT 1";
     $statement = $connection->prepare($query);
 
     if($statement->execute()) {
