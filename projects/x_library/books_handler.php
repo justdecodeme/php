@@ -11,9 +11,9 @@ function fetchCategoriesForBooks() {
     foreach($row as $category) {
       // mark 'uncategorised' option selected by default
       if($category->category_code == 'default') {
-        $categories_list .= "<option data-category-id='$category->id' value='$category->category_code' selected>$category->category_name</option>";
+        $categories_list .= "<option value='$category->id' selected>$category->category_name</option>";
       } else {
-        $categories_list .= "<option data-category-id='$category->id' value='$category->category_code'>$category->category_name</option>";
+        $categories_list .= "<option value='$category->id'>$category->category_name</option>";
       }
     }
     echo $categories_list;
@@ -34,7 +34,7 @@ function returnBooks() {
     foreach($row as $book) {
       $i++;
       $books_list .= "
-      <tr data-book-id='$book->bookId'>
+      <tr data-book-id='$book->bookId' data-category-id='$book->categoryId'>
         <td>$i</td>
         <td class='book-title'>$book->title</td>
         <td class='book-author'>$book->author</td>
@@ -100,12 +100,23 @@ if(isset($_POST['action']) && $_POST['action'] == 'update') {
   $newTitle = $_POST['newTitle'];
   $newAuthor = $_POST['newAuthor'];
   $newStock = $_POST['newStock'];
-  $updateId = $_POST['updateId'];
+  $newCategory = $_POST['newCategory'];
+  $bookId = $_POST['bookId'];
 
-  $query = "UPDATE books SET title = '$newTitle', author = '$newAuthor', stock = '$newStock' WHERE id = $updateId LIMIT 1";
+  $query = "UPDATE `books`
+    SET
+      `title` = :TITLE,
+      `author` = :AUTHOR,
+      `stock` = :STOCK,
+      `category_id` = :CATEGORY
+    WHERE
+      `id` = :BOOKID
+    LIMIT 1";
+    
   $statement = $connection->prepare($query);
+  $params = array ('TITLE'=>$newTitle,'AUTHOR'=>$newAuthor,'STOCK'=>$newStock,'CATEGORY'=>$newCategory, 'BOOKID'=>$bookId);
 
-  if($statement->execute()) {
+  if($statement->execute($params)) {
     returnBooks();
   } else {
     echo "Something went wrong!";

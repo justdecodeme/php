@@ -1,4 +1,4 @@
-var bookParent, bookTitle, bookStock, bookStock, bookTitleValue, bookAuthorValue, bookStockValue;
+var bookParent, bookTitle, bookStock, bookStock, bookCategory, bookTitleValue, bookAuthorValue, bookStockValue, bookCategoryValue;
 var booksListContainer = document.getElementById('booksListContainer');
 var selectCategory = document.getElementById('selectCategory');
 var addBtn = document.getElementById('addBtn');
@@ -52,8 +52,9 @@ function individualOperations(e) {
   else if(e.target.id == 'editBtn' && !isEditing) {
     isEditing = true;
     bookParent = e.target.parentNode.parentNode;
-    var editId = bookParent.dataset.bookId;
-    console.log('editing: ' + editId);
+    var bookId = bookParent.dataset.bookId;
+    var categoryId = bookParent.dataset.categoryId;
+    console.log('editing: ' + bookId);
 
     bookTitle = bookParent.querySelector('.book-title');
     bookAuthor = bookParent.querySelector('.book-author');
@@ -64,37 +65,43 @@ function individualOperations(e) {
     bookStockValue = bookStock.innerHTML;
     bookCategoryValue = bookCategory.innerHTML;
 
+    // change elements for editing
     bookParent.classList.add('editing-outer');
-    bookTitle.innerHTML = '<input type="text" class="form-control" id="newTitle" value="'+bookTitleValue+'">';
-    bookAuthor.innerHTML = '<input type="text" class="form-control" id="newAuthor" value="'+bookAuthorValue+'">';
-    bookStock.innerHTML = '<input type="number" class="form-control" id="newStock" value="'+bookStockValue+'" min="0" max="100">';
-    bookCategory.innerHTML = '<select></select>';
-    // var cloneSelectedCategory = selectCategory;
-    // var clone = cloneSelectedCategory.cloneNode(false);
-    // bookCategory.appendChild(cloneSelectedCategory);
+    bookTitle.innerHTML = '<input type="text" class="form-control" value="'+bookTitleValue+'">';
+    bookAuthor.innerHTML = '<input type="text" class="form-control" value="'+bookAuthorValue+'">';
+    bookStock.innerHTML = '<input type="number" class="form-control" value="'+bookStockValue+'" min="0" max="100">';
+    // copy and insert category list
+    bookCategory.innerHTML = '';
+    var clone = selectCategory.cloneNode(true);
+    bookCategory.appendChild(clone);
+    // update category as as original
+    bookCategory.querySelector('select').value = categoryId;
   }
   // cancel -> if editing
   else if(e.target.id == 'cancelBtn' && isEditing) {
     isEditing = false;
     bookParent = e.target.parentNode.parentNode;
-    var cancelId = bookParent.dataset.bookId;
-    console.log('cancelling: ' + cancelId);
+    var bookId = bookParent.dataset.bookId;
+    console.log('cancelling: ' + bookId);
 
     bookParent.classList.remove('editing-outer');
     bookTitle.innerHTML = bookTitleValue;
     bookAuthor.innerHTML = bookAuthorValue;
     bookStock.innerHTML = bookStockValue;
+    bookStock.innerHTML = bookStockValue;
+    bookCategory.innerHTML = bookCategoryValue;
   }
   // update -> if editing
   else if(e.target.id == 'updateBtn' && isEditing) {
     isEditing = false;
     bookParent = e.target.parentNode.parentNode;
-    var updateId = bookParent.dataset.bookId;
-    console.log('updating: ' + updateId);
+    var bookId = bookParent.dataset.bookId;
+    console.log('updating: ' + bookId);
 
-    var newTitle = document.getElementById('newTitle').value;
-    var newAuthor = document.getElementById('newAuthor').value;
-    var newStock = document.getElementById('newStock').value;
+    var newTitle = bookTitle.querySelector('input').value;;
+    var newAuthor = bookAuthor.querySelector('input').value;
+    var newStock = bookStock.querySelector('input').value;
+    var newCategory = bookCategory.querySelector('select').value;;
 
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -107,7 +114,8 @@ function individualOperations(e) {
     xhttp.send("action=update&newTitle="+newTitle+
       "&newAuthor="+newAuthor+
       "&newStock="+newStock+
-      "&updateId="+updateId
+      "&newCategory="+newCategory+
+      "&bookId="+bookId
     );
   }
 }
@@ -136,7 +144,7 @@ function addBook() {
     var addTitle = document.getElementById('addTitle').value;
     var addAuthor = document.getElementById('addAuthor').value;
     var addStock = document.getElementById('addStock').value;
-    var addCategory = selectCategory.selectedOptions[0].dataset.bookId;
+    var addCategory = selectCategory.value;
     document.getElementById('addTitle').value = '';
     document.getElementById('addAuthor').value = '';
     document.getElementById('addStock').value = 1;
