@@ -22,24 +22,24 @@ function fetchCategoriesForBooks() {
   }
 }
 
-function returnBooks() {
+function returnUsers() {
   global $connection;
-  $query = "SELECT books.id as bookId, title, author, stock, category_id as categoryId, category_code, category_name  FROM books LEFT JOIN categories ON books.category_id = categories.id ORDER BY title";
-  // $query = "SELECT * FROM books ORDER BY title";
+  $query = "SELECT *  FROM users ORDER BY username";
   $statement = $connection->prepare($query);
   if($statement->execute()) {
     $row = $statement->fetchAll(PDO::FETCH_OBJ);
-    $books_list = '';
+    $users_list = '';
     $i = 0;
-    foreach($row as $book) {
+    foreach($row as $user) {
       $i++;
-      $books_list .= "
-      <tr data-book-id='$book->bookId' data-category-id='$book->categoryId'>
+      $users_list .= "
+      <tr data-user-id='$user->id'>
         <td>$i</td>
-        <td class='book-title'>$book->title</td>
-        <td class='book-author'>$book->author</td>
-        <td class='book-stock'>$book->stock</td>
-        <td class='book-category'>$book->category_name</td>
+        <td class='user-username'>$user->username</td>
+        <td class='user-fullname'>$user->full_name</td>
+        <td class='user-email'>$user->email</td>
+        <td class='user-image'>$user->image</td>
+        <td class='user-access-type'>$user->access_type</td>
         <td>
           <button type='button' class='btn btn-primary reading' id='editBtn'><i class='fas fa-edit'></i></button>
           <button type='button' class='btn btn-danger reading' id='deleteBtn'><i class='fas fa-trash-alt'></i></button>
@@ -49,15 +49,15 @@ function returnBooks() {
       </tr>
       ";
     }
-    echo $books_list;
+    echo $users_list;
   } else {
     echo "Something went wrong!";
   }
 }
 
 // return books list
-if(isset($_GET['action']) && $_GET['action'] == 'fetchBooks') {
-  returnBooks();
+if(isset($_GET['action']) && $_GET['action'] == 'fetchUsers') {
+  returnUsers();
 }
 
 // return books list
@@ -76,7 +76,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'add') {
   $statement = $connection->prepare($query);
 
   if($statement->execute()) {
-    returnBooks();
+    returnUsers();
   } else {
     echo "Something went wrong!";
   }
@@ -89,7 +89,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'delete') {
   $query = "DELETE FROM books WHERE id=$deleteId LIMIT 1";
   $statement = $connection->prepare($query);
   if($statement->execute()) {
-    returnBooks();
+    returnUsers();
   } else {
     echo "Something went wrong!";
   }
@@ -112,12 +112,12 @@ if(isset($_POST['action']) && $_POST['action'] == 'update') {
     WHERE
       `id` = :BOOKID
     LIMIT 1";
-    
+
   $statement = $connection->prepare($query);
   $params = array ('TITLE'=>$newTitle,'AUTHOR'=>$newAuthor,'STOCK'=>$newStock,'CATEGORY'=>$newCategory, 'BOOKID'=>$bookId);
 
   if($statement->execute($params)) {
-    returnBooks();
+    returnUsers();
   } else {
     echo "Something went wrong!";
   }

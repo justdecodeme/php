@@ -1,23 +1,7 @@
 var bookParent, bookTitle, bookStock, bookStock, bookCategory, bookTitleValue, bookAuthorValue, bookStockValue, bookCategoryValue;
-var booksListContainer = document.getElementById('booksListContainer');
+var usersListContainer = document.getElementById('usersListContainer');
 var selectCategory = document.getElementById('selectCategory');
 var addBtn = document.getElementById('addBtn');
-
-// fetch the categories list
-function fetchCategoriesForBooks() {
-  console.log('fetching categories for books list...');
-  // load content from database
-  xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      selectCategory.innerHTML = this.responseText;
-    } else {
-      // console.log(this.readyState, this.status);
-    }
-  };
-  xhttp.open("GET", "books_handler.php?action=fetchCategoriesForBooks", true);  // open(method, url, async)
-  xhttp.send();
-}
 
 // Edit -> Delete -> Cancel -> Submit functions
 function individualOperations(e) {
@@ -32,7 +16,7 @@ function individualOperations(e) {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-       booksListContainer.innerHTML = this.responseText;
+       usersListContainer.innerHTML = this.responseText;
      } else {
        // console.log(this.readyState, this.status);
      }
@@ -41,7 +25,7 @@ function individualOperations(e) {
     var deleteConfirmation = confirm("Want to delete?");
     if (deleteConfirmation) {
         // logic to delete the item
-        xhttp.open("POST", "books_handler.php", true);  // open(method, url, async)
+        xhttp.open("POST", "users_handler.php", true);  // open(method, url, async)
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("action=delete&deleteId="+deleteId);
     } else {
@@ -106,10 +90,10 @@ function individualOperations(e) {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        booksListContainer.innerHTML = this.responseText;
+        usersListContainer.innerHTML = this.responseText;
       }
     };
-    xhttp.open("POST", "books_handler.php", true);  // open(method, url, async)
+    xhttp.open("POST", "users_handler.php", true);  // open(method, url, async)
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("action=update&newTitle="+newTitle+
       "&newAuthor="+newAuthor+
@@ -120,19 +104,19 @@ function individualOperations(e) {
   }
 }
 
-// fetch the books list
-function fetchBooks() {
-  console.log('fetching books list...');
+// fetch the users list
+function fetchUsers() {
+  console.log('fetching users list...');
   // load content from database
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     booksListContainer.innerHTML = this.responseText;
+     usersListContainer.innerHTML = this.responseText;
    } else {
      // console.log(this.readyState, this.status);
    }
   };
-  xhttp.open("GET", "books_handler.php?action=fetchBooks", true);  // open(method, url, async)
+  xhttp.open("GET", "users_handler.php?action=fetchUsers", true);  // open(method, url, async)
   xhttp.send();
 }
 
@@ -153,12 +137,12 @@ function addBook() {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        booksListContainer.innerHTML = this.responseText;
+        usersListContainer.innerHTML = this.responseText;
       } else {
         // console.log(this.readyState, this.status);
       }
     };
-    xhttp.open("POST", "books_handler.php", true);  // open(method, url, async)
+    xhttp.open("POST", "users_handler.php", true);  // open(method, url, async)
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("action=add&addTitle="+addTitle+
       "&addAuthor="+addAuthor+
@@ -170,10 +154,10 @@ function addBook() {
 
 // run on page laod
 function init() {
-  fetchCategoriesForBooks();
-  fetchBooks();
+  // fetchCategoriesForBooks();
+  fetchUsers();
 };
 init();
 
-booksListContainer.addEventListener('click', individualOperations, false);
+usersListContainer.addEventListener('click', individualOperations, false);
 addBtn.addEventListener('click', addBook, false);
