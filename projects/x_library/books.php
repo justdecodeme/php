@@ -4,7 +4,7 @@ include 'includes/init.php';
 include 'includes/header.php';
 ?>
 
-<div class="container-fluid dashboard-page" id="dashboard">
+<div class="container-fluid books-page">
   <h2>Books</h2>
   <hr>
   <table class="table table-hover">
