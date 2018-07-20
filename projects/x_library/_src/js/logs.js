@@ -1,7 +1,7 @@
 var bookParent, bookTitle, bookStock, bookStock, bookCategory, bookTitleValue, bookAuthorValue, bookStockValue, bookCategoryValue;
-var booksListContainer = document.getElementById('booksListContainer');
-var selectCategory = document.getElementById('selectCategory');
-var addBtn = document.getElementById('addBtn');
+var booksReturnedContainer = document.getElementById('booksReturnedContainer');
+// var selectCategory = document.getElementById('selectCategory');
+// var addBtn = document.getElementById('addBtn');
 
 // fetch the categories list
 function fetchCategoriesForBooks() {
@@ -32,7 +32,7 @@ function individualOperations(e) {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-       booksListContainer.innerHTML = this.responseText;
+       booksReturnedContainer.innerHTML = this.responseText;
      } else {
        // console.log(this.readyState, this.status);
      }
@@ -105,7 +105,7 @@ function individualOperations(e) {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        booksListContainer.innerHTML = this.responseText;
+        booksReturnedContainer.innerHTML = this.responseText;
       }
     };
     xhttp.open("POST", "books_handler.php", true);  // open(method, url, async)
@@ -119,19 +119,20 @@ function individualOperations(e) {
   }
 }
 
-// fetch the books list
-function fetchBooks() {
-  console.log('fetching books list...');
+// fetch the logs list
+function fetchLogs() {
+  console.log('fetching logs list...');
   // load content from database
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     booksListContainer.innerHTML = this.responseText;
+     booksReturnedContainer.innerHTML = this.responseText;
+     // console.log(this.responseText);
    } else {
      // console.log(this.readyState, this.status);
    }
   };
-  xhttp.open("GET", "books_handler.php?action=fetchBooks", true);  // open(method, url, async)
+  xhttp.open("GET", "logs_handler.php?action=fetchLogs", true);  // open(method, url, async)
   xhttp.send();
 }
 
@@ -152,7 +153,7 @@ function addBook() {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        booksListContainer.innerHTML = this.responseText;
+        booksReturnedContainer.innerHTML = this.responseText;
       } else {
         // console.log(this.readyState, this.status);
       }
@@ -169,10 +170,10 @@ function addBook() {
 
 // run on page laod
 function init() {
-  fetchCategoriesForBooks();
-  fetchBooks();
+  // fetchCategoriesForBooks();
+  fetchLogs();
 };
 init();
 
-booksListContainer.addEventListener('click', individualOperations, false);
-addBtn.addEventListener('click', addBook, false);
+booksReturnedContainer.addEventListener('click', individualOperations, false);
+// addBtn.addEventListener('click', addBook, false);

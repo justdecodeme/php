@@ -87,46 +87,9 @@
       </td>
     </tr>
     </tbody>
-    <tfoot>
-      <tr>
-        <td>Rakesh</td>
-        <td>Nudge</td>
-        <td>09-March-2018</td>
-        <td>16-March-2018</td>
-        <td>Eric</td>
-        <td>16-March-2018</td>
-        <td>Hiroki</td>
-        <td>
-          <button type="button" class="btn btn-success btn-block" disabled>Returned</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Rakesh</td>
-        <td>Nudge</td>
-        <td>09-March-2018</td>
-        <td>16-March-2018</td>
-        <td>Eric</td>
-        <td>16-March-2018</td>
-        <td>Hiroki</td>
-        <td>
-          <button type="button" class="btn btn-primary btn-block" disabled>Returned</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Rakesh</td>
-        <td>Nudge</td>
-        <td>09-March-2018</td>
-        <td>16-March-2018</td>
-        <td>Eric</td>
-        <td>16-March-2018</td>
-        <td>Hiroki</td>
-        <td>
-          <button type="button" class="btn btn-danger btn-block" disabled>Returned</button>
-        </td>
-      </tr>
-    </tfoot>
+    <tfoot id="booksReturnedContainer"></tfoot>
   </table>
 </div>
 
 <?php include 'includes/footer.php'; ?>
-<script src="./_assets/js/timetable.min.js" charset="utf-8"></script>
+<script src="./_assets/js/logs.min.js" charset="utf-8"></script>

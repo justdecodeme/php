@@ -33,7 +33,7 @@ function returnUsers() {
     foreach($row as $user) {
       $i++;
       $users_list .= "
-      <tr data-user-id='$user->id'>
+      <tr data-user-id='$user->id' data-user-access-type='$user->access_type'>
         <td>$i</td>
         <td class='user-username'>$user->username</td>
         <td class='user-fullname'>$user->full_name</td>
@@ -55,24 +55,25 @@ function returnUsers() {
   }
 }
 
-// return books list
+// return users list
 if(isset($_GET['action']) && $_GET['action'] == 'fetchUsers') {
   returnUsers();
 }
 
-// return books list
+// return users list
 if(isset($_GET['action']) && $_GET['action'] == 'fetchCategoriesForBooks') {
   fetchCategoriesForBooks();
 }
 
 // add item on click of add button
 if(isset($_POST['action']) && $_POST['action'] == 'add') {
-  $addTitle = $_POST['addTitle'];
-  $addAuthor = $_POST['addAuthor'];
-  $addStock = $_POST['addStock'];
-  $addCategory = $_POST['addCategory'];
+  $addUsername = $_POST['addUsername'];
+  $addFullName = $_POST['addFullName'];
+  $addEmail = $_POST['addEmail'];
+  $addImage = $_POST['addImage'];
+  $selectUserType = $_POST['selectUserType'];
 
-  $query = "INSERT INTO books (title, author, stock, category_id) VALUES ('".$addTitle."','".$addAuthor."','".$addStock."','".$addCategory."')";
+  $query = "INSERT INTO users (username, full_name, email, image, access_type) VALUES ('".$addUsername."','".$addFullName."','".$addEmail."','".$addImage."','".$selectUserType."')";
   $statement = $connection->prepare($query);
 
   if($statement->execute()) {
@@ -84,9 +85,9 @@ if(isset($_POST['action']) && $_POST['action'] == 'add') {
 
 // delete item on click of delete button
 if(isset($_POST['action']) && $_POST['action'] == 'delete') {
-  $deleteId = $_POST['deleteId'];
-
-  $query = "DELETE FROM books WHERE id=$deleteId LIMIT 1";
+  $userId = $_POST['userId'];
+  echo $userId;
+  $query = "DELETE FROM users WHERE id = $userId LIMIT 1";
   $statement = $connection->prepare($query);
   if($statement->execute()) {
     returnUsers();
@@ -97,24 +98,26 @@ if(isset($_POST['action']) && $_POST['action'] == 'delete') {
 
 // update on click of update button after editing
 if(isset($_POST['action']) && $_POST['action'] == 'update') {
-  $newTitle = $_POST['newTitle'];
-  $newAuthor = $_POST['newAuthor'];
-  $newStock = $_POST['newStock'];
-  $newCategory = $_POST['newCategory'];
-  $bookId = $_POST['bookId'];
+  $newUsername = $_POST['newUsername'];
+  $newFullname = $_POST['newFullname'];
+  $newEmail = $_POST['newEmail'];
+  $newImage = $_POST['newImage'];
+  $newAccessType = $_POST['newAccessType'];
+  $userId = $_POST['userId'];
 
-  $query = "UPDATE `books`
+  $query = "UPDATE `users`
     SET
-      `title` = :TITLE,
-      `author` = :AUTHOR,
-      `stock` = :STOCK,
-      `category_id` = :CATEGORY
+      `username` = :USERNAME,
+      `full_name` = :FULLNAME,
+      `email` = :EMAIL,
+      `image` = :IMAGE,
+      `access_type` = :ACCESS_TYPE
     WHERE
-      `id` = :BOOKID
+      `id` = :USERID
     LIMIT 1";
 
   $statement = $connection->prepare($query);
-  $params = array ('TITLE'=>$newTitle,'AUTHOR'=>$newAuthor,'STOCK'=>$newStock,'CATEGORY'=>$newCategory, 'BOOKID'=>$bookId);
+  $params = array ('USERNAME'=>$newUsername,'FULLNAME'=>$newFullname,'EMAIL'=>$newEmail,'IMAGE'=>$newImage, 'ACCESS_TYPE'=>$newAccessType, 'USERID'=>$userId);
 
   if($statement->execute($params)) {
     returnUsers();

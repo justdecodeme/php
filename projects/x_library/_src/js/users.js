@@ -1,6 +1,5 @@
-var bookParent, bookTitle, bookStock, bookStock, bookCategory, bookTitleValue, bookAuthorValue, bookStockValue, bookCategoryValue;
+var userParent, bookTitle, bookStock, bookStock, bookCategory, bookTitleValue, bookAuthorValue, bookStockValue, bookCategoryValue;
 var usersListContainer = document.getElementById('usersListContainer');
-var selectCategory = document.getElementById('selectCategory');
 var addBtn = document.getElementById('addBtn');
 
 // Edit -> Delete -> Cancel -> Submit functions
@@ -9,9 +8,9 @@ function individualOperations(e) {
 
   // delete -> only if not editing
   if(e.target.id == 'deleteBtn' && !isEditing) {
-    bookParent = e.target.parentNode.parentNode;
-    var deleteId = bookParent.dataset.bookId;
-    console.log('deleting: ' + deleteId);
+    userParent = e.target.parentNode.parentNode;
+    var userId = userParent.dataset.userId;
+    console.log('deleting: ' + userId);
 
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -27,7 +26,7 @@ function individualOperations(e) {
         // logic to delete the item
         xhttp.open("POST", "users_handler.php", true);  // open(method, url, async)
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("action=delete&deleteId="+deleteId);
+        xhttp.send("action=delete&userId="+userId);
     } else {
       console.log('Deletion is stopped!');
     }
@@ -35,57 +34,64 @@ function individualOperations(e) {
   // edit -> only if not editing
   else if(e.target.id == 'editBtn' && !isEditing) {
     isEditing = true;
-    bookParent = e.target.parentNode.parentNode;
-    var bookId = bookParent.dataset.bookId;
-    var categoryId = bookParent.dataset.categoryId;
-    console.log('editing: ' + bookId);
+    userParent = e.target.parentNode.parentNode;
+    var userId = userParent.dataset.userId;
+    var userAccessId = userParent.dataset.userAccessType;
+    console.log('editing: ' + userId);
 
-    bookTitle = bookParent.querySelector('.book-title');
-    bookAuthor = bookParent.querySelector('.book-author');
-    bookStock = bookParent.querySelector('.book-stock');
-    bookCategory = bookParent.querySelector('.book-category');
-    bookTitleValue = bookTitle.innerHTML;
-    bookAuthorValue = bookAuthor.innerHTML;
-    bookStockValue = bookStock.innerHTML;
-    bookCategoryValue = bookCategory.innerHTML;
+    userUsername = userParent.querySelector('.user-username');
+    userFullname = userParent.querySelector('.user-fullname');
+    userEmail = userParent.querySelector('.user-email');
+    userImage = userParent.querySelector('.user-image');
+    userAccessType = userParent.querySelector('.user-access-type');
+    userUsernameValue = userUsername.innerHTML;
+    userFullnameValue = userFullname.innerHTML;
+    userEmailValue = userEmail.innerHTML;
+    userImageValue = userImage.innerHTML;
+    userAccessTypeValue = userAccessType.innerHTML;
 
     // change elements for editing
-    bookParent.classList.add('editing-outer');
-    bookTitle.innerHTML = '<input type="text" class="form-control" value="'+bookTitleValue+'">';
-    bookAuthor.innerHTML = '<input type="text" class="form-control" value="'+bookAuthorValue+'">';
-    bookStock.innerHTML = '<input type="number" class="form-control" value="'+bookStockValue+'" min="0" max="100">';
-    // copy and insert category list
-    bookCategory.innerHTML = '';
-    var clone = selectCategory.cloneNode(true);
-    bookCategory.appendChild(clone);
-    // update category as as original
-    bookCategory.querySelector('select').value = categoryId;
+    userParent.classList.add('editing-outer');
+    userUsername.innerHTML = '<input type="text" class="form-control" value="'+userUsernameValue+'">';
+    userFullname.innerHTML = '<input type="text" class="form-control" value="'+userFullnameValue+'">';
+    userEmail.innerHTML = '<input type="email" class="form-control" value="'+userEmailValue+'">';
+    userImage.innerHTML = '<input type="file" class="form-control" value="'+userImageValue+'">';
+    userAccessType.innerHTML = `
+      <select class="custom-select">
+        <option value="admin">Admin</option>
+        <option value="user">User</option>
+      </select>
+    `;
+
+    // update user access type as as original
+    userAccessType.querySelector('select').value = userAccessId;
   }
   // cancel -> if editing
   else if(e.target.id == 'cancelBtn' && isEditing) {
     isEditing = false;
-    bookParent = e.target.parentNode.parentNode;
-    var bookId = bookParent.dataset.bookId;
-    console.log('cancelling: ' + bookId);
+    userParent = e.target.parentNode.parentNode;
+    var userId = userParent.dataset.userId;
+    console.log('cancelling: ' + userId);
 
-    bookParent.classList.remove('editing-outer');
-    bookTitle.innerHTML = bookTitleValue;
-    bookAuthor.innerHTML = bookAuthorValue;
-    bookStock.innerHTML = bookStockValue;
-    bookStock.innerHTML = bookStockValue;
-    bookCategory.innerHTML = bookCategoryValue;
+    userParent.classList.remove('editing-outer');
+    userUsername.innerHTML = userUsernameValue;
+    userFullname.innerHTML = userFullnameValue;
+    userEmail.innerHTML = userEmailValue;
+    userImage.innerHTML = userImageValue;
+    userAccessType.innerHTML = userAccessTypeValue;
   }
   // update -> if editing
   else if(e.target.id == 'updateBtn' && isEditing) {
     isEditing = false;
-    bookParent = e.target.parentNode.parentNode;
-    var bookId = bookParent.dataset.bookId;
-    console.log('updating: ' + bookId);
+    userParent = e.target.parentNode.parentNode;
+    var userId = userParent.dataset.userId;
+    console.log('updating: ' + userId);
 
-    var newTitle = bookTitle.querySelector('input').value;;
-    var newAuthor = bookAuthor.querySelector('input').value;
-    var newStock = bookStock.querySelector('input').value;
-    var newCategory = bookCategory.querySelector('select').value;;
+    var newUsername = userUsername.querySelector('input').value;;
+    var newFullname = userFullname.querySelector('input').value;
+    var newEmail = userEmail.querySelector('input').value;
+    var newImage = userImage.querySelector('input').value;;
+    var newAccessType = userAccessType.querySelector('select').value;;
 
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -95,11 +101,13 @@ function individualOperations(e) {
     };
     xhttp.open("POST", "users_handler.php", true);  // open(method, url, async)
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("action=update&newTitle="+newTitle+
-      "&newAuthor="+newAuthor+
-      "&newStock="+newStock+
-      "&newCategory="+newCategory+
-      "&bookId="+bookId
+    xhttp.send("action=update"+
+      "&newUsername="+newUsername+
+      "&newFullname="+newFullname+
+      "&newEmail="+newEmail+
+      "&newImage="+newImage+
+      "&newAccessType="+newAccessType+
+      "&userId="+userId
     );
   }
 }
@@ -121,18 +129,20 @@ function fetchUsers() {
 }
 
 // Add Category on add btn click
-function addBook() {
+function addUser() {
   if(!isEditing) {
     console.log('adding book..');
 
-    var addTitle = document.getElementById('addTitle').value;
-    var addAuthor = document.getElementById('addAuthor').value;
-    var addStock = document.getElementById('addStock').value;
-    var addCategory = selectCategory.value;
-    document.getElementById('addTitle').value = '';
-    document.getElementById('addAuthor').value = '';
-    document.getElementById('addStock').value = 1;
-    // document.getElementById('selectCategory').value = 1;
+    var addUsername = document.getElementById('addUsername').value;
+    var addFullName = document.getElementById('addFullName').value;
+    var addEmail = document.getElementById('addEmail').value;
+    var addImage = document.getElementById('addImage').value;
+    var selectUserType = document.getElementById('selectUserType').value;
+    document.getElementById('addUsername').value = '';
+    document.getElementById('addFullName').value = '';
+    document.getElementById('addEmail').value = '';
+    document.getElementById('addImage').value = '';
+    document.getElementById('selectUserType').value = 'user';
 
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -144,10 +154,12 @@ function addBook() {
     };
     xhttp.open("POST", "users_handler.php", true);  // open(method, url, async)
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("action=add&addTitle="+addTitle+
-      "&addAuthor="+addAuthor+
-      "&addStock="+addStock+
-      "&addCategory="+addCategory
+    xhttp.send("action=add"+
+      "&addUsername="+addUsername+
+      "&addFullName="+addFullName+
+      "&addEmail="+addEmail+
+      "&addImage="+addImage+
+      "&selectUserType="+selectUserType
     );
   }
 }
@@ -160,4 +172,4 @@ function init() {
 init();
 
 usersListContainer.addEventListener('click', individualOperations, false);
-addBtn.addEventListener('click', addBook, false);
+addBtn.addEventListener('click', addUser, false);
