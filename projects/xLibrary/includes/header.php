@@ -30,10 +30,10 @@
             <a class="nav-link" href="users.php">Users</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="login.php">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="logout.php">Logout</a>
           </li>
         </ul>
       </div>
