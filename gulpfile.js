@@ -7,10 +7,10 @@ const PORT = '8080';
 // const jsPathSource = 'php/projects/x_connect/_src/*.js';
 // const jsPathDestination = 'php/projects/x_connect/_assets';
 
-const scssPathSource = 'php/projects/x_connect/_src/scss/*.scss';
-const scssPathDestination = 'php/projects/x_connect/_assets/css';
-const jsPathSource = 'php/projects/x_connect/_src/js/*.js';
-const jsPathDestination = 'php/projects/x_connect/_assets/js';
+const scssPathSource = 'php/projects/xLibrary/_src/scss/*.scss';
+const scssPathDestination = 'php/projects/xLibrary/_assets/css';
+const jsPathSource = 'php/projects/xLibrary/_src/js/*.js';
+const jsPathDestination = 'php/projects/xLibrary/_assets/js';
 
 // Imports
 var gulp   = require('gulp'),
