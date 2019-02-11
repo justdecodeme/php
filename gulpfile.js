@@ -1,16 +1,18 @@
+// backup for php projects
+
 // Port#
 const PORT = '8080';
 
 // Paths
-// const scssPathSource = 'php/projects/x_connect/_src/*.scss';
-// const scssPathDestination = 'php/projects/x_connect/_assets';
-// const jsPathSource = 'php/projects/x_connect/_src/*.js';
-// const jsPathDestination = 'php/projects/x_connect/_assets';
+const scssPathSource = 'php/xApps/_src/scss/*.scss';
+const scssPathDestination = 'php/xApps/_assets/css';
+const jsPathSource = 'php/xApps/_src/js/*.js';
+const jsPathDestination = 'php/xApps/_assets/js';
 
-const scssPathSource = 'php/projects/xLibrary/_src/scss/*.scss';
-const scssPathDestination = 'php/projects/xLibrary/_assets/css';
-const jsPathSource = 'php/projects/xLibrary/_src/js/*.js';
-const jsPathDestination = 'php/projects/xLibrary/_assets/js';
+// const scssPathSource = 'php/projects/xLibrary/_src/scss/*.scss';
+// const scssPathDestination = 'php/projects/xLibrary/_assets/css';
+// const jsPathSource = 'php/projects/xLibrary/_src/js/*.js';
+// const jsPathDestination = 'php/projects/xLibrary/_assets/js';
 
 // Imports
 var gulp   = require('gulp'),
