@@ -1,7 +1,7 @@
 <?php
-// include 'includes/init.php';
+include 'includes/init.php';
 
-// if session variables are set redirect user to index.php page
+// if session variables are set redirect user to x-apps.php page
 if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
     $query = "SELECT *
       FROM users
@@ -12,12 +12,12 @@ if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
     $params = array('EMAIL' => $_SESSION['email'], 'PASSWORD' => $_SESSION['password']);
 
     if ($statement->execute($params) && $statement->rowCount() == 1) {
-        redirect('index.php');
+        redirect('x-apps.php');
     }
 }
 ?>
 
-<?php include 'includes/header.php';?>
+<?php include 'includes/x-header.php';?>
 
 <div class="container">
   <div class="row">
@@ -41,11 +41,11 @@ unset($_SESSION['message']);
         </div>
         <button type="submit" class="btn btn-primary" name="submitLogin" id="submitLogin">Submit</button>
 
-        <small style="margin-top: 10px;" class="form-text text-muted">Don’t have an account? <a href="signup.php">Signup</a></small>
+        <small style="margin-top: 10px;" class="form-text text-muted">Don’t have an account? <a href="x-signup.php">Signup</a></small>
       </form>
     </div>
   </div>
 </div>
 
-<?php include 'includes/footer.php';?>
-<script src="./_assets/js/login.min.js" charset="utf-8"></script>
+<?php include 'includes/x-footer.php';?>
+<script src="./_assets/js/x-login.min.js" charset="utf-8"></script>

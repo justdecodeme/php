@@ -20,7 +20,7 @@ submitLoginForm.addEventListener('submit', function (e) {
   xhttp1.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       if (this.responseText == 1) {
-        location.href = "index.php";
+        location.href = "x-apps.php";
       } else {
         message.innerHTML = this.responseText;
       }
@@ -28,7 +28,7 @@ submitLoginForm.addEventListener('submit', function (e) {
       console.log(this.readyState, this.status);
     }
   };
-  xhttp1.open("POST", "login_handler.php", true); // open(method, url, async)
+  xhttp1.open("POST", "x-login-handler.php", true); // open(method, url, async)
   xhttp1.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp1.send("action=submitLogin" +
     "&email=" + email +

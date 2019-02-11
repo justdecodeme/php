@@ -1,7 +1,7 @@
 <?php
-//   include 'includes/init.php';
-//   include 'includes/login_status.php';
-include 'includes/header.php';
+  include 'includes/init.php';
+  include 'includes/login-status.php';
+include 'includes/x-header.php';
 ?>
 
 <div class="container">
@@ -12,4 +12,4 @@ include 'includes/header.php';
   </div>
 </div>
 
-<?php include 'includes/footer.php';?>
+<?php include 'includes/x-footer.php';?>

@@ -26,10 +26,11 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
     }
   // if login is not validated
   } else {
-    header('Location: login.php');
+    header('Location: x-login.php');
+    // echo "Something goes wrong, Try after some time!";
   }
   // if session variables are not set
 } else {
-    header('Location: login.php');
+    header('Location: x-login.php');
 }
 ?>

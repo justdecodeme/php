@@ -28,7 +28,7 @@ submitForm.addEventListener('submit', function (e) {
       console.log(this.readyState, this.status);
     }
   };
-  xhttp1.open("POST", "signup_handler.php", true); // open(method, url, async)
+  xhttp1.open("POST", "x-signup-handler.php", true); // open(method, url, async)
   xhttp1.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp1.send("action=submitSignup" +
     "&username=" + username +
