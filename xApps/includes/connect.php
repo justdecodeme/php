@@ -9,7 +9,7 @@
   try {
     $connection = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS);
 
-    // Error Handling
+    // Error Handling (set the PDO error mode to exception)
     $connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // echo "Connected to Database: " . DB_NAME;

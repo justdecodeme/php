@@ -49,6 +49,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitSignup') {
       </div>';
     }
     if ($message == '') {
+      // prepare sql and bind parameters
         $query = "INSERT INTO `users`
       ( `username`, `email`, `password`, `role`)
       VALUES

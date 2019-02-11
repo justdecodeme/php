@@ -1,3 +1,7 @@
+////////////////////////////////////////////
+NOTE: Use only PDO with Prepared statements
+////////////////////////////////////////////
+
 This folder will contain all xApps like xLibrary, xQuotes, xType etc.
 
 1. run gulp: /Github/gulpfile.js
