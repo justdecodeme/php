@@ -19,7 +19,7 @@ submitForm.addEventListener('submit', function (e) {
     if (this.readyState == 4 && this.status == 200) {
       if (this.responseText == 1) {
         // console.log('if');
-        location.href = "login.php";
+        location.href = "x-login.php";
       } else {
         // console.log('else');
         message.innerHTML = this.responseText;
