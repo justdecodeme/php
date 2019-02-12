@@ -9,7 +9,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitSignup') {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirmPassword'];
-    $role = 'subscriber';
+    $role = 'subscriber'; // default role
     $message = '';
 
     if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
@@ -76,6 +76,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitSignup') {
             <span aria-hidden="true">&times;</span>
           </button>
         </div>';
+
+        echo $message;
         }
     } else {
         echo $message;

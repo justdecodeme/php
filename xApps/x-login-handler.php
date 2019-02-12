@@ -3,7 +3,7 @@ include 'includes/init.php';
 ?>
 
 <?php
-// register user
+// login user
 if (isset($_POST['action']) && $_POST['action'] == 'submitLogin') {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -28,7 +28,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitLogin') {
         $statement = $connection->prepare($query);
         $params = array('EMAIL' => $email, 'PASSWORD' => $password);
 
-        // Update timetable if query is successful
         if ($statement->execute($params) && $statement->rowCount() == 1) {
             // set session for user details
             $_SESSION['email'] = $email;
