@@ -1,13 +1,60 @@
 /*********************************/
 //          Common
 /*********************************/
-*:focus, *:active {
+*:focus,
+*:active {
   outline: none;
+}
+
+nav {
+  margin-bottom: 15px;
 }
 
 /*********************************/
 //          xApps
 /*********************************/
-nav {
-  margin-bottom: 15px;
+.x-apps {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/*********************************/
+//          xQuote
+/*********************************/
+.x-quote {
+  .quote {
+    background: orange;
+    text-align: center;
+    padding: 100px 10%;
+    border-radius: 30px;
+    color: white;
+
+    h1 {
+      font-size: 40px;
+    }
+
+    blockquote {
+      margin: 50px 0 0;
+      font-size: 26px;
+    }
+  }
+}
+
+.x-quote-admin {
+  .quote {
+    background: orange;
+    text-align: center;
+    padding: 20px;
+    border-radius: 30px;
+    color: white;
+    h1 {
+      font-size: 20px;
+    }
+    blockquote {
+      margin: 20px 0 0;
+      font-size: 18px;
+    }
+  }
+  .list-group-item.active {
+    font-size: 30px;
+  }
 }

@@ -1,4 +1,5 @@
 <?php
+$bodyClass = "x-apps";
 
 include 'includes/init.php';
 include 'includes/login-status.php';
@@ -9,10 +10,19 @@ include 'includes/x-header.php';
   <div class="row">
 
     <div class="col-md-3">
-      <a class="card" href="x-quotes.php">
+      <a class="card" href="x-quote.php">
         <img class="card-img-top" src="./_assets/img/quotes.jpg" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">
           <h4 class="card-title text-center" style="margin: 0;">xQuotes</h4>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-3">
+      <a class="card" href="x-quote-admin.php">
+        <img class="card-img-top" src="./_assets/img/quotes.jpg" alt="Card image cap">
+        <div class="card-body" style="padding: 1rem;">
+          <h4 class="card-title text-center" style="margin: 0;">xQuotes Admin</h4>
         </div>
       </a>
     </div>
