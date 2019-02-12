@@ -10,10 +10,16 @@ function email_exists($email) {
     FROM users
     WHERE email=:EMAIL
   ";
-  $statement = $connection->prepare($query);
-  $params = array ('EMAIL'=>$email);
 
-  if($statement->execute($params) && $statement->rowCount() == 1) {
+  $statement = $connection->prepare($query);
+
+  // METHOD 1
+  // $params = array('EMAIL'=>$email);
+  // if($statement->execute($params) && $statement->rowCount() == 1) {
+    
+  // METHOD 2
+  $statement->bindParam(':EMAIL', $email);
+  if($statement->execute() && $statement->rowCount() == 1) {
 		return true;
 	} else {
 		return false;
@@ -27,8 +33,9 @@ function username_exists($username) {
     FROM users
     WHERE username=:USERNAME
   ";
+
   $statement = $connection->prepare($query);
-  $params = array ('USERNAME'=>$username);
+  $params = array('USERNAME'=>$username);
 
   if($statement->execute($params) && $statement->rowCount() == 1) {
 		return true;
@@ -36,4 +43,4 @@ function username_exists($username) {
 		return false;
 	}
 }
- ?>
+?>
