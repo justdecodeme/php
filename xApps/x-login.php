@@ -1,34 +1,22 @@
 <?php
-include 'includes/init.php';
-
-// if session variables are set redirect user to x-apps.php page
-if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
-    $query = "SELECT *
-      FROM users
-      WHERE email=:EMAIL
-      AND password=:PASSWORD
-    ";
-    $statement = $connection->prepare($query);
-    $params = array('EMAIL' => $_SESSION['email'], 'PASSWORD' => $_SESSION['password']);
-
-    if ($statement->execute($params) && $statement->rowCount() == 1) {
-        redirect('x-apps.php');
-    }
-}
+  $isLoginPage = true;
+  $isSignupPage = false;
+  
+  include 'includes/init.php';
+  include 'includes/login-status.php';
+  include 'includes/x-header.php';
 ?>
-
-<?php include 'includes/x-header.php';?>
 
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <!-- <h2>Login to xConnect</h2> -->
       <?php
-if (isset($_SESSION['message'])) {
-    echo $_SESSION['message'];
-}
-unset($_SESSION['message']);
-?>
+        if (isset($_SESSION['message'])) {
+            echo $_SESSION['message'];
+        }
+        unset($_SESSION['message']);
+      ?>
       <div id="message"></div>
       <form id="submitLoginForm">
         <div class="form-group">
