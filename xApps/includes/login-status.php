@@ -31,12 +31,13 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
     }
   // if login is not validated
   } else {
-    header('Location: x-login.php');
+    redirect('x-login.php');
     echo "Something goes wrong, Try after some time!";
   }
-} else {
   // if session variables are not set and
+} else {
   // request is not coming from login or signup page itself
+  // redirect to login page
   if(!isset($isLoginPage) && !isset($isSignupPage)) {
     redirect('x-login.php');
   }
