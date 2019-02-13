@@ -14,10 +14,12 @@ function email_exists($email) {
   $statement = $connection->prepare($query);
 
   // METHOD 1
+  // Execute a prepared statement with an array of insert values (named parameters)
   // $params = array('EMAIL'=>$email);
   // if($statement->execute($params) && $statement->rowCount() == 1) {
     
   // METHOD 2
+  // Execute a prepared statement with a bound variable and value
   $statement->bindParam(':EMAIL', $email);
   if($statement->execute() && $statement->rowCount() == 1) {
 		return true;

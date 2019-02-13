@@ -78,7 +78,6 @@
     update_users_list($_GET['batchCode'], $_GET['role'], $_GET['gender'], $_GET['doj'], $_GET['search'], $_GET['orderBy'], $_GET['ascOrDesc']);
   }
 
-
   // Add class on click of Submit button in tfoot
   if(isset($_POST['action']) && $_POST['action'] == 'add') {
     $batch_code = $_POST['batchCode'];
