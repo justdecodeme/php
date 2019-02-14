@@ -54,15 +54,22 @@ nav {
       font-size: 18px;
     }
   }
-  .list-group-item.active {
-    font-size: 30px;
-  }
-  .form-group {
-    margin-bottom: 0;
-  }
   .admin-panel {
     button {
       cursor: pointer;
+    }
+    .list-group-item.active {
+      font-size: 30px;
+    }
+  }
+  table {
+    .form-group {
+      margin-bottom: 0;
+    }
+    button {
+      svg {
+        pointer-events: none;
+      }
     }
   }
   .modal {

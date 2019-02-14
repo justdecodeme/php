@@ -1,7 +1,7 @@
 <?php
 include 'includes/connect.php';
 
-function updateQuotesList($orderBy, $ascOrDesc)
+function updateList($orderBy, $ascOrDesc)
 {
     global $connection;
 
@@ -10,39 +10,39 @@ function updateQuotesList($orderBy, $ascOrDesc)
     $statement = $connection->prepare($query);
 
     if ($statement->execute()) {
-        $quotesList = '';
+        $list = '';
         $i = 1;
 
         $row = $statement->fetchAll(PDO::FETCH_OBJ);
 
         foreach ($row as $quote) {
-            $quotesList .= "
+            $list .= "
       <tr data-id='{$quote->id}'>
         <th scope='row'>{$i}</th>
         <td>{$quote->quote}</td>
         <td>{$quote->author}</td>
         <td>
-          <button type='button' class='btn btn-success'><i class='far fa-edit'></i></button>
-          <button type='button' class='btn btn-danger'><i class='far fa-trash-alt'></i></button>
-          <button type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title=\"Make it today's Quote\"><i class='far fa-clock'></i></button>
+          <button data-action='edit' type='button' class='btn btn-success'><i class='far fa-edit'></i></button>
+          <button data-action='delete' type='button' class='btn btn-danger'><i class='far fa-trash-alt'></i></button>
+          <button data-action='set' type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title=\"Make it today's Quote\"><i class='far fa-clock'></i></button>
         </td>
       </tr>
       ";
             $i++;
         }
-        echo $quotesList;
+        echo $list;
     } else {
         echo "queryError";
     }
 }
 
-// update quotes list
-if (isset($_GET['action']) && $_GET['action'] == 'updateQuotesList') {
-    updateQuotesList($_GET['orderBy'], $_GET['ascOrDesc']);
+// update list
+if (isset($_GET['action']) && $_GET['action'] == 'updateList') {
+    updateList($_GET['orderBy'], $_GET['ascOrDesc']);
 }
 
-// add quote
-if (isset($_POST['action']) && $_POST['action'] == 'addQuote') {
+// add
+if (isset($_POST['action']) && $_POST['action'] == 'add') {
     $quoteInputValue = $_POST['quoteInputValue'];
     $authorInputValue = $_POST['authorInputValue'];
     $orderBy = $_POST['orderBy'];
@@ -55,14 +55,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'addQuote') {
     $statement->bindParam(':QUOTE', $quoteInputValue);
 
     if ($statement->execute() && $statement->rowCount() == 1) {
-      //   echo "
-      //   <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">
-      //     <strong>This quote already exist!</strong>
-      //     <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
-      //       <span aria-hidden=\"true\">&times;</span>
-      //     </button>
-      //   </div>
-      // ";
       echo "alreadyExist";
     } else {
         $query = "INSERT INTO `quotes`
@@ -75,7 +67,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'addQuote') {
 
         // Update quotes list if query is successful
         if ($statement->execute($params)) {
-            updateQuotesList($orderBy, $ascOrDesc);
+            updateList($orderBy, $ascOrDesc);
         } else {
             echo "queryError";
         }

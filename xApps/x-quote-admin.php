@@ -38,7 +38,7 @@ include 'includes/x-header.php';
               </div>
             </th>
             <th scope="col" style="width: 170px;">
-              <button type="button" class="btn btn-success" id="addQuoteBtn">Add Quote</button>
+              <button type="button" class="btn btn-success" id="addBtn">Add</button>
             </th>
           </tr>
           <tr>
@@ -48,7 +48,7 @@ include 'includes/x-header.php';
             <th scope="col">Action</th>
           </tr>
         </thead>
-        <tbody id="quotesList">
+        <tbody id="list">
           <!--<tr>
             <th scope="row">1</th>
             <td><input type="text"></td>
@@ -86,14 +86,14 @@ include 'includes/x-header.php';
 <div class="modal fade query-success" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
-        <div class="alert alert-success" role="alert">Quotes list updated!</div>
+        <div class="alert alert-success" role="alert">Added and List updated!</div>
     </div>
   </div>
 </div>
 <div class="modal fade already-exist" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
-        <div class="alert alert-warning" role="alert">Quote already exist!</div>
+        <div class="alert alert-warning" role="alert">Already exist!</div>
     </div>
   </div>
 </div>
