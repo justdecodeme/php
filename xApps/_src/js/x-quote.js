@@ -4,9 +4,21 @@
 
 var quotesList = document.getElementById('quotesList');
 var addQuoteBtn = document.getElementById('addQuoteBtn');
+var toggleTodaysQuoteBtn = document.getElementById('toggleTodaysQuoteBtn');
+var todaysQuoteSection = document.getElementById('todaysQuoteSection');
+var alreadyExistModalBtn = document.getElementById('alreadyExistModalBtn');
 
 var orderBy = 'quote';
 var ascOrDesc = 'ASC';
+
+
+/*****************************************/
+//            events
+/*****************************************/
+addQuoteBtn.addEventListener('click', addQuote, false);
+toggleTodaysQuoteBtn.addEventListener('click', () => {
+  todaysQuoteSection.classList.toggle('d-none');
+}, false);
 
 
 /*****************************************/
@@ -34,7 +46,7 @@ function updateQuotesList() {
       // console.log(this.readyState, this.status);
     }
   };
-  xhttp.open("GET", "x-quote-admin-handler.php?action=updateQuotesList"+
+  xhttp.open("GET", "x-quote-handler.php?action=updateQuotesList"+
     "&orderBy=" + orderBy +
     "&ascOrDesc=" + ascOrDesc, true);
   xhttp.send();
@@ -50,15 +62,22 @@ function addQuote() {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        // update quotes list
-        quotesList.innerHTML = this.responseText;
-        // clearning fileds after successful addtion of batch
-        quoteInput.value = authorInput.value = '';
+        if (this.responseText == "alreadyExist") {
+          alreadyExistModalBtn.click();
+        } else if (this.responseText == "queryError") {
+          queryErrorBtn.click();
+        } else {
+          // update quotes list
+          quotesList.innerHTML = this.responseText;
+          // clearning fileds after successful addtion of batch
+          quoteInput.value = authorInput.value = '';
+          querySuccessBtn.click();
+        }
       } else {
         // console.log(this.readyState, this.status);
       }
     };
-    xhttp.open("POST", "x-quote-admin-handler.php", true); // open(method, url, async)
+    xhttp.open("POST", "x-quote-handler.php", true); // open(method, url, async)
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("action=addQuote"+
       "&quoteInputValue=" + quoteInputValue +
@@ -67,8 +86,3 @@ function addQuote() {
       "&ascOrDesc=" + ascOrDesc);
 }
 
-
-/*****************************************/
-//            events
-/*****************************************/
-addQuoteBtn.addEventListener('click', addQuote, false);

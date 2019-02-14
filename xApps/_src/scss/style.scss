@@ -60,4 +60,14 @@ nav {
   .form-group {
     margin-bottom: 0;
   }
+  .admin-panel {
+    button {
+      cursor: pointer;
+    }
+  }
+  .modal {
+    .alert {
+      margin-bottom: 0;
+    }
+  }
 }

@@ -32,17 +32,7 @@ function updateQuotesList($orderBy, $ascOrDesc)
         }
         echo $quotesList;
     } else {
-        echo '
-    <tr><td colspan="4">
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Error!</strong> Query is not succesful.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      </td>
-    </tr>
-    ';
+        echo "queryError";
     }
 }
 
@@ -65,14 +55,15 @@ if (isset($_POST['action']) && $_POST['action'] == 'addQuote') {
     $statement->bindParam(':QUOTE', $quoteInputValue);
 
     if ($statement->execute() && $statement->rowCount() == 1) {
-        echo "
-        <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">
-          <strong>Duplicate entry!</strong> {$quoteInputValue} | {$authorInputValue}
-          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
-            <span aria-hidden=\"true\">&times;</span>
-          </button>
-        </div>
-      ";
+      //   echo "
+      //   <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">
+      //     <strong>This quote already exist!</strong>
+      //     <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+      //       <span aria-hidden=\"true\">&times;</span>
+      //     </button>
+      //   </div>
+      // ";
+      echo "alreadyExist";
     } else {
         $query = "INSERT INTO `quotes`
               ( `quote`, `author`)
@@ -86,7 +77,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'addQuote') {
         if ($statement->execute($params)) {
             updateQuotesList($orderBy, $ascOrDesc);
         } else {
-            echo "Querry is not successful!";
+            echo "queryError";
         }
     }
 
