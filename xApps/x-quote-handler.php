@@ -74,3 +74,21 @@ if (isset($_POST['action']) && $_POST['action'] == 'add') {
     }
 
 }
+
+// delete
+if (isset($_POST['action']) && $_POST['action'] == 'delete') {
+    $id = $_POST['id'];
+    $orderBy = $_POST['orderBy'];
+    $ascOrDesc = $_POST['ascOrDesc'];
+
+    $query = "DELETE FROM quotes WHERE id=:ID LIMIT 1";
+    $statement = $connection->prepare($query);
+    $statement->bindParam(":ID", $id);
+    if ($statement->execute()) {
+      updateList($orderBy, $ascOrDesc);
+    } else {
+      echo "queryError";
+
+    }
+}
+

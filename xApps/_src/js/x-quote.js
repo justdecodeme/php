@@ -7,9 +7,8 @@ var addBtn = document.getElementById('addBtn');
 var toggleTodaysQuoteBtn = document.getElementById('toggleTodaysQuoteBtn');
 var todaysQuoteSection = document.getElementById('todaysQuoteSection');
 
-var querySuccessBtn = document.getElementById('querySuccessBtn');
-var alreadyExistModalBtn = document.getElementById('alreadyExistModalBtn');
-var queryErrorBtn = document.getElementById('queryErrorBtn');
+var statusModalBtn = document.getElementById('statusModalBtn');
+var statusModalAlert = document.getElementById('statusModalAlert');
 
 var orderBy = 'id';
 var ascOrDesc = 'DESC';
@@ -37,6 +36,13 @@ function init() {
   updateList();
 };
 init();
+
+// one modal for different status (add, delete, error, update, edit)
+function showStatusModal(text, type) {
+  statusModalAlert.innerHTML = text;
+  statusModalAlert.setAttribute('class', type);
+  statusModalBtn.click();
+}
 
 // update list
 function updateList() {
@@ -70,15 +76,15 @@ function add() {
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         if (this.responseText == "alreadyExist") {
-          alreadyExistModalBtn.click();
+          showStatusModal('Already Exist', 'alert alert-warning');
         } else if (this.responseText == "queryError") {
-          queryErrorBtn.click();
+          showStatusModal('Query Error!', 'alert alert-error');
         } else {
-          // update quotes list
+          // update list
           list.innerHTML = this.responseText;
-          // clearning fileds after successful addtion of batch
+          // clearning fileds after successful addtion
           quoteInput.value = authorInput.value = '';
-          querySuccessBtn.click();
+          showStatusModal('Successfully Added!', 'alert alert-success');
         }
       } else {
         // console.log(this.readyState, this.status);
@@ -101,32 +107,35 @@ function remove(e) {
   
   if (action == "delete") {
     console.log('deleting...', id);
+
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        if (this.responseText == "queryError") {
+          queryErrorBtn.click();
+        } else {
+          // update list
+          list.innerHTML = this.responseText;
+          showStatusModal('Successfully Deleted!', 'alert alert-success');
+        }
+      } else {
+        // console.log(this.readyState, this.status);
+      }
+    };
+
+    var deleteConfirmation = confirm("Want to delete?");
+    if (deleteConfirmation) {
+      //Logic to delete the item
+      xhttp.open("POST", "x-quote-handler.php", true); // open(method, url, async)
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("action=delete" +
+        "&id=" + id +
+        "&orderBy=" + orderBy +
+        "&ascOrDesc=" + ascOrDesc);
+    } else {
+      console.log('Deletion is stopped!');
+    }
   }
 
-  // xhttp = new XMLHttpRequest();
-  // xhttp.onreadystatechange = function () {
-  //   if (this.readyState == 4 && this.status == 200) {
-  //     if (this.responseText == "alreadyExist") {
-  //       alreadyExistModalBtn.click();
-  //     } else if (this.responseText == "queryError") {
-  //       queryErrorBtn.click();
-  //     } else {
-  //       // update quotes list
-  //       quotesList.innerHTML = this.responseText;
-  //       // clearning fileds after successful addtion of batch
-  //       quoteInput.value = authorInput.value = '';
-  //       querySuccessBtn.click();
-  //     }
-  //   } else {
-  //     // console.log(this.readyState, this.status);
-  //   }
-  // };
-  // xhttp.open("POST", "x-quote-handler.php", true); // open(method, url, async)
-  // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  // xhttp.send("action=add" +
-  //   "&quoteInputValue=" + quoteInputValue +
-  //   "&authorInputValue=" + authorInputValue +
-  //   "&orderBy=" + orderBy +
-  //   "&ascOrDesc=" + ascOrDesc);
 }
 
