@@ -34,6 +34,7 @@ list.addEventListener('click', remove, false); // can't use 'delete' as a func n
 // run on page laod
 function init() {
   updateList();
+  getTodaysQuote();
 };
 init();
 
@@ -42,6 +43,67 @@ function showStatusModal(text, type) {
   statusModalAlert.innerHTML = text;
   statusModalAlert.setAttribute('class', type);
   statusModalBtn.click();
+}
+
+// get today's quote
+function getTodaysQuote() {
+  console.log('updating todays quote...');
+
+  // load content from database
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      if (this.responseText == "queryError") {
+        showStatusModal('Can\'t fetch today\'s quote!', 'alert alert-danger');
+      } else {
+        todaysQuoteSection.querySelector('.content').innerHTML = this.responseText;
+      }      
+    } else {
+      console.log(this.readyState, this.status);
+    }
+  };
+  xhttp.open("GET", "x-quote-handler.php?action=getTodaysQuote", true);
+  xhttp.send();  
+}
+
+// set today's quote
+function setTodaysQuote(e) {
+
+  var action = e.target.dataset.action;
+  var id = e.target.closest('tr').dataset.id;
+
+  if (action == "delete") {
+    console.log('deleting...', id);
+
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        if (this.responseText == "queryError") {
+          queryErrorBtn.click();
+        } else {
+          // update list
+          list.innerHTML = this.responseText;
+          showStatusModal('Successfully Deleted!', 'alert alert-success');
+        }
+      } else {
+        // console.log(this.readyState, this.status);
+      }
+    };
+
+    var deleteConfirmation = confirm("Want to delete?");
+    if (deleteConfirmation) {
+      //Logic to delete the item
+      xhttp.open("POST", "x-quote-handler.php", true); // open(method, url, async)
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("action=delete" +
+        "&id=" + id +
+        "&orderBy=" + orderBy +
+        "&ascOrDesc=" + ascOrDesc);
+    } else {
+      console.log('Deletion is stopped!');
+    }
+  }
+
 }
 
 // update list
@@ -75,10 +137,12 @@ function add() {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        if (this.responseText == "alreadyExist") {
+        if (this.responseText == "emptyFields") {
+          showStatusModal('one ore more fields are empty!', 'alert alert-danger');
+        } else if (this.responseText == "alreadyExist") {
           showStatusModal('Already Exist', 'alert alert-warning');
         } else if (this.responseText == "queryError") {
-          showStatusModal('Query Error!', 'alert alert-error');
+          showStatusModal('Query Error!', 'alert alert-danger');
         } else {
           // update list
           list.innerHTML = this.responseText;
@@ -138,4 +202,5 @@ function remove(e) {
   }
 
 }
+
 
