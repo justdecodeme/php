@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2019 at 05:41 PM
+-- Generation Time: Feb 15, 2019 at 07:04 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -21,6 +21,143 @@ SET time_zone = "+00:00";
 --
 -- Database: `x_apps`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quotes`
+--
+
+CREATE TABLE `quotes` (
+  `id` int(11) NOT NULL,
+  `quote` varchar(700) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `author` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `quotes`
+--
+
+INSERT INTO `quotes` (`id`, `quote`, `author`) VALUES
+(10, 'Whatever the mind of man can conceive and believe, it can achieve.', 'Napoleon Hill'),
+(11, 'Strive not to be a success, but rather to be of value.', 'Albert Einstein'),
+(12, 'Two roads diverged in a wood, and Iâ€”I took the one less traveled by, And that has made all the difference.', 'Robert Frost'),
+(13, 'I attribute my success to this: I never gave or took any excuse.', 'Florence Nightingale'),
+(14, 'You miss 100% of the shots you donâ€™t take.', 'Wayne Gretzky'),
+(15, 'Iâ€™ve missed more than 9000 shots in my career. Iâ€™ve lost almost 300 games. 26 times Iâ€™ve been trusted to take the game winning shot and missed. Iâ€™ve failed over and over and over again in my life. And that is why I succeed.', 'Michael Jordan'),
+(16, 'The most difficult thing is the decision to act, the rest is merely tenacity.', 'Amelia Earhart'),
+(17, 'Every strike brings me closer to the next home run.', 'Babe Ruth'),
+(18, 'Definiteness of purpose is the starting point of all achievement.', 'W. Clement Stone'),
+(19, 'We must balance conspicuous consumption with conscious capitalism.', 'Kevin Kruse'),
+(20, 'Life is what happens to you while youâ€™re busy making other plans.', 'John Lennon'),
+(21, 'We become what we think about.', 'Earl Nightingale'),
+(22, 'Twenty years from now you will be more disappointed by the things that you didnâ€™t do than by the ones you did do, so throw off the bowlines, sail away from safe harbor, catch the trade winds in your sails.  Explore, Dream, Discover.', 'Mark Twain'),
+(23, 'Life is 10% what happens to me and 90% of how I react to it.', 'Charles Swindoll'),
+(24, 'The most common way people give up their power is by thinking they donâ€™t have any.', 'Alice Walker'),
+(25, 'The mind is everything. What you think you become.', 'Buddha'),
+(26, 'The best time to plant a tree was 20 years ago. The second best time is now.', 'Chinese Proverb'),
+(27, 'An unexamined life is not worth living.', 'Socrates'),
+(28, 'Eighty percent of success is showing up.', 'Woody Allen'),
+(29, 'Your time is limited, so donâ€™t waste it living someone elseâ€™s life.', 'Steve Jobs'),
+(30, 'Winning isnâ€™t everything, but wanting to win is.', 'Vince Lombardi'),
+(31, 'I am not a product of my circumstances. I am a product of my decisions.', 'Stephen Covey'),
+(32, 'Every child is an artist.  The problem is how to remain an artist once he grows up.', 'Pablo Picasso'),
+(33, 'You can never cross the ocean until you have the courage to lose sight of the shore.', 'Christopher Columbus'),
+(34, 'Iâ€™ve learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel.', 'Maya Angelou'),
+(35, 'Either you run the day, or the day runs you.', 'Jim Rohn'),
+(36, 'Whether you think you can or you think you canâ€™t, youâ€™re right.', 'Henry Ford'),
+(37, 'The two most important days in your life are the day you are born and the day you find out why.', 'Mark Twain'),
+(38, 'Whatever you can do, or dream you can, begin it.  Boldness has genius, power and magic in it.', 'Johann Wolfgang von Goethe'),
+(39, 'The best revenge is massive success.', 'Frank Sinatra'),
+(40, 'People often say that motivation doesnâ€™t last. Well, neither does bathing.  Thatâ€™s why we recommend it daily.', 'Zig Ziglar'),
+(41, 'Life shrinks or expands in proportion to oneâ€™s courage.', 'Anais Nin'),
+(42, 'If you hear a voice within you say â€œyou cannot paint,â€ then by all means paint and that voice will be silenced.', 'Vincent Van Gogh'),
+(43, 'There is only one way to avoid criticism: do nothing, say nothing, and be nothing.', 'Aristotle'),
+(44, 'Ask and it will be given to you; search, and you will find; knock and the door will be opened for you.', 'Jesus'),
+(45, 'The only person you are destined to become is the person you decide to be.', 'Ralph Waldo Emerson'),
+(46, 'Go confidently in the direction of your dreams.  Live the life you have imagined.', 'Henry David Thoreau'),
+(47, 'When I stand before God at the end of my life, I would hope that I would not have a single bit of talent left and could say, I used everything you gave me.', 'Erma Bombeck'),
+(48, 'Few things can help an individual more than to place responsibility on him, and to let him know that you trust him.', 'Booker T. Washington'),
+(49, 'Certain things catch your eye, but pursue only those that capture the heart.', ' Ancient Indian Proverb'),
+(50, 'Believe you can and youâ€™re halfway there.', 'Theodore Roosevelt'),
+(51, 'Everything youâ€™ve ever wanted is on the other side of fear.', 'George Addair'),
+(52, 'We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light.', 'Plato'),
+(53, 'Teach thy tongue to say, â€œI do not know,â€ and thous shalt progress.', 'Maimonides'),
+(54, 'Start where you are. Use what you have.  Do what you can.', 'Arthur Ashe'),
+(55, 'When I was 5 years old, my mother always told me that happiness was the key to life.  When I went to school, they asked me what I wanted to be when I grew up.  I wrote down â€˜happyâ€™.  They told me I didnâ€™t understand the assignment, and I told them they didnâ€™t understand life.', 'John Lennon'),
+(56, 'Fall seven times and stand up eight.', 'Japanese Proverb'),
+(57, 'When one door of happiness closes, another opens, but often we look so long at the closed door that we do not see the one that has been opened for us.', 'Helen Keller'),
+(58, 'Everything has beauty, but not everyone can see.', 'Confucius'),
+(59, 'How wonderful it is that nobody need wait a single moment before starting to improve the world.', 'Anne Frank'),
+(60, 'When I let go of what I am, I become what I might be.', 'Lao Tzu'),
+(61, 'Life is not measured by the number of breaths we take, but by the moments that take our breath away.', 'Maya Angelou'),
+(62, 'Happiness is not something readymade.  It comes from your own actions.', 'Dalai Lama'),
+(63, 'If youâ€™re offered a seat on a rocket ship, donâ€™t ask what seat! Just get on.', 'Sheryl Sandberg'),
+(64, 'First, have a definite, clear practical ideal; a goal, an objective. Second, have the necessary means to achieve your ends; wisdom, money, materials, and methods. Third, adjust all your means to that end.', 'Aristotle'),
+(65, 'If the wind will not serve, take to the oars.', 'Latin Proverb'),
+(66, 'You canâ€™t fall if you donâ€™t climb.  But thereâ€™s no joy in living your whole life on the ground.', 'Unknown'),
+(67, 'We must believe that we are gifted for something, and that this thing, at whatever cost, must be attained.', 'Marie Curie'),
+(68, 'Too many of us are not living our dreams because we are living our fears.', 'Les Brown'),
+(69, 'Challenges are what make life interesting and overcoming them is what makes life meaningful.', 'Joshua J. Marine'),
+(70, 'If you want to lift yourself up, lift up someone else.', 'Booker T. Washington'),
+(71, 'I have been impressed with the urgency of doing. Knowing is not enough; we must apply. Being willing is not enough; we must do.', 'Leonardo da Vinci'),
+(72, 'Limitations live only in our minds.  But if we use our imaginations, our possibilities become limitless.', 'Jamie Paolinetti'),
+(73, 'You take your life in your own hands, and what happens? A terrible thing, no one to blame.', 'Erica Jong'),
+(74, 'Whatâ€™s money? A man is a success if he gets up in the morning and goes to bed at night and in between does what he wants to do.', 'Bob Dylan'),
+(75, 'I didnâ€™t fail the test. I just found 100 ways to do it wrong.', 'Benjamin Franklin'),
+(76, 'In order to succeed, your desire for success should be greater than your fear of failure.', 'Bill Cosby'),
+(77, 'A person who never made a mistake never tried anything new.', ' Albert Einstein'),
+(78, 'The person who says it cannot be done should not interrupt the person who is doing it.', 'Chinese Proverb'),
+(79, 'There are no traffic jams along the extra mile.', 'Roger Staubach'),
+(80, 'It is never too late to be what you might have been.', 'George Eliot'),
+(81, 'You become what you believe.', 'Oprah Winfrey'),
+(82, 'I would rather die of passion than of boredom.', 'Vincent van Gogh'),
+(83, 'A truly rich man is one whose children run into his arms when his hands are empty.', 'Unknown'),
+(84, 'It is not what you do for your children, but what you have taught them to do for themselves, that will make them successful human beings.', 'Ann Landers'),
+(85, 'If you want your children to turn out well, spend twice as much time with them, and half as much money.', 'Abigail Van Buren'),
+(86, 'Build your own dreams, or someone else will hire you to build theirs.', 'Farrah Gray'),
+(87, 'The battles that count arenâ€™t the ones for gold medals. The struggles within yourselfâ€“the invisible battles inside all of usâ€“thatâ€™s where itâ€™s at.', 'Jesse Owens'),
+(88, 'Education costs money.  But then so does ignorance.', 'Sir Claus Moser'),
+(89, 'I have learned over the years that when oneâ€™s mind is made up, this diminishes fear.', 'Rosa Parks'),
+(90, 'It does not matter how slowly you go as long as you do not stop.', 'Confucius'),
+(91, 'If you look at what you have in life, youâ€™ll always have more. If you look at what you donâ€™t have in life, youâ€™ll never have enough.', 'Oprah Winfrey'),
+(92, 'Remember that not getting what you want is sometimes a wonderful stroke of luck.', 'Dalai Lama'),
+(93, 'You canâ€™t use up creativity.  The more you use, the more you have.', 'Maya Angelou'),
+(94, 'Dream big and dare to fail.', 'Norman Vaughan'),
+(95, 'Our lives begin to end the day we become silent about things that matter.', 'Martin Luther King Jr.'),
+(96, 'Do what you can, where you are, with what you have.', 'Teddy Roosevelt'),
+(97, 'If you do what youâ€™ve always done, youâ€™ll get what youâ€™ve always gotten.', 'Tony Robbins'),
+(98, 'Dreaming, after all, is a form of planning.', 'Gloria Steinem'),
+(99, 'Itâ€™s your place in the world; itâ€™s your life. Go on and do all you can with it, and make it the life you want to live.', 'Mae Jemison'),
+(100, 'You may be disappointed if you fail, but you are doomed if you donâ€™t try.', 'Beverly Sills'),
+(101, 'Remember no one can make you feel inferior without your consent.', 'Eleanor Roosevelt'),
+(102, 'Life is what we make it, always has been, always will be.', 'Grandma Moses'),
+(103, 'The question isnâ€™t who is going to let me; itâ€™s who is going to stop me.', 'Ayn Rand'),
+(104, 'When everything seems to be going against you, remember that the airplane takes off against the wind, not with it.', 'Henry Ford'),
+(105, 'Itâ€™s not the years in your life that count. Itâ€™s the life in your years.', 'Abraham Lincoln'),
+(106, 'Change your thoughts and you change your world.', 'Norman Vincent Peale'),
+(107, 'Either write something worth reading or do something worth writing.', 'Benjamin Franklin'),
+(108, 'Nothing is impossible, the word itself says, â€œIâ€™m possible!â€', 'Audrey Hepburn'),
+(109, 'The only way to do great work is to love what you do.', 'Steve Jobs'),
+(110, 'If you can dream it, you can achieve it.', 'Zig Ziglar'),
+(115, 'Life isn\'t about getting and ha', 'Kevin Kruse');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `todays_quote_id`
+--
+
+CREATE TABLE `todays_quote_id` (
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `todays_quote_id`
+--
+
+INSERT INTO `todays_quote_id` (`id`) VALUES
+(106);
 
 -- --------------------------------------------------------
 
@@ -51,7 +188,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `f_name`, `l_name`, `username`, `email`, `password`, `image`, `role`, `gender`, `doj`, `batch_code`, `student_code`, `instructor_code`) VALUES
 (1, 'Admin', '', 'admin', 'admin@gmail.com', 'admin', 'a.jpg', 'admin', 'male', '2018-03-08 07:23:00', '', '', ''),
 (2, 'Employee', '', 'employee', 'employee@gmail.com', 'employee', 'rakesh.jpg', 'employee', 'male', '2018-03-09 13:38:04', '', '', 'ins_rakesh'),
-(25, 'Student', '', 'student', 'student@gamil.com', 'student', 'https://s3.amazonaws.com/uifaces/faces/twitter/woodydotmx/128.jpg', 'student', 'female', '2017-09-12 08:14:37', 'u180325', 'std_71392', ''),
+(25, 'Student', '', 'student', 'student@gmail.com', 'student', 'https://s3.amazonaws.com/uifaces/faces/twitter/woodydotmx/128.jpg', 'student', 'female', '2017-09-12 08:14:37', 'u180325', 'std_71392', ''),
 (26, 'Subscriber', '', 'subscriber', 'subscriber@gmail.com', 'subscriber', 'https://s3.amazonaws.com/uifaces/faces/twitter/orkuncaylar/128.jpg', 'subscriber', 'male', '2018-02-20 22:57:15', 'u180325', 'std_60090', ''),
 (27, 'Elwyn', 'Crooks', 'Kaley4', 'Sabrina_Rice@hotmail.com', '102', 'https://s3.amazonaws.com/uifaces/faces/twitter/envex/128.jpg', 'student', 'male', '2017-09-27 19:28:24', 'u180325', 'std_21531', ''),
 (32, 'Ernest', 'Kutch', 'Jamison_Schmitt21', 'Richie.Altenwerth47@gmail.com', '747', 'https://s3.amazonaws.com/uifaces/faces/twitter/buleswapnil/128.jpg', 'student', 'male', '2018-03-06 18:50:57', 'wd180325', 'std_21298', ''),
@@ -103,11 +240,20 @@ INSERT INTO `users` (`id`, `f_name`, `l_name`, `username`, `email`, `password`, 
 (82, 'Alford', 'Welch', 'Alana_Kunde', 'Herta.Hane@gmail.com', '701', 'https://s3.amazonaws.com/uifaces/faces/twitter/mizko/128.jpg', 'student', 'female', '2017-07-20 09:03:03', 'bc180305b', 'std_19065', ''),
 (83, 'Alvah', 'Conroy', 'Cristopher14', 'Tiana_Crist27@yahoo.com', '247', 'https://s3.amazonaws.com/uifaces/faces/twitter/agromov/128.jpg', 'student', 'female', '2017-12-24 02:45:32', 'bc180305b', 'std_58214', ''),
 (85, 'Ceasar', 'Blanda', 'Kieran.Emard', 'Jake_Herman41@yahoo.com', '628', 'https://s3.amazonaws.com/uifaces/faces/twitter/doronmalki/128.jpg', 'student', 'female', '2017-06-14 09:44:23', 'bc180305a', 'std_82582', ''),
-(87, 'Dena', 'McGlynn', 'Scottie_Feil', 'Pedro6@yahoo.com', '137', 'https://s3.amazonaws.com/uifaces/faces/twitter/tweetubhai/128.jpg', 'student', 'female', '2017-10-01 16:38:03', 'bc180305a', 'std_90199', '');
+(87, 'Dena', 'McGlynn', 'Scottie_Feil', 'Pedro6@yahoo.com', '137', 'https://s3.amazonaws.com/uifaces/faces/twitter/tweetubhai/128.jpg', 'student', 'female', '2017-10-01 16:38:03', 'bc180305a', 'std_90199', ''),
+(88, '', '', 'a', 'a@gmail.com', 'a', '', 'subscriber', '', '2019-02-12 13:22:14', '', '', ''),
+(89, '', '', 'b', 'b@gmail.com', 'b', '', 'subscriber', '', '2019-02-12 13:22:52', '', '', '');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `quotes`
+--
+ALTER TABLE `quotes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`) USING BTREE;
 
 --
 -- Indexes for table `users`
@@ -120,10 +266,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `quotes`
+--
+ALTER TABLE `quotes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
