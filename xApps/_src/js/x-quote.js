@@ -4,7 +4,6 @@
 
 var list = document.getElementById('list');
 var addBtn = document.getElementById('addBtn');
-var toggleTodaysQuoteBtn = document.getElementById('toggleTodaysQuoteBtn');
 var todaysQuoteSection = document.getElementById('todaysQuoteSection');
 
 var statusModalBtn = document.getElementById('statusModalBtn');
@@ -19,10 +18,6 @@ var ascOrDesc = 'DESC';
 /*****************************************/
 
 addBtn.addEventListener('click', add, false);
-
-toggleTodaysQuoteBtn.addEventListener('click', () => {
-  todaysQuoteSection.classList.toggle('d-none');
-}, false);
 
 list.addEventListener('click', listBtnFunction, false);
 

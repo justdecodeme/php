@@ -10,7 +10,7 @@ include 'includes/x-header.php';
 
   <div class="row">
 
-    <div class="col-md-10">
+    <div class="col-md-12">
       <!-- quote of the day -->
       <div class="todays-quote" id="todaysQuoteSection">
         <h1>Quote of the Day!</h1>  
@@ -61,15 +61,6 @@ include 'includes/x-header.php';
         </tbody>
       </table>
     </div>
-
-    <!-- admin panel -->
-    <div class="col-md-2">
-      <div class="list-group admin-panel">
-        <button class="list-group-item list-group-item-action active">Admin Panel</button>
-        <button id="toggleTodaysQuoteBtn" class="list-group-item list-group-item-action">Toggle Today's Quote</button>
-        </a>
-      </div>      
-    </div>    
 
   </div>
 
