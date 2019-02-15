@@ -24,7 +24,7 @@ include 'includes/x-header.php';
       </div>    
     
       <!-- quote listing -->
-      <table class="table">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col" colspan="2">
@@ -67,10 +67,6 @@ include 'includes/x-header.php';
       <div class="list-group admin-panel">
         <button class="list-group-item list-group-item-action active">Admin Panel</button>
         <button id="toggleTodaysQuoteBtn" class="list-group-item list-group-item-action">Toggle Today's Quote</button>
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-secondary">Previous</button>
-          <button type="button" class="btn btn-secondary btn-info">Next</button>
-        </div>
         </a>
       </div>      
     </div>    

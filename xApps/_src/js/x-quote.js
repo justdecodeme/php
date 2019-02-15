@@ -24,7 +24,7 @@ toggleTodaysQuoteBtn.addEventListener('click', () => {
   todaysQuoteSection.classList.toggle('d-none');
 }, false);
 
-list.addEventListener('click', remove, false); // can't use 'delete' as a func name 
+list.addEventListener('click', listBtnFunction, false);
 
 
 /*****************************************/
@@ -33,8 +33,8 @@ list.addEventListener('click', remove, false); // can't use 'delete' as a func n
 
 // run on page laod
 function init() {
-  updateList();
   getTodaysQuote();
+  updateList();
 };
 init();
 
@@ -47,7 +47,7 @@ function showStatusModal(text, type) {
 
 // get today's quote
 function getTodaysQuote() {
-  console.log('updating todays quote...');
+  console.log('getting todays quote...');
 
   // load content from database
   xhttp = new XMLHttpRequest();
@@ -59,51 +59,11 @@ function getTodaysQuote() {
         todaysQuoteSection.querySelector('.content').innerHTML = this.responseText;
       }      
     } else {
-      console.log(this.readyState, this.status);
+      // console.log(this.readyState, this.status);
     }
   };
   xhttp.open("GET", "x-quote-handler.php?action=getTodaysQuote", true);
   xhttp.send();  
-}
-
-// set today's quote
-function setTodaysQuote(e) {
-
-  var action = e.target.dataset.action;
-  var id = e.target.closest('tr').dataset.id;
-
-  if (action == "delete") {
-    console.log('deleting...', id);
-
-    xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        if (this.responseText == "queryError") {
-          queryErrorBtn.click();
-        } else {
-          // update list
-          list.innerHTML = this.responseText;
-          showStatusModal('Successfully Deleted!', 'alert alert-success');
-        }
-      } else {
-        // console.log(this.readyState, this.status);
-      }
-    };
-
-    var deleteConfirmation = confirm("Want to delete?");
-    if (deleteConfirmation) {
-      //Logic to delete the item
-      xhttp.open("POST", "x-quote-handler.php", true); // open(method, url, async)
-      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("action=delete" +
-        "&id=" + id +
-        "&orderBy=" + orderBy +
-        "&ascOrDesc=" + ascOrDesc);
-    } else {
-      console.log('Deletion is stopped!');
-    }
-  }
-
 }
 
 // update list
@@ -117,6 +77,7 @@ function updateList() {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       list.innerHTML = this.responseText;
+      $('[data-toggle="tooltip"]').tooltip();
     } else {
       // console.log(this.readyState, this.status);
     }
@@ -163,20 +124,40 @@ function add() {
       "&ascOrDesc=" + ascOrDesc);
 }
 
-// delete on `Delete` button click
-function remove(e) {
+// list buttons → edit, delete, set, update, cancel 
+function listBtnFunction(e) {
   
   var action = e.target.dataset.action;
   var id = e.target.closest('tr').dataset.id;
   
-  if (action == "delete") {
+  if (action == "set") {
+    console.log('setting today\'s quote...', id);
+
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        if (this.responseText == "queryError") {
+          showStatusModal('Query Error!', 'alert alert-danger');
+        } else {
+          getTodaysQuote();
+          showStatusModal('Today\'s quote udpated!', 'alert alert-success');
+        }
+      } else {
+        // console.log(this.readyState, this.status);
+      }
+    };
+
+    xhttp.open("POST", "x-quote-handler.php", true); // open(method, url, async)
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("action=setTodaysQuote&id=" + id);
+  } else if(action == "delete") {
     console.log('deleting...', id);
 
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         if (this.responseText == "queryError") {
-          queryErrorBtn.click();
+          showStatusModal('Query Error!', 'alert alert-danger');
         } else {
           // update list
           list.innerHTML = this.responseText;
@@ -199,8 +180,13 @@ function remove(e) {
     } else {
       console.log('Deletion is stopped!');
     }
-  }
+  } else if(action == "edit") {
 
+  } else if(action == "cancel") {
+    
+  } else if(action == "submit") {
+
+  }
 }
 
 

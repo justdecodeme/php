@@ -11,10 +11,25 @@ if (isset($_GET['action']) && $_GET['action'] == 'updateList') {
     updateList($_GET['orderBy'], $_GET['ascOrDesc']);
 }
 
-// update todays quote
+// get today's quote
 if (isset($_GET['action']) && $_GET['action'] == 'getTodaysQuote') {
-    getTodaysQuote();
+  getTodaysQuote();
 }
+
+// set today's quote
+if (isset($_POST['action']) && $_POST['action'] == 'setTodaysQuote') {
+  $id = $_POST['id'];
+
+  $query = "UPDATE `todays_quote_id` SET `id`=:ID";
+  $statement = $connection->prepare($query);
+  $statement->bindParam(":ID", $id);
+  if ($statement->execute() && $statement->rowCount() == 1) {
+    echo "quoteSet";
+  } else {
+    echo "queryError";
+  }
+}
+
 
 // add
 if (isset($_POST['action']) && $_POST['action'] == 'add') {
@@ -68,7 +83,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
         updateList($orderBy, $ascOrDesc);
     } else {
         echo "queryError";
-
     }
 }
 
@@ -98,9 +112,11 @@ function updateList($orderBy, $ascOrDesc)
         <td>{$quote->quote}</td>
         <td>{$quote->author}</td>
         <td>
-          <button data-action='edit' type='button' class='btn btn-success'><i class='far fa-edit'></i></button>
-          <button data-action='delete' type='button' class='btn btn-danger'><i class='far fa-trash-alt'></i></button>
-          <button data-action='set' type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title=\"Make it today's Quote\"><i class='far fa-clock'></i></button>
+          <button data-action='edit' type='button' class='btn btn-success reading'><i class='fas fa-edit'></i></button>
+          <button data-action='delete' type='button' class='btn btn-danger reading'><i class='fas fa-trash-alt'></i></button>
+          <button data-action='set' type='button' class='btn btn-primary reading' data-toggle='tooltip' data-placement='top' title=\"Make it today's Quote\"><i class='fas fa-clock'></i></button>
+          <button data-action='cancel' type='button' class='btn btn-primary editing' data-toggle='tooltip' data-placement='top'><i class='fas fa-times'></i></button>
+          <button data-action='submit' type='button' class='btn btn-primary editing' data-toggle='tooltip' data-placement='top'><i class='fas fa-check'></i></button>
         </td>
       </tr>
       ";
@@ -121,7 +137,7 @@ function getTodaysQuote() {
 
   if ($statement->execute() && $statement->rowCount() == 1) {
       $row = $statement->fetch();
-      $id =  $row['id'];
+      $id = $row['id'];
 
       // get quote information related to fetched 'id'
       $query = "SELECT * FROM `quotes` WHERE id = {$id}";
@@ -129,18 +145,15 @@ function getTodaysQuote() {
       if ($statement->execute() && $statement->rowCount() == 1) {
           $quoteRow = $statement->fetch();
           echo "
-            <blockquote>
-              <p>{$quoteRow['quote']}</p>
-            </blockquote>
-            <cite>– {$quoteRow['author']}</cite>          
-          ";
+              <blockquote>
+                <p>{$quoteRow['quote']}</p>
+              </blockquote>
+              <cite>– {$quoteRow['author']}</cite>
+            ";
       } else {
-        echo "queryError";
+          echo "queryError";
       }
   } else {
       echo "queryError";
   }
 }
-
-
-
