@@ -86,6 +86,39 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     }
 }
 
+// submit
+if (isset($_POST['action']) && $_POST['action'] == 'submit') {
+    $id = $_POST['id'];
+    $orderBy = $_POST['orderBy'];
+    $ascOrDesc = $_POST['ascOrDesc'];
+    $quoteInputValue = $_POST['quoteInputValue'];
+    $authorInputValue = $_POST['authorInputValue'];
+
+    $query = "UPDATE `quotes`
+      SET
+        `quote` = :QUOTE_VALUE,
+        `author` = :AUTHOR_VALUE
+      WHERE
+        `id` = :ID
+      LIMIT 1";
+
+  $statement = $connection->prepare($query);
+  $params = array(
+      'ID' => $id,
+      'QUOTE_VALUE' => $quoteInputValue,
+      'AUTHOR_VALUE' => $authorInputValue,
+  );
+  // $statement->rowCount() == 1    if any changes are there
+  // $statement->rowCount() == 0    if no changes are there
+  if ($statement->execute($params)) {
+    if($statement->rowCount() == 1) {
+      updateList($orderBy, $ascOrDesc);
+    }
+  } else {
+      echo "queryError";
+  }
+}
+
 
 /******************************/
 //       functions
@@ -109,14 +142,14 @@ function updateList($orderBy, $ascOrDesc)
             $list .= "
       <tr data-id='{$quote->id}'>
         <th scope='row'>{$i}</th>
-        <td>{$quote->quote}</td>
-        <td>{$quote->author}</td>
+        <td data-column='quote'>{$quote->quote}</td>
+        <td data-column='author'>{$quote->author}</td>
         <td>
-          <button data-action='edit' type='button' class='btn btn-success reading'><i class='fas fa-edit'></i></button>
-          <button data-action='delete' type='button' class='btn btn-danger reading'><i class='fas fa-trash-alt'></i></button>
-          <button data-action='set' type='button' class='btn btn-primary reading' data-toggle='tooltip' data-placement='top' title=\"Make it today's Quote\"><i class='fas fa-clock'></i></button>
-          <button data-action='cancel' type='button' class='btn btn-primary editing' data-toggle='tooltip' data-placement='top'><i class='fas fa-times'></i></button>
-          <button data-action='submit' type='button' class='btn btn-primary editing' data-toggle='tooltip' data-placement='top'><i class='fas fa-check'></i></button>
+          <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
+          <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
+          <button data-action='set' type='button' class='btn btn-primary primary' data-toggle='tooltip' data-placement='top' title=\"Make it today's Quote\"><i class='fas fa-clock'></i></button>
+          <button data-action='cancel' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-times'></i></button>
+          <button data-action='submit' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-check'></i></button>
         </td>
       </tr>
       ";

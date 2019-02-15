@@ -125,6 +125,7 @@ function add() {
 }
 
 // list buttons → edit, delete, set, update, cancel 
+var rowEl, quoteEl, authorEl, quoteElValue, authorElValue;
 function listBtnFunction(e) {
   
   var action = e.target.dataset.action;
@@ -181,11 +182,60 @@ function listBtnFunction(e) {
       console.log('Deletion is stopped!');
     }
   } else if(action == "edit") {
+    console.log('editing...', id);
 
-  } else if(action == "cancel") {
+    rowEl = e.target.closest('tr');
+    quoteEl = rowEl.querySelector('[data-column="quote"]');
+    authorEl = rowEl.querySelector('[data-column="author"]');
+    quoteElValue = quoteEl.innerHTML;
+    authorElValue = authorEl.innerHTML;
     
-  } else if(action == "submit") {
+    rowEl.classList.add('editing');
+    
+    quoteEl.innerHTML = '<input type="text" class="form-control"  value="' + quoteElValue + '">';
+    authorEl.innerHTML = '<input type="text" class="form-control" value="' + authorElValue + '">';
+  } else if(action == "cancel") {
+    console.log('canceling...', id);
 
+    quoteEl.innerHTML = quoteElValue;
+    authorEl.innerHTML = authorElValue;
+    
+    rowEl.classList.remove('editing');
+    // updateList();
+  } else if(action == "submit") {
+    console.log('submiting...', id);
+
+    var quoteInputValue = quoteEl.querySelector('input').value;
+    var authorInputValue = authorEl.querySelector('input').value;
+
+    // update changes to database if there is a change
+    if (quoteInputValue == "" || authorInputValue == "") {
+      showStatusModal('one ore more fields are empty!', 'alert alert-danger');
+    } else if (quoteInputValue == quoteElValue || authorInputValue == authorElValue) {
+      quoteEl.innerHTML = quoteInputValue;
+      authorEl.innerHTML = authorInputValue;
+      rowEl.classList.remove('editing');
+    } else {
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          if (this.responseText == "queryError") {
+            showStatusModal('Query Error!', 'alert alert-danger');
+          } else {
+            list.innerHTML = this.responseText;
+            showStatusModal('Successfully Updated!', 'alert alert-success');
+          }
+        }
+      };
+      xhttp.open("POST", "x-quote-handler.php", true); // open(method, url, async)
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("action=submit" +
+        "&orderBy=" + orderBy +
+        "&ascOrDesc=" + ascOrDesc +
+        "&quoteInputValue=" + quoteInputValue +
+        "&authorInputValue=" + authorInputValue +
+        "&id=" + id);
+    }
   }
 }
 

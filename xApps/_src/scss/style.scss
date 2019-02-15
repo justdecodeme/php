@@ -40,12 +40,13 @@ nav {
 }
 
 .x-quote-admin {
-  .quote {
+  .todays-quote {
     background: orange;
     text-align: center;
     padding: 20px;
     border-radius: 30px;
     color: white;
+    margin-bottom: 20px;
     h1 {
       font-size: 20px;
     }
@@ -66,12 +67,22 @@ nav {
     .form-group {
       margin-bottom: 0;
     }
-    button {
-      svg {
-        pointer-events: none;
+    tr {
+      button {
+        svg {
+          pointer-events: none;
+        }
+      }
+      .secondary {
+        display: none;
       }
       &.editing {
-        display: none;
+        .primary {
+          display: none;
+        }
+        .secondary {
+          display: inline;
+        }
       }
     }
   }

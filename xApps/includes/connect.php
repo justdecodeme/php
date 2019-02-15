@@ -15,8 +15,8 @@
     // echo "Connected to Database: " . DB_NAME;
     
     // $connection = null;
-  } catch(PDOException $error) {
-    print "Error ". $error->getMessage() ;
+  } catch(PDOException $exception) {
+    print "Exception ". $exception->getMessage() ;
     die();
   }
  ?>

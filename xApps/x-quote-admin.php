@@ -12,7 +12,7 @@ include 'includes/x-header.php';
 
     <div class="col-md-10">
       <!-- quote of the day -->
-      <div class="quote" id="todaysQuoteSection">
+      <div class="todays-quote" id="todaysQuoteSection">
         <h1>Quote of the Day!</h1>  
         <div class="content">
           <!-- <blockquote>
