@@ -77,3 +77,4 @@ include 'includes/x-header.php';
 
 <?php include 'includes/x-footer.php';?>
 <script src="./_assets/js/x-quote.min.js"></script>
+<script src="./_assets/js/x-quote-admin.min.js"></script>
