@@ -29,9 +29,14 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitLogin') {
         $params = array('EMAIL' => $email, 'PASSWORD' => $password);
 
         if ($statement->execute($params) && $statement->rowCount() == 1) {
+            $row = $statement->fetchAll(PDO::FETCH_OBJ);
+            
             // set session for user details
-            $_SESSION['email'] = $email;
-            $_SESSION['password'] = $password;
+            foreach($row as $user) {
+              $_SESSION['email'] = $user->email;
+              $_SESSION['password'] = $user->password;
+              $_SESSION['role'] = $user->role;
+            }
 
             // 1 for success
             echo 1;

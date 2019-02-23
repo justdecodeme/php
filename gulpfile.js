@@ -72,18 +72,6 @@ gulp.task('watch', (cb) => {
     .pipe(livereload());
   });
 
-  watch('./**/*.css', (e) => {
-    gulp.src(e.path)
-    .pipe(plumber())
-    .pipe(livereload());
-  });
-
-  watch('./**/*.js', (e) => {
-    gulp.src(e.path)
-    .pipe(plumber())
-    .pipe(livereload());
-  });
-
   watch('./**/*.json', (e) => {
     gulp.src(e.path)
     .pipe(plumber())
@@ -95,22 +83,8 @@ gulp.task('watch', (cb) => {
   console.log('==================================');
 
 
-  /* Minifying + Watching Riot | JS | SCSS files */
+  /* Minifying + Watching JS | SCSS files */
   /*************************************/
-
-  watch('_src/tag/*.tag', (e) => {
-    gulp.src(e.path)
-    .pipe(riot({
-      compact: true
-    }))
-    .pipe(minify({
-      ext: {
-        min: '.min.js'
-      },
-      noSource: true
-    }))
-    .pipe(gulp.dest('_assets/tag'));
-  });
 
   watch(scssPathSource, (e) => {
     gulp.src(e.path)
@@ -143,7 +117,7 @@ gulp.task('watch', (cb) => {
   });
 
   console.log('==================================');
-  console.log('Watching + Minifing a Riot | JS | SCSS files.');
+  console.log('Watching + Minifing a JS | SCSS files.');
   console.log('==================================');
 
   cb();

@@ -3,6 +3,7 @@
 
   unset($_SESSION['email']);
   unset($_SESSION['password']);
+  unset($_SESSION['role']);
 
   $_SESSION['message'] =
   '<div class="alert alert-success alert-dismissible fade show" role="alert" id="sessonMessage">

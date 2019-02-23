@@ -3,6 +3,9 @@ $bodyClass = "x-quote-admin";
 
 include 'includes/init.php';
 include 'includes/login-status.php';
+if(isset($role) && $role !== 'admin') {
+  redirect('x-quote.php');
+}
 include 'includes/x-header.php';
 ?>
 

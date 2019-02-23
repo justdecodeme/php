@@ -40,7 +40,17 @@ function getTodaysQuote() {
   xhttp.send();  
 }
 
-setInterval(() => {
-  console.log('running')
-  getTodaysQuote();
-}, 1000);
+// var url = 'wss://echo.websocket.org';
+
+// // Create WebSocket connection.
+// const ws = new WebSocket(url);
+
+// // Connection opened
+// ws.addEventListener('open', function (event) {
+//   ws.send('Hello Server!');
+// });
+
+// // Listen for messages
+// ws.addEventListener('message', function (event) {
+//   console.log('Message from server ', event.data);
+// });
