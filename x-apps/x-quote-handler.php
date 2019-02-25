@@ -163,6 +163,7 @@ function updateList($orderBy, $ascOrDesc)
 
 function getTodaysQuote() {
   global $connection;
+  // $response = array();
 
   // get todays quote id
   $query = "SELECT id FROM `todays_quote_id` LIMIT 1";
@@ -177,6 +178,7 @@ function getTodaysQuote() {
       $statement = $connection->prepare($query);
       if ($statement->execute() && $statement->rowCount() == 1) {
           $quoteRow = $statement->fetch();
+          // $response['msg'] = "
           echo "
               <blockquote>
                 <p>{$quoteRow['quote']}</p>
@@ -189,4 +191,15 @@ function getTodaysQuote() {
   } else {
       echo "queryError";
   }
+
+  // $filename = dirname(__FILE__) . "/data.txt";
+  // $lastmodif = isset($_GET['timestamp']) ? $_GET['timestamp'] : 0;
+  // $currentmodif = filemtime($filename);
+  // while ($currentmodif <= $lastmodif) {
+  //     usleep(10000);
+  //     clearstatcache();
+  //     $currentmodif = filemtime($filename);
+  // }
+  // $response['timestamp'] = $currentmodif;
+  // echo json_encode($response);
 }

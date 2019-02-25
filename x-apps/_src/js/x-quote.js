@@ -3,6 +3,8 @@
 /*****************************************/
 
 var todaysQuoteSection = document.getElementById('todaysQuoteSection');
+// var timestamp = null;
+
 
 /*****************************************/
 //            events
@@ -31,16 +33,35 @@ function getTodaysQuote() {
         showStatusModal('Can\'t fetch today\'s quote!', 'alert alert-danger');
       } else {
         todaysQuoteSection.querySelector('.content').innerHTML = this.responseText;
-      }      
+      }
     } else {
       // console.log(this.readyState, this.status);
     }
   };
   xhttp.open("GET", "x-quote-handler.php?action=getTodaysQuote", true);
-  xhttp.send();  
+  xhttp.send();
+
+  // $.ajax({
+  //   type: "GET",
+  //   url: "x-quote-handler.php?action=getTodaysQuote&timestamp=" + timestamp,
+  //   async: true,
+  //   cache: false,
+  //   success: function (data) {
+  //     var json = eval('(' + data + ')');
+  //     todaysQuoteSection.querySelector('.content').innerHTML = json['msg'];
+  //     timestamp = json["timestamp"];
+  //     setTimeout("getTodaysQuote()", 1000);
+  //   },
+  //   error: function (XMLHttpRequest, textStatus, errorThrown) {
+  //     alert("error: "+textStatus + " "+ errorThrown );
+  //     setTimeout("getTodaysQuote()", 15000);
+  //   }
+  // });
+
 }
 
-// var url = 'wss://echo.websocket.org';
+// // var url = 'wss://echo.websocket.org';
+// var url = 'ws://weball.io:3306/websocket';
 
 // // Create WebSocket connection.
 // const ws = new WebSocket(url);
