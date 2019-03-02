@@ -1,30 +1,23 @@
 // backup for php projects
-
 // Port#
 const PORT = '8080';
 
-// Paths
-const scssPathSource = 'php/xApps/_src/scss/*.scss';
-const scssPathDestination = 'php/xApps/_assets/css';
-const jsPathSource = 'php/xApps/_src/js/*.js';
-const jsPathDestination = 'php/xApps/_assets/js';
-
-// const scssPathSource = 'php/projects/xLibrary/_src/scss/*.scss';
-// const scssPathDestination = 'php/projects/xLibrary/_assets/css';
-// const jsPathSource = 'php/projects/xLibrary/_src/js/*.js';
-// const jsPathDestination = 'php/projects/xLibrary/_assets/js';
+const scssPathSource = 'php/x-apps/_src/scss/*.scss';
+const scssPathDestination = 'php/x-apps/_assets/css';
+const jsPathSource = 'php/x-apps/_src/js/*.js';
+const jsPathDestination = 'php/x-apps/_assets/js';
+const mapPathDestination = '../../maps'; // this path is related to *.min.js/*.min.css files
 
 // Imports
-var gulp   = require('gulp'),
-    exec   = require('child_process').exec,
-    watch  = require('gulp-watch'),
-    riot   = require('gulp-riot'),
-    minify = require('gulp-minify'),
-    sass   = require('gulp-sass'),
-    plumber   = require('gulp-plumber'),
-    livereload   = require('gulp-livereload'),
-    rename = require('gulp-rename'),
-    sourcemaps = require('gulp-sourcemaps');
+var gulp = require('gulp'),
+  exec = require('child_process').exec,
+  watch = require('gulp-watch'),
+  minify = require('gulp-minify'),
+  sass = require('gulp-sass'),
+  plumber = require('gulp-plumber'),
+  livereload = require('gulp-livereload'),
+  rename = require('gulp-rename'),
+  sourcemaps = require('gulp-sourcemaps');
 
 // Start localhost
 gulp.task('startWebServer', (cb) => {
@@ -62,20 +55,32 @@ gulp.task('watch', (cb) => {
 
   watch('./**/*.html', (e) => {
     gulp.src(e.path)
-    .pipe(plumber())
-    .pipe(livereload());
+      .pipe(plumber())
+      .pipe(livereload());
   });
 
   watch('./**/*.php', (e) => {
     gulp.src(e.path)
-    .pipe(plumber())
-    .pipe(livereload());
+      .pipe(plumber())
+      .pipe(livereload());
+  });
+
+  watch('./**/*.css', (e) => {
+    gulp.src(e.path)
+      .pipe(plumber())
+      .pipe(livereload());
+  });
+
+  watch('./**/*.js', (e) => {
+    gulp.src(e.path)
+      .pipe(plumber())
+      .pipe(livereload());
   });
 
   watch('./**/*.json', (e) => {
     gulp.src(e.path)
-    .pipe(plumber())
-    .pipe(livereload());
+      .pipe(plumber())
+      .pipe(livereload());
   });
 
   console.log('==================================');
@@ -83,48 +88,48 @@ gulp.task('watch', (cb) => {
   console.log('==================================');
 
 
-  /* Minifying + Watching JS | SCSS files */
+  /* Minifying + Watching SCSS | JS files */
   /*************************************/
 
   watch(scssPathSource, (e) => {
     gulp.src(e.path)
-    .pipe(plumber())
-    .pipe(sourcemaps.init())
-    .pipe(sass({
-      outputStyle: 'compressed'
-    }).on('error', sass.logError))
-    .pipe(rename({
-      suffix: ".min"
-    }))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(scssPathDestination))
-    .pipe(livereload());
+      .pipe(plumber())
+      .pipe(sourcemaps.init())
+      .pipe(sass({
+        outputStyle: 'compressed'
+      }).on('error', sass.logError))
+      .pipe(rename({
+        suffix: ".min"
+      }))
+      .pipe(sourcemaps.write(mapPathDestination))
+      .pipe(gulp.dest(scssPathDestination))
+      .pipe(livereload());
   });
 
   watch(jsPathSource, (e) => {
     gulp.src(e.path)
-    .pipe(plumber())
-    .pipe(sourcemaps.init())
-    .pipe(minify({
-      ext: {
-        min: '.min.js'
-      },
-      noSource: true
-    }))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(jsPathDestination))
-    .pipe(livereload());
+      .pipe(plumber())
+      .pipe(sourcemaps.init())
+      .pipe(minify({
+        ext: {
+          min: '.min.js'
+        },
+        noSource: true
+      }))
+      .pipe(sourcemaps.write(mapPathDestination))
+      .pipe(gulp.dest(jsPathDestination))
+      .pipe(livereload());
   });
 
   console.log('==================================');
-  console.log('Watching + Minifing a JS | SCSS files.');
+  console.log('Watching + Minifing a SCSS | JS files.');
   console.log('==================================');
 
   cb();
 });
 
 // Say hello
-gulp.task('sayHello', function() {
+gulp.task('sayHello', function () {
   console.log('==================================');
   console.log("Hi, I'm always with you!");
   console.log('==================================');

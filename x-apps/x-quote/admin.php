@@ -1,12 +1,16 @@
 <?php
 $bodyClass = "x-quote-admin";
+$title = 'xApps | Admin';
+$rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/x-apps/';
 
-include 'includes/init.php';
-include 'includes/login-status.php';
+
+include $rootPath.'includes/init.php';
+include $rootPath.'includes/login-status.php';
+
 if(isset($role) && $role !== 'admin') {
-  redirect('x-quote.php');
+  redirect($rootPath.'x-quote/');
 }
-include 'includes/x-header.php';
+include $rootPath.'includes/x-header.php';
 ?>
 
 <div class="container-fluid">
@@ -78,6 +82,6 @@ include 'includes/x-header.php';
   </div>
 </div>
 
-<?php include 'includes/x-footer.php';?>
-<script src="./_assets/js/x-quote.min.js"></script>
-<script src="./_assets/js/x-quote-admin.min.js"></script>
+<?php include $rootPath.'includes/x-footer.php';?>
+<script src="/php/x-apps/_assets/js/x-quote.min.js"></script>
+<script src="/php/x-apps/_assets/js/x-quote-admin.min.js"></script>

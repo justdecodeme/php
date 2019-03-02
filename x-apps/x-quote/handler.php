@@ -1,5 +1,5 @@
 <?php
-include 'includes/connect.php';
+include '../includes/connect.php';
 
 
 /******************************/
@@ -178,13 +178,13 @@ function getTodaysQuote() {
       $statement = $connection->prepare($query);
       if ($statement->execute() && $statement->rowCount() == 1) {
           $quoteRow = $statement->fetch();
-          // $response['msg'] = "
           echo "
               <blockquote>
                 <p>{$quoteRow['quote']}</p>
               </blockquote>
               <cite>– {$quoteRow['author']}</cite>
             ";
+
       } else {
           echo "queryError";
       }
@@ -192,14 +192,4 @@ function getTodaysQuote() {
       echo "queryError";
   }
 
-  // $filename = dirname(__FILE__) . "/data.txt";
-  // $lastmodif = isset($_GET['timestamp']) ? $_GET['timestamp'] : 0;
-  // $currentmodif = filemtime($filename);
-  // while ($currentmodif <= $lastmodif) {
-  //     usleep(10000);
-  //     clearstatcache();
-  //     $currentmodif = filemtime($filename);
-  // }
-  // $response['timestamp'] = $currentmodif;
-  // echo json_encode($response);
 }

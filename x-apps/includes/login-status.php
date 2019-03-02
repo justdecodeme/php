@@ -1,4 +1,6 @@
 <?php
+$rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/x-apps/';
+
 $email = '';
 // if session variables are set
 if(isset($_SESSION['email']) && isset($_SESSION['password'])){
@@ -13,7 +15,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
   if($statement->execute($params) && $statement->rowCount() == 1) {
     // redirect to x-appps.html if already logged in
     if(isset($isLoginPage) || isset($isSignupPage)) {
-      redirect('x-apps.php');
+      redirect($rootPath.'x-apps/');
     } else {
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
       foreach($row as $user) {

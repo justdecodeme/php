@@ -54,7 +54,7 @@ function updateList() {
       // console.log(this.readyState, this.status);
     }
   };
-  xhttp.open("GET", "x-quote-handler.php?action=updateList"+
+  xhttp.open("GET", "handler.php?action=updateList"+
     "&orderBy=" + orderBy +
     "&ascOrDesc=" + ascOrDesc, true);
   xhttp.send();
@@ -87,7 +87,7 @@ function add() {
         // console.log(this.readyState, this.status);
       }
     };
-    xhttp.open("POST", "x-quote-handler.php", true); // open(method, url, async)
+    xhttp.open("POST", "handler.php", true); // open(method, url, async)
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("action=add"+
       "&quoteInputValue=" + quoteInputValue +
@@ -120,7 +120,7 @@ function listBtnFunction(e) {
       }
     };
 
-    xhttp.open("POST", "x-quote-handler.php", true); // open(method, url, async)
+    xhttp.open("POST", "handler.php", true); // open(method, url, async)
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("action=setTodaysQuote&id=" + id);
   } else if(action == "delete") {
@@ -144,7 +144,7 @@ function listBtnFunction(e) {
     var deleteConfirmation = confirm("Want to delete?");
     if (deleteConfirmation) {
       //Logic to delete the item
-      xhttp.open("POST", "x-quote-handler.php", true); // open(method, url, async)
+      xhttp.open("POST", "handler.php", true); // open(method, url, async)
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.send("action=delete" +
         "&id=" + id +
@@ -199,7 +199,7 @@ function listBtnFunction(e) {
           }
         }
       };
-      xhttp.open("POST", "x-quote-handler.php", true); // open(method, url, async)
+      xhttp.open("POST", "handler.php", true); // open(method, url, async)
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.send("action=submit" +
         "&orderBy=" + orderBy +

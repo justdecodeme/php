@@ -20,7 +20,7 @@ submitLoginForm.addEventListener('submit', function (e) {
   xhttp1.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       if (this.responseText == 1) {
-        location.href = "x-apps.php";
+        location.href = "/php/x-apps/";
       } else {
         message.innerHTML = this.responseText;
       }
