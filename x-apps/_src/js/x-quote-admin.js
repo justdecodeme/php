@@ -115,7 +115,9 @@ function listBtnFunction(e) {
         } else {
           getTodaysQuote();
           var oldRowEl = document.querySelector('#list tr.table-active');
-          oldRowEl.classList.remove('table-active');
+          if(oldRowEl) {
+            oldRowEl.classList.remove('table-active');
+          }
           rowEl.classList.add('table-active');
           showStatusModal('Today\'s quote udpated!', 'alert alert-success');
         }
@@ -135,6 +137,8 @@ function listBtnFunction(e) {
       if (this.readyState == 4 && this.status == 200) {
         if (this.responseText == "queryError") {
           showStatusModal('Query Error!', 'alert alert-danger');
+        } else if(this.responseText == "cantDelete") {
+          showStatusModal('Can\'t Delete!', 'alert alert-danger');
         } else {
           // update list
           list.innerHTML = this.responseText;

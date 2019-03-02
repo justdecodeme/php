@@ -76,6 +76,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     $orderBy = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];
 
+    if($id == getTodaysQuoteId()) {
+      echo "cantDelete";
+      return;
+    }
+
     $query = "DELETE FROM quotes WHERE id=:ID LIMIT 1";
     $statement = $connection->prepare($query);
     $statement->bindParam(":ID", $id);
