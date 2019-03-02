@@ -173,6 +173,22 @@ function listBtnFunction(e) {
     
     quoteEl.innerHTML = '<input type="text" class="form-control"  value="' + quoteElValue + '">';
     authorEl.innerHTML = '<input type="text" class="form-control" value="' + authorElValue + '">';
+    quoteEl.querySelector('input').focus();
+
+    var quoteInputEl = quoteEl.querySelector('input');
+    var authorInputEl = authorEl.querySelector('input');
+
+    // attach keyboard events on `enter` button for `submit`
+    // and `esc` btn for `cancel`
+    var cancelBtn = rowEl.querySelector('[data-action="cancel"');
+    var submitBtn = rowEl.querySelector('[data-action="submit"');
+    quoteInputEl.addEventListener('keyup', function (e) {
+      keyUpFunc(e, cancelBtn, submitBtn);
+    })
+    authorInputEl.addEventListener('keyup', function (e) {
+      keyUpFunc(e, cancelBtn, submitBtn);
+    })
+    
   } else if(action == "cancel") {
     console.log('canceling...', id);
 
@@ -203,6 +219,7 @@ function listBtnFunction(e) {
             showStatusModal('Query Error!', 'alert alert-danger');
           } else {
             list.innerHTML = this.responseText;
+            getTodaysQuote();
             showStatusModal('Successfully Updated!', 'alert alert-success');
           }
         }
@@ -218,5 +235,4 @@ function listBtnFunction(e) {
     }
   }
 }
-
 

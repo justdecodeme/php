@@ -40,5 +40,3 @@ function getTodaysQuote() {
   xhttp.open("GET", "handler.php?action=getTodaysQuote", true);
   xhttp.send();
 }
-
-setInterval(() => { getTodaysQuote(); }, 15000)

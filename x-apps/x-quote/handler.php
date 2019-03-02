@@ -129,47 +129,44 @@ if (isset($_POST['action']) && $_POST['action'] == 'submit') {
 //       functions
 /******************************/
 
-function updateList($orderBy, $ascOrDesc)
-{
-    $todaysQuoteId = getTodaysQuoteId();
+function updateList($orderBy, $ascOrDesc) {
+  $todaysQuoteId = getTodaysQuoteId();
 
-    global $connection;
+  global $connection;
 
-    $query = "SELECT * FROM quotes ORDER BY $orderBy $ascOrDesc";
+  $query = "SELECT * FROM quotes ORDER BY $orderBy $ascOrDesc";
 
-    $statement = $connection->prepare($query);
+  $statement = $connection->prepare($query);
 
-    if ($statement->execute()) {
-        $list = '';
-        $i = 1;
+  if ($statement->execute()) {
+      $list = '';
+      $i = 1;
 
-        $row = $statement->fetchAll(PDO::FETCH_OBJ);
+      $row = $statement->fetchAll(PDO::FETCH_OBJ);
 
-        foreach ($row as $quote) {
-          if($todaysQuoteId == $quote->id) {
-            $list .= "<tr data-id='{$quote->id}' class='table-active'>";
-          } else {
-            $list .= "<tr data-id='{$quote->id}'>";
-          }
-            $list .= "
-        <th scope='row'>{$i}</th>
-        <td data-column='quote'>{$quote->quote}</td>
-        <td data-column='author'>{$quote->author}</td>
-        <td>
-          <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
-          <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
-          <button data-action='set' type='button' class='btn btn-primary primary' data-toggle='tooltip' data-placement='top' title=\"Make it today's Quote\"><i class='fas fa-clock'></i></button>
-          <button data-action='cancel' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-times'></i></button>
-          <button data-action='submit' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-check'></i></button>
-        </td>
-      </tr>
-      ";
-            $i++;
-        }
-        echo $list;
-    } else {
-        echo "queryError";
-    }
+      foreach ($row as $quote) {
+        if($todaysQuoteId == $quote->id) {
+          $list .= "<tr data-id='{$quote->id}' class='table-active'>";
+        } else { $list .= "<tr data-id='{$quote->id}'>"; }
+          $list .= "
+      <th scope='row'>{$i}</th>
+      <td data-column='quote'>{$quote->quote}</td>
+      <td data-column='author'>{$quote->author}</td>
+      <td>
+        <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
+        <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
+        <button data-action='set' type='button' class='btn btn-primary primary' data-toggle='tooltip' data-placement='top' title=\"Make it today's Quote\"><i class='fas fa-clock'></i></button>
+        <button data-action='cancel' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-times'></i></button>
+        <button data-action='submit' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-check'></i></button>
+      </td>
+    </tr>
+    ";
+          $i++;
+      }
+      echo $list;
+  } else {
+      echo "queryError";
+  }
 }
 
 function getTodaysQuoteId() {
