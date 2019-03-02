@@ -138,7 +138,7 @@ function listBtnFunction(e) {
         if (this.responseText == "queryError") {
           showStatusModal('Query Error!', 'alert alert-danger');
         } else if(this.responseText == "cantDelete") {
-          showStatusModal('Can\'t Delete!', 'alert alert-danger');
+          showStatusModal('Can\'t Delete Current Quote!', 'alert alert-danger');
         } else {
           // update list
           list.innerHTML = this.responseText;
