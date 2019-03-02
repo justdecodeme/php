@@ -126,6 +126,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'submit') {
 
 function updateList($orderBy, $ascOrDesc)
 {
+    $todaysQuoteId = getTodaysQuoteId();
+
     global $connection;
 
     $query = "SELECT * FROM quotes ORDER BY $orderBy $ascOrDesc";
@@ -139,8 +141,12 @@ function updateList($orderBy, $ascOrDesc)
         $row = $statement->fetchAll(PDO::FETCH_OBJ);
 
         foreach ($row as $quote) {
+          if($todaysQuoteId == $quote->id) {
+            $list .= "<tr data-id='{$quote->id}' class='table-active'>";
+          } else {
+            $list .= "<tr data-id='{$quote->id}'>";
+          }
             $list .= "
-      <tr data-id='{$quote->id}'>
         <th scope='row'>{$i}</th>
         <td data-column='quote'>{$quote->quote}</td>
         <td data-column='author'>{$quote->author}</td>
@@ -161,35 +167,38 @@ function updateList($orderBy, $ascOrDesc)
     }
 }
 
-function getTodaysQuote() {
+function getTodaysQuoteId() {
   global $connection;
-  // $response = array();
 
   // get todays quote id
   $query = "SELECT id FROM `todays_quote_id` LIMIT 1";
   $statement = $connection->prepare($query);
 
   if ($statement->execute() && $statement->rowCount() == 1) {
-      $row = $statement->fetch();
-      $id = $row['id'];
+    $row = $statement->fetch();
+    return $row['id'];
+  } else {
+    return "queryError";
+  }
+}
 
-      // get quote information related to fetched 'id'
-      $query = "SELECT * FROM `quotes` WHERE id = {$id}";
-      $statement = $connection->prepare($query);
-      if ($statement->execute() && $statement->rowCount() == 1) {
-          $quoteRow = $statement->fetch();
-          echo "
-              <blockquote>
-                <p>{$quoteRow['quote']}</p>
-              </blockquote>
-              <cite>– {$quoteRow['author']}</cite>
-            ";
+function getTodaysQuote() {
+  global $connection;
+  $id = getTodaysQuoteId();
 
-      } else {
-          echo "queryError";
-      }
+  // get quote information related to fetched 'id'
+  $query = "SELECT * FROM `quotes` WHERE id = {$id}";
+  $statement = $connection->prepare($query);
+  if ($statement->execute() && $statement->rowCount() == 1) {
+      $quoteRow = $statement->fetch();
+      echo "
+          <blockquote>
+            <p>{$quoteRow['quote']}</p>
+          </blockquote>
+          <cite>– {$quoteRow['author']}</cite>
+        ";
+
   } else {
       echo "queryError";
   }
-
 }

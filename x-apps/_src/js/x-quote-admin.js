@@ -100,8 +100,9 @@ function add() {
 var rowEl, quoteEl, authorEl, quoteElValue, authorElValue;
 function listBtnFunction(e) {
   
+  rowEl = e.target.closest('tr');
+  var id = rowEl.dataset.id;
   var action = e.target.dataset.action;
-  var id = e.target.closest('tr').dataset.id;
   
   if (action == "set") {
     console.log('setting today\'s quote...', id);
@@ -113,6 +114,9 @@ function listBtnFunction(e) {
           showStatusModal('Query Error!', 'alert alert-danger');
         } else {
           getTodaysQuote();
+          var oldRowEl = document.querySelector('#list tr.table-active');
+          oldRowEl.classList.remove('table-active');
+          rowEl.classList.add('table-active');
           showStatusModal('Today\'s quote udpated!', 'alert alert-success');
         }
       } else {
@@ -156,7 +160,6 @@ function listBtnFunction(e) {
   } else if(action == "edit") {
     console.log('editing...', id);
 
-    rowEl = e.target.closest('tr');
     quoteEl = rowEl.querySelector('[data-column="quote"]');
     authorEl = rowEl.querySelector('[data-column="author"]');
     quoteElValue = quoteEl.innerHTML;
@@ -183,10 +186,11 @@ function listBtnFunction(e) {
     // update changes to database if there is a change
     if (quoteInputValue == "" || authorInputValue == "") {
       showStatusModal('one ore more fields are empty!', 'alert alert-danger');
-    } else if (quoteInputValue == quoteElValue || authorInputValue == authorElValue) {
+    } else if (quoteInputValue == quoteElValue && authorInputValue == authorElValue) {
       quoteEl.innerHTML = quoteInputValue;
       authorEl.innerHTML = authorInputValue;
       rowEl.classList.remove('editing');
+      showStatusModal('Nothing changed!', 'alert alert-warning');
     } else {
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
