@@ -5,11 +5,13 @@
 var list = document.getElementById('list');
 var addBtn = document.getElementById('addBtn');
 
+var orderListBy = document.querySelectorAll('[data-order-by]');
+
 var statusModalBtn = document.getElementById('statusModalBtn');
 var statusModalAlert = document.getElementById('statusModalAlert');
 
-var orderBy = 'id';
-var ascOrDesc = 'DESC';
+var orderBy = 'quote';
+var ascOrDesc = 'ASC';
 
 
 /*****************************************/
@@ -20,6 +22,9 @@ addBtn.addEventListener('click', add, false);
 
 list.addEventListener('click', listBtnFunction, false);
 
+for (var i = 0; i < orderListBy.length; i++) {
+  orderListBy[i].addEventListener('click', orderList, false);
+}
 
 /*****************************************/
 //            functions
@@ -236,3 +241,32 @@ function listBtnFunction(e) {
   }
 }
 
+function orderList(e) {
+  var prevOrderBy = orderBy;
+  // remove active class from all columns
+  for (var i = 0; i < orderListBy.length; i++) {
+    orderListBy[i].classList.remove('active-ASC');
+    orderListBy[i].classList.remove('active-DESC');
+  }
+
+  orderBy = e.target.dataset.orderBy;
+
+  // toggle ASC | DESC if column clicked is same as previous click
+  if (prevOrderBy == orderBy) {
+    if (ascOrDesc == 'DESC') {
+      ascOrDesc = 'ASC';
+    } else {
+      ascOrDesc = 'DESC';
+    }
+    // make ASC if column clicked is different from previous click
+  } else {
+    ascOrDesc = 'ASC';
+  }
+
+  // add active class to clicked column
+  e.target.classList.add('active-' + ascOrDesc);
+
+  console.log('ordering by...' + orderBy, ascOrDesc);
+
+  updateList();
+}

@@ -35,9 +35,6 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle username" data-toggle="dropdown">'.$username.'</a>
                   <div class="dropdown-menu">
-                    <a href="profile.php" class="dropdown-item">View Profile</a>
-                    <a href="profile-edit.php" class="dropdown-item">Edit Profile</a>
-                    <div class="dropdown-divider"></div>
                     <a href="/php/x-apps/x-logout.php" class="dropdown-item">Logout</a>
                   </div>
                 </li>

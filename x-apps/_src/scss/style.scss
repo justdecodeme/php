@@ -94,6 +94,26 @@ nav {
         }
       }
     }
+    th.order-by {
+      span {
+        display: none;
+        pointer-events: none;
+      }
+      cursor: pointer;
+      &:hover, &.active-ASC, &.active-DESC {
+        background: rgba(0, 0, 0, 0.03);
+      }
+      &.active-ASC {
+        .down {
+          display: inline;
+        }
+      }
+      &.active-DESC {
+        .up {
+          display: inline;
+        }
+      }
+    }
   }
   .modal {
     .alert {

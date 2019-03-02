@@ -35,14 +35,30 @@ include $rootPath.'includes/x-header.php';
     }
     ?>
 
-    <!-- <div class="col-md-3">
+    <div class="col-md-3">
       <a class="card" href="x-library/x-library.php">
         <img class="card-img-top" src="./_assets/img/library.jpg" alt="Card image cap">
         <div class="card-body" style="padding: 1rem;">
           <h4 class="card-title text-center" style="margin: 0;">xLibrary</h4>
         </div>
       </a>
-    </div> -->
+    </div>
+
+    <?php
+    if (isset($role) && $role == 'admin') {
+        echo '
+        <div class="col-md-3">
+          <a class="card" href="x-library/x-library.php">
+            <img class="card-img-top" src="./_assets/img/library.jpg" alt="Card image cap">
+            <div class="card-body" style="padding: 1rem;">
+              <h4 class="card-title text-center" style="margin: 0;">xLibrary Admin</h4>
+            </div>
+          </a>
+        </div>
+          ';
+    }
+    ?>
+
 
   </div>
 </div>
