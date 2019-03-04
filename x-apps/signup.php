@@ -3,7 +3,7 @@
 
   include 'includes/init.php';
   include 'includes/login-status.php';
-  include 'includes/x-header.php';
+  include 'includes/header.php';
 ?>
 
 <div class="container">
@@ -30,11 +30,11 @@
         </div>
         <button type="submit" class="btn btn-primary" name="submitSignup" id="submitSignup">Submit</button>
 
-        <small style="margin-top: 10px;" class="form-text text-muted">Already have an account? <a class="bg-link" href="x-login.php">Login</a></small>
+        <small style="margin-top: 10px;" class="form-text text-muted">Already have an account? <a class="bg-link" href="login.php">Login</a></small>
       </form>
     </div>
   </div>
 </div>
 
-<?php include 'includes/x-footer.php';?>
-<script src="./_assets/js/x-signup.min.js" charset="utf-8"></script>
+<?php include 'includes/footer.php';?>
+<script src="./_assets/js/signup.min.js" charset="utf-8"></script>

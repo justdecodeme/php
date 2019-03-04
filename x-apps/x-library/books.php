@@ -1,6 +1,6 @@
 <?php
-$bodyClass = "x-categories";
-$title = 'xCategories | Admin';
+$bodyClass = "x-books";
+$title = 'xBooks | Admin';
 $rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/x-apps/';
 
 include $rootPath . 'includes/init.php';
@@ -46,4 +46,4 @@ include $rootPath . 'includes/header.php';
 </div>
 
 <?php include $rootPath . 'includes/footer.php';?>
-<script src="/php/x-apps/_assets/js/categories.min.js"></script>
+<script src="/php/x-apps/_assets/js/books.min.js"></script>

@@ -14,12 +14,12 @@ submitForm.addEventListener('submit', function (e) {
   var confirmPassword = document.getElementById('confirmPassword').value;
 
   // load content from database
-  var xhttp1 = new XMLHttpRequest();
-  xhttp1.onreadystatechange = function () {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       if (this.responseText == 1) {
         // console.log('if');
-        location.href = "x-login.php";
+        location.href = "login.php";
       } else {
         // console.log('else');
         message.innerHTML = this.responseText;
@@ -28,9 +28,9 @@ submitForm.addEventListener('submit', function (e) {
       console.log(this.readyState, this.status);
     }
   };
-  xhttp1.open("POST", "x-signup-handler.php", true); // open(method, url, async)
-  xhttp1.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp1.send("action=submitSignup" +
+  xhttp.open("POST", "signup-handler.php", true); // open(method, url, async)
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("action=submitSignup" +
     "&username=" + username +
     "&email=" + email +
     "&password=" + password +

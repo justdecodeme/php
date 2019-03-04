@@ -16,8 +16,8 @@ submitLoginForm.addEventListener('submit', function (e) {
   var password = document.getElementById('password').value;
 
   // load content from database
-  var xhttp1 = new XMLHttpRequest();
-  xhttp1.onreadystatechange = function () {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       if (this.responseText == 1) {
         location.href = "/php/x-apps/";
@@ -28,9 +28,9 @@ submitLoginForm.addEventListener('submit', function (e) {
       console.log(this.readyState, this.status);
     }
   };
-  xhttp1.open("POST", "x-login-handler.php", true); // open(method, url, async)
-  xhttp1.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp1.send("action=submitLogin" +
+  xhttp.open("POST", "login-handler.php", true); // open(method, url, async)
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("action=submitLogin" +
     "&email=" + email +
     "&password=" + password, true);
 }, false);

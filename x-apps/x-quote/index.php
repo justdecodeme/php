@@ -4,7 +4,7 @@ $rootPath = $_SERVER['DOCUMENT_ROOT'].'/php/x-apps/';
 
 include $rootPath.'includes/init.php';
 include $rootPath.'includes/login-status.php';
-include $rootPath.'includes/x-header.php';
+include $rootPath.'includes/header.php';
 ?>
 
 <!-- quote of the day -->
@@ -19,8 +19,8 @@ include $rootPath.'includes/x-header.php';
   </div>
 </div>  
 
-<?php include $rootPath.'includes/x-footer.php';?>
-<script src="/php/x-apps/_assets/js/x-quote.min.js"></script>
+<?php include $rootPath.'includes/footer.php';?>
+<script src="/php/x-apps/_assets/js/quote.min.js"></script>
 <script>
   setInterval(() => { getTodaysQuote(); }, 15000)
 </script>

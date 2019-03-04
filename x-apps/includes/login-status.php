@@ -13,7 +13,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
   $params = array ('EMAIL'=>$_SESSION['email'], 'PASSWORD'=>$_SESSION['password']);
 
   if($statement->execute($params) && $statement->rowCount() == 1) {
-    // redirect to x-appps.html if already logged in
+    // redirect to x-apps.html if already logged in
     if(isset($isLoginPage) || isset($isSignupPage)) {
       redirect($rootPath.'x-apps/');
     } else {
@@ -33,7 +33,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
     }
   // if login is not validated
   } else {
-    redirect('x-login.php');
+    redirect('/php/x-apps/login.php');
     echo "Something goes wrong, Try after some time!";
   }
   // if session variables are not set and
@@ -41,7 +41,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
   // request is not coming from login or signup page itself
   // redirect to login page
   if(!isset($isLoginPage) && !isset($isSignupPage)) {
-    redirect('x-login.php');
+    redirect('/php/x-apps/login.php');
   }
 }
 ?>

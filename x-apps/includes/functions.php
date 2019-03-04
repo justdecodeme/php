@@ -1,5 +1,6 @@
 <?php
 function redirect($location) {
+  echo $location;
 	return header("Location: {$location}");
 }
 

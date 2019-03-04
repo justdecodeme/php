@@ -13,5 +13,5 @@
     </button>
   </div>';
 
-	header('Location: x-login.php');
+	header('Location: login.php');
 ?>

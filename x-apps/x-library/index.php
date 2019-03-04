@@ -9,7 +9,7 @@ include $rootPath . 'includes/login-status.php';
 if (isset($role) && $role !== 'admin') {
     redirect($rootPath . 'x-library/');
 }
-include $rootPath . 'includes/x-header.php';
+include $rootPath . 'includes/header.php';
 ?>
 
 <div class="container-fluid">
@@ -70,6 +70,6 @@ include $rootPath . 'includes/x-header.php';
   </div>
 </div>
 
-<?php include $rootPath . 'includes/x-footer.php';?>
-<script src="/php/x-apps/_assets/js/x-quote.min.js"></script>
-<script src="/php/x-apps/_assets/js/x-quote-admin.min.js"></script>
+<?php include $rootPath . 'includes/footer.php';?>
+<script src="/php/x-apps/_assets/js/quote.min.js"></script>
+<script src="/php/x-apps/_assets/js/quote-admin.min.js"></script>

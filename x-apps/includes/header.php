@@ -35,7 +35,7 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle username" data-toggle="dropdown">'.$username.'</a>
                   <div class="dropdown-menu">
-                    <a href="/php/x-apps/x-logout.php" class="dropdown-item">Logout</a>
+                    <a href="/php/x-apps/logout.php" class="dropdown-item">Logout</a>
                   </div>
                 </li>
               </ul>
@@ -44,10 +44,10 @@
               echo '
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                    <a class="nav-link" href="/php/x-apps/x-login.php">Login</a>
+                    <a class="nav-link" href="/php/x-apps/login.php">Login</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/php/x-apps/x-signup.php">Signup</a>
+                    <a class="nav-link" href="/php/x-apps/signup.php">Signup</a>
                   </li>
                 </ul>
               ';
