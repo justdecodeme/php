@@ -42,8 +42,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add') {
     if ($quoteInputValue == "" || $authorInputValue == "") {
         echo "emptyFields";
     } else {
-        // Show error if `quote` already exist
-        // otherwise add new `quote`
+        // Show error if already exist, otherwise add new
         $query = "SELECT * FROM quotes WHERE quote=:QUOTE";
         $statement = $connection->prepare($query);
         $statement->bindParam(':QUOTE', $quoteInputValue);

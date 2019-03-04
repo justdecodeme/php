@@ -20,8 +20,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add') {
     if ($categoryInputValue == "") {
         echo "emptyFields";
     } else {
-        // Show error if `category` already exist
-        // otherwise add new `category`
+        // Show error if already exist, otherwise add new
         $query = "SELECT * FROM `categories` WHERE category_name=:CATEGORY_NAME";
         $statement = $connection->prepare($query);
         $statement->bindParam(':CATEGORY_NAME', $categoryInputValue);

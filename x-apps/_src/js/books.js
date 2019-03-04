@@ -10,9 +10,12 @@ var orderListBy = document.querySelectorAll('[data-order-by]');
 var statusModalBtn = document.getElementById('statusModalBtn');
 var statusModalAlert = document.getElementById('statusModalAlert');
 
+var titleInput = document.getElementById('titleInput');
+var authorInput = document.getElementById('authorInput');
+var stockInput = document.getElementById('stockInput');
 var categoryInput = document.getElementById('categoryInput');
 
-var orderBy = 'category_name';
+var orderBy = 'book_title';
 var ascOrDesc = 'ASC';
 
 
@@ -34,9 +37,27 @@ for (var i = 0; i < orderListBy.length; i++) {
 
 // run on page laod
 function init() {
+  fetchCategoriesForBooks();
   updateList();
 };
 init();
+
+// fetch the categories list
+function fetchCategoriesForBooks() {
+  console.log('fetching categories for books list...');
+  
+  // load content from database
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      categoryInput.innerHTML = this.responseText;
+    } else {
+      // console.log(this.readyState, this.status);
+    }
+  };
+  xhttp.open("GET", "books-handler.php?action=fetchCategoriesForBooks", true); // open(method, url, async)
+  xhttp.send();
+}
 
 
 // update list
@@ -55,7 +76,7 @@ function updateList() {
       // console.log(this.readyState, this.status);
     }
   };
-  xhttp.open("GET", "categories-handler.php?action=updateList" +
+  xhttp.open("GET", "books-handler.php?action=updateList" +
     "&orderBy=" + orderBy +
     "&ascOrDesc=" + ascOrDesc, true);
   xhttp.send();
@@ -65,6 +86,9 @@ function updateList() {
 function add() {
   console.log('adding...');
 
+  var titleInputValue = titleInput.value;
+  var authorInputValue = authorInput.value;
+  var stockInputValue = stockInput.value;
   var categoryInputValue = categoryInput.value;
 
   xhttp = new XMLHttpRequest();
@@ -80,16 +104,19 @@ function add() {
         // update list
         list.innerHTML = this.responseText;
         // clearning fileds after successful addtion
-        categoryInput.value = '';
+        titleInput.value = authorInput.value = stockInput.value = '';
         showStatusModal('Successfully Added!', 'alert alert-success');
       }
     } else {
       // console.log(this.readyState, this.status);
     }
   };
-  xhttp.open("POST", "categories-handler.php", true); // open(method, url, async)
+  xhttp.open("POST", "books-handler.php", true); // open(method, url, async)
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("action=add" +
+    "&titleInputValue=" + titleInputValue +
+    "&authorInputValue=" + authorInputValue +
+    "&stockInputValue=" + stockInputValue +
     "&categoryInputValue=" + categoryInputValue +
     "&orderBy=" + orderBy +
     "&ascOrDesc=" + ascOrDesc);
@@ -125,7 +152,7 @@ function listBtnFunction(e) {
     var deleteConfirmation = confirm("Want to delete?");
     if (deleteConfirmation) {
       //Logic to delete the item
-      xhttp.open("POST", "categories-handler.php", true); // open(method, url, async)
+      xhttp.open("POST", "books-handler.php", true); // open(method, url, async)
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.send("action=delete" +
         "&id=" + id +
@@ -193,7 +220,7 @@ function listBtnFunction(e) {
           }
         }
       };
-      xhttp.open("POST", "categories-handler.php", true); // open(method, url, async)
+      xhttp.open("POST", "books-handler.php", true); // open(method, url, async)
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.send("action=submit" +
         "&orderBy=" + orderBy +

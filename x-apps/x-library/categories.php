@@ -17,6 +17,7 @@ include $rootPath . 'includes/header.php';
   <div class="row">
 
     <div class="col-md-12">
+      <h1>Categories</h1>
 
       <!-- listing -->
       <table class="table table-hover common-table">

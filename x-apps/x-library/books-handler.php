@@ -5,6 +5,12 @@ include '../includes/connect.php';
 //       requests
 /******************************/
 
+// return categories list for books
+if (isset($_GET['action']) && $_GET['action'] == 'fetchCategoriesForBooks') {
+    fetchCategoriesForBooks();
+}
+
+
 // update list
 if (isset($_GET['action']) && $_GET['action'] == 'updateList') {
     updateList($_GET['orderBy'], $_GET['ascOrDesc']);
@@ -12,30 +18,32 @@ if (isset($_GET['action']) && $_GET['action'] == 'updateList') {
 
 // add
 if (isset($_POST['action']) && $_POST['action'] == 'add') {
+    $titleInputValue = $_POST['titleInputValue'];
+    $authorInputValue = $_POST['authorInputValue'];
+    $stockInputValue = $_POST['stockInputValue'];
     $categoryInputValue = $_POST['categoryInputValue'];
     $orderBy = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];
 
     // first check if fields are empty
-    if ($categoryInputValue == "") {
+    if ($titleInputValue == "" || $authorInputValue == "" || $stockInputValue == "" ) {
         echo "emptyFields";
     } else {
-        // Show error if `category` already exist
-        // otherwise add new `category`
-        $query = "SELECT * FROM `categories` WHERE category_name=:CATEGORY_NAME";
+        // Show error if already exist, otherwise add new
+        $query = "SELECT `id` FROM `books` WHERE book_title=:BOOK_TITLE";
         $statement = $connection->prepare($query);
-        $statement->bindParam(':CATEGORY_NAME', $categoryInputValue);
+        $statement->bindParam(':BOOK_TITLE', $titleInputValue);
 
         if ($statement->execute() && $statement->rowCount() == 1) {
             echo "alreadyExist";
         } else {
-            $query = "INSERT INTO `categories`
-                ( `category_name`)
+            $query = "INSERT INTO `books`
+                ( `book_title`, `book_author`, `book_stock`, `category_id`)
                 VALUES
-                (:CATEGORY_NAME)";
+                (:BOOK_TITLE, :BOOK_AUTHOR, :BOOK_STOCK, :CATEGORY_ID)";
 
             $statement = $connection->prepare($query);
-            $params = array('CATEGORY_NAME' => $categoryInputValue);
+            $params = array('BOOK_TITLE' => $titleInputValue, 'BOOK_AUTHOR' => $authorInputValue, 'BOOK_STOCK' => $stockInputValue, 'CATEGORY_ID' => $categoryInputValue);
 
             // Update list if query is successful
             if ($statement->execute($params)) {
@@ -54,7 +62,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     $orderBy = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];
 
-    $query = "DELETE FROM `categories` WHERE id=:ID LIMIT 1";
+    $query = "DELETE FROM `books` WHERE id=:ID LIMIT 1";
     $statement = $connection->prepare($query);
     $statement->bindParam(":ID", $id);
     if ($statement->execute()) {
@@ -98,11 +106,29 @@ if (isset($_POST['action']) && $_POST['action'] == 'submit') {
 //       functions
 /******************************/
 
+function fetchCategoriesForBooks()
+{
+    global $connection;
+    $query = "SELECT * FROM `categories` ORDER BY `category_name`";
+    $statement = $connection->prepare($query);
+    if ($statement->execute()) {
+        $row = $statement->fetchAll(PDO::FETCH_OBJ);
+        $list = '';
+        foreach ($row as $category) {
+          $list .= "<option value='$category->id'>$category->category_name</option>";
+        }
+        echo $list;
+    } else {
+        echo "queryError";
+    }
+}
+
+
 function updateList($orderBy, $ascOrDesc)
 {
     global $connection;
 
-    $query = "SELECT * FROM `categories` ORDER BY $orderBy $ascOrDesc";
+    $query = "SELECT * FROM `books` ORDER BY $orderBy $ascOrDesc";
 
     $statement = $connection->prepare($query);
 
@@ -112,11 +138,14 @@ function updateList($orderBy, $ascOrDesc)
 
         $row = $statement->fetchAll(PDO::FETCH_OBJ);
 
-        foreach ($row as $category) {
+        foreach ($row as $book) {
             $list .= "
-            <tr data-id='{$category->id}'>
+            <tr data-id='{$book->id}'>
             <th scope='row'>{$i}</th>
-            <td data-column='category'>{$category->category_name}</td>
+            <td data-column='book'>{$book->book_title}</td>
+            <td data-column='book'>{$book->book_author}</td>
+            <td data-column='book'>{$book->book_stock}</td>
+            <td data-column='book'>{$book->category_id}</td>
             <td>
               <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
               <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
