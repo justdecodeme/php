@@ -1,6 +1,6 @@
 <?php
 $bodyClass = "x-quote-admin";
-$title = 'xApps | Admin';
+$title = 'xQuote | Admin';
 $rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/x-apps/';
 
 
@@ -31,7 +31,7 @@ include $rootPath.'includes/x-header.php';
       </div>    
     
       <!-- quote listing -->
-      <table class="table table-hover">
+      <table class="table table-hover common-table">
         <thead>
           <tr>
             <th scope="col" colspan="2">
@@ -71,15 +71,6 @@ include $rootPath.'includes/x-header.php';
 
   </div>
 
-</div>
-
-<button id="statusModalBtn" type="button" class="btn btn-primary d-none" data-toggle="modal" data-target=".status-modal">querySuccessBtn</button>
-<div class="modal fade status-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-        <div id="statusModalAlert" class="alert alert-success" role="alert">...</div>
-    </div>
-  </div>
 </div>
 
 <?php include $rootPath.'includes/x-footer.php';?>

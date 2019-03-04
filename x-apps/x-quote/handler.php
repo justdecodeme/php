@@ -59,7 +59,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add') {
             $statement = $connection->prepare($query);
             $params = array('QUOTE' => $quoteInputValue, 'AUTHOR' => $authorInputValue);
 
-            // Update quotes list if query is successful
+            // Update list if query is successful
             if ($statement->execute($params)) {
                 updateList($orderBy, $ascOrDesc);
             } else {

@@ -1,94 +1,134 @@
 <?php
-include 'includes/connect.php';
+include '../includes/connect.php';
 
-function returnCategories()
-{
-    global $connection;
-    $query = "SELECT * FROM categories ORDER BY category_code";
-    $statement = $connection->prepare($query);
-    if ($statement->execute()) {
-        $row = $statement->fetchAll(PDO::FETCH_OBJ);
-        $categories_list = '';
-        $i = 0;
-        foreach ($row as $category) {
-            $i++;
-            if ($category->category_code !== 'default') {
-                $categories_list .= "
-          <tr>
-            <td>$i</td>
-            <td class='category-code'>$category->category_code</td>
-            <td class='category-name'>$category->category_name</td>
-            <td>
-              <button type='button' class='btn btn-primary reading' data-id='$category->id' id='editBtn'><i class='fas fa-edit'></i></button>
-              <button type='button' class='btn btn-danger reading' data-id='$category->id' id='deleteBtn'><i class='fas fa-trash-alt'></i></button>
-              <button type='button' class='btn btn-success editing' data-id='$category->id' id='updateBtn'><i class='fas fa-check'></i></button>
-              <button type='button' class='btn btn-primary editing' data-id='$category->id' id='cancelBtn'><i class='fas fa-times'></i></button>
-            </td>
-          </tr>
-        ";
+/******************************/
+//       requests
+/******************************/
+
+// update list
+if (isset($_GET['action']) && $_GET['action'] == 'updateList') {
+    updateList($_GET['orderBy'], $_GET['ascOrDesc']);
+}
+
+// add
+if (isset($_POST['action']) && $_POST['action'] == 'add') {
+    $categoryInputValue = $_POST['categoryInputValue'];
+    $orderBy = $_POST['orderBy'];
+    $ascOrDesc = $_POST['ascOrDesc'];
+
+    // first check if fields are empty
+    if ($categoryInputValue == "") {
+        echo "emptyFields";
+    } else {
+        // Show error if `category` already exist
+        // otherwise add new `category`
+        $query = "SELECT * FROM `categories` WHERE category_name=:CATEGORY_NAME";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(':CATEGORY_NAME', $categoryInputValue);
+
+        if ($statement->execute() && $statement->rowCount() == 1) {
+            echo "alreadyExist";
+        } else {
+            $query = "INSERT INTO `categories`
+                ( `category_name`)
+                VALUES
+                (:CATEGORY_NAME)";
+
+            $statement = $connection->prepare($query);
+            $params = array('CATEGORY_NAME' => $categoryInputValue);
+
+            // Update list if query is successful
+            if ($statement->execute($params)) {
+                updateList($orderBy, $ascOrDesc);
             } else {
-                $categories_list .= "
-          <tr>
-            <td>$i</td>
-            <td class='category-code'>$category->category_code</td>
-            <td class='category-name'>$category->category_name</td>
-            <td></td>
-          </tr>
-        ";
-
+                echo "queryError";
             }
         }
-        echo $categories_list;
-    } else {
-        echo "Something went wrong!";
     }
+
 }
 
-// return categories list
-if (isset($_GET['action']) && $_GET['action'] == 'fetchCategories') {
-    returnCategories();
-}
-
-// add item on click of add button
-if (isset($_POST['action']) && $_POST['action'] == 'add') {
-    $addCode = $_POST['addCode'];
-    $addName = $_POST['addName'];
-
-    $query = "INSERT INTO categories (category_code, category_name) VALUES ('" . $addCode . "','" . $addName . "')";
-    $statement = $connection->prepare($query);
-
-    if ($statement->execute()) {
-        returnCategories();
-    } else {
-        echo "Something went wrong!";
-    }
-}
-
-// delete item on click of delete button
+// delete
 if (isset($_POST['action']) && $_POST['action'] == 'delete') {
-    $deleteId = $_POST['deleteId'];
+    $id = $_POST['id'];
+    $orderBy = $_POST['orderBy'];
+    $ascOrDesc = $_POST['ascOrDesc'];
 
-    $query = "DELETE FROM categories WHERE id=$deleteId LIMIT 1";
+    $query = "DELETE FROM `categories` WHERE id=:ID LIMIT 1";
     $statement = $connection->prepare($query);
+    $statement->bindParam(":ID", $id);
     if ($statement->execute()) {
-        returnCategories();
+        updateList($orderBy, $ascOrDesc);
     } else {
-        echo "Something went wrong!";
+        echo "queryError";
     }
 }
 
-// update on click of update button after editing
-if (isset($_POST['action']) && $_POST['action'] == 'update') {
-    $newCode = $_POST['newCode'];
-    $newName = $_POST['newName'];
-    $updateId = $_POST['updateId'];
+// submit
+if (isset($_POST['action']) && $_POST['action'] == 'submit') {
+    $id = $_POST['id'];
+    $orderBy = $_POST['orderBy'];
+    $ascOrDesc = $_POST['ascOrDesc'];
+    $categoryInputValue = $_POST['categoryInputValue'];
 
-    $query = "UPDATE categories SET category_code = '$newCode', category_name = '$newName' WHERE id = $updateId LIMIT 1";
+    $query = "UPDATE `categories`
+      SET
+        `category_name` = :CATEGORY_NAME
+      WHERE
+        `id` = :ID
+      LIMIT 1";
+
+    $statement = $connection->prepare($query);
+    $params = array(
+        'ID' => $id,
+        'CATEGORY_NAME' => $categoryInputValue,
+    );
+    // $statement->rowCount() == 1    if any changes are there
+    // $statement->rowCount() == 0    if no changes are there
+    if ($statement->execute($params)) {
+        if ($statement->rowCount() == 1) {
+            updateList($orderBy, $ascOrDesc);
+        }
+    } else {
+        echo "queryError";
+    }
+}
+
+/******************************/
+//       functions
+/******************************/
+
+function updateList($orderBy, $ascOrDesc)
+{
+    global $connection;
+
+    $query = "SELECT * FROM `categories` ORDER BY $orderBy $ascOrDesc";
+
     $statement = $connection->prepare($query);
 
     if ($statement->execute()) {
-        returnCategories();
+        $list = '';
+        $i = 1;
+
+        $row = $statement->fetchAll(PDO::FETCH_OBJ);
+
+        foreach ($row as $category) {
+            $list .= "
+            <tr data-id='{$category->id}'>
+            <th scope='row'>{$i}</th>
+            <td data-column='category'>{$category->category_name}</td>
+            <td>
+              <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
+              <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
+              <button data-action='cancel' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-times'></i></button>
+              <button data-action='submit' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-check'></i></button>
+            </td>
+          </tr>
+          ";
+            $i++;
+        }
+        echo $list;
     } else {
-        echo "Something went wrong!";
+        echo "queryError";
     }
 }

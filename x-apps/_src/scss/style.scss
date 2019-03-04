@@ -10,6 +10,66 @@ nav {
   margin-bottom: 15px;
 }
 
+.common-table {
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  tr {
+    button {
+      svg {
+        pointer-events: none;
+      }
+    }
+
+    .secondary {
+      display: none;
+    }
+
+    &.editing {
+      .primary {
+        display: none;
+      }
+
+      .secondary {
+        display: inline;
+      }
+    }
+  }
+
+  th.order-by {
+    span {
+      display: none;
+      pointer-events: none;
+    }
+
+    cursor: pointer;
+
+    &:hover,
+    &.active-ASC,
+    &.active-DESC {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    &.active-ASC {
+      .down {
+        display: inline;
+      }
+    }
+
+    &.active-DESC {
+      .up {
+        display: inline;
+      }
+    }
+  }
+}
+.common-alert-modal {
+  .alert {
+    margin-bottom: 0;
+  }
+}
+
 /*********************************/
 //          xApps
 /*********************************/
@@ -22,9 +82,11 @@ nav {
 /*********************************/
 .x-quote {
   overflow: hidden;
+
   .main-navigation {
     margin: 0;
   }
+
   .todays-quote {
     background: orange;
     padding: 50px;
@@ -34,12 +96,15 @@ nav {
     justify-content: center;
     align-items: center;
     flex-flow: column;
+
     h1 {
       margin-top: -30px;
       font-size: 40px;
     }
+
     .content {
       max-width: 50%;
+
       blockquote {
         margin: 50px 0 0;
         font-size: 26px;
@@ -49,75 +114,34 @@ nav {
 }
 
 .x-quote-admin {
+  .main-navigation {
+    margin: 0;
+  }
   .todays-quote {
     background: orange;
     text-align: center;
     padding: 20px;
-    border-radius: 30px;
+    border-radius: 0;
     color: white;
-    margin-bottom: 20px;
+    margin: 0 -15px;
+
     h1 {
       font-size: 20px;
     }
+
     blockquote {
       margin: 20px 0 0;
       font-size: 18px;
     }
   }
+
   .admin-panel {
     button {
       cursor: pointer;
     }
+
     .list-group-item.active {
       font-size: 30px;
-    }
-  }
-  table {
-    .form-group {
-      margin-bottom: 0;
-    }
-    tr {
-      button {
-        svg {
-          pointer-events: none;
-        }
-      }
-      .secondary {
-        display: none;
-      }
-      &.editing {
-        .primary {
-          display: none;
-        }
-        .secondary {
-          display: inline;
-        }
-      }
-    }
-    th.order-by {
-      span {
-        display: none;
-        pointer-events: none;
-      }
-      cursor: pointer;
-      &:hover, &.active-ASC, &.active-DESC {
-        background: rgba(0, 0, 0, 0.03);
-      }
-      &.active-ASC {
-        .down {
-          display: inline;
-        }
-      }
-      &.active-DESC {
-        .up {
-          display: inline;
-        }
-      }
-    }
-  }
-  .modal {
-    .alert {
-      margin-bottom: 0;
     }
   }
 }

@@ -1,10 +1,10 @@
 <?php
 $bodyClass = "x-categories";
-$title = 'xApps | Admin';
+$title = 'xCategories | Admin';
 $rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/x-apps/';
 
 include $rootPath . 'includes/init.php';
-include $rootPath . 'includes/login-status.php';
+// include $rootPath . 'includes/login-status.php';
 
 if (isset($role) && $role !== 'admin') {
     redirect($rootPath . 'x-library/');
@@ -12,33 +12,38 @@ if (isset($role) && $role !== 'admin') {
 include $rootPath . 'includes/x-header.php';
 ?>
 
-<div class="container-fluid categories-page">
-  <h2>Categories</h2>
-  <hr>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <td class="serial-no">S.No.</td>
-        <td>Code</td>
-        <td>Name</td>
-        <td>Action</td>
-      </tr>
-      <tr>
-        <td>#</td>
-        <td>
-          <input type="text" class="form-control" name="code" id="addCode">
-        </td>
-        <td>
-          <input type="text" class="form-control" name="name" id="addName">
-        </td>
-        <td>
-          <button type="button" class="btn btn-success" id="addBtn">Add Category</button>
-        </td>
-      </tr>
-    </thead>
-    <tbody id="categoriesListContainer"></tbody>
-  </table>
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-md-12">
+
+      <!-- listing -->
+      <table class="table table-hover common-table">
+        <thead>
+          <tr>
+            <th scope="col" colspan="2">
+              <div class="form-group">
+                <input id="categoryInput" type="text" class="form-control" placeholder="Category">
+              </div>
+            </th>
+            <th scope="col" style="width: 170px;">
+              <button type="button" class="btn btn-success" id="addBtn">Add</button>
+            </th>
+          </tr>
+          <tr>
+            <th scope="col" width="100">#</th>
+            <th scope="col" data-order-by="category_name" class="order-by active-ASC">Category <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+
+  </div>
+
 </div>
 
-<?php include 'includes/footer.php';?>
-<script src="./_assets/js/categories.min.js" charset="utf-8"></script>
+<?php include $rootPath . 'includes/x-footer.php';?>
+<script src="/php/x-apps/_assets/js/x-categories.min.js"></script>

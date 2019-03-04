@@ -10,6 +10,9 @@ var orderListBy = document.querySelectorAll('[data-order-by]');
 var statusModalBtn = document.getElementById('statusModalBtn');
 var statusModalAlert = document.getElementById('statusModalAlert');
 
+var quoteInput = document.getElementById('quoteInput');
+var authorInput = document.getElementById('authorInput');
+
 var orderBy = 'quote';
 var ascOrDesc = 'ASC';
 
@@ -35,13 +38,6 @@ function init() {
   updateList();
 };
 init();
-
-// one modal for different status (add, delete, error, update, edit)
-function showStatusModal(text, type) {
-  statusModalAlert.innerHTML = text;
-  statusModalAlert.setAttribute('class', type);
-  statusModalBtn.click();
-}
 
 // update list
 function updateList() {
@@ -169,6 +165,14 @@ function listBtnFunction(e) {
   } else if(action == "edit") {
     console.log('editing...', id);
 
+    // remove editing class from already editing row if any
+    var oldRowEl = document.querySelector('#list tr.editing');
+    if (oldRowEl) {
+      quoteEl.innerHTML = quoteElValue;
+      authorEl.innerHTML = authorElValue;
+      oldRowEl.classList.remove('editing');
+    }
+
     quoteEl = rowEl.querySelector('[data-column="quote"]');
     authorEl = rowEl.querySelector('[data-column="author"]');
     quoteElValue = quoteEl.innerHTML;
@@ -239,34 +243,4 @@ function listBtnFunction(e) {
         "&id=" + id);
     }
   }
-}
-
-function orderList(e) {
-  var prevOrderBy = orderBy;
-  // remove active class from all columns
-  for (var i = 0; i < orderListBy.length; i++) {
-    orderListBy[i].classList.remove('active-ASC');
-    orderListBy[i].classList.remove('active-DESC');
-  }
-
-  orderBy = e.target.dataset.orderBy;
-
-  // toggle ASC | DESC if column clicked is same as previous click
-  if (prevOrderBy == orderBy) {
-    if (ascOrDesc == 'DESC') {
-      ascOrDesc = 'ASC';
-    } else {
-      ascOrDesc = 'DESC';
-    }
-    // make ASC if column clicked is different from previous click
-  } else {
-    ascOrDesc = 'ASC';
-  }
-
-  // add active class to clicked column
-  e.target.classList.add('active-' + ascOrDesc);
-
-  console.log('ordering by...' + orderBy, ascOrDesc);
-
-  updateList();
 }
