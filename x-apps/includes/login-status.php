@@ -5,9 +5,9 @@ $email = '';
 // if session variables are set
 if(isset($_SESSION['email']) && isset($_SESSION['password'])){
   $query = "SELECT *
-    FROM users
-    WHERE email=:EMAIL
-    AND password=:PASSWORD
+    FROM `users`
+    WHERE `user_email`=:EMAIL
+    AND `user_password`=:PASSWORD
   ";
   $statement = $connection->prepare($query);
   $params = array ('EMAIL'=>$_SESSION['email'], 'PASSWORD'=>$_SESSION['password']);
@@ -19,16 +19,16 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
     } else {
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
       foreach($row as $user) {
-        $image = $user->image;
-        $f_name = $user->f_name;
-        $l_name = $user->l_name;
-        $username = $user->username;
-        $email = $user->email;
-        $role = $user->role;
-        $doj = $user->doj;
-        $batch_code = $user->batch_code;
-        $student_code = $user->student_code;
-        $instructor_code = $user->instructor_code;
+        $image = $user->user_image;
+        $f_name = $user->user_f_name;
+        $l_name = $user->user_l_name;
+        $username = $user->user_name;
+        $email = $user->user_email;
+        $role = $user->user_role_id;
+        $doj = $user->user_doj;
+        $batch_code = $user->user_batch_code;
+        $student_code = $user->user_student_code;
+        $instructor_code = $user->user_instructor_code;
       }
     }
   // if login is not validated

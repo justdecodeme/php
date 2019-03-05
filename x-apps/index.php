@@ -21,7 +21,7 @@ include $rootPath.'includes/header.php';
     </div>
 
     <?php 
-    if(isset($role) && $role == 'admin') {
+    if(isset($role) && $role == '1') {
       echo '
       <div class="col-md-3">
         <a class="card" href="x-quote/admin.php">
@@ -45,7 +45,7 @@ include $rootPath.'includes/header.php';
     </div>
 
     <?php
-    if (isset($role) && $role == 'admin') {
+    if (isset($role) && $role == '1') {
         echo '
         <div class="col-md-3">
           <a class="card" href="x-library/admin.php">
@@ -76,13 +76,21 @@ include $rootPath.'includes/header.php';
     ?>
 
     <?php
-    if (isset($role) && $role == 'admin') {
+    if (isset($role) && $role == '1') {
         echo '
         <div class="col-md-3">
           <a class="card" href="x-user/admin.php">
             <img class="card-img-top" src="./_assets/img/users.jpg" alt="Card image cap">
             <div class="card-body" style="padding: 1rem;">
               <h4 class="card-title text-center" style="margin: 0;">Users Admin</h4>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a class="card" href="x-user/roles.php">
+            <img class="card-img-top" src="./_assets/img/users.jpg" alt="Card image cap">
+            <div class="card-body" style="padding: 1rem;">
+              <h4 class="card-title text-center" style="margin: 0;">Roles Admin</h4>
             </div>
           </a>
         </div>

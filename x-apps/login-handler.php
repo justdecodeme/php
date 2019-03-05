@@ -22,8 +22,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitLogin') {
     } else {
 
         $query = "SELECT * FROM users
-        WHERE email=:EMAIL
-        AND `password`=:PASSWORD
+        WHERE user_email=:EMAIL
+        AND `user_password`=:PASSWORD
       ";
         $statement = $connection->prepare($query);
         $params = array('EMAIL' => $email, 'PASSWORD' => $password);
@@ -33,9 +33,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitLogin') {
             
             // set session for user details
             foreach($row as $user) {
-              $_SESSION['email'] = $user->email;
-              $_SESSION['password'] = $user->password;
-              $_SESSION['role'] = $user->role;
+              $_SESSION['email'] = $user->user_email;
+              $_SESSION['password'] = $user->user_password;
+              $_SESSION['role'] = $user->user_role_id;
             }
 
             // 1 for success
