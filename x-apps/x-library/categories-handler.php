@@ -53,6 +53,26 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     $orderBy = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];
 
+    if($id == 1) {
+      echo "cantDelete";
+      return;
+    }
+
+    // to check if category to be deleted is already used or not
+    $query = "SELECT COUNT(*) FROM categories c INNER JOIN books b ON c.id = b.category_id WHERE c.id = :ID GROUP BY c.id";
+    $statement = $connection->prepare($query);
+    $statement->bindParam(":ID", $id);
+
+    if($statement->execute()) {
+      $number_of_rows = $statement->fetchColumn();
+      if($number_of_rows > 0) {
+        echo "isUsedAtOtherPlace";
+        return false;
+      }
+    } else {
+      echo "queryError";
+    }
+
     $query = "DELETE FROM `categories` WHERE id=:ID LIMIT 1";
     $statement = $connection->prepare($query);
     $statement->bindParam(":ID", $id);
@@ -101,7 +121,7 @@ function updateList($orderBy, $ascOrDesc)
 {
     global $connection;
 
-    $query = "SELECT * FROM `categories` ORDER BY $orderBy $ascOrDesc";
+    $query = "SELECT * FROM `categories` ORDER BY LOWER($orderBy) $ascOrDesc";
 
     $statement = $connection->prepare($query);
 
@@ -112,13 +132,14 @@ function updateList($orderBy, $ascOrDesc)
         $row = $statement->fetchAll(PDO::FETCH_OBJ);
 
         foreach ($row as $category) {
+            $isDisabled =  $category->id == 1 ? "d-none" : "";
             $list .= "
             <tr data-id='{$category->id}'>
             <th scope='row'>{$i}</th>
             <td data-column='category'>{$category->category_name}</td>
             <td>
               <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
-              <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
+              <button data-action='delete' type='button' class='btn btn-danger primary {$isDisabled}'><i class='fas fa-trash-alt'></i></button>
               <button data-action='cancel' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-times'></i></button>
               <button data-action='submit' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-check'></i></button>
             </td>

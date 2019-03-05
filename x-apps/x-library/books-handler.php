@@ -124,7 +124,8 @@ function fetchCategoriesForBooks()
         $row = $statement->fetchAll(PDO::FETCH_OBJ);
         $list = '';
         foreach ($row as $category) {
-          $list .= "<option value='$category->id'>$category->category_name</option>";
+          $isSelected = $category->id == 1 ? "selected" : "";
+          $list .= "<option value='{$category->id}' {$isSelected}>{$category->category_name}</option>";
         }
         echo $list;
     } else {
@@ -139,9 +140,9 @@ function updateList($orderBy, $ascOrDesc)
 
     $query = "SELECT b.id, b.book_title, b.book_author, b.book_stock, c.category_name, c.id as category_id
       FROM books b 
-      INNER JOIN categories c 
+      LEFT JOIN categories c 
       ON b.category_id = c.id 
-      ORDER BY $orderBy $ascOrDesc";
+      ORDER BY LOWER($orderBy) $ascOrDesc";
     // $query = "SELECT * FROM `books` ORDER BY $orderBy $ascOrDesc";
 
     $statement = $connection->prepare($query);

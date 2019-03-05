@@ -55,10 +55,40 @@ include $rootPath.'includes/header.php';
             </div>
           </a>
         </div>
+        <div class="col-md-3">
+          <a class="card" href="x-library/categories.php">
+            <img class="card-img-top" src="./_assets/img/library.jpg" alt="Card image cap">
+            <div class="card-body" style="padding: 1rem;">
+              <h4 class="card-title text-center" style="margin: 0;">Categories Admin</h4>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a class="card" href="x-library/books.php">
+            <img class="card-img-top" src="./_assets/img/library.jpg" alt="Card image cap">
+            <div class="card-body" style="padding: 1rem;">
+              <h4 class="card-title text-center" style="margin: 0;">Books Admin</h4>
+            </div>
+          </a>
+        </div>
           ';
     }
     ?>
 
+    <?php
+    if (isset($role) && $role == 'admin') {
+        echo '
+        <div class="col-md-3">
+          <a class="card" href="x-user/admin.php">
+            <img class="card-img-top" src="./_assets/img/users.jpg" alt="Card image cap">
+            <div class="card-body" style="padding: 1rem;">
+              <h4 class="card-title text-center" style="margin: 0;">Users Admin</h4>
+            </div>
+          </a>
+        </div>
+          ';
+    }
+    ?>
 
   </div>
 </div>

@@ -133,7 +133,7 @@ function updateList($orderBy, $ascOrDesc) {
 
   global $connection;
 
-  $query = "SELECT * FROM quotes ORDER BY $orderBy $ascOrDesc";
+  $query = "SELECT * FROM quotes ORDER BY LOWER($orderBy) $ascOrDesc";
 
   $statement = $connection->prepare($query);
 

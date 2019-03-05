@@ -4,7 +4,7 @@ $title = 'xBooks | Admin';
 $rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/x-apps/';
 
 include $rootPath . 'includes/init.php';
-// include $rootPath . 'includes/login-status.php';
+include $rootPath . 'includes/login-status.php';
 
 if (isset($role) && $role !== 'admin') {
     redirect($rootPath . 'x-library/');
@@ -54,7 +54,7 @@ include $rootPath . 'includes/header.php';
             <th scope="col" data-order-by="book_title" class="order-by active-ASC">Title <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="book_author" class="order-by">Author <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="book_stock" class="order-by">Stock <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="category_id" class="order-by">Category <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="category_name" class="order-by">Category <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col">Action</th>
           </tr>
         </thead>

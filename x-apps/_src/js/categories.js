@@ -112,6 +112,10 @@ function listBtnFunction(e) {
       if (this.readyState == 4 && this.status == 200) {
         if (this.responseText == "queryError") {
           showStatusModal('Query Error!', 'alert alert-danger');
+        } else if (this.responseText == "cantDelete") {
+          showStatusModal('Can\'t Delete default Category!', 'alert alert-danger');
+        } else if (this.responseText == "isUsedAtOtherPlace") {
+          showStatusModal('Can\'t Delete, Category is in Used!', 'alert alert-danger');
         } else {
           // update list
           list.innerHTML = this.responseText;
