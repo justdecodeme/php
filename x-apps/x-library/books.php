@@ -20,9 +20,8 @@ include $rootPath . 'includes/header.php';
       <h1>Books</h1>
 
       <!-- listing -->
-      <table class="table table-hover common-table">
-        <thead>
-          <tr>
+      <table class="table common-table">
+        <tr>
             <th scope="col" colspan="2">
               <div class="form-group">
                 <input id="titleInput" type="text" class="form-control" placeholder="Title">
@@ -46,7 +45,10 @@ include $rootPath . 'includes/header.php';
             <th scope="col">
               <button type="button" class="btn btn-success" id="addBtn">Add</button>
             </th>
-          </tr>
+        </tr>
+      </table>
+      <table class="table table-hover common-table">
+        <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col" data-order-by="book_title" class="order-by active-ASC">Title <span class="down">↓</span><span class="up">↑</span></th>
