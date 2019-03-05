@@ -77,11 +77,17 @@ if (isset($_POST['action']) && $_POST['action'] == 'submit') {
     $id = $_POST['id'];
     $orderBy = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];
+    $titleInputValue = $_POST['titleInputValue'];
+    $authorInputValue = $_POST['authorInputValue'];
+    $stockInputValue = $_POST['stockInputValue'];
     $categoryInputValue = $_POST['categoryInputValue'];
 
-    $query = "UPDATE `categories`
+    $query = "UPDATE `books`
       SET
-        `category_name` = :CATEGORY_NAME
+        `book_title` = :BOOK_TITLE,
+        `book_author` = :BOOK_AUTHOR,
+        `book_stock` = :BOOK_STOCK,
+        `category_id` = :CATEGORY_ID
       WHERE
         `id` = :ID
       LIMIT 1";
@@ -89,7 +95,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'submit') {
     $statement = $connection->prepare($query);
     $params = array(
         'ID' => $id,
-        'CATEGORY_NAME' => $categoryInputValue,
+        'BOOK_TITLE' => $titleInputValue,
+        'BOOK_AUTHOR' => $authorInputValue,
+        'BOOK_STOCK' => $stockInputValue,
+        'CATEGORY_ID' => $categoryInputValue,
     );
     // $statement->rowCount() == 1    if any changes are there
     // $statement->rowCount() == 0    if no changes are there
@@ -128,7 +137,7 @@ function updateList($orderBy, $ascOrDesc)
 {
     global $connection;
 
-    $query = "SELECT * 
+    $query = "SELECT b.id, b.book_title, b.book_author, b.book_stock, c.category_name, c.id as category_id
       FROM books b 
       INNER JOIN categories c 
       ON b.category_id = c.id 
@@ -147,10 +156,10 @@ function updateList($orderBy, $ascOrDesc)
             $list .= "
             <tr data-id='{$book->id}'>
             <th scope='row'>{$i}</th>
-            <td data-column='book'>{$book->book_title}</td>
-            <td data-column='book'>{$book->book_author}</td>
-            <td data-column='book'>{$book->book_stock}</td>
-            <td data-column='book'>{$book->category_name}</td>
+            <td data-column='title'>{$book->book_title}</td>
+            <td data-column='author'>{$book->book_author}</td>
+            <td data-column='stock'>{$book->book_stock}</td>
+            <td data-column='category' data-id='{$book->category_id}'>{$book->category_name}</td>
             <td>
               <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
               <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>

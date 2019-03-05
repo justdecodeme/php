@@ -123,7 +123,7 @@ function add() {
 }
 
 // list buttons → edit, delete, set, update, cancel 
-var rowEl, categoryEl, categoryElValue;
+var rowEl, titleEl, titleElValue, authorEl, authorElValue, stockEl, stockElValue, categoryEl, categoryElValue, categoryId;
 
 function listBtnFunction(e) {
 
@@ -167,31 +167,64 @@ function listBtnFunction(e) {
     // remove editing class from already editing row if any
     var oldRowEl = document.querySelector('#list tr.editing');
     if (oldRowEl) {
+      titleEl.innerHTML = titleElValue;
+      authorEl.innerHTML = authorElValue;
+      stockEl.innerHTML = stockElValue;
       categoryEl.innerHTML = categoryElValue;
       oldRowEl.classList.remove('editing');
     }
 
+    titleEl = rowEl.querySelector('[data-column="title"]');
+    authorEl = rowEl.querySelector('[data-column="author"]');
+    stockEl = rowEl.querySelector('[data-column="stock"]');
     categoryEl = rowEl.querySelector('[data-column="category"]');
+    categoryId = categoryEl.dataset.id;
+
+    titleElValue = titleEl.innerHTML;
+    authorElValue = authorEl.innerHTML;
+    stockElValue = stockEl.innerHTML;
     categoryElValue = categoryEl.innerHTML;
 
     rowEl.classList.add('editing');
 
-    categoryEl.innerHTML = '<input type="text" class="form-control"  value="' + categoryElValue + '">';
-    categoryEl.querySelector('input').focus();
+    titleEl.innerHTML = '<input type="text" class="form-control"  value="' + titleElValue + '">';
+    authorEl.innerHTML = '<input type="text" class="form-control"  value="' + authorElValue + '">';
+    stockEl.innerHTML = '<input type="number" class="form-control"  value="' + stockElValue + '">';
+    // categoryEl.innerHTML = '<input type="text" class="form-control"  value="' + categoryElValue + '">';
+    titleEl.querySelector('input').focus();
 
-    var categoryInputEl = categoryEl.querySelector('input');
+    // copy and insert category list
+    categoryEl.innerHTML = '';
+    var clone = categoryInput.cloneNode(true);
+    categoryEl.appendChild(clone);
+    // update category as as original
+    categoryEl.querySelector('select').value = categoryId;
+
+
+    var titleInputEl = titleEl.querySelector('input');
+    var authorInputEl = authorEl.querySelector('input');
+    var stockInputEl = stockEl.querySelector('input');
 
     // attach keyboard events on `enter` button for `submit`
     // and `esc` btn for `cancel`
     var cancelBtn = rowEl.querySelector('[data-action="cancel"');
     var submitBtn = rowEl.querySelector('[data-action="submit"');
-    categoryInputEl.addEventListener('keyup', function (e) {
+    titleInputEl.addEventListener('keyup', function (e) {
+      keyUpFunc(e, cancelBtn, submitBtn);
+    })
+    authorInputEl.addEventListener('keyup', function (e) {
+      keyUpFunc(e, cancelBtn, submitBtn);
+    })
+    stockInputEl.addEventListener('keyup', function (e) {
       keyUpFunc(e, cancelBtn, submitBtn);
     })
 
   } else if (action == "cancel") {
     console.log('canceling...', id);
 
+    titleEl.innerHTML = titleElValue;
+    authorEl.innerHTML = authorElValue;
+    stockEl.innerHTML = stockElValue;
     categoryEl.innerHTML = categoryElValue;
 
     rowEl.classList.remove('editing');
@@ -199,13 +232,19 @@ function listBtnFunction(e) {
   } else if (action == "submit") {
     console.log('submiting...', id);
 
-    var categoryInputValue = categoryEl.querySelector('input').value;
+    var titleInputValue = titleEl.querySelector('input').value;
+    var authorInputValue = authorEl.querySelector('input').value;
+    var stockInputValue = stockEl.querySelector('input').value;
+    var categoryInputValue = categoryEl.querySelector('select').value;
 
     // update changes to database if there is a change
-    if (categoryInputValue == "") {
+    if (titleInputValue == "" || authorInputValue == "" || stockInputValue == "") {
       showStatusModal('one ore more fields are empty!', 'alert alert-danger');
-    } else if (categoryInputValue == categoryElValue) {
-      categoryEl.innerHTML = categoryInputValue;
+    } else if (titleInputValue == titleElValue && authorInputValue == authorElValue && stockInputValue == stockElValue && categoryInputValue == categoryId) {
+      titleEl.innerHTML = titleInputValue;
+      authorEl.innerHTML = authorInputValue;
+      stockEl.innerHTML = stockInputValue;
+      categoryEl.innerHTML = categoryElValue;
       rowEl.classList.remove('editing');
       showStatusModal('Nothing changed!', 'alert alert-warning');
     } else {
@@ -225,6 +264,9 @@ function listBtnFunction(e) {
       xhttp.send("action=submit" +
         "&orderBy=" + orderBy +
         "&ascOrDesc=" + ascOrDesc +
+        "&titleInputValue=" + titleInputValue +
+        "&authorInputValue=" + authorInputValue +
+        "&stockInputValue=" + stockInputValue +
         "&categoryInputValue=" + categoryInputValue +
         "&id=" + id);
     }
