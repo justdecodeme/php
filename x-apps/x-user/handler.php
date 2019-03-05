@@ -12,7 +12,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'fetchRolesForUsers') {
 
 // update list
 if (isset($_GET['action']) && $_GET['action'] == 'updateList') {
-    updateList($_GET['orderBy'], $_GET['ascOrDesc']);
+    updateList($_GET['roleValue'], $_GET['genderValue'], $_GET['searchValue'], $_GET['orderBy'], $_GET['ascOrDesc']);
 }
 
 // delete
@@ -84,14 +84,23 @@ function fetchRolesForUsers()
     }
 }
 
-function updateList($orderBy, $ascOrDesc)
+function updateList($roleValue, $genderValue, $searchValue, $orderBy, $ascOrDesc)
 {
     global $connection;
+
+    // if it is all selected in dropdown then please make it blank to match everything in LIKE
+    if ($roleValue == 'all') {$roleValue = '';}
+    if ($genderValue == 'all') {$genderValue = '';}
+    
 
     $query = "SELECT u.id, u.user_name, u.user_email, u.user_role_id, u.user_gender, r.role_name as user_role_name, r.role_code as user_role_code
       FROM users u
       LEFT JOIN roles r
       ON u.user_role_id = r.id
+      WHERE 
+        (u.user_name LIKE '%$searchValue%' OR  u.user_email LIKE '%$searchValue%') AND
+        r.role_code LIKE '%$roleValue%' AND
+        u.user_gender LIKE '$genderValue%'
       ORDER BY LOWER($orderBy) $ascOrDesc";
 
     // $query = "SELECT * FROM `users` ORDER BY LOWER($orderBy) $ascOrDesc";

@@ -24,19 +24,19 @@ include $rootPath . 'includes/header.php';
           <thead>
           <tr>
               <td scope="col" width="100">
-                <label for="selectedTotal">Total</label>
-                <input type="text" name="search" id="selectedTotal" class="form-control" disabled style="text-align: center;" placeholder="0">
+                <label for="totalInput">Total</label>
+                <input type="text" name="search" id="totalInput" class="form-control" disabled style="text-align: center;" placeholder="0">
               </td>
               <td scope="col">
                 <form class="form-block">
-                  <label for="roleInput">Select Role</label>
-                  <select class="custom-select my-1" id="roleInput"></select>
+                  <label for="roleSelect">Select Role</label>
+                  <select class="custom-select my-1" id="roleSelect"></select>
                 </form>
               </td>
               <td scope="col">
                 <form class="form-block">
-                  <label for="selectedGender">Select Gender</label>
-                  <select class="custom-select my-1" id="selectedGender">
+                  <label for="genderSelect">Select Gender</label>
+                  <select class="custom-select my-1" id="genderSelect">
                     <option value="all" selected>All</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -51,8 +51,8 @@ include $rootPath . 'includes/header.php';
               </td> -->
               <td scope="col" colspan="3">
                 <form class="form-block">
-                  <label for="selectedSearch">Search User (Username or Email)</label>
-                  <input type="text" name="search" id="selectedSearch" placeholder="abc@example.com" class="form-control">
+                  <label for="searchSelect">Search User (Username or Email)</label>
+                  <input type="text" name="search" id="searchSelect" placeholder="abc@example.com" class="form-control">
                 </form>
               </td>
           </tr>

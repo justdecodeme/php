@@ -30,7 +30,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'setTodaysQuote') {
   }
 }
 
-
 // add
 if (isset($_POST['action']) && $_POST['action'] == 'add') {
     $quoteInputValue = $_POST['quoteInputValue'];

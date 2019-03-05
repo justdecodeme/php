@@ -9,7 +9,9 @@ var orderListBy = document.querySelectorAll('[data-order-by]');
 var statusModalBtn = document.getElementById('statusModalBtn');
 var statusModalAlert = document.getElementById('statusModalAlert');
 
-var roleInput = document.getElementById('roleInput');
+var roleSelect = document.getElementById('roleSelect');
+var genderSelect = document.getElementById('genderSelect');
+var searchSelect = document.getElementById('searchSelect');
 
 var orderBy = 'user_name';
 var ascOrDesc = 'ASC';
@@ -18,6 +20,10 @@ var ascOrDesc = 'ASC';
 /*****************************************/
 //            events
 /*****************************************/
+
+roleSelect.addEventListener('change', updateList, false);
+genderSelect.addEventListener('change', updateList, false);
+searchSelect.addEventListener('keyup', updateList, false);
 
 list.addEventListener('click', listBtnFunction, false);
 
@@ -44,7 +50,7 @@ function fetchRolesForUsers() {
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      roleInput.innerHTML = this.responseText;
+      roleSelect.innerHTML = this.responseText;
     } else {
       // console.log(this.readyState, this.status);
     }
@@ -58,19 +64,25 @@ function fetchRolesForUsers() {
 function updateList() {
   console.log('list updating...');
 
-  // editingUserFlag = false;
+  // check what value is selected in dropdown
+  roleValue = roleSelect.value;
+  genderValue = genderSelect.value;
+  searchValue = searchSelect.value;
 
   // load content from database
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       list.innerHTML = this.responseText;
-      $('[data-toggle="tooltip"]').tooltip();
+      totalInput.value = list.getElementsByTagName('tr').length;
     } else {
       // console.log(this.readyState, this.status);
     }
   };
   xhttp.open("GET", "handler.php?action=updateList" +
+    "&roleValue=" + roleValue +
+    "&genderValue=" + genderValue +
+    "&searchValue=" + searchValue +
     "&orderBy=" + orderBy +
     "&ascOrDesc=" + ascOrDesc, true);
   xhttp.send();
@@ -134,7 +146,7 @@ function listBtnFunction(e) {
 
     // copy and insert category list
     roleEl.innerHTML = '';
-    var clone = roleInput.cloneNode(true);
+    var clone = roleSelect.cloneNode(true);
     roleEl.appendChild(clone);
     roleEl.querySelector('select option:first-child').remove();
     // update category as as original
