@@ -29,14 +29,8 @@ include $rootPath . 'includes/header.php';
               </td>
               <td scope="col">
                 <form class="form-block">
-                  <label for="selectedRole">Select Role</label>
-                  <select class="custom-select my-1" id="selectedRole">
-                    <option value="all" selected>All</option>
-                    <option value="admin">Admin</option>
-                    <option value="instructor">Instructor</option>
-                    <option value="student">Students</option>
-                    <option value="subscriber">Subscriber</option>
-                  </select>
+                  <label for="roleInput">Select Role</label>
+                  <select class="custom-select my-1" id="roleInput"></select>
                 </form>
               </td>
               <td scope="col">
@@ -49,13 +43,13 @@ include $rootPath . 'includes/header.php';
                   </select>
                 </form>
               </td>
-              <td scope="col">
+              <!-- <td scope="col">
                 <form class="form-block">
                   <label for="selectedDOJ">Joined before</label>
                   <input type="date" class="form-control" id="selectedDOJ" value="2018-05-01">
                 </form>
-              </td>
-              <td scope="col" colspan="2">
+              </td> -->
+              <td scope="col" colspan="3">
                 <form class="form-block">
                   <label for="selectedSearch">Search User (Username or Email)</label>
                   <input type="text" name="search" id="selectedSearch" placeholder="abc@example.com" class="form-control">
@@ -66,7 +60,7 @@ include $rootPath . 'includes/header.php';
             <th scope="col">#</th>
             <th scope="col" data-order-by="user_name" class="order-by active-ASC">Username <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="user_email" class="order-by">Email <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="user_role" class="order-by">Role <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="user_role_name" class="order-by">Role <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="user_gender" class="order-by">Gender <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col">Action</th>
           </tr>

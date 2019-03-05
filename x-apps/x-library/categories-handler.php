@@ -59,7 +59,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     }
 
     // to check if category to be deleted is already used or not
-    $query = "SELECT COUNT(*) FROM categories c INNER JOIN books b ON c.id = b.category_id WHERE c.id = :ID GROUP BY c.id";
+    $query = "SELECT COUNT(*) FROM categories c INNER JOIN books b ON c.id = b.book_category_id WHERE c.id = :ID GROUP BY c.id";
     $statement = $connection->prepare($query);
     $statement->bindParam(":ID", $id);
 

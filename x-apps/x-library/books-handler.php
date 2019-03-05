@@ -38,12 +38,12 @@ if (isset($_POST['action']) && $_POST['action'] == 'add') {
             echo "alreadyExist";
         } else {
             $query = "INSERT INTO `books`
-                ( `book_title`, `book_author`, `book_stock`, `category_id`)
+                ( `book_title`, `book_author`, `book_stock`, `book_category_id`)
                 VALUES
-                (:BOOK_TITLE, :BOOK_AUTHOR, :BOOK_STOCK, :CATEGORY_ID)";
+                (:BOOK_TITLE, :BOOK_AUTHOR, :BOOK_STOCK, :BOOK_CATEGORY_ID)";
 
             $statement = $connection->prepare($query);
-            $params = array('BOOK_TITLE' => $titleInputValue, 'BOOK_AUTHOR' => $authorInputValue, 'BOOK_STOCK' => $stockInputValue, 'CATEGORY_ID' => $categoryInputValue);
+            $params = array('BOOK_TITLE' => $titleInputValue, 'BOOK_AUTHOR' => $authorInputValue, 'BOOK_STOCK' => $stockInputValue, 'BOOK_CATEGORY_ID' => $categoryInputValue);
 
             // Update list if query is successful
             if ($statement->execute($params)) {
@@ -87,7 +87,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'submit') {
         `book_title` = :BOOK_TITLE,
         `book_author` = :BOOK_AUTHOR,
         `book_stock` = :BOOK_STOCK,
-        `category_id` = :CATEGORY_ID
+        `book_category_id` = :BOOK_CATEGORY_ID
       WHERE
         `id` = :ID
       LIMIT 1";
@@ -98,7 +98,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'submit') {
         'BOOK_TITLE' => $titleInputValue,
         'BOOK_AUTHOR' => $authorInputValue,
         'BOOK_STOCK' => $stockInputValue,
-        'CATEGORY_ID' => $categoryInputValue,
+        'BOOK_CATEGORY_ID' => $categoryInputValue,
     );
     // $statement->rowCount() == 1    if any changes are there
     // $statement->rowCount() == 0    if no changes are there
@@ -138,11 +138,12 @@ function updateList($orderBy, $ascOrDesc)
 {
     global $connection;
 
-    $query = "SELECT b.id, b.book_title, b.book_author, b.book_stock, c.category_name, c.id as category_id
+    $query = "SELECT b.id, b.book_title, b.book_author, b.book_stock, b.book_cagtegory_id, c.category_name as book_category_name
       FROM books b 
       LEFT JOIN categories c 
-      ON b.category_id = c.id 
+      ON b.book_category_id = c.id 
       ORDER BY LOWER($orderBy) $ascOrDesc";
+      
     // $query = "SELECT * FROM `books` ORDER BY $orderBy $ascOrDesc";
 
     $statement = $connection->prepare($query);
@@ -160,7 +161,7 @@ function updateList($orderBy, $ascOrDesc)
             <td data-column='title'>{$book->book_title}</td>
             <td data-column='author'>{$book->book_author}</td>
             <td data-column='stock'>{$book->book_stock}</td>
-            <td data-column='category' data-id='{$book->category_id}'>{$book->category_name}</td>
+            <td data-column='category' data-id='{$book->book_category_id}'>{$book->book_category_name}</td>
             <td>
               <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
               <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
