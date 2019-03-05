@@ -128,7 +128,12 @@ function updateList($orderBy, $ascOrDesc)
 {
     global $connection;
 
-    $query = "SELECT * FROM `books` ORDER BY $orderBy $ascOrDesc";
+    $query = "SELECT * 
+      FROM books b 
+      INNER JOIN categories c 
+      ON b.category_id = c.id 
+      ORDER BY $orderBy $ascOrDesc";
+    // $query = "SELECT * FROM `books` ORDER BY $orderBy $ascOrDesc";
 
     $statement = $connection->prepare($query);
 
@@ -145,7 +150,7 @@ function updateList($orderBy, $ascOrDesc)
             <td data-column='book'>{$book->book_title}</td>
             <td data-column='book'>{$book->book_author}</td>
             <td data-column='book'>{$book->book_stock}</td>
-            <td data-column='book'>{$book->category_id}</td>
+            <td data-column='book'>{$book->category_name}</td>
             <td>
               <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
               <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
