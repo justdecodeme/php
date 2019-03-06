@@ -270,6 +270,8 @@ function updateList($orderBy, $ascOrDesc)
             $issue_date = date('j-M-Y', strtotime($library->lid));
             $due_date = date('j-M-Y', strtotime($library->ldd));
             $return_date = date('j-M-Y', strtotime($library->lrd));
+            $isReturned = is_null($library->lrd) ? '...' : $return_date;
+            $isConfirmed = is_null($library->confirmed_by) ? '...' : $library->confirmed_by;
             $list .= "
             <tr data-id='{$library->id}'>
             <th scope='row'>{$i}</th>
@@ -279,8 +281,8 @@ function updateList($orderBy, $ascOrDesc)
             <td data-column='lid'>{$issue_date}</td>
             <td data-column='ldd'>{$due_date}</td>
             <td data-column='approve'>{$library->approved_by}</td>
-            <td data-column='lrd'>{$return_date}</td>
-            <td data-column='confirm'>{$library->confirmed_by}</td>
+            <td data-column='lrd'>{$isReturned}</td>
+            <td data-column='confirm'>{$isConfirmed}</td>
             <td>
               <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
               <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
