@@ -245,10 +245,10 @@ function updateList($orderBy, $ascOrDesc)
 
 
     $query = "SELECT 
-      l.id, l.library_issue_date as lid, l.library_due_date as ldd, l.library_return_date as lrd, 
-      u1.user_f_name as borrowed_by, u1.user_l_name as u1ulm, 
-      u2.user_f_name as approved_by,  u2.user_l_name as u2ulm, 
-      u3.user_f_name as confirmed_by, u3.user_l_name as u3ulm, 
+      l.id, l.library_issue_date AS lid, l.library_due_date AS ldd, l.library_return_date AS lrd, 
+      CONCAT(u1.user_f_name, ' ', u1.user_l_name) AS borrowed_by,
+      CONCAT(u2.user_f_name, ' ', u2.user_l_name) AS approved_by,
+      CONCAT(u3.user_f_name, ' ', u3.user_l_name) AS confirmed_by,
       b.book_title, c.category_name
       FROM library l
       INNER JOIN users u1 ON l.library_user_id=u1.id
@@ -267,17 +267,20 @@ function updateList($orderBy, $ascOrDesc)
         $row = $statement->fetchAll(PDO::FETCH_OBJ);
 
         foreach ($row as $library) {
+            $issue_date = date('j-M-Y', strtotime($library->lid));
+            $due_date = date('j-M-Y', strtotime($library->ldd));
+            $return_date = date('j-M-Y', strtotime($library->lrd));
             $list .= "
             <tr data-id='{$library->id}'>
             <th scope='row'>{$i}</th>
-            <td data-column='borrow'>{$library->borrowed_by} {$library->u1ulm}</td>
+            <td data-column='borrow'>{$library->borrowed_by}</td>
             <td data-column='title'>{$library->book_title}</td>
             <td data-column='category'>{$library->category_name}</td>
-            <td data-column='lid'>{$library->lid}</td>
-            <td data-column='ldd'>{$library->ldd}</td>
-            <td data-column='approve'>{$library->approved_by} {$library->u2ulm}</td>
-            <td data-column='lrd'>{$library->lrd}</td>
-            <td data-column='confirm'>{$library->confirmed_by} {$library->u3ulm}</td>
+            <td data-column='lid'>{$issue_date}</td>
+            <td data-column='ldd'>{$due_date}</td>
+            <td data-column='approve'>{$library->approved_by}</td>
+            <td data-column='lrd'>{$return_date}</td>
+            <td data-column='confirm'>{$library->confirmed_by}</td>
             <td>
               <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
               <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
