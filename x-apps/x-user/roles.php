@@ -39,7 +39,7 @@ include $rootPath . 'includes/header.php';
           </tr>
           <tr>
             <th scope="col" width="100">#</th>
-            <th scope="col" data-order-by="role_name" class="order-by active-ASC">Role <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="role_name" class="order-by">Role <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="role_code" class="order-by">Code <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col">Action</th>
           </tr>

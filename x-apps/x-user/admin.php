@@ -58,7 +58,7 @@ include $rootPath . 'includes/header.php';
           </tr>
           <tr>
             <th scope="col">#</th>
-            <th scope="col" data-order-by="user_name" class="order-by active-ASC">Username <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="user_name" class="order-by">Username <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="user_email" class="order-by">Email <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="user_role_name" class="order-by">Role <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="user_gender" class="order-by">Gender <span class="down">↓</span><span class="up">↑</span></th>

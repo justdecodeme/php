@@ -80,7 +80,7 @@ include $rootPath . 'includes/header.php';
           </tr>
           <tr>
             <th scope="col" width="50">#</th>
-            <th scope="col" data-order-by="borrowed_by" class="order-by active-ASC">Borrower <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="borrowed_by" class="order-by">Borrower <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="book_title" class="order-by">Book <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="category_name" class="order-by">Book Category <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="lid" class="order-by">Issue Date <span class="down">↓</span><span class="up">↑</span></th>

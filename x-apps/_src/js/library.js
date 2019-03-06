@@ -19,7 +19,7 @@ var dueDateInput = document.getElementById('dueDateInput');
 // var returnedDateInput = document.getElementById('returnedDateInput');
 // var ConfirmedBySelect = document.getElementById('ConfirmedBySelect');
 
-var orderBy = 'book_title';
+var orderBy = 'lid';
 var ascOrDesc = 'ASC';
 const numberOfDaysToAdd = 7;
 
@@ -42,11 +42,16 @@ for (var i = 0; i < orderListBy.length; i++) {
 
 // run on page laod
 function init() {
+  // add `active-ASC` class to predefined element
+  document.querySelector('[data-order-by="' + orderBy + '"]').classList.add('active-ASC');
+
+  // fetch all the data required for assigning new books
   fetchBorrowersList();
   fetchAdminsList();
   fetchBookCategoriesList();
   fetchBookssList();
   fetchDates();
+
   updateList();
 };
 init();

@@ -34,7 +34,7 @@ include $rootPath . 'includes/header.php';
           </tr>
           <tr>
             <th scope="col" width="100">#</th>
-            <th scope="col" data-order-by="category_name" class="order-by active-ASC">Category <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="category_name" class="order-by">Category <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col">Action</th>
           </tr>
         </thead>

@@ -37,6 +37,9 @@ for (var i = 0; i < orderListBy.length; i++) {
 
 // run on page laod
 function init() {
+  // add `active-ASC` class to predefined element
+  document.querySelector('[data-order-by="' + orderBy + '"]').classList.add('active-ASC');
+  
   fetchRolesForUsers();
   updateList();
 };

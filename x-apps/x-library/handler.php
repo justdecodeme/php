@@ -251,11 +251,11 @@ function updateList($orderBy, $ascOrDesc)
       CONCAT(u3.user_f_name, ' ', u3.user_l_name) AS confirmed_by,
       b.book_title, c.category_name
       FROM library l
-      INNER JOIN users u1 ON l.library_user_id=u1.id
-      INNER JOIN users u2 ON l.library_approved_by_user_id=u2.id
-      INNER JOIN users u3 ON l.library_confirmed_by_user_id=u3.id
-      INNER JOIN books b ON l.library_book_id = b.id
-      INNER JOIN categories c ON b.book_category_id = c.id
+      LEFT JOIN users u1 ON l.library_user_id=u1.id
+      LEFT JOIN users u2 ON l.library_approved_by_user_id=u2.id
+      LEFT JOIN users u3 ON l.library_confirmed_by_user_id=u3.id
+      LEFT JOIN books b ON l.library_book_id = b.id
+      LEFT JOIN categories c ON b.book_category_id = c.id
       ORDER BY LOWER($orderBy) $ascOrDesc";
 
     $statement = $connection->prepare($query);

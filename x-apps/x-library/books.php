@@ -49,7 +49,7 @@ include $rootPath . 'includes/header.php';
           </tr>
           <tr>
             <th scope="col">#</th>
-            <th scope="col" data-order-by="book_title" class="order-by active-ASC">Title <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="book_title" class="order-by">Title <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="book_author" class="order-by">Author <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="book_stock" class="order-by">Stock <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="category_name" class="order-by">Category <span class="down">↓</span><span class="up">↑</span></th>

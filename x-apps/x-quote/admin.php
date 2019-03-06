@@ -50,7 +50,7 @@ include $rootPath.'includes/header.php';
           </tr>
           <tr>
             <th scope="col">#</th>
-            <th scope="col" data-order-by="quote" class="order-by active-ASC">Quote <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="quote" class="order-by">Quote <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="author" class="order-by">Author <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col">Action</th>
           </tr>
