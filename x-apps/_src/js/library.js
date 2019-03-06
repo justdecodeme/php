@@ -222,7 +222,7 @@ function listBtnFunction(e) {
     var deleteConfirmation = confirm("Want to delete?");
     if (deleteConfirmation) {
       //Logic to delete the item
-      xhttp.open("POST", "books-handler.php", true); // open(method, url, async)
+      xhttp.open("POST", "handler.php", true); // open(method, url, async)
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.send("action=delete" +
         "&id=" + id +

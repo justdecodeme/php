@@ -72,7 +72,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     $orderBy = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];
 
-    $query = "DELETE FROM `books` WHERE id=:ID LIMIT 1";
+    $query = "DELETE FROM `library` WHERE id=:ID LIMIT 1";
     $statement = $connection->prepare($query);
     $statement->bindParam(":ID", $id);
     if ($statement->execute()) {
