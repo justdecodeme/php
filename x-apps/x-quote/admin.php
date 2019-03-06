@@ -7,7 +7,7 @@ $rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/x-apps/';
 include $rootPath.'includes/init.php';
 include $rootPath.'includes/login-status.php';
 
-if(isset($role) && $role !== 'admin') {
+if(isset($role) && $role !== '1') {
   redirect($rootPath.'x-quote/');
 }
 include $rootPath.'includes/header.php';

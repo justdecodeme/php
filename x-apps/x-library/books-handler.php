@@ -138,7 +138,7 @@ function updateList($orderBy, $ascOrDesc)
 {
     global $connection;
 
-    $query = "SELECT b.id, b.book_title, b.book_author, b.book_stock, b.book_cagtegory_id, c.category_name as book_category_name
+    $query = "SELECT b.id, b.book_title, b.book_author, b.book_stock, b.book_category_id, c.category_name as book_category_name
       FROM books b 
       LEFT JOIN categories c 
       ON b.book_category_id = c.id 

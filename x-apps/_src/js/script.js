@@ -1,4 +1,5 @@
 var xhttp = null;
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 function keyUpFunc(e, cancelBtn, submitBtn) {
     if (e.keyCode === 13) {
@@ -46,4 +47,25 @@ function orderList(e) {
   console.log('ordering by...' + orderBy, ascOrDesc);
 
   updateList();
+}
+
+function getTodaysDate() {
+  var date = new Date();
+  var y = date.getFullYear();
+  var m = date.getMonth()+1;
+  var d = date.getDate();
+  m = m < 10 ? '0' + m : m;
+  d = d < 10 ? '0' + d : d;
+  return y + '-' + m + '-' + d;
+}
+function getDateAfterDays(numberOfDaysToAdd) {
+  var date = new Date();
+  date.setDate(date.getDate() + numberOfDaysToAdd);
+
+  var y = date.getFullYear();
+  var m = date.getMonth() + 1;
+  var d = date.getDate() ;
+  m = m < 10 ? '0' + m : m;
+  d = d < 10 ? '0' + d : d;
+  return y + '-' + m + '-' + d;
 }
