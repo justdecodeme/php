@@ -113,7 +113,7 @@ function fetchBooksList(e) {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       if(this.responseText == "NA") {
-        bookSelect.innerHTML = "<option>None</option>";
+        bookSelect.innerHTML = "<option value=''>None</option>";
         bookSelect.setAttribute('disabled', 'true');
       } else {
         bookSelect.innerHTML = this.responseText;
@@ -132,7 +132,6 @@ function fetchDates() {
   issueDateInput.value = getTodaysDate();
   dueDateInput.value = getDateAfterDays(numberOfDaysToAdd);
 }
-
 
 // update list
 function updateList() {
@@ -158,7 +157,6 @@ function add() {
   console.log('adding...');
 
   var borrowerSelectValue = borrowerSelect.value;
-  var bookCategorySelectValue = bookCategorySelect.value;
   var bookSelectValue = bookSelect.value;
   var issueDateInputValue = issueDateInput.value;
   var dueDateInputValue = dueDateInput.value;
@@ -186,7 +184,6 @@ function add() {
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("action=add" +
     "&borrowerSelectValue=" + borrowerSelectValue +
-    "&bookCategorySelectValue=" + bookCategorySelectValue +
     "&bookSelectValue=" + bookSelectValue +
     "&issueDateInputValue=" + issueDateInputValue +
     "&dueDateInputValue=" + dueDateInputValue +

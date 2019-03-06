@@ -26,32 +26,34 @@ if (isset($_GET['action']) && $_GET['action'] == 'updateList') {
 
 // add
 if (isset($_POST['action']) && $_POST['action'] == 'add') {
-    $titleInputValue = $_POST['titleInputValue'];
-    $authorInputValue = $_POST['authorInputValue'];
-    $stockInputValue = $_POST['stockInputValue'];
-    $categoryInputValue = $_POST['categoryInputValue'];
+    $borrowerSelectValue = $_POST['borrowerSelectValue'];
+    $bookSelectValue = $_POST['bookSelectValue'];
+    $issueDateInputValue = $_POST['issueDateInputValue'];
+    $dueDateInputValue = $_POST['dueDateInputValue'];
+    $approvedBySelectValue = $_POST['approvedBySelectValue'];
     $orderBy = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];
 
     // first check if fields are empty
-    if ($titleInputValue == "" || $authorInputValue == "" || $stockInputValue == "") {
+    if ($bookSelectValue == "" || $issueDateInputValue == "" || $dueDateInputValue == "") {
         echo "emptyFields";
     } else {
         // Show error if already exist, otherwise add new
-        $query = "SELECT `id` FROM `books` WHERE book_title=:BOOK_TITLE";
+        $query = "SELECT `id` FROM `library` WHERE library_user_id=:LIBRARY_USER_ID AND library_book_id=:LIBRARY_BOOK_ID";
         $statement = $connection->prepare($query);
-        $statement->bindParam(':BOOK_TITLE', $titleInputValue);
+        $statement->bindParam(':LIBRARY_USER_ID', $borrowerSelectValue);
+        $statement->bindParam(':LIBRARY_BOOK_ID', $bookSelectValue);
 
         if ($statement->execute() && $statement->rowCount() == 1) {
             echo "alreadyExist";
         } else {
-            $query = "INSERT INTO `books`
-                ( `book_title`, `book_author`, `book_stock`, `book_category_id`)
+            $query = "INSERT INTO `library`
+                ( `library_user_id`, `library_book_id`, `library_issue_date`, `library_due_date`, `library_approved_by_user_id`)
                 VALUES
-                (:BOOK_TITLE, :BOOK_AUTHOR, :BOOK_STOCK, :BOOK_CATEGORY_ID)";
+                (:LIBRARY_USER_ID, :LIBRARY_BOOK_ID, :LIBRARY_ISSUE_DATE, :LIBRARY_DUE_DATE, :LIBRARY_APPROVED_ID)";
 
             $statement = $connection->prepare($query);
-            $params = array('BOOK_TITLE' => $titleInputValue, 'BOOK_AUTHOR' => $authorInputValue, 'BOOK_STOCK' => $stockInputValue, 'BOOK_CATEGORY_ID' => $categoryInputValue);
+            $params = array('LIBRARY_USER_ID' => $borrowerSelectValue, 'LIBRARY_BOOK_ID' => $bookSelectValue, 'LIBRARY_ISSUE_DATE' => $issueDateInputValue, 'LIBRARY_DUE_DATE' => $dueDateInputValue, 'LIBRARY_APPROVED_ID' => $approvedBySelectValue);
 
             // Update list if query is successful
             if ($statement->execute($params)) {
