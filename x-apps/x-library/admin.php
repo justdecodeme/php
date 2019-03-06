@@ -23,7 +23,7 @@ include $rootPath . 'includes/header.php';
         <table class="table table-hover common-table">
           <thead>
           <tr>
-              <td scope="col" colspan="2">
+              <td scope="col" colspan="3">
                 <form class="form-block">
                   <label for="borrowerSelect">Select Borrower</label>
                   <select class="custom-select my-1" id="borrowerSelect"></select>
@@ -35,7 +35,7 @@ include $rootPath . 'includes/header.php';
                   <select class="custom-select my-1" id="bookCategorySelect"></select>
                 </form>
               </td>
-              <td scope="col">
+              <td scope="col" colspan="2">
                 <form class="form-block">
                   <label for="bookSelect">Select book</label>
                   <select class="custom-select my-1" id="bookSelect"></select>
@@ -59,7 +59,7 @@ include $rootPath . 'includes/header.php';
                   <select class="custom-select my-1" id="approvedBySelect"></select>
                 </form>
               </td>
-              <td scope="col">
+              <!-- <td scope="col">
                 <form class="form-block">
                   <label for="returnedDateInput">Return Date</label>
                   <input type="date" class="form-control" id="returnedDateInput" value="2018-03-09">
@@ -70,7 +70,7 @@ include $rootPath . 'includes/header.php';
                   <label for="ConfirmedBySelect">Confirmed By</label>
                   <select class="custom-select my-1" id="ConfirmedBySelect"></select>
                 </form>
-              </td>
+              </td> -->
               <td scope="col">
                 <form class="form-block">
                   <label>.</label><br>
@@ -80,14 +80,14 @@ include $rootPath . 'includes/header.php';
           </tr>
           <tr>
             <th scope="col" width="50">#</th>
-            <th scope="col" data-order-by="user_name" class="order-by active-ASC">Borrower <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="user_role_name" class="order-by">Book <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="user_email" class="order-by">Book Category <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="user_gender" class="order-by">Issue Date <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="user_gender" class="order-by">Due Date <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="user_gender" class="order-by">Approved By <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="user_gender" class="order-by">Returned Date <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="user_gender" class="order-by">Confirmed By <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="borrowed_by" class="order-by active-ASC">Borrower <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="book_title" class="order-by">Book <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="category_name" class="order-by">Book Category <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="lid" class="order-by">Issue Date <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="ldd" class="order-by">Due Date <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="approved_by" class="order-by">Approved By <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="lrd" class="order-by">Returned Date <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="confirmed_by" class="order-by">Confirmed By <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col">Action</th>
           </tr>
         </thead>

@@ -14,10 +14,10 @@ var borrowerSelect = document.getElementById('borrowerSelect');
 var bookCategorySelect = document.getElementById('bookCategorySelect');
 var bookSelect = document.getElementById('bookSelect');
 var approvedBySelect = document.getElementById('approvedBySelect');
-var ConfirmedBySelect = document.getElementById('ConfirmedBySelect');
 var issueDateInput = document.getElementById('issueDateInput');
 var dueDateInput = document.getElementById('dueDateInput');
-var returnedDateInput = document.getElementById('returnedDateInput');
+// var returnedDateInput = document.getElementById('returnedDateInput');
+// var ConfirmedBySelect = document.getElementById('ConfirmedBySelect');
 
 var orderBy = 'book_title';
 var ascOrDesc = 'ASC';
@@ -47,7 +47,7 @@ function init() {
   fetchBookCategoriesList();
   fetchBookssList();
   fetchDates();
-  // updateList();
+  updateList();
 };
 init();
 
@@ -73,7 +73,7 @@ function fetchAdminsList() {
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      approvedBySelect.innerHTML = ConfirmedBySelect.innerHTML = this.responseText;
+      approvedBySelect.innerHTML = this.responseText;
     } else {
       // console.log(this.readyState, this.status);
     }
@@ -114,7 +114,6 @@ function fetchBookssList(e) {
         bookSelect.innerHTML = this.responseText;
         bookSelect.removeAttribute('disabled');
       }
-      console.log(this.responseText)
     } else {
       // console.log(this.readyState, this.status);
     }
@@ -126,7 +125,7 @@ function fetchDates() {
   console.log('fetching dates...');
 
   issueDateInput.value = getTodaysDate();
-  dueDateInput.value = returnedDateInput.value = getDateAfterDays(numberOfDaysToAdd);
+  dueDateInput.value = getDateAfterDays(numberOfDaysToAdd);
 }
 
 
@@ -134,19 +133,16 @@ function fetchDates() {
 function updateList() {
   console.log('list updating...');
 
-  // editingUserFlag = false;
-
   // load content from database
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       list.innerHTML = this.responseText;
-      $('[data-toggle="tooltip"]').tooltip();
     } else {
       // console.log(this.readyState, this.status);
     }
   };
-  xhttp.open("GET", "books-handler.php?action=updateList" +
+  xhttp.open("GET", "handler.php?action=updateList" +
     "&orderBy=" + orderBy +
     "&ascOrDesc=" + ascOrDesc, true);
   xhttp.send();
@@ -156,10 +152,12 @@ function updateList() {
 function add() {
   console.log('adding...');
 
-  var titleInputValue = titleInput.value;
-  var authorInputValue = authorInput.value;
-  var stockInputValue = stockInput.value;
-  var categoryInputValue = categoryInput.value;
+  var borrowerSelectValue = borrowerSelect.value;
+  var bookCategorySelectValue = bookCategorySelect.value;
+  var bookSelectValue = bookSelect.value;
+  var issueDateInputValue = issueDateInput.value;
+  var dueDateInputValue = dueDateInput.value;
+  var approvedBySelectValue = approvedBySelect.value;
 
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -173,21 +171,21 @@ function add() {
       } else {
         // update list
         list.innerHTML = this.responseText;
-        // clearning fileds after successful addtion
-        titleInput.value = authorInput.value = stockInput.value = '';
         showStatusModal('Successfully Added!', 'alert alert-success');
       }
     } else {
       // console.log(this.readyState, this.status);
     }
   };
-  xhttp.open("POST", "books-handler.php", true); // open(method, url, async)
+  xhttp.open("POST", "handler.php", true); // open(method, url, async)
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("action=add" +
-    "&titleInputValue=" + titleInputValue +
-    "&authorInputValue=" + authorInputValue +
-    "&stockInputValue=" + stockInputValue +
-    "&categoryInputValue=" + categoryInputValue +
+    "&borrowerSelectValue=" + borrowerSelectValue +
+    "&bookCategorySelectValue=" + bookCategorySelectValue +
+    "&bookSelectValue=" + bookSelectValue +
+    "&issueDateInputValue=" + issueDateInputValue +
+    "&dueDateInputValue=" + dueDateInputValue +
+    "&approvedBySelectValue=" + approvedBySelectValue +
     "&orderBy=" + orderBy +
     "&ascOrDesc=" + ascOrDesc);
 }

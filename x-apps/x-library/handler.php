@@ -243,13 +243,20 @@ function updateList($orderBy, $ascOrDesc)
 {
     global $connection;
 
-    $query = "SELECT b.id, b.book_title, b.book_author, b.book_stock, b.book_category_id, c.category_name as book_category_name
-      FROM books b
-      LEFT JOIN categories c
-      ON b.book_category_id = c.id
-      ORDER BY LOWER($orderBy) $ascOrDesc";
 
-    // $query = "SELECT * FROM `books` ORDER BY $orderBy $ascOrDesc";
+    $query = "SELECT 
+      l.id, l.library_issue_date as lid, l.library_due_date as ldd, l.library_return_date as lrd, 
+      u1.user_f_name as borrowed_by, u1.user_l_name as u1ulm, 
+      u2.user_f_name as approved_by,  u2.user_l_name as u2ulm, 
+      u3.user_f_name as confirmed_by, u3.user_l_name as u3ulm, 
+      b.book_title, c.category_name
+      FROM library l
+      INNER JOIN users u1 ON l.library_user_id=u1.id
+      INNER JOIN users u2 ON l.library_approved_by_user_id=u2.id
+      INNER JOIN users u3 ON l.library_confirmed_by_user_id=u3.id
+      INNER JOIN books b ON l.library_book_id = b.id
+      INNER JOIN categories c ON b.book_category_id = c.id
+      ORDER BY LOWER($orderBy) $ascOrDesc";
 
     $statement = $connection->prepare($query);
 
@@ -259,14 +266,18 @@ function updateList($orderBy, $ascOrDesc)
 
         $row = $statement->fetchAll(PDO::FETCH_OBJ);
 
-        foreach ($row as $book) {
+        foreach ($row as $library) {
             $list .= "
-            <tr data-id='{$book->id}'>
+            <tr data-id='{$library->id}'>
             <th scope='row'>{$i}</th>
-            <td data-column='title'>{$book->book_title}</td>
-            <td data-column='author'>{$book->book_author}</td>
-            <td data-column='stock'>{$book->book_stock}</td>
-            <td data-column='category' data-id='{$book->book_category_id}'>{$book->book_category_name}</td>
+            <td data-column='borrow'>{$library->borrowed_by} {$library->u1ulm}</td>
+            <td data-column='title'>{$library->book_title}</td>
+            <td data-column='category'>{$library->category_name}</td>
+            <td data-column='lid'>{$library->lid}</td>
+            <td data-column='ldd'>{$library->ldd}</td>
+            <td data-column='approve'>{$library->approved_by} {$library->u2ulm}</td>
+            <td data-column='lrd'>{$library->lrd}</td>
+            <td data-column='confirm'>{$library->confirmed_by} {$library->u3ulm}</td>
             <td>
               <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
               <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
