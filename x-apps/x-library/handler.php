@@ -244,12 +244,15 @@ function updateList($orderBy, $ascOrDesc)
 
 
     $query = "SELECT 
-      l.id, l.library_issue_date AS lid, l.library_due_date AS ldd, l.library_return_date AS lrd, 
+      l.id, l.library_user_id, l.library_book_id, l.library_approved_by_user_id, l.library_confirmed_by_user_id,
+      l.library_issue_date AS issue_date, 
+      l.library_due_date AS due_date, 
+      l.library_return_date AS return_date, 
       CONCAT(u1.user_f_name, ' ', u1.user_l_name) AS borrowed_by,
       CONCAT(u2.user_f_name, ' ', u2.user_l_name) AS approved_by,
       CONCAT(u3.user_f_name, ' ', u3.user_l_name) AS confirmed_by,
       CONCAT(b.book_title, ' - ', b.book_author) AS book,
-      c.category_name
+      c.category_name, b.book_category_id
       FROM library l
       LEFT JOIN users u1 ON l.library_user_id=u1.id
       LEFT JOIN users u2 ON l.library_approved_by_user_id=u2.id
@@ -267,22 +270,25 @@ function updateList($orderBy, $ascOrDesc)
         $row = $statement->fetchAll(PDO::FETCH_OBJ);
 
         foreach ($row as $library) {
-            $issue_date = date('j-M-Y', strtotime($library->lid));
-            $due_date = date('j-M-Y', strtotime($library->ldd));
-            $return_date = date('j-M-Y', strtotime($library->lrd));
-            $isReturned = is_null($library->lrd) ? '...' : $return_date;
+            $issue_date_attr = date('Y-m-d', strtotime($library->issue_date));
+            $issue_date = date('d-M-Y', strtotime($library->issue_date));
+            $due_date_attr = date('Y-m-d', strtotime($library->due_date));
+            $due_date = date('d-M-Y', strtotime($library->due_date));
+            $return_date_attr = date('Y-m-d', strtotime($library->return_date));
+            $return_date = date('d-M-Y', strtotime($library->return_date));
+            $isReturned = is_null($library->return_date) ? '...' : $return_date;
             $isConfirmed = is_null($library->confirmed_by) ? '...' : $library->confirmed_by;
             $list .= "
             <tr data-id='{$library->id}'>
             <th scope='row'>{$i}</th>
-            <td data-column='borrow'>{$library->borrowed_by}</td>
-            <td data-column='title'>{$library->book}</td>
-            <td data-column='category'>{$library->category_name}</td>
-            <td data-column='lid'>{$issue_date}</td>
-            <td data-column='ldd'>{$due_date}</td>
-            <td data-column='approve'>{$library->approved_by}</td>
-            <td data-column='lrd'>{$isReturned}</td>
-            <td data-column='confirm'>{$isConfirmed}</td>
+            <td data-column='borrow' data-value='{$library->library_user_id}'>{$library->borrowed_by}</td>
+            <td data-column='book' data-value='{$library->library_book_id}'>{$library->book}</td>
+            <td data-column='category' data-value='{$library->book_category_id}'>{$library->category_name}</td>
+            <td data-column='issue_date' data-value='{$issue_date_attr}'>{$issue_date}</td>
+            <td data-column='due_date' data-value='{$due_date_attr}'>{$due_date}</td>
+            <td data-column='approve' data-value='{$library->library_approved_by_user_id}'>{$library->approved_by}</td>
+            <td data-column='return_date' data-value='{$return_date_attr}'>{$isReturned}</td>
+            <td data-column='confirm' data-value='{$library->library_confirmed_by_user_id}'>{$isConfirmed}</td>
             <td>
               <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
               <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>

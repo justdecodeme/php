@@ -83,10 +83,10 @@ include $rootPath . 'includes/header.php';
             <th scope="col" data-order-by="borrowed_by" class="order-by">Borrower <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="book" class="order-by">Book <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="category_name" class="order-by">Book Category <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="lid" class="order-by">Issue Date <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="ldd" class="order-by">Due Date <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="issue_date" class="order-by">Issue Date <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="due_date" class="order-by">Due Date <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="approved_by" class="order-by">Approved By <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="lrd" class="order-by">Returned Date <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="return_date" class="order-by">Returned Date <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="confirmed_by" class="order-by">Confirmed By <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col">Action</th>
           </tr>

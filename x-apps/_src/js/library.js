@@ -19,7 +19,7 @@ var dueDateInput = document.getElementById('dueDateInput');
 // var returnedDateInput = document.getElementById('returnedDateInput');
 // var ConfirmedBySelect = document.getElementById('ConfirmedBySelect');
 
-var orderBy = 'lid';
+var orderBy = 'issue_date';
 var ascOrDesc = 'ASC';
 const numberOfDaysToAdd = 7;
 
@@ -193,7 +193,13 @@ function add() {
 }
 
 // list buttons → edit, delete, set, update, cancel 
-var rowEl, titleEl, titleElValue, authorEl, authorElValue, stockEl, stockElValue, categoryEl, categoryElValue, categoryId;
+var clone, rowEl, 
+  borrowEl, borrowElValue, 
+  bookEl, bookElValue,
+  categoryEl, categoryElValue,
+  issueDateEl, issueDateElValue,
+  dueDateEl, dueDateElValue,
+  approveEl, approveElValue;
 
 function listBtnFunction(e) {
 
@@ -244,50 +250,64 @@ function listBtnFunction(e) {
       oldRowEl.classList.remove('editing');
     }
 
-    titleEl = rowEl.querySelector('[data-column="title"]');
-    authorEl = rowEl.querySelector('[data-column="author"]');
-    stockEl = rowEl.querySelector('[data-column="stock"]');
+    borrowEl = rowEl.querySelector('[data-column="borrow"]');
+    bookEl = rowEl.querySelector('[data-column="book"]');
     categoryEl = rowEl.querySelector('[data-column="category"]');
-    categoryId = categoryEl.dataset.id;
+    issueDateEl = rowEl.querySelector('[data-column="issue_date"]');
+    dueDateEl = rowEl.querySelector('[data-column="due_date"]');
+    approveEl = rowEl.querySelector('[data-column="approve"]');
+    // categoryId = categoryEl.dataset.id;
 
-    titleElValue = titleEl.innerHTML;
-    authorElValue = authorEl.innerHTML;
-    stockElValue = stockEl.innerHTML;
-    categoryElValue = categoryEl.innerHTML;
-
+    borrowElValue = borrowEl.dataset.value;
+    bookElValue = bookEl.dataset.value;
+    categoryElValue = categoryEl.dataset.value;
+    issueDateElValue = issueDateEl.dataset.value;
+    dueDateElValue = dueDateEl.dataset.value;
+    approveElValue = approveEl.dataset.value;
+  
     rowEl.classList.add('editing');
 
-    titleEl.innerHTML = '<input type="text" class="form-control"  value="' + titleElValue + '">';
-    authorEl.innerHTML = '<input type="text" class="form-control"  value="' + authorElValue + '">';
-    stockEl.innerHTML = '<input type="number" class="form-control"  value="' + stockElValue + '">';
-    // categoryEl.innerHTML = '<input type="text" class="form-control"  value="' + categoryElValue + '">';
-    titleEl.querySelector('input').focus();
-
+    issueDateEl.innerHTML = '<input type="date" class="form-control"  value="' + issueDateElValue + '">';
+    dueDateEl.innerHTML = '<input type="date" class="form-control"  value="' + dueDateElValue + '">';
+    borrowEl.innerHTML = bookEl.innerHTML = categoryEl.innerHTML = approveEl.innerHTML = '';
+    
     // copy and insert category list
-    categoryEl.innerHTML = '';
-    var clone = categoryInput.cloneNode(true);
+    clone = borrowerSelect.cloneNode(true);
+    borrowEl.appendChild(clone);
+    borrowEl.querySelector('select').value = borrowElValue;
+
+    clone = bookSelect.cloneNode(true);
+    bookEl.appendChild(clone);
+    bookEl.querySelector('select').value = bookElValue;
+
+    clone = bookCategorySelect.cloneNode(true);
     categoryEl.appendChild(clone);
-    // update category as as original
-    categoryEl.querySelector('select').value = categoryId;
+    categoryEl.querySelector('select').value = categoryElValue;
+    categoryEl.querySelector('select option:first-child').remove();
 
+    clone = approvedBySelect.cloneNode(true);
+    approveEl.appendChild(clone);
+    approveEl.querySelector('select').value = approveElValue;
+    
+    // borrowEl.querySelector('input').focus();
 
-    var titleInputEl = titleEl.querySelector('input');
-    var authorInputEl = authorEl.querySelector('input');
-    var stockInputEl = stockEl.querySelector('input');
+    // var titleInputEl = titleEl.querySelector('input');
+    // var authorInputEl = authorEl.querySelector('input');
+    // var stockInputEl = stockEl.querySelector('input');
 
-    // attach keyboard events on `enter` button for `submit`
-    // and `esc` btn for `cancel`
-    var cancelBtn = rowEl.querySelector('[data-action="cancel"');
-    var submitBtn = rowEl.querySelector('[data-action="submit"');
-    titleInputEl.addEventListener('keyup', function (e) {
-      keyUpFunc(e, cancelBtn, submitBtn);
-    })
-    authorInputEl.addEventListener('keyup', function (e) {
-      keyUpFunc(e, cancelBtn, submitBtn);
-    })
-    stockInputEl.addEventListener('keyup', function (e) {
-      keyUpFunc(e, cancelBtn, submitBtn);
-    })
+    // // attach keyboard events on `enter` button for `submit`
+    // // and `esc` btn for `cancel`
+    // var cancelBtn = rowEl.querySelector('[data-action="cancel"');
+    // var submitBtn = rowEl.querySelector('[data-action="submit"');
+    // titleInputEl.addEventListener('keyup', function (e) {
+    //   keyUpFunc(e, cancelBtn, submitBtn);
+    // })
+    // authorInputEl.addEventListener('keyup', function (e) {
+    //   keyUpFunc(e, cancelBtn, submitBtn);
+    // })
+    // stockInputEl.addEventListener('keyup', function (e) {
+    //   keyUpFunc(e, cancelBtn, submitBtn);
+    // })
 
   } else if (action == "cancel") {
     console.log('canceling...', id);
