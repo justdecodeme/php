@@ -29,16 +29,16 @@ include $rootPath . 'includes/header.php';
                   <select class="custom-select my-1" id="borrowerSelect"></select>
                 </form>
               </td>
-              <td scope="col">
-                <form class="form-block">
-                  <label for="bookCategorySelect">Select Book Category</label>
-                  <select class="custom-select my-1" id="bookCategorySelect"></select>
-                </form>
-              </td>
               <td scope="col" colspan="2">
                 <form class="form-block">
                   <label for="bookSelect">Select book</label>
                   <select class="custom-select my-1" id="bookSelect"></select>
+                </form>
+              </td>
+              <td scope="col">
+                <form class="form-block">
+                  <label for="bookCategorySelect">Select Book Category</label>
+                  <select class="custom-select my-1" id="bookCategorySelect"></select>
                 </form>
               </td>
               <td scope="col">
@@ -81,7 +81,7 @@ include $rootPath . 'includes/header.php';
           <tr>
             <th scope="col" width="50">#</th>
             <th scope="col" data-order-by="borrowed_by" class="order-by">Borrower <span class="down">↓</span><span class="up">↑</span></th>
-            <th scope="col" data-order-by="book_title" class="order-by">Book <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="book" class="order-by">Book <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="category_name" class="order-by">Book Category <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="lid" class="order-by">Issue Date <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="ldd" class="order-by">Due Date <span class="down">↓</span><span class="up">↑</span></th>

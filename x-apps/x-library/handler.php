@@ -207,15 +207,15 @@ function fetchBooksList($book_category_id)
 {
     global $connection;
     if($book_category_id !== "" && $book_category_id !== "all") {
-    $query = "SELECT b.id, b.book_title
-      FROM books b
-      LEFT JOIN categories c
-      ON b.book_category_id = c.id
-      WHERE
-        b.book_category_id =:BOOK_CATEGORY_ID
-      ORDER BY LOWER(b.book_title) ASC";
+      $query = "SELECT b.id, CONCAT(b.book_title, ' - ', b.book_author) AS book
+        FROM books b
+        LEFT JOIN categories c
+        ON b.book_category_id = c.id
+        WHERE
+          b.book_category_id =:BOOK_CATEGORY_ID
+        ORDER BY LOWER(book) ASC";
     } else {
-      $query = "SELECT `id`, `book_title` FROM `books` ORDER BY `book_title`";
+      $query = "SELECT `id`, CONCAT(b.book_title, ' - ', b.book_author) AS book FROM books b ORDER BY LOWER(book) ASC";
     }
     
     $statement = $connection->prepare($query);
@@ -229,7 +229,7 @@ function fetchBooksList($book_category_id)
         } else {
           $list = "";
           foreach ($row as $book) {
-              $list .= "<option value='{$book->id}'>{$book->book_title}</option>";
+              $list .= "<option value='{$book->id}'>{$book->book}</option>";
           }
           echo $list;
         }
@@ -248,7 +248,8 @@ function updateList($orderBy, $ascOrDesc)
       CONCAT(u1.user_f_name, ' ', u1.user_l_name) AS borrowed_by,
       CONCAT(u2.user_f_name, ' ', u2.user_l_name) AS approved_by,
       CONCAT(u3.user_f_name, ' ', u3.user_l_name) AS confirmed_by,
-      b.book_title, c.category_name
+      CONCAT(b.book_title, ' - ', b.book_author) AS book,
+      c.category_name
       FROM library l
       LEFT JOIN users u1 ON l.library_user_id=u1.id
       LEFT JOIN users u2 ON l.library_approved_by_user_id=u2.id
@@ -275,7 +276,7 @@ function updateList($orderBy, $ascOrDesc)
             <tr data-id='{$library->id}'>
             <th scope='row'>{$i}</th>
             <td data-column='borrow'>{$library->borrowed_by}</td>
-            <td data-column='title'>{$library->book_title}</td>
+            <td data-column='title'>{$library->book}</td>
             <td data-column='category'>{$library->category_name}</td>
             <td data-column='lid'>{$issue_date}</td>
             <td data-column='ldd'>{$due_date}</td>
