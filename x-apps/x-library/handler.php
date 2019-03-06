@@ -16,7 +16,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'fetchBookCategoriesList') {
     fetchBookCategoriesList();
 }
 if (isset($_GET['action']) && $_GET['action'] == 'fetchBookssList') {
-    fetchBookssList();
+    fetchBookssList($_GET['book_category_id']);
 }
 
 // update list
@@ -204,28 +204,36 @@ function fetchBookCategoriesList()
     }
 }
 
-function fetchBookssList()
+function fetchBookssList($book_category_id)
 {
     global $connection;
-    // $query = "SELECT u.id, u.user_f_name, u.user_l_name, r.role_code
-    //   FROM users u
-    //   LEFT JOIN roles r
-    //   ON u.user_role_id = r.id
-    //   WHERE
-    //     r.role_code='em'
-    //   ORDER BY LOWER(u.user_f_name) ASC";
+    if($book_category_id !== "" && $book_category_id !== "all") {
+    $query = "SELECT b.id, b.book_title
+      FROM books b
+      LEFT JOIN categories c
+      ON b.book_category_id = c.id
+      WHERE
+        b.book_category_id =:BOOK_CATEGORY_ID
+      ORDER BY LOWER(b.book_title) ASC";
+    } else {
+      $query = "SELECT `id`, `book_title` FROM `books` ORDER BY `book_title`";
+    }
     
-    $query = "SELECT `id`, `book_title` FROM `books` ORDER BY `book_title`";
     $statement = $connection->prepare($query);
-    // $statement->bindParam(':ROLE_CODE', 'em');
+    $statement->bindParam(':BOOK_CATEGORY_ID', $book_category_id);
 
     if ($statement->execute()) {
         $row = $statement->fetchAll(PDO::FETCH_OBJ);
-        $list = "";
-        foreach ($row as $book) {
-            $list .= "<option value='{$book->id}'>{$book->book_title}</option>";
+        if($statement->rowCount() == 0) {
+          echo "NA";
+          return;
+        } else {
+          $list = "";
+          foreach ($row as $book) {
+              $list .= "<option value='{$book->id}'>{$book->book_title}</option>";
+          }
+          echo $list;
         }
-        echo $list;
     } else {
         echo "queryError";
     }

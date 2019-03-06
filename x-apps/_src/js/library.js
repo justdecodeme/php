@@ -28,6 +28,7 @@ const numberOfDaysToAdd = 7;
 /*****************************************/
 
 addBtn.addEventListener('click', add, false);
+bookCategorySelect.addEventListener('change', fetchBookssList, false);
 
 list.addEventListener('click', listBtnFunction, false);
 
@@ -95,19 +96,30 @@ function fetchBookCategoriesList() {
   xhttp.open("GET", "handler.php?action=fetchBookCategoriesList", true); // open(method, url, async)
   xhttp.send();
 }
-function fetchBookssList() {
+function fetchBookssList(e) {
+  var book_category_id = '';
+  if(e) {
+    book_category_id = e.target.value;
+  }
   console.log('fetching books list...');
 
   // load content from database
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      bookSelect.innerHTML = this.responseText;
+      if(this.responseText == "NA") {
+        bookSelect.innerHTML = "<option>None</option>";
+        bookSelect.setAttribute('disabled', 'true');
+      } else {
+        bookSelect.innerHTML = this.responseText;
+        bookSelect.removeAttribute('disabled');
+      }
+      console.log(this.responseText)
     } else {
       // console.log(this.readyState, this.status);
     }
   };
-  xhttp.open("GET", "handler.php?action=fetchBookssList", true); // open(method, url, async)
+  xhttp.open("GET", "handler.php?action=fetchBookssList&book_category_id=" + book_category_id, true); // open(method, url, async)
   xhttp.send();
 }
 function fetchDates() {
