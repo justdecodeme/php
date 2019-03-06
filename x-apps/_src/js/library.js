@@ -28,7 +28,7 @@ const numberOfDaysToAdd = 7;
 /*****************************************/
 
 addBtn.addEventListener('click', add, false);
-bookCategorySelect.addEventListener('change', fetchBookssList, false);
+bookCategorySelect.addEventListener('change', fetchBooksList, false);
 
 list.addEventListener('click', listBtnFunction, false);
 
@@ -49,7 +49,7 @@ function init() {
   fetchBorrowersList();
   fetchAdminsList();
   fetchBookCategoriesList();
-  fetchBookssList();
+  fetchBooksList();
   fetchDates();
 
   updateList();
@@ -101,7 +101,7 @@ function fetchBookCategoriesList() {
   xhttp.open("GET", "handler.php?action=fetchBookCategoriesList", true); // open(method, url, async)
   xhttp.send();
 }
-function fetchBookssList(e) {
+function fetchBooksList(e) {
   var book_category_id = '';
   if(e) {
     book_category_id = e.target.value;
@@ -123,7 +123,7 @@ function fetchBookssList(e) {
       // console.log(this.readyState, this.status);
     }
   };
-  xhttp.open("GET", "handler.php?action=fetchBookssList&book_category_id=" + book_category_id, true); // open(method, url, async)
+  xhttp.open("GET", "handler.php?action=fetchBooksList&book_category_id=" + book_category_id, true); // open(method, url, async)
   xhttp.send();
 }
 function fetchDates() {

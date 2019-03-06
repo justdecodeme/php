@@ -15,8 +15,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'fetchAdminsList') {
 if (isset($_GET['action']) && $_GET['action'] == 'fetchBookCategoriesList') {
     fetchBookCategoriesList();
 }
-if (isset($_GET['action']) && $_GET['action'] == 'fetchBookssList') {
-    fetchBookssList($_GET['book_category_id']);
+if (isset($_GET['action']) && $_GET['action'] == 'fetchBooksList') {
+    fetchBooksList($_GET['book_category_id']);
 }
 
 // update list
@@ -149,7 +149,6 @@ function fetchBorrowersList()
         echo "queryError";
     }
 }
-
 function fetchAdminsList()
 {
     global $connection;
@@ -176,7 +175,6 @@ function fetchAdminsList()
         echo "queryError";
     }
 }
-
 function fetchBookCategoriesList()
 {
     global $connection;
@@ -203,8 +201,7 @@ function fetchBookCategoriesList()
         echo "queryError";
     }
 }
-
-function fetchBookssList($book_category_id)
+function fetchBooksList($book_category_id)
 {
     global $connection;
     if($book_category_id !== "" && $book_category_id !== "all") {
