@@ -253,10 +253,9 @@ function listBtnFunction(e) {
     borrowEl = rowEl.querySelector('[data-column="borrow"]');
     bookEl = rowEl.querySelector('[data-column="book"]');
     categoryEl = rowEl.querySelector('[data-column="category"]');
+    approveEl = rowEl.querySelector('[data-column="approve"]');
     issueDateEl = rowEl.querySelector('[data-column="issue_date"]');
     dueDateEl = rowEl.querySelector('[data-column="due_date"]');
-    approveEl = rowEl.querySelector('[data-column="approve"]');
-    // categoryId = categoryEl.dataset.id;
 
     borrowElValue = borrowEl.dataset.value;
     bookElValue = bookEl.dataset.value;
@@ -264,6 +263,13 @@ function listBtnFunction(e) {
     issueDateElValue = issueDateEl.dataset.value;
     dueDateElValue = dueDateEl.dataset.value;
     approveElValue = approveEl.dataset.value;
+
+    borrowElHTML = borrowEl.innerHTML;
+    bookElHTML = bookEl.innerHTML;
+    categoryElHTML = categoryEl.innerHTML;
+    issueDateElHTML = issueDateEl.innerHTML;
+    dueDateElHTML = dueDateEl.innerHTML;
+    approveElHTML = approveEl.innerHTML;
   
     rowEl.classList.add('editing');
 
@@ -283,65 +289,75 @@ function listBtnFunction(e) {
     clone = bookCategorySelect.cloneNode(true);
     categoryEl.appendChild(clone);
     categoryEl.querySelector('select').value = categoryElValue;
-    categoryEl.querySelector('select option:first-child').remove();
+    // categoryEl.querySelector('select option:first-child').remove();
 
     clone = approvedBySelect.cloneNode(true);
     approveEl.appendChild(clone);
     approveEl.querySelector('select').value = approveElValue;
     
-    // borrowEl.querySelector('input').focus();
+    borrowEl.querySelector('select').focus();
 
-    // var titleInputEl = titleEl.querySelector('input');
-    // var authorInputEl = authorEl.querySelector('input');
-    // var stockInputEl = stockEl.querySelector('input');
-
-    // // attach keyboard events on `enter` button for `submit`
-    // // and `esc` btn for `cancel`
-    // var cancelBtn = rowEl.querySelector('[data-action="cancel"');
-    // var submitBtn = rowEl.querySelector('[data-action="submit"');
-    // titleInputEl.addEventListener('keyup', function (e) {
-    //   keyUpFunc(e, cancelBtn, submitBtn);
-    // })
-    // authorInputEl.addEventListener('keyup', function (e) {
-    //   keyUpFunc(e, cancelBtn, submitBtn);
-    // })
-    // stockInputEl.addEventListener('keyup', function (e) {
-    //   keyUpFunc(e, cancelBtn, submitBtn);
-    // })
+    var borrowSelectEl = borrowEl.querySelector('select');
+    var bookSelectEl = bookEl.querySelector('select');
+    var categorySelectEl = categoryEl.querySelector('select');
+    var approveSelectEl = approveEl.querySelector('select');
+    var issueDateInputEl = issueDateEl.querySelector('input');
+    var dueDateInputEl = dueDateEl.querySelector('input');
+    
+    // attach keyboard events on `enter` button for `submit`
+    // and `esc` btn for `cancel`
+    var cancelBtn = rowEl.querySelector('[data-action="cancel"');
+    var submitBtn = rowEl.querySelector('[data-action="submit"');
+    borrowSelectEl.addEventListener('keyup', function (e) { keyUpFunc(e, cancelBtn, submitBtn); })
+    bookSelectEl.addEventListener('keyup', function (e) { keyUpFunc(e, cancelBtn, submitBtn); })
+    categorySelectEl.addEventListener('keyup', function (e) { keyUpFunc(e, cancelBtn, submitBtn); })
+    approveSelectEl.addEventListener('keyup', function (e) { keyUpFunc(e, cancelBtn, submitBtn); })
+    issueDateInputEl.addEventListener('keyup', function (e) { keyUpFunc(e, cancelBtn, submitBtn); })
+    dueDateInputEl.addEventListener('keyup', function (e) { keyUpFunc(e, cancelBtn, submitBtn); })
 
   } else if (action == "cancel") {
     console.log('canceling...', id);
 
-    titleEl.innerHTML = titleElValue;
-    authorEl.innerHTML = authorElValue;
-    stockEl.innerHTML = stockElValue;
-    categoryEl.innerHTML = categoryElValue;
+    borrowEl.innerHTML = borrowElHTML;
+    bookEl.innerHTML = bookElHTML;
+    categoryEl.innerHTML = categoryElHTML;
+    issueDateEl.innerHTML = issueDateElHTML;
+    dueDateEl.innerHTML = dueDateElHTML;
+    approveEl.innerHTML = approveElHTML;
 
     rowEl.classList.remove('editing');
     // updateList();
   } else if (action == "submit") {
     console.log('submiting...', id);
 
-    var titleInputValue = titleEl.querySelector('input').value;
-    var authorInputValue = authorEl.querySelector('input').value;
-    var stockInputValue = stockEl.querySelector('input').value;
-    var categoryInputValue = categoryEl.querySelector('select').value;
+    var borrowSelectValue = borrowEl.querySelector('select').value;
+    var bookSelectValue = bookEl.querySelector('select').value;
+    // var categorySelectValue = categoryEl.querySelector('select').value;
+    var approveSelectValue = approveEl.querySelector('select').value;
+    var issueDateInputValue = issueDateEl.querySelector('input').value;
+    var dueDateInputValue = dueDateEl.querySelector('input').value;
 
     // update changes to database if there is a change
-    if (titleInputValue == "" || authorInputValue == "" || stockInputValue == "") {
+    if (bookSelectValue == "" || issueDateInputValue == "" || dueDateInputValue == "") {
       showStatusModal('one ore more fields are empty!', 'alert alert-danger');
-    } else if (titleInputValue == titleElValue && authorInputValue == authorElValue && stockInputValue == stockElValue && categoryInputValue == categoryId) {
-      titleEl.innerHTML = titleInputValue;
-      authorEl.innerHTML = authorInputValue;
-      stockEl.innerHTML = stockInputValue;
-      categoryEl.innerHTML = categoryElValue;
+    } else if (borrowSelectValue == borrowElValue && bookSelectValue == bookElValue && approveSelectValue == approveElValue && issueDateInputValue == issueDateElValue && dueDateInputValue == dueDateElValue) {
+      borrowEl.innerHTML = borrowElHTML;
+      bookEl.innerHTML = bookElHTML;
+      categoryEl.innerHTML = categoryElHTML;
+      approveEl.innerHTML = approveElHTML;
+      issueDateEl.innerHTML = issueDateElHTML;
+      dueDateEl.innerHTML = dueDateElHTML;
       rowEl.classList.remove('editing');
       showStatusModal('Nothing changed!', 'alert alert-warning');
     } else {
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-          if (this.responseText == "queryError") {
+          if (this.responseText == "emptyFields") {
+            showStatusModal('one ore more fields are empty!', 'alert alert-danger');
+          } else if (this.responseText == "alreadyExist") {
+            showStatusModal('Already Exist', 'alert alert-warning');
+          } else if (this.responseText == "queryError") {
             showStatusModal('Query Error!', 'alert alert-danger');
           } else {
             list.innerHTML = this.responseText;
