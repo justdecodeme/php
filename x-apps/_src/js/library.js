@@ -238,17 +238,20 @@ function listBtnFunction(e) {
       console.log('Deletion is stopped!');
     }
   } else if (action == "edit") {
-    console.log('editing...', id);
-
     // remove editing class from already editing row if any
     var oldRowEl = document.querySelector('#list tr.editing');
     if (oldRowEl) {
-      titleEl.innerHTML = titleElValue;
-      authorEl.innerHTML = authorElValue;
-      stockEl.innerHTML = stockElValue;
-      categoryEl.innerHTML = categoryElValue;
+      borrowEl.innerHTML = borrowElHTML;
+      bookEl.innerHTML = bookElHTML;
+      categoryEl.innerHTML = categoryElHTML;
+      approveEl.innerHTML = approveElHTML;
+      issueDateEl.innerHTML = issueDateElHTML;
+      dueDateEl.innerHTML = dueDateElHTML;
+      console.log('canceling...', oldRowEl.dataset.id);
       oldRowEl.classList.remove('editing');
     }
+    
+    console.log('editing...', id);
 
     borrowEl = rowEl.querySelector('[data-column="borrow"]');
     bookEl = rowEl.querySelector('[data-column="book"]');
@@ -260,9 +263,9 @@ function listBtnFunction(e) {
     borrowElValue = borrowEl.dataset.value;
     bookElValue = bookEl.dataset.value;
     categoryElValue = categoryEl.dataset.value;
+    approveElValue = approveEl.dataset.value;
     issueDateElValue = issueDateEl.dataset.value;
     dueDateElValue = dueDateEl.dataset.value;
-    approveElValue = approveEl.dataset.value;
 
     borrowElHTML = borrowEl.innerHTML;
     bookElHTML = bookEl.innerHTML;
@@ -332,7 +335,6 @@ function listBtnFunction(e) {
 
     var borrowSelectValue = borrowEl.querySelector('select').value;
     var bookSelectValue = bookEl.querySelector('select').value;
-    // var categorySelectValue = categoryEl.querySelector('select').value;
     var approveSelectValue = approveEl.querySelector('select').value;
     var issueDateInputValue = issueDateEl.querySelector('input').value;
     var dueDateInputValue = dueDateEl.querySelector('input').value;
@@ -353,11 +355,7 @@ function listBtnFunction(e) {
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-          if (this.responseText == "emptyFields") {
-            showStatusModal('one ore more fields are empty!', 'alert alert-danger');
-          } else if (this.responseText == "alreadyExist") {
-            showStatusModal('Already Exist', 'alert alert-warning');
-          } else if (this.responseText == "queryError") {
+          if (this.responseText == "queryError") {
             showStatusModal('Query Error!', 'alert alert-danger');
           } else {
             list.innerHTML = this.responseText;
@@ -365,15 +363,16 @@ function listBtnFunction(e) {
           }
         }
       };
-      xhttp.open("POST", "books-handler.php", true); // open(method, url, async)
+      xhttp.open("POST", "handler.php", true); // open(method, url, async)
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.send("action=submit" +
         "&orderBy=" + orderBy +
         "&ascOrDesc=" + ascOrDesc +
-        "&titleInputValue=" + titleInputValue +
-        "&authorInputValue=" + authorInputValue +
-        "&stockInputValue=" + stockInputValue +
-        "&categoryInputValue=" + categoryInputValue +
+        "&borrowElValue=" + borrowSelectValue +
+        "&bookElValue=" + bookSelectValue +
+        "&approveElValue=" + approveSelectValue +
+        "&issueDateElValue=" + issueDateInputValue +
+        "&dueDateElValue=" + dueDateInputValue +
         "&id=" + id);
     }
   }

@@ -87,28 +87,31 @@ if (isset($_POST['action']) && $_POST['action'] == 'submit') {
     $id = $_POST['id'];
     $orderBy = $_POST['orderBy'];
     $ascOrDesc = $_POST['ascOrDesc'];
-    $titleInputValue = $_POST['titleInputValue'];
-    $authorInputValue = $_POST['authorInputValue'];
-    $stockInputValue = $_POST['stockInputValue'];
-    $categoryInputValue = $_POST['categoryInputValue'];
-
-    $query = "UPDATE `books`
+    $borrowElValue = $_POST['borrowElValue'];
+    $bookElValue = $_POST['bookElValue'];
+    $approveElValue = $_POST['approveElValue'];
+    $issueDateElValue = $_POST['issueDateElValue'];
+    $dueDateElValue = $_POST['dueDateElValue'];
+    // var_dump($id, $borrowElValue, $bookElValue, $approveElValue, $issueDateElValue, $dueDateElValue);
+    $query = "UPDATE `library`
       SET
-        `book_title` = :BOOK_TITLE,
-        `book_author` = :BOOK_AUTHOR,
-        `book_stock` = :BOOK_STOCK,
-        `book_category_id` = :BOOK_CATEGORY_ID
+        `library_user_id`=:LIBRARY_USER_ID,
+        `library_book_id`=:LIBRARY_BOOK_ID,
+        `library_approved_by_user_id`=:LIBRARY_APPROVED_BY_USER_ID,
+        `library_issue_date`=:LIBRARY_ISSUE_DATE,
+        `library_due_date`=:LIBRARY_DUE_DATE
       WHERE
-        `id` = :ID
+        `id`=:ID
       LIMIT 1";
 
     $statement = $connection->prepare($query);
     $params = array(
         'ID' => $id,
-        'BOOK_TITLE' => $titleInputValue,
-        'BOOK_AUTHOR' => $authorInputValue,
-        'BOOK_STOCK' => $stockInputValue,
-        'BOOK_CATEGORY_ID' => $categoryInputValue,
+        'LIBRARY_USER_ID' => $borrowElValue,
+        'LIBRARY_BOOK_ID' => $bookElValue,
+        'LIBRARY_APPROVED_BY_USER_ID' => $approveElValue,
+        'LIBRARY_ISSUE_DATE' => $issueDateElValue,
+        'LIBRARY_DUE_DATE' => $dueDateElValue
     );
     // $statement->rowCount() == 1    if any changes are there
     // $statement->rowCount() == 0    if no changes are there
