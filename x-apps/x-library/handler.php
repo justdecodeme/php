@@ -336,8 +336,19 @@ function updateList($orderBy, $ascOrDesc)
             <td data-column='return_date' data-value='{$return_date_attr}'>{$isReturned}</td>
             <td data-column='confirm' data-value='{$library->library_confirmed_by_user_id}'>{$isConfirmed}</td>
             <td class='action-btns'>
-              <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
-              <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
+
+              <div class='btn-group primary' role='group' aria-label='Button group with nested dropdown'>
+                <button type='button' class='btn btn-warning'>Confirm</button>
+                <div class='btn-group' role='group'>
+                  <button id='btnGroupDrop1' type='button' class='btn btn-light dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'></button>
+                  <div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>
+                    <div class='btn-group' role='group' aria-label='First group'>
+                      <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
+                      <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <button data-action='cancel' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-times'></i></button>
               <button data-action='submit' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-check'></i></button>
             </td>
