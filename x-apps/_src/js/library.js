@@ -22,13 +22,16 @@ var dueDateInput = document.getElementById('dueDateInput');
 var orderBy = 'issue_date';
 var ascOrDesc = 'ASC';
 const numberOfDaysToAdd = 7;
+const undef = undefined;
 
 /*****************************************/
 //            events
 /*****************************************/
 
 addBtn.addEventListener('click', add, false);
-bookCategorySelect.addEventListener('change', fetchBooksList, false);
+bookCategorySelect.addEventListener('change', (e) => {
+  fetchBooksList(e, 'bookSelect', undef);
+}, false);
 
 list.addEventListener('click', listBtnFunction, false);
 
@@ -46,24 +49,27 @@ function init() {
   document.querySelector('[data-order-by="' + orderBy + '"]').classList.add('active-ASC');
 
   // fetch all the data required for assigning new books
-  fetchBorrowersList();
-  fetchAdminsList();
-  fetchBookCategoriesList();
-  fetchBooksList();
+  fetchBorrowersList('borrowerSelect', undef);
+  fetchBooksList(undef, 'bookSelect', undef);
+  fetchBookCategoriesList('bookCategorySelect', undef);
+  fetchAdminsList('approvedBySelect', undef);
   fetchDates();
 
   updateList();
 };
 init();
 
-function fetchBorrowersList() {
+function fetchBorrowersList(elId, value) {
   console.log('fetching borrowers list...');
 
   // load content from database
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      borrowerSelect.innerHTML = this.responseText;
+      document.getElementById(elId).innerHTML = this.responseText;
+      if(value !== undefined) {
+        document.getElementById(elId).value = value;
+      }
     } else {
       // console.log(this.readyState, this.status);
     }
@@ -71,40 +77,13 @@ function fetchBorrowersList() {
   xhttp.open("GET", "handler.php?action=fetchBorrowersList", true); // open(method, url, async)
   xhttp.send();
 }
-function fetchAdminsList() {
-  console.log('fetching admins list...');
-
-  // load content from database
-  xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      approvedBySelect.innerHTML = this.responseText;
-    } else {
-      // console.log(this.readyState, this.status);
-    }
-  };
-  xhttp.open("GET", "handler.php?action=fetchAdminsList", true); // open(method, url, async)
-  xhttp.send();
-}
-function fetchBookCategoriesList() {
-  console.log('fetching book categories list...');
-
-  // load content from database
-  xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      bookCategorySelect.innerHTML = this.responseText;
-    } else {
-      // console.log(this.readyState, this.status);
-    }
-  };
-  xhttp.open("GET", "handler.php?action=fetchBookCategoriesList", true); // open(method, url, async)
-  xhttp.send();
-}
-function fetchBooksList(e) {
+function fetchBooksList(e, elId, value) {
   var book_category_id = '';
-  if(e) {
-    book_category_id = e.target.value;
+  if (e) {
+    var book_category_id = e;
+    if (e.type == "change") {
+      book_category_id = e.target.value;
+    }
   }
   console.log('fetching books list...');
 
@@ -112,18 +91,57 @@ function fetchBooksList(e) {
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      if(this.responseText == "NA") {
-        bookSelect.innerHTML = "<option value=''>None</option>";
-        bookSelect.setAttribute('disabled', 'true');
+      if (this.responseText == "NA") {
+        document.getElementById(elId).innerHTML = "<option value=''>None</option>";
+        document.getElementById(elId).setAttribute('disabled', 'true');
       } else {
-        bookSelect.innerHTML = this.responseText;
-        bookSelect.removeAttribute('disabled');
+        document.getElementById(elId).innerHTML = this.responseText;
+        if (value !== undefined) {
+          document.getElementById(elId).value = value;
+        }
+        document.getElementById(elId).removeAttribute('disabled');
       }
     } else {
       // console.log(this.readyState, this.status);
     }
   };
   xhttp.open("GET", "handler.php?action=fetchBooksList&book_category_id=" + book_category_id, true); // open(method, url, async)
+  xhttp.send();
+}
+function fetchBookCategoriesList(elId, value) {
+  console.log('fetching book categories list...');
+
+  // load content from database
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById(elId).innerHTML = this.responseText;
+      if (value !== undefined) {
+        document.getElementById(elId).value = value;
+      }
+    } else {
+      // console.log(this.readyState, this.status);
+    }
+  };
+  xhttp.open("GET", "handler.php?action=fetchBookCategoriesList", true); // open(method, url, async)
+  xhttp.send();
+}
+function fetchAdminsList(elId, value) {
+  console.log('fetching admins list...');
+
+  // load content from database
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById(elId).innerHTML = this.responseText;
+      if (value !== undefined) {
+        document.getElementById(elId).value = value;
+      }
+    } else {
+      // console.log(this.readyState, this.status);
+    }
+  };
+  xhttp.open("GET", "handler.php?action=fetchAdminsList", true); // open(method, url, async)
   xhttp.send();
 }
 function fetchDates() {
@@ -200,9 +218,8 @@ var clone, rowEl,
   issueDateEl, issueDateElValue,
   dueDateEl, dueDateElValue,
   approveEl, approveElValue;
-
 function listBtnFunction(e) {
-
+  
   rowEl = e.target.closest('tr');
   var id = rowEl.dataset.id;
   var action = e.target.dataset.action;
@@ -278,25 +295,16 @@ function listBtnFunction(e) {
 
     issueDateEl.innerHTML = '<input type="date" class="form-control"  value="' + issueDateElValue + '">';
     dueDateEl.innerHTML = '<input type="date" class="form-control"  value="' + dueDateElValue + '">';
-    borrowEl.innerHTML = bookEl.innerHTML = categoryEl.innerHTML = approveEl.innerHTML = '';
+    borrowEl.innerHTML = '<select class="custom-select my-1" id="borrowerSelectEditing"></select>'
+    bookEl.innerHTML = '<select class="custom-select my-1" id="bookSelectEditing"></select>'
+    categoryEl.innerHTML = '<select class="custom-select my-1" id="bookCategorySelectEditing"></select>'
+    approveEl.innerHTML = '<select class="custom-select my-1" id="approvedBySelectEditing"></select>'
     
-    // copy and insert category list
-    clone = borrowerSelect.cloneNode(true);
-    borrowEl.appendChild(clone);
-    borrowEl.querySelector('select').value = borrowElValue;
-
-    clone = bookSelect.cloneNode(true);
-    bookEl.appendChild(clone);
-    bookEl.querySelector('select').value = bookElValue;
-
-    clone = bookCategorySelect.cloneNode(true);
-    categoryEl.appendChild(clone);
-    categoryEl.querySelector('select').value = categoryElValue;
-    // categoryEl.querySelector('select option:first-child').remove();
-
-    clone = approvedBySelect.cloneNode(true);
-    approveEl.appendChild(clone);
-    approveEl.querySelector('select').value = approveElValue;
+    
+    fetchBorrowersList('borrowerSelectEditing', borrowElValue);
+    fetchBooksList(categoryElValue, 'bookSelectEditing', bookElValue);
+    fetchBookCategoriesList('bookCategorySelectEditing', categoryElValue);
+    fetchAdminsList('approvedBySelectEditing', approveElValue);
     
     borrowEl.querySelector('select').focus();
 
@@ -306,6 +314,11 @@ function listBtnFunction(e) {
     var approveSelectEl = approveEl.querySelector('select');
     var issueDateInputEl = issueDateEl.querySelector('input');
     var dueDateInputEl = dueDateEl.querySelector('input');
+
+    categorySelectEl.addEventListener('change', (e) => {
+      fetchBooksList(e, 'bookSelectEditing', undef);
+    }, false);
+
     
     // attach keyboard events on `enter` button for `submit`
     // and `esc` btn for `cancel`
