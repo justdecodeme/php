@@ -127,6 +127,41 @@ if (isset($_POST['action']) && $_POST['action'] == 'submit') {
     }
 }
 
+// confirm
+if (isset($_POST['action']) && $_POST['action'] == 'confirm') {
+    $id = $_POST['id'];
+    $orderBy = $_POST['orderBy'];
+    $ascOrDesc = $_POST['ascOrDesc'];
+    $returnDateInputValue = $_POST['returnDateInputValue'];
+    $confirmSelectValue = $_POST['confirmSelectValue'];
+
+    // var_dump($id, $returnDateInputValue, $confirmSelectValue);
+
+    $query = "UPDATE `library`
+      SET
+        `library_return_date`=:LIBRARY_RETURN_DATE,
+        `library_confirmed_by_user_id`=:LIBRARY_CONFIRMED_BY_USER_ID
+      WHERE
+        `id`=:ID
+      LIMIT 1";
+
+    $statement = $connection->prepare($query);
+    $params = array(
+        'ID' => $id,
+        'LIBRARY_RETURN_DATE' => $returnDateInputValue,
+        'LIBRARY_CONFIRMED_BY_USER_ID' => $confirmSelectValue
+    );
+    // $statement->rowCount() == 1    if any changes are there
+    // $statement->rowCount() == 0    if no changes are there
+    if ($statement->execute($params)) {
+        if ($statement->rowCount() == 1) {
+            updateList($orderBy, $ascOrDesc);
+        }
+    } else {
+        echo "queryError";
+    }
+}
+
 /******************************/
 //       functions
 /******************************/
@@ -317,11 +352,23 @@ function updateList($orderBy, $ascOrDesc)
             $return_date = date('d-M-Y', strtotime($library->return_date));
 
             $currentDate = date('Y-m-d', time());
-            $isReturned = is_null($library->return_date) ? "<input type='date' class='form-control' value='{$currentDate}'>" : $return_date;
-            // $isReturned = is_null($library->return_date) ? "..." : $return_date;
 
-            $isConfirmed = is_null($library->confirmed_by) ? $admin_list : $library->confirmed_by;
-            // $isConfirmed = is_null($library->confirmed_by) ? '...' : $library->confirmed_by;
+            if(is_null($library->return_date)) {
+              $returnData = "<input type='date' class='form-control' value='{$currentDate}'>";
+              $returnAttr = date('Y-m-d', time());
+              // $returnAttr = '';
+            } else {
+              $returnData = date('d-M-Y', strtotime($library->return_date));
+              $returnAttr =date('Y-m-d', strtotime($library->return_date));
+            }
+
+            if(is_null($library->confirmed_by)) {
+              $confirmData = $admin_list;
+              $confirmAttr = '';
+            } else {
+              $confirmData = $library->confirmed_by;
+              $confirmAttr = $library->library_confirmed_by_user_id;
+            }
 
             $list .= "
 
@@ -333,12 +380,12 @@ function updateList($orderBy, $ascOrDesc)
             <td data-column='issue_date' data-value='{$issue_date_attr}'>{$issue_date}</td>
             <td data-column='due_date' data-value='{$due_date_attr}'>{$due_date}</td>
             <td data-column='approve' data-value='{$library->library_approved_by_user_id}'>{$library->approved_by}</td>
-            <td data-column='return_date' data-value='{$return_date_attr}'>{$isReturned}</td>
-            <td data-column='confirm' data-value='{$library->library_confirmed_by_user_id}'>{$isConfirmed}</td>
+            <td data-column='return_date' data-value='{$returnAttr}'>{$returnData}</td>
+            <td data-column='confirm' data-value='{$confirmAttr}'>{$confirmData}</td>
             <td class='action-btns'>
 
               <div class='btn-group primary' role='group' aria-label='Button group with nested dropdown'>
-                <button type='button' class='btn btn-warning'>Confirm</button>
+                <button data-action='confirm' type='button' class='btn btn-warning'>Confirm</button>
                 <div class='btn-group' role='group'>
                   <button id='btnGroupDrop1' type='button' class='btn btn-light dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'></button>
                   <div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>
@@ -349,8 +396,8 @@ function updateList($orderBy, $ascOrDesc)
                   </div>
                 </div>
               </div>
-              <button data-action='cancel' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-times'></i></button>
-              <button data-action='submit' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-check'></i></button>
+              <button data-action='cancel' type='button' class='btn btn-primary secondary'><i class='fas fa-times'></i></button>
+              <button data-action='submit' type='button' class='btn btn-primary secondary'><i class='fas fa-check'></i></button>
             </td>
           </tr>
           ";

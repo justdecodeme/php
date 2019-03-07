@@ -210,21 +210,56 @@ function add() {
     "&ascOrDesc=" + ascOrDesc);
 }
 
-// list buttons → edit, delete, set, update, cancel 
+// list buttons → edit, delete, set, update, cancel, confirm 
 var clone, rowEl, 
   borrowEl, borrowElValue, 
   bookEl, bookElValue,
   categoryEl, categoryElValue,
   issueDateEl, issueDateElValue,
   dueDateEl, dueDateElValue,
-  approveEl, approveElValue;
+  approveEl, approveElValue,
+  returnDateEl,
+  confirmEl;
 function listBtnFunction(e) {
   
   rowEl = e.target.closest('tr');
   var id = rowEl.dataset.id;
   var action = e.target.dataset.action;
 
-  if (action == "delete") {
+  if(action == "confirm") {
+    console.log('confirming...', id);
+
+    returnDateEl = rowEl.querySelector('[data-column="return_date"]');
+    confirmEl = rowEl.querySelector('[data-column="confirm"]');
+
+    var returnDateInputValue = returnDateEl.querySelector('input').value;
+    var confirmSelectValue = confirmEl.querySelector('select').value;
+
+    // update changes to database if there is a change
+    if (returnDateInputValue == "") {
+      showStatusModal('one ore more fields are empty!', 'alert alert-danger');
+    } else {
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          if (this.responseText == "queryError") {
+            showStatusModal('Query Error!', 'alert alert-danger');
+          } else {
+            list.innerHTML = this.responseText;
+            showStatusModal('Successfully Confirmed!', 'alert alert-success');
+          }
+        }
+      };
+      xhttp.open("POST", "handler.php", true); // open(method, url, async)
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("action=confirm" +
+        "&orderBy=" + orderBy +
+        "&ascOrDesc=" + ascOrDesc +
+        "&returnDateInputValue=" + returnDateInputValue +
+        "&confirmSelectValue=" + confirmSelectValue +
+        "&id=" + id);
+    }
+  } else if (action == "delete") {
     console.log('deleting...', id);
 
     xhttp = new XMLHttpRequest();
