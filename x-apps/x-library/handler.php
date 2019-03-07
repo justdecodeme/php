@@ -135,8 +135,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'confirm') {
     $returnDateInputValue = $_POST['returnDateInputValue'];
     $confirmSelectValue = $_POST['confirmSelectValue'];
 
-    // var_dump($id, $returnDateInputValue, $confirmSelectValue);
-
     $query = "UPDATE `library`
       SET
         `library_return_date`=:LIBRARY_RETURN_DATE,
@@ -342,14 +340,14 @@ function updateList($orderBy, $ascOrDesc)
         $row = $statement->fetchAll(PDO::FETCH_OBJ);
 
         foreach ($row as $library) {
-            $issue_date_attr = date('Y-m-d', strtotime($library->issue_date));
             $issue_date = date('d-M-Y', strtotime($library->issue_date));
+            $issue_date_attr = date('Y-m-d', strtotime($library->issue_date));
 
-            $due_date_attr = date('Y-m-d', strtotime($library->due_date));
             $due_date = date('d-M-Y', strtotime($library->due_date));
+            $due_date_attr = date('Y-m-d', strtotime($library->due_date));
 
-            $return_date_attr = date('Y-m-d', strtotime($library->return_date));
             $return_date = date('d-M-Y', strtotime($library->return_date));
+            $return_date_attr = date('Y-m-d', strtotime($library->return_date));
 
             $currentDate = date('Y-m-d', time());
 

@@ -186,7 +186,7 @@ function add() {
       if (this.responseText == "emptyFields") {
         showStatusModal('one ore more fields are empty!', 'alert alert-danger');
       } else if (this.responseText == "alreadyExist") {
-        showStatusModal('Already Exist', 'alert alert-warning');
+        showStatusModal('Already Issued!', 'alert alert-warning');
       } else if (this.responseText == "queryError") {
         showStatusModal('Query Error!', 'alert alert-danger');
       } else {
@@ -244,6 +244,8 @@ function listBtnFunction(e) {
         if (this.readyState == 4 && this.status == 200) {
           if (this.responseText == "queryError") {
             showStatusModal('Query Error!', 'alert alert-danger');
+          } else if(this.responseText == "") {
+            showStatusModal('Something goes wrong!', 'alert alert-danger');
           } else {
             list.innerHTML = this.responseText;
             showStatusModal('Successfully Confirmed!', 'alert alert-success');
