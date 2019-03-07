@@ -1,5 +1,8 @@
 <?php
-include '../includes/connect.php';
+$rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/x-apps/';
+
+include $rootPath . 'includes/init.php';
+include $rootPath . 'includes/connect.php';
 
 /******************************/
 //       requests
@@ -157,7 +160,7 @@ function fetchBorrowersList()
 function fetchAdminsList()
 {
     global $connection;
-    $query = "SELECT u.id, u.user_f_name, u.user_l_name
+    $query = "SELECT u.id, u.user_name, u.user_f_name, u.user_l_name
       FROM users u
       LEFT JOIN roles r
       ON u.user_role_id = r.id
@@ -173,11 +176,42 @@ function fetchAdminsList()
         $row = $statement->fetchAll(PDO::FETCH_OBJ);
         $list = '';
         foreach ($row as $user) {
-            $list .= "<option value='{$user->id}'>{$user->user_f_name} {$user->user_l_name}</option>";
+          $isSelected = $user->user_name == $_SESSION['user_name'] ? 'selected' : '';
+          $list .= "<option value='{$user->id}' {$isSelected}>{$user->user_f_name} {$user->user_l_name}</option>";
         }
         echo $list;
     } else {
         echo "queryError";
+    }
+}
+
+// return admin list to confirm return of books
+function fetchConfirmedByList()
+{
+    global $connection;
+    $query = "SELECT u.id, u.user_name, u.user_f_name, u.user_l_name
+      FROM users u
+      LEFT JOIN roles r
+      ON u.user_role_id = r.id
+      WHERE
+        r.role_code='ad'
+      ORDER BY LOWER(u.user_f_name) ASC";
+    
+    $statement = $connection->prepare($query);
+    // $statement->bindParam(':ROLE_CODE', 'em');
+
+    if ($statement->execute()) {
+        $row = $statement->fetchAll(PDO::FETCH_OBJ);
+        
+        $list = '<select class="custom-select my-1">';
+        foreach ($row as $user) {
+          $isSelected = $user->user_name == $_SESSION['user_name'] ? 'selected' : '';
+          $list .= "<option value='{$user->id}' {$isSelected}>{$user->user_f_name} {$user->user_l_name}</option>";
+        }
+        $list .= '</select>';
+        return $list;
+    } else {
+        return "queryError";
     }
 }
 function fetchBookCategoriesList()
@@ -244,7 +278,7 @@ function fetchBooksList($book_category_id)
 function updateList($orderBy, $ascOrDesc)
 {
     global $connection;
-
+    $admin_list = fetchConfirmedByList();
 
     $query = "SELECT 
       l.id, l.library_user_id, l.library_book_id, l.library_approved_by_user_id, l.library_confirmed_by_user_id,
@@ -275,13 +309,22 @@ function updateList($orderBy, $ascOrDesc)
         foreach ($row as $library) {
             $issue_date_attr = date('Y-m-d', strtotime($library->issue_date));
             $issue_date = date('d-M-Y', strtotime($library->issue_date));
+
             $due_date_attr = date('Y-m-d', strtotime($library->due_date));
             $due_date = date('d-M-Y', strtotime($library->due_date));
+
             $return_date_attr = date('Y-m-d', strtotime($library->return_date));
             $return_date = date('d-M-Y', strtotime($library->return_date));
-            $isReturned = is_null($library->return_date) ? '...' : $return_date;
-            $isConfirmed = is_null($library->confirmed_by) ? '...' : $library->confirmed_by;
+
+            $currentDate = date('Y-m-d', time());
+            $isReturned = is_null($library->return_date) ? "<input type='date' class='form-control' value='{$currentDate}'>" : $return_date;
+            // $isReturned = is_null($library->return_date) ? "..." : $return_date;
+
+            $isConfirmed = is_null($library->confirmed_by) ? $admin_list : $library->confirmed_by;
+            // $isConfirmed = is_null($library->confirmed_by) ? '...' : $library->confirmed_by;
+
             $list .= "
+
             <tr data-id='{$library->id}'>
             <th scope='row'>{$i}</th>
             <td data-column='borrow' data-value='{$library->library_user_id}'>{$library->borrowed_by}</td>

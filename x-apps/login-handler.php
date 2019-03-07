@@ -34,6 +34,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitLogin') {
             // set session for user details
             foreach($row as $user) {
               $_SESSION['email'] = $user->user_email;
+              $_SESSION['user_name'] = $user->user_name;
               $_SESSION['password'] = $user->user_password;
               $_SESSION['role'] = $user->user_role_id;
             }
