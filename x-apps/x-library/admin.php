@@ -23,7 +23,7 @@ include $rootPath . 'includes/header.php';
         <table class="table table-hover common-table">
           <thead>
           <tr>
-              <td scope="col" colspan="3">
+              <td scope="col" colspan="2">
                 <form class="form-block">
                   <label for="borrowerSelect">Select Borrower</label>
                   <select class="custom-select my-1" id="borrowerSelect"></select>
@@ -35,7 +35,7 @@ include $rootPath . 'includes/header.php';
                   <select class="custom-select my-1" id="bookSelect"></select>
                 </form>
               </td>
-              <td scope="col">
+              <td scope="col" colspan="2">
                 <form class="form-block">
                   <label for="bookCategorySelect">Select Book Category</label>
                   <select class="custom-select my-1" id="bookCategorySelect"></select>

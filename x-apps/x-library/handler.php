@@ -289,7 +289,7 @@ function updateList($orderBy, $ascOrDesc)
             <td data-column='approve' data-value='{$library->library_approved_by_user_id}'>{$library->approved_by}</td>
             <td data-column='return_date' data-value='{$return_date_attr}'>{$isReturned}</td>
             <td data-column='confirm' data-value='{$library->library_confirmed_by_user_id}'>{$isConfirmed}</td>
-            <td>
+            <td class='action-btns'>
               <button data-action='edit' type='button' class='btn btn-success primary'><i class='fas fa-edit'></i></button>
               <button data-action='delete' type='button' class='btn btn-danger primary'><i class='fas fa-trash-alt'></i></button>
               <button data-action='cancel' type='button' class='btn btn-primary secondary' data-toggle='tooltip' data-placement='top'><i class='fas fa-times'></i></button>

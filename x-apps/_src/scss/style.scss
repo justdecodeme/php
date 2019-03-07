@@ -67,6 +67,11 @@ nav {
       }
     }
   }
+  tbody {
+    .action-btns {
+      width: 120px;
+    }
+  }
 }
 .common-alert-modal {
   .alert {
@@ -146,6 +151,42 @@ nav {
 
     .list-group-item.active {
       font-size: 30px;
+    }
+  }
+}
+.x-library {
+  &>.container-fluid {
+    padding: 0;
+    overflow: hidden;
+  }
+  .common-table {
+    font-size: 12px;
+    [data-order-by="issue_date"],
+    [data-order-by="due_date"],
+    [data-order-by="return_date"] {
+      width: 130px;
+    }
+    [data-order-by="category_name"] {
+      min-width: 130px;
+    }
+    input[type="date"] {
+      font-size: 12px;
+    }
+    tbody {
+      input[type="date"], select {
+        padding-left: 5px;
+        padding-right: 0;
+      }
+      input[type="date"] {
+        width: 125px;
+      }
+      .action-btns {
+        width: 95px;
+        button {
+          padding: 5px 9px;
+          font-size: 12px;
+        }
+      }
     }
   }
 }
