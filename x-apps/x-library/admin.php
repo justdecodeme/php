@@ -29,16 +29,16 @@ include $rootPath . 'includes/header.php';
                   <select class="custom-select my-1" id="borrowerSelect"></select>
                 </form>
               </td>
-              <td scope="col" colspan="2">
-                <form class="form-block">
-                  <label for="bookSelect">Select book</label>
-                  <select class="custom-select my-1" id="bookSelect"></select>
-                </form>
-              </td>
-              <td scope="col" colspan="2">
+              <td scope="col" colspan="1">
                 <form class="form-block">
                   <label for="bookCategorySelect">Select Book Category</label>
                   <select class="custom-select my-1" id="bookCategorySelect"></select>
+                </form>
+              </td>
+              <td scope="col" colspan="3">
+                <form class="form-block">
+                  <label for="bookSelect">Select book</label>
+                  <select class="custom-select my-1" id="bookSelect"></select>
                 </form>
               </td>
               <td scope="col">
@@ -74,7 +74,7 @@ include $rootPath . 'includes/header.php';
               <td scope="col">
                 <form class="form-block">
                   <label>.</label><br>
-                  <button type="button" class="btn btn-success" id="addBtn">Add</button>
+                  <button type="button" class="btn btn-success" id="addBtn">Approve</button>
                 </form>
               </td>
           </tr>

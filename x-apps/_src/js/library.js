@@ -192,7 +192,7 @@ function add() {
       } else {
         // update list
         list.innerHTML = this.responseText;
-        showStatusModal('Successfully Added!', 'alert alert-success');
+        showStatusModal('Successfully Approved!', 'alert alert-success');
       }
     } else {
       // console.log(this.readyState, this.status);
