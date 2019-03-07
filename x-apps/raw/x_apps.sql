@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2019 at 04:47 PM
+-- Generation Time: Mar 07, 2019 at 04:52 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -91,10 +91,12 @@ CREATE TABLE `library` (
 --
 
 INSERT INTO `library` (`id`, `library_user_id`, `library_book_id`, `library_issue_date`, `library_due_date`, `library_return_date`, `library_approved_by_user_id`, `library_confirmed_by_user_id`) VALUES
-(1, 2, 5, '2019-03-06 11:53:24', '2019-03-12 18:30:00', NULL, 1, NULL),
-(4, 27, 9, '2019-03-01 11:54:13', '2019-03-02 18:30:00', '2019-03-04 18:30:00', 35, 1),
-(6, 60, 6, '2019-03-05 10:49:58', '2019-03-13 18:30:00', NULL, 33, NULL),
-(8, 54, 2, '2019-03-05 18:30:00', '2019-03-12 18:30:00', NULL, 33, NULL);
+(4, 60, 9, '2019-03-07 15:47:51', '2019-03-02 18:30:00', NULL, 35, NULL),
+(6, 27, 6, '2019-03-07 15:47:58', '2019-03-13 18:30:00', NULL, 33, NULL),
+(8, 32, 2, '2019-03-07 15:50:50', '2019-03-30 18:30:00', '2019-03-14 18:30:00', 1, 35),
+(11, 2, 11, '2019-03-07 15:48:00', '2019-03-13 18:30:00', NULL, 33, NULL),
+(12, 2, 6, '2019-03-07 18:30:00', '2019-03-14 18:30:00', NULL, 35, NULL),
+(13, 54, 2, '2019-03-07 15:47:56', '2019-03-13 18:30:00', NULL, 33, NULL);
 
 -- --------------------------------------------------------
 
@@ -399,7 +401,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `library`
 --
 ALTER TABLE `library`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `quotes`
