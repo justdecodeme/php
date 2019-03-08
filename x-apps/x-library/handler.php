@@ -277,7 +277,7 @@ function fetchBooksList($book_category_id)
 {
     global $connection;
     if($book_category_id !== "" && $book_category_id !== "all") {
-      $query = "SELECT b.id, CONCAT(b.book_title, ' - ', b.book_author) AS book
+      $query = "SELECT b.id, CONCAT(b.book_title, ' - ', b.book_author) AS book, b.book_stock
         FROM books b
         LEFT JOIN categories c
         ON b.book_category_id = c.id
@@ -285,7 +285,7 @@ function fetchBooksList($book_category_id)
           b.book_category_id =:BOOK_CATEGORY_ID
         ORDER BY LOWER(book) ASC";
     } else {
-      $query = "SELECT `id`, CONCAT(b.book_title, ' - ', b.book_author) AS book FROM books b ORDER BY LOWER(book) ASC";
+      $query = "SELECT `id`, CONCAT(b.book_title, ' - ', b.book_author) AS book, b.book_stock FROM books b ORDER BY LOWER(book) ASC";
     }
     
     $statement = $connection->prepare($query);
@@ -299,7 +299,7 @@ function fetchBooksList($book_category_id)
         } else {
           $list = "";
           foreach ($row as $book) {
-              $list .= "<option value='{$book->id}'>{$book->book}</option>";
+              $list .= "<option value='{$book->id}'>{$book->book} ({$book->book_stock})</option>";
           }
           echo $list;
         }
@@ -396,11 +396,10 @@ function updateList($orderBy, $ascOrDesc)
             <td data-column='category' data-value='{$library->book_category_id}'>{$library->category_name}</td>
             <td data-column='issue_date' data-value='{$issue_date_attr}'>{$issue_date}</td>
             <td data-column='due_date' data-value='{$due_date_attr}'>{$due_date}</td>
-            <td data-column='approve' data-value='{$library->library_approved_by_user_id}'>{$library->approved_by} {$intervalFormatted}</td>
+            <td data-column='approve' data-value='{$library->library_approved_by_user_id}'>{$library->approved_by}</td>
             <td data-column='return_date' data-value='{$returnAttr}'>{$returnData}</td>
             <td data-column='confirm' data-value='{$confirmAttr}'>{$confirmData}</td>
             <td class='action-btns'>
-
               <div class='btn-group primary' role='group' aria-label='Button group with nested dropdown'>
                 <button data-action='confirm' type='button' class='btn btn-warning {$confirmBtnDisplayClass}'>Confirm</button>
                 <button data-action='returned' type='button' class='btn disabled {$returnBtnDisplayClass}'>Returned</button>
