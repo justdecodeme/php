@@ -301,6 +301,10 @@ function listBtnFunction(e) {
       approveEl.innerHTML = approveElHTML;
       issueDateEl.innerHTML = issueDateElHTML;
       dueDateEl.innerHTML = dueDateElHTML;
+      
+      returnDateEl.innerHTML = returnDateElHTML;
+      confirmEl.innerHTML = confirmElHTML;
+
       console.log('canceling...', oldRowEl.dataset.id);
       oldRowEl.classList.remove('editing');
     }
@@ -314,6 +318,9 @@ function listBtnFunction(e) {
     issueDateEl = rowEl.querySelector('[data-column="issue_date"]');
     dueDateEl = rowEl.querySelector('[data-column="due_date"]');
 
+    returnDateEl = rowEl.querySelector('[data-column="return_date"]');
+    confirmEl = rowEl.querySelector('[data-column="confirm"]');
+
     borrowElValue = borrowEl.dataset.value;
     bookElValue = bookEl.dataset.value;
     categoryElValue = categoryEl.dataset.value;
@@ -321,12 +328,18 @@ function listBtnFunction(e) {
     issueDateElValue = issueDateEl.dataset.value;
     dueDateElValue = dueDateEl.dataset.value;
 
+    returnDateElValue = returnDateEl.dataset.value;
+    confirmElValue = confirmEl.dataset.value;
+
     borrowElHTML = borrowEl.innerHTML;
     bookElHTML = bookEl.innerHTML;
     categoryElHTML = categoryEl.innerHTML;
+    approveElHTML = approveEl.innerHTML;
     issueDateElHTML = issueDateEl.innerHTML;
     dueDateElHTML = dueDateEl.innerHTML;
-    approveElHTML = approveEl.innerHTML;
+
+    returnDateElHTML = returnDateEl.innerHTML;
+    confirmElHTML = confirmEl.innerHTML;
   
     rowEl.classList.add('editing');
 
@@ -335,13 +348,17 @@ function listBtnFunction(e) {
     borrowEl.innerHTML = '<select class="custom-select my-1" id="borrowerSelectEditing"></select>'
     bookEl.innerHTML = '<select class="custom-select my-1" id="bookSelectEditing"></select>'
     categoryEl.innerHTML = '<select class="custom-select my-1" id="bookCategorySelectEditing"></select>'
-    approveEl.innerHTML = '<select class="custom-select my-1" id="approvedBySelectEditing"></select>'
+    approveEl.innerHTML = '<select class="custom-select my-1" id="approveBySelectEditing"></select>'
     
+    returnDateEl.innerHTML = '<input type="date" class="form-control"  value="' + returnDateElValue + '">';
+    confirmEl.innerHTML = '<select class="custom-select my-1" id="confirmBySelectEditing"></select>'
     
     fetchBorrowersList('borrowerSelectEditing', borrowElValue);
     fetchBooksList(categoryElValue, 'bookSelectEditing', bookElValue);
     fetchBookCategoriesList('bookCategorySelectEditing', categoryElValue);
-    fetchAdminsList('approvedBySelectEditing', approveElValue);
+    fetchAdminsList('approveBySelectEditing', approveElValue);
+
+    fetchAdminsList('confirmBySelectEditing', confirmElValue);
     
     borrowEl.querySelector('select').focus();
 
@@ -351,6 +368,9 @@ function listBtnFunction(e) {
     var approveSelectEl = approveEl.querySelector('select');
     var issueDateInputEl = issueDateEl.querySelector('input');
     var dueDateInputEl = dueDateEl.querySelector('input');
+
+    var returnDateInputEl = returnDateEl.querySelector('input');
+    var confirmSelectEl = confirmEl.querySelector('select');
 
     categorySelectEl.addEventListener('change', (e) => {
       fetchBooksList(e, 'bookSelectEditing', undef);
@@ -367,6 +387,9 @@ function listBtnFunction(e) {
     approveSelectEl.addEventListener('keyup', function (e) { keyUpFunc(e, cancelBtn, submitBtn); })
     issueDateInputEl.addEventListener('keyup', function (e) { keyUpFunc(e, cancelBtn, submitBtn); })
     dueDateInputEl.addEventListener('keyup', function (e) { keyUpFunc(e, cancelBtn, submitBtn); })
+    
+    returnDateInputEl.addEventListener('keyup', function (e) { keyUpFunc(e, cancelBtn, submitBtn); })
+    confirmSelectEl.addEventListener('keyup', function (e) { keyUpFunc(e, cancelBtn, submitBtn); })
 
   } else if (action == "cancel") {
     console.log('canceling...', id);
@@ -374,9 +397,12 @@ function listBtnFunction(e) {
     borrowEl.innerHTML = borrowElHTML;
     bookEl.innerHTML = bookElHTML;
     categoryEl.innerHTML = categoryElHTML;
+    approveEl.innerHTML = approveElHTML;
     issueDateEl.innerHTML = issueDateElHTML;
     dueDateEl.innerHTML = dueDateElHTML;
-    approveEl.innerHTML = approveElHTML;
+    
+    returnDateEl.innerHTML = returnDateElHTML;
+    confirmEl.innerHTML = confirmElHTML;
 
     rowEl.classList.remove('editing');
     // updateList();

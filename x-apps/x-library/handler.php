@@ -352,6 +352,7 @@ function updateList($orderBy, $ascOrDesc)
             $currentDate = date('Y-m-d', time());
 
             if(is_null($library->return_date)) {
+              $isReturnedClass = "";
               $confirmBtnDisplayClass = '';
               $returnBtnDisplayClass = 'd-none';
               $returnData = "<input type='date' class='form-control' value='{$currentDate}'>";
@@ -373,7 +374,7 @@ function updateList($orderBy, $ascOrDesc)
               }
 
               $confirmBtnDisplayClass = 'd-none disabled';
-
+              $isReturnedClass = "returned";
 
               $returnData = date('d-M-Y', strtotime($library->return_date));
               $returnAttr =date('Y-m-d', strtotime($library->return_date));
@@ -389,7 +390,7 @@ function updateList($orderBy, $ascOrDesc)
 
             $list .= "
 
-            <tr data-id='{$library->id}'>
+            <tr data-id='{$library->id}' class='{$isReturnedClass}'>
             <th scope='row'>{$i}</th>
             <td data-column='borrow' data-value='{$library->library_user_id}'>{$library->borrowed_by}</td>
             <td data-column='book' data-value='{$library->library_book_id}'>{$library->book}</td>
