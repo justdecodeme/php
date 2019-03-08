@@ -352,10 +352,29 @@ function updateList($orderBy, $ascOrDesc)
             $currentDate = date('Y-m-d', time());
 
             if(is_null($library->return_date)) {
+              $confirmBtnDisplayClass = '';
+              $returnBtnDisplayClass = 'd-none';
               $returnData = "<input type='date' class='form-control' value='{$currentDate}'>";
               $returnAttr = date('Y-m-d', time());
               // $returnAttr = '';
             } else {
+              // make 'returned' button 'green' if return_date <= due_date else make it 'red' color
+              $id = new DateTime($library->due_date);
+              $rd = new DateTime($library->return_date);
+              $interval = $rd->diff($id);
+              $intervalFormatted = $interval->format('%R%a');
+
+              if($intervalFormatted < 0) {
+                $returnBtnDisplayClass = 'btn-danger';
+              } else if($intervalFormatted > 0) {
+                $returnBtnDisplayClass = 'btn-success';
+              } else {
+                $returnBtnDisplayClass = 'btn-secondary';
+              }
+
+              $confirmBtnDisplayClass = 'd-none disabled';
+
+
               $returnData = date('d-M-Y', strtotime($library->return_date));
               $returnAttr =date('Y-m-d', strtotime($library->return_date));
             }
@@ -377,13 +396,14 @@ function updateList($orderBy, $ascOrDesc)
             <td data-column='category' data-value='{$library->book_category_id}'>{$library->category_name}</td>
             <td data-column='issue_date' data-value='{$issue_date_attr}'>{$issue_date}</td>
             <td data-column='due_date' data-value='{$due_date_attr}'>{$due_date}</td>
-            <td data-column='approve' data-value='{$library->library_approved_by_user_id}'>{$library->approved_by}</td>
+            <td data-column='approve' data-value='{$library->library_approved_by_user_id}'>{$library->approved_by} {$intervalFormatted}</td>
             <td data-column='return_date' data-value='{$returnAttr}'>{$returnData}</td>
             <td data-column='confirm' data-value='{$confirmAttr}'>{$confirmData}</td>
             <td class='action-btns'>
 
               <div class='btn-group primary' role='group' aria-label='Button group with nested dropdown'>
-                <button data-action='confirm' type='button' class='btn btn-warning'>Confirm</button>
+                <button data-action='confirm' type='button' class='btn btn-warning {$confirmBtnDisplayClass}'>Confirm</button>
+                <button data-action='returned' type='button' class='btn disabled {$returnBtnDisplayClass}'>Returned</button>
                 <div class='btn-group' role='group'>
                   <button id='btnGroupDrop1' type='button' class='btn btn-light dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'></button>
                   <div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>
