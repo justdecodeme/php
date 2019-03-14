@@ -15,7 +15,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
   if($statement->execute($params) && $statement->rowCount() == 1) {
     // redirect to xConnect.html if already logged in
     if(isset($isLoginPage) || isset($isSignupPage)) {
-      redirect($rootPath.'xConnect/');
+      redirect('/php/xConnect/');
     } else {
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
       foreach($row as $user) {
