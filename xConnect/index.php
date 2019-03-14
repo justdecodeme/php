@@ -1,7 +1,7 @@
 <?php
-$bodyClass = "x-apps";
-$title = "xApps";
-$rootPath = $_SERVER['DOCUMENT_ROOT'].'/php/x-apps/';
+$bodyClass = "xConnect";
+$title = "xConnect";
+$rootPath = $_SERVER['DOCUMENT_ROOT'].'/php/xConnect/';
 
 include $rootPath.'includes/init.php';
 include $rootPath.'includes/login-status.php';

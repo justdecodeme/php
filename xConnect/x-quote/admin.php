@@ -1,15 +1,16 @@
 <?php
-$bodyClass = "x-library-admin";
-$title = 'xApps | Admin';
-$rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/x-apps/';
+$bodyClass = "x-quote-admin";
+$title = 'xQuote | Admin';
+$rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/xConnect/';
 
-include $rootPath . 'includes/init.php';
-include $rootPath . 'includes/login-status.php';
 
-if (isset($role) && $role !== 'admin') {
-    redirect($rootPath . 'x-library/');
+include $rootPath.'includes/init.php';
+include $rootPath.'includes/login-status.php';
+
+if(isset($role) && $role !== '1') {
+  redirect($rootPath.'x-quote/');
 }
-include $rootPath . 'includes/header.php';
+include $rootPath.'includes/header.php';
 ?>
 
 <div class="container-fluid">
@@ -17,9 +18,20 @@ include $rootPath . 'includes/header.php';
   <div class="row">
 
     <div class="col-md-12">
-
+      <!-- quote of the day -->
+      <div class="todays-quote" id="todaysQuoteSection">
+        <h1>Quote of the Day!</h1>  
+        <div class="content">
+          <!-- <blockquote>
+            <p>Words can be like X-rays, if you use them properly – they'll go through anything. You read and you're
+              pierced.</p>
+          </blockquote>
+          <cite>– Aldous Huxley, Brave New World</cite> -->
+        </div>
+      </div>    
+    
       <!-- quote listing -->
-      <table class="table table-hover">
+      <table class="table table-hover common-table">
         <thead>
           <tr>
             <th scope="col" colspan="2">
@@ -38,7 +50,7 @@ include $rootPath . 'includes/header.php';
           </tr>
           <tr>
             <th scope="col">#</th>
-            <th scope="col" data-order-by="quote" class="order-by active-ASC">Quote <span class="down">↓</span><span class="up">↑</span></th>
+            <th scope="col" data-order-by="quote" class="order-by">Quote <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col" data-order-by="author" class="order-by">Author <span class="down">↓</span><span class="up">↑</span></th>
             <th scope="col">Action</th>
           </tr>
@@ -50,7 +62,7 @@ include $rootPath . 'includes/header.php';
             <td><input type="text"></td>
             <td>
               <button type="button" class="btn btn-success"><i class="far fa-check-circle"></i></button>
-              <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+              <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>              
             </td>
           </tr> -->
         </tbody>
@@ -61,15 +73,6 @@ include $rootPath . 'includes/header.php';
 
 </div>
 
-<button id="statusModalBtn" type="button" class="btn btn-primary d-none" data-toggle="modal" data-target=".status-modal">querySuccessBtn</button>
-<div class="modal fade status-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-        <div id="statusModalAlert" class="alert alert-success" role="alert">...</div>
-    </div>
-  </div>
-</div>
-
-<?php include $rootPath . 'includes/footer.php';?>
-<script src="/php/x-apps/_assets/js/quote.min.js"></script>
-<script src="/php/x-apps/_assets/js/quote-admin.min.js"></script>
+<?php include $rootPath.'includes/footer.php';?>
+<script src="/php/xConnect/_assets/js/quote.min.js"></script>
+<script src="/php/xConnect/_assets/js/quote-admin.min.js"></script>

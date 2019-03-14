@@ -1,5 +1,5 @@
 <?php
-$rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/x-apps/';
+$rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/xConnect/';
 
 include $rootPath . 'includes/init.php';
 include $rootPath . 'includes/connect.php';

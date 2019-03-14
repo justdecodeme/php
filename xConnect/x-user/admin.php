@@ -1,7 +1,7 @@
 <?php
 $bodyClass = "x-user";
 $title = 'xUser | Admin';
-$rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/x-apps/';
+$rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/xConnect/';
 
 include $rootPath . 'includes/init.php';
 // include $rootPath . 'includes/login-status.php';
@@ -74,4 +74,4 @@ include $rootPath . 'includes/header.php';
 </div>
 
 <?php include $rootPath . 'includes/footer.php';?>
-<script src="/php/x-apps/_assets/js/users.min.js"></script>
+<script src="/php/xConnect/_assets/js/users.min.js"></script>

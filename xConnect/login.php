@@ -9,7 +9,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <h2>Login to xApps</h2>
+      <h2>Login to xConnect</h2>
       <?php
         if (isset($_SESSION['message'])) {
             echo $_SESSION['message'];

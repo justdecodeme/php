@@ -1,6 +1,6 @@
 <?php
 $bodyClass = "x-quote";
-$rootPath = $_SERVER['DOCUMENT_ROOT'].'/php/x-apps/';
+$rootPath = $_SERVER['DOCUMENT_ROOT'].'/php/xConnect/';
 
 include $rootPath.'includes/init.php';
 include $rootPath.'includes/login-status.php';
@@ -20,7 +20,7 @@ include $rootPath.'includes/header.php';
 </div>  
 
 <?php include $rootPath.'includes/footer.php';?>
-<script src="/php/x-apps/_assets/js/quote.min.js"></script>
+<script src="/php/xConnect/_assets/js/quote.min.js"></script>
 <script>
   setInterval(() => { getTodaysQuote(); }, 15000)
 </script>
