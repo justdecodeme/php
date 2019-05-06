@@ -21,9 +21,12 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitLogin') {
         echo $message;
     } else {
 
-        $query = "SELECT * FROM users
-        WHERE user_email=:EMAIL
-        AND `user_password`=:PASSWORD
+        $query = "SELECT u.user_email, u.user_name, u.user_password, r.role_code as user_role
+          FROM users u
+          LEFT JOIN roles r
+          ON u.user_role_id = r.id
+          WHERE `user_email`=:EMAIL
+          AND `user_password`=:PASSWORD
       ";
         $statement = $connection->prepare($query);
         $params = array('EMAIL' => $email, 'PASSWORD' => $password);
@@ -36,7 +39,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitLogin') {
               $_SESSION['email'] = $user->user_email;
               $_SESSION['user_name'] = $user->user_name;
               $_SESSION['password'] = $user->user_password;
-              $_SESSION['role'] = $user->user_role_id;
+              $_SESSION['role'] = $user->user_role;
             }
 
             // 1 for success

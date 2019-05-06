@@ -15,7 +15,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
   if($statement->execute($params) && $statement->rowCount() == 1) {
     // redirect to xConnect.html if already logged in
     if(isset($isLoginPage) || isset($isSignupPage)) {
-      redirect('/php/xConnect/');
+      redirect('index.php');
     } else {
       $row = $statement->fetchAll(PDO::FETCH_OBJ);
       foreach($row as $user) {
@@ -24,7 +24,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
         $l_name = $user->user_l_name;
         $username = $user->user_name;
         $email = $user->user_email;
-        $role = $user->user_role_id;
+        // $role = $user->user_role_id;
         $doj = $user->user_doj;
         $batch_code = $user->user_batch_code;
         $student_code = $user->user_student_code;
@@ -33,7 +33,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
     }
   // if login is not validated
   } else {
-    redirect('/php/xConnect/login.php');
+    redirect('login.php');
     echo "Something goes wrong, Try after some time!";
   }
   // if session variables are not set and
@@ -41,7 +41,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['password'])){
   // request is not coming from login or signup page itself
   // redirect to login page
   if(!isset($isLoginPage) && !isset($isSignupPage)) {
-    redirect('/php/xConnect/login.php');
+    redirect('login.php');
   }
 }
 ?>

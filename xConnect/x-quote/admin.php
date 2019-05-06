@@ -7,8 +7,8 @@ $rootPath = $_SERVER['DOCUMENT_ROOT'] . '/php/xConnect/';
 include $rootPath.'includes/init.php';
 include $rootPath.'includes/login-status.php';
 
-if(isset($role) && $role !== '1') {
-  redirect($rootPath.'x-quote/');
+if(isset($_SESSION['role']) && $_SESSION['role'] != 'admin') {
+  redirect('/php/xConnect/x-quote/');
 }
 include $rootPath.'includes/header.php';
 ?>
